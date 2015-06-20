@@ -4,19 +4,25 @@
 import os
 import sys
 
-import django_docutils
-
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-version = django_docutils.__version__
+about = {}
+with open("django_docutils/__about__.py") as fp:
+    exec(fp.read(), about)
+
+with open('requirements.txt') as f:
+    install_reqs = [line for line in f.read().split('\n') if line]
+    tests_reqs = []
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     print("You probably want to also tag the version now:")
-    print("  git tag -a %s -m 'version %s'" % (version, version))
+    print("  git tag -a %s -m 'version %s'" % (
+        about['__version__'], about['__version']
+    ))
     print("  git push --tags")
     sys.exit()
 
@@ -24,22 +30,22 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='django-docutils',
-    version=version,
-    description="""Docutils (reStructuredText) support for Django""",
+    name=about['__title__'],
+    version=about['__version__'],
+    author=about['__author__'],
+    author_email=about['__email__'],
+    description=about['__description__'],
     long_description=readme + '\n\n' + history,
-    author='Tony Narlock',
-    author_email='tony@git-pull.com',
     url='https://github.com/tony/django-docutils',
     packages=[
         'django_docutils',
     ],
     include_package_data=True,
-    install_requires=[
-    ],
+    install_requires=install_reqs,
     license="BSD",
     zip_safe=False,
-    keywords='django-docutils',
+    keywords=['django,' 'docutils', 'documentation utilities', 'reST',
+              'reStructuredText', 'rst'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Framework :: Django',
