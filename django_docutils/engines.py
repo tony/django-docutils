@@ -54,7 +54,7 @@ class DocutilsTemplate(object):
             context['csrf_token'] = csrf_token_lazy(request)
         context = {
             'source': self.source,
-            'writer_name': 'html-base'
+            'writer_name': 'html'
         }
 
         return core.publish_parts(**context)['html_body']
