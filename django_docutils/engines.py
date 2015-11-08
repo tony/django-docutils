@@ -3,7 +3,10 @@
 import io
 
 from django.conf import settings
-from django.template.base import TemplateDoesNotExist
+try:
+    from django.template.base import TemplateDoesNotExist
+except ImportError: # >= 1.9
+    from django.template.exceptions import TemplateDoesNotExist
 from django.template.backends.base import BaseEngine
 from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
