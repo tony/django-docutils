@@ -13,7 +13,7 @@ about = {}
 with open("django_docutils/__about__.py") as fp:
     exec(fp.read(), about)
 
-with open('requirements.txt') as f:
+with open('requirements/base.txt') as f:
     install_reqs = [line for line in f.read().split('\n') if line]
     tests_reqs = []
 
