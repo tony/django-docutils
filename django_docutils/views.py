@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import django
+
 from django.core.exceptions import ImproperlyConfigured
 
 from django.views.generic.base import TemplateView
@@ -26,13 +28,20 @@ class DocutilsResponse(TemplateResponse):
         content explicitly using the value of this property.
         """
 
-        context = self._resolve_context(self.context_data)
+
+        if django.VERSION < (1, 10):
+            context = self._resolve_context(self.context_data)
+        else:
+            context = self.resolve_context(self.context_data)
 
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
         context['content'] = mark_safe(select_template(self.rst_name, using='docutils').render())
 
-        template = self._resolve_template(self.template_name)
+        if django.VERSION < (1, 10):
+            template = self._resolve_template(self.template_name)
+        else:
+            template = self.resolve_template(self.template_name)
         content = template.render(context, self._request)
         return content
 
