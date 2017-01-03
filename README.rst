@@ -16,7 +16,7 @@ Docutils (reStructuredText) support for Django
 Documentation
 -------------
 
-The full documentation is at https://django-docutils.readthedocs.org.
+The full documentation is at https://django-docutils.git-pull.com.
 
 Quickstart
 ----------
