@@ -1,1 +1,1 @@
-../requirements/doc.txt
+-r ../requirements/doc.txt
