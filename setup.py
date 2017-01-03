@@ -27,7 +27,7 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+history = open('CHANGES').read().replace('.. :changelog:', '')
 
 setup(
     name=about['__title__'],
