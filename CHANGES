@@ -1,0 +1,14 @@
+=========
+Changelog
+=========
+
+History
+-------
+
+- :release:`0.2.0 <2017-01-01>`
+- :support:`-` Support for Django 1.10.0
+
+- :release:`0.1.0 <2015-06-20>`
+- :support:`-` First release on PyPI.
+
+.. vim: set filetype=rst:
