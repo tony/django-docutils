@@ -1,17 +1,6 @@
-=============================
-django-docutils
-=============================
+|pypi| |docs| |build-status| |coverage| |license|
 
-.. image:: https://badge.fury.io/py/django-docutils.png
-    :target: https://badge.fury.io/py/django-docutils
-
-.. image:: https://travis-ci.org/tony/django-docutils.png?branch=master
-    :target: https://travis-ci.org/tony/django-docutils
-
-.. image:: https://coveralls.io/repos/tony/django-docutils/badge.png?branch=master
-    :target: https://coveralls.io/r/tony/django-docutils?branch=master
-
-Docutils (reStructuredText) support for Django
+django-docutils, docutils (reStructuredText) support for Django
 
 Documentation
 -------------
@@ -29,7 +18,22 @@ Then use it in a project::
 
     import django-docutils
 
-Features
---------
+.. |pypi| image:: https://img.shields.io/pypi/v/django_docutils.svg
+    :alt: Python Package
+    :target: http://badge.fury.io/py/django_docutils
 
-* TODO
+.. |build-status| image:: https://img.shields.io/travis/tony/django_docutils.svg
+   :alt: Build Status
+   :target: https://travis-ci.org/tony/django_docutils
+
+.. |coverage| image:: https://codecov.io/gh/tony/django_docutils/branch/master/graph/badge.svg
+    :alt: Code Coverage
+    :target: https://codecov.io/gh/tony/django_docutils
+
+.. |license| image:: https://img.shields.io/github/license/tony/django_docutils.svg
+    :alt: License 
+
+.. |docs| image:: https://readthedocs.org/projects/django_docutils/badge/?version=latest
+    :alt: Documentation Status
+    :scale: 100%
+    :target: https://readthedocs.org/projects/django_docutils/
