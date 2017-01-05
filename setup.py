@@ -4,6 +4,8 @@
 import os
 import sys
 
+from setuptools.command.test import test as TestCommand
+
 try:
     from setuptools import setup
 except ImportError:
@@ -15,7 +17,9 @@ with open("django_docutils/__about__.py") as fp:
 
 with open('requirements/base.txt') as f:
     install_reqs = [line for line in f.read().split('\n') if line]
-    tests_reqs = []
+
+with open('requirements/test.txt') as f:
+    tests_reqs = [line for line in f.read().split('\n') if line]
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -25,6 +29,20 @@ if sys.argv[-1] == 'publish':
     ))
     print("  git push --tags")
     sys.exit()
+
+
+class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
+
+    def run_tests(self):
+        import pytest
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
+
 
 readme = open('README.rst').read()
 history = open('CHANGES').read().replace('.. :changelog:', '')
@@ -42,6 +60,8 @@ setup(
     ],
     include_package_data=True,
     install_requires=install_reqs,
+    tests_require=tests_reqs,
+    cmdclass={'test': PyTest},
     license="BSD",
     zip_safe=False,
     keywords=['django,' 'docutils', 'documentation utilities', 'reST',
@@ -57,5 +77,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 )
