@@ -18,22 +18,22 @@ Then use it in a project::
 
     import django-docutils
 
-.. |pypi| image:: https://img.shields.io/pypi/v/django_docutils.svg
+.. |pypi| image:: https://img.shields.io/pypi/v/django-docutils.svg
     :alt: Python Package
-    :target: http://badge.fury.io/py/django_docutils
+    :target: http://badge.fury.io/py/django-docutils
 
-.. |build-status| image:: https://img.shields.io/travis/tony/django_docutils.svg
+.. |build-status| image:: https://img.shields.io/travis/tony/django-docutils.svg
    :alt: Build Status
-   :target: https://travis-ci.org/tony/django_docutils
+   :target: https://travis-ci.org/tony/django-docutils
 
-.. |coverage| image:: https://codecov.io/gh/tony/django_docutils/branch/master/graph/badge.svg
+.. |coverage| image:: https://codecov.io/gh/tony/django-docutils/branch/master/graph/badge.svg
     :alt: Code Coverage
-    :target: https://codecov.io/gh/tony/django_docutils
+    :target: https://codecov.io/gh/tony/django-docutils
 
-.. |license| image:: https://img.shields.io/github/license/tony/django_docutils.svg
+.. |license| image:: https://img.shields.io/github/license/tony/django-docutils.svg
     :alt: License 
 
-.. |docs| image:: https://readthedocs.org/projects/django_docutils/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/django-docutils/badge/?version=latest
     :alt: Documentation Status
     :scale: 100%
-    :target: https://readthedocs.org/projects/django_docutils/
+    :target: https://readthedocs.org/projects/django-docutils/
