@@ -50,6 +50,7 @@ setup(
     name=about['__title__'],
     version=about['__version__'],
     author=about['__author__'],
+    long_description=readme,
     author_email=about['__email__'],
     description=about['__description__'],
     packages=[
