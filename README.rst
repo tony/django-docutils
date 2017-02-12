@@ -10,11 +10,15 @@ The full documentation is at https://django-docutils.git-pull.com.
 Quickstart
 ----------
 
-Install django-docutils::
+Install django-docutils:
+
+.. code-block:: sh
 
     pip install django-docutils
 
-Then use it in a project::
+Then use it in a project:
+
+.. code-block:: python
 
     import django-docutils
 
