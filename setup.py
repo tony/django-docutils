@@ -45,7 +45,6 @@ class PyTest(TestCommand):
 
 
 readme = open('README.rst').read()
-history = open('CHANGES').read().replace('.. :changelog:', '')
 
 setup(
     name=about['__title__'],
@@ -53,8 +52,6 @@ setup(
     author=about['__author__'],
     author_email=about['__email__'],
     description=about['__description__'],
-    long_description=readme + '\n\n' + history,
-    url='https://github.com/tony/django-docutils',
     packages=[
         'django_docutils',
     ],
