@@ -30,7 +30,7 @@ in your settings file:
 
 Then in your template:
 
-.. code-block:: html
+.. code-block:: django
 
     {% load django_docutils %}
     {% filter restructuredtext %}
