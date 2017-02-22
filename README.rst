@@ -16,12 +16,66 @@ Install django-docutils:
 
     pip install django-docutils
 
+Template filter
+---------------
+
 If you want to use the template filter, add it to your ``INSTALLED_APPS``
 in your settings file:
 
 .. code-block:: python
 
-    INSTALLED_APPS = [..., 'django-docutils']
+    INSTALLED_APPS = [ # ... your default apps,
+        'django_docutils'
+    ]
+
+Then in your template:
+
+.. code-block:: html
+
+    {% load django_docutils %}
+    {% filter restructuredtext %}
+    # hey
+    # how's it going
+    A. hows
+    B. it
+
+    C. going
+    D. today
+
+    **hi**
+    *hi*
+    {% endfilter %}
+
+
+Template engine (class-based view)
+----------------------------------
+
+You can also use a class-based view to render restructuredtext.
+
+If you want to use reStructuredText as a django template engine,
+``INSTALLED_APPS`` *isn't* required, instead you add this to your
+``TEMPLATES`` variable in your settings:
+
+.. code-block:: python
+
+    TEMPLATES = [ # .. your default engines
+    {
+        'NAME': 'docutils',
+        'BACKEND': 'django_docutils.engines.Docutils',
+        'DIRS': [],
+        'APP_DIRS': True,
+    }]
+
+Now django will be able to scan for .rst files and process them. In your
+view:
+
+.. code-block:: python
+
+   from django_docutils.views import DocutilsView
+
+   class HomeView(DocutilsView):
+       template_name = 'base.html'
+       rst_name = 'home.rst'
 
 .. |pypi| image:: https://img.shields.io/pypi/v/django-docutils.svg
     :alt: Python Package
