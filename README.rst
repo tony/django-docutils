@@ -16,11 +16,12 @@ Install django-docutils:
 
     pip install django-docutils
 
-Then use it in a project:
+If you want to use the template filter, add it to your ``INSTALLED_APPS``
+in your settings file:
 
 .. code-block:: python
 
-    import django-docutils
+    INSTALLED_APPS = [..., 'django-docutils']
 
 .. |pypi| image:: https://img.shields.io/pypi/v/django-docutils.svg
     :alt: Python Package
