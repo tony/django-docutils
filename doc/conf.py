@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import alagitpull
 
 # Get the project root dir, which is the parent dir of this
 cwd = os.getcwd()
@@ -14,7 +15,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'releases',
-    'alabaster',
+    'alagitpull',
 ]
 
 releases_unstable_prehistory = True
@@ -38,19 +39,25 @@ exclude_patterns = ['_build']
 
 pygments_style = 'sphinx'
 
-import alabaster
-
-html_theme_path = [alabaster.get_path()]
-html_theme = 'alabaster'
+html_theme_path = [alagitpull.get_path()]
+html_theme = 'alagitpull'
 html_sidebars = {
     '**': [
         'about.html',
-        'star.html',
         'navigation.html',
         'relations.html',
         'more.html',
         'searchbox.html',
     ]
+}
+
+html_theme_options = {
+    'github_user': 'tony',
+    'github_repo': 'django-docutils',
+    'github_type': 'star',
+    'github_banner': True,
+    'projects': alagitpull.projects,
+    'project_name': about['__title__'],
 }
 
 html_static_path = ['_static']
