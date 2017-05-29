@@ -1,6 +1,8 @@
 django-docutils
 ===============
 
+.. include:: ../README.rst
+
 Contents:
 
 .. toctree::
