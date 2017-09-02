@@ -40,3 +40,7 @@ output/*/index.html
 
 # Sphinx
 doc/_build
+
+.eggs/
+.cache/
+.*env*/
