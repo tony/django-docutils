@@ -1,4 +1,4 @@
 django>=1.8
-wheel==0.29.0
+wheel==0.30.0
 docutils>=0.12
 #svn+http://svn.code.sf.net/p/docutils/code/trunk/docutils#egg=docutils
