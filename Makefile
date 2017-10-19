@@ -1,55 +1,29 @@
-.PHONY: clean-pyc clean-build docs
+WATCH_FILES= find . -type f -not -path '*/\.*' | grep -i '.*[.]py$$' 2> /dev/null
 
-help:
-	@echo "clean-build - remove build artifacts"
-	@echo "clean-pyc - remove Python file artifacts"
-	@echo "lint - check style with flake8"
-	@echo "test - run tests quickly with the default Python"
-	@echo "testall - run tests on every Python version with tox"
-	@echo "coverage - check code coverage quickly with the default Python"
-	@echo "docs - generate Sphinx HTML documentation, including API docs"
-	@echo "release - package and upload a release"
-	@echo "sdist - package"
-
-clean: clean-build clean-pyc
-
-clean-build:
-	rm -fr build/
-	rm -fr dist/
-	rm -fr *.egg-info
-
-clean-pyc:
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
-	find . -name '*~' -exec rm -f {} +
-
-lint:
-	flake8 django_docutils tests
 
 test:
-	python runtests.py tests
+	py.test $(test)
 
-test-all:
-	tox
+entr_warn:
+	@echo "----------------------------------------------------------"
+	@echo "     ! File watching functionality non-operational !      "
+	@echo ""
+	@echo "Install entr(1) to automatically run tasks on file change."
+	@echo "See http://entrproject.org/"
+	@echo "----------------------------------------------------------"
 
-coverage:
-	coverage run --source django_docutils runtests.py tests
-	coverage report -m
-	coverage html
-	open htmlcov/index.html
 
-docs:
-	rm -f docs/django-docutils.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ django-docutils
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	open docs/_build/html/index.html
+watch_test:
+	if command -v entr > /dev/null; then ${WATCH_FILES} | entr -c $(MAKE) test; else $(MAKE) test entr_warn; fi
 
-release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+build_docs:
+	cd doc && $(MAKE) html
 
-sdist: clean
-	python setup.py sdist
-	ls -l dist
+watch_docs:
+	cd doc && $(MAKE) watch_docs
+
+flake8:
+	flake8 django_docutils tests
+
+watch_flake8:
+	if command -v entr > /dev/null; then ${WATCH_FILES} | entr -c $(MAKE) flake8; else $(MAKE) flake8 entr_warn; fi
