@@ -5,6 +5,11 @@ Changelog
 History
 -------
 
+Current
+-------
+- Add black + isort and format code with it
+- Remove vulture
+
 - :release:`0.4.0 <2017-02-21>`
 - :feature:`-` Django template tag
 - :support:`-` Some README documentation
