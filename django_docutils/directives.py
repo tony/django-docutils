@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function, \
-    with_statement, unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 from docutils import nodes
-from docutils.parsers.rst import directives, Directive
-
+from docutils.parsers.rst import Directive, directives
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import TextLexer, get_lexer_by_name
 
 # -*- coding: utf-8 -*-
 """
@@ -50,7 +50,6 @@ from docutils.parsers.rst import directives, Directive
 # Set to True if you want inline CSS styles instead of classes
 INLINESTYLES = False
 
-from pygments.formatters import HtmlFormatter
 
 # The default formatter
 DEFAULT = HtmlFormatter(noclasses=INLINESTYLES)
@@ -60,12 +59,11 @@ VARIANTS = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name, TextLexer
 
 class CodeBlock(Directive):
     """ Source code syntax hightlighting.
     """
+
     required_arguments = 1
     optional_arguments = 0
     final_argument_whitespace = True

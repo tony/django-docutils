@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import django
-
 from django.core.exceptions import ImproperlyConfigured
-
-from django.views.generic.base import TemplateView
-from django.template.response import TemplateResponse
 from django.template.loader import select_template
+from django.template.response import TemplateResponse
+from django.views.generic.base import TemplateView
+
 
 class DocutilsResponse(TemplateResponse):
 
