@@ -22,6 +22,12 @@ build_docs:
 watch_docs:
 	cd doc && $(MAKE) watch_docs
 
+black:
+	black `${PY_FILES}`
+
+isort:
+	isort `${PY_FILES}`
+
 flake8:
 	flake8 django_docutils tests
 
