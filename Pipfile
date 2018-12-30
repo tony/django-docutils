@@ -4,17 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-
-django = ">=1.8"
 docutils = ">=0.12"
-alagitpull = "==0.0.19"
-coverage = "==4.5.1"
-pytest = "==3.4.0"
-"flake8" = ">=2.1.0"
+alagitpull = "==0.0.21"
+coverage = "==4.5.2"
+pytest = "==4.0.2"
+flake8 = ">=2.1.0"
 tox = ">=1.7.0"
-releases = "==1.4.0"
-sphinx = "*"
-
+releases = "==1.6.1"
+Django = ">=1.8"
+Sphinx = "==1.8.0"
+django-docutils = {editable = true,path = "."}
 
 [packages]
-"e1839a8" = {path = ".", editable = true}
+e1839a8 = {path = ".",editable = true}
