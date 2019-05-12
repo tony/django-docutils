@@ -5,15 +5,15 @@ name = "pypi"
 
 [dev-packages]
 docutils = ">=0.12"
-alagitpull = "==0.0.21"
-coverage = "==4.5.2"
-pytest = "==4.0.2"
+alagitpull = "==0.0.22"
+coverage = "==4.5.3"
+pytest = "==4.5.0"
 flake8 = ">=2.1.0"
 tox = ">=1.7.0"
 Django = ">=1.8"
-Sphinx = ">=l.8.0"
-django-docutils = {editable = true,path = "."}
-isort = "==4.3.4"
+Sphinx = ">=1.8.5"
+django-docutils = {path = ".",editable = true}
+isort = "==4.3.18"
 black = "==19.3b0"
 
 [packages]
