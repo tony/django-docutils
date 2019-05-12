@@ -15,6 +15,7 @@ Sphinx = ">=2.0.0"
 django-docutils = {path = ".",editable = true}
 isort = "*"
 black = "==19.3b0"
+sphinx-issues = "*"
 
 [packages]
 e1839a8 = {path = ".",editable = true}
