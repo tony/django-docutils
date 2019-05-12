@@ -12,10 +12,13 @@ flake8 = ">=2.1.0"
 tox = ">=1.7.0"
 releases = "==1.6.1"
 Django = ">=1.8"
-Sphinx = "==1.8.0"
+Sphinx = ">=l.8.0"
 django-docutils = {editable = true,path = "."}
 isort = "==4.3.4"
-black = "*"
+black = "==19.3b0"
 
 [packages]
 e1839a8 = {path = ".",editable = true}
+
+[requires]
+python_version = "3"
