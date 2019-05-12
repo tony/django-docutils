@@ -10,7 +10,6 @@ coverage = "==4.5.2"
 pytest = "==4.0.2"
 flake8 = ">=2.1.0"
 tox = ">=1.7.0"
-releases = "==1.6.1"
 Django = ">=1.8"
 Sphinx = ">=l.8.0"
 django-docutils = {editable = true,path = "."}

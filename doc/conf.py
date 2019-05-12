@@ -15,12 +15,11 @@ with open("../django_docutils/__about__.py") as fp:
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
-    'releases',
     'alagitpull',
 ]
 
 releases_unstable_prehistory = True
-releases_document_name = "history"
+releases_document_name = ["history"]
 releases_issue_uri = "https://github.com/tony/django-docutils/issues/%s"
 releases_release_uri = "https://github.com/tony/django-docutils/tree/v%s"
 
