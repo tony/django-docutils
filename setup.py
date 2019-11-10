@@ -62,7 +62,8 @@ setup(
     license="MIT",
     zip_safe=False,
     keywords=[
-        'django,' 'docutils',
+        'django',
+        'docutils',
         'documentation utilities',
         'reST',
         'reStructuredText',
