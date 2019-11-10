@@ -24,9 +24,9 @@ with open('requirements/test.txt') as f:
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     print("You probably want to also tag the version now:")
-    print("  git tag -a %s -m 'version %s'" % (
-        about['__version__'], about['__version']
-    ))
+    print(
+        "  git tag -a %s -m 'version %s'" % (about['__version__'], about['__version'])
+    )
     print("  git push --tags")
     sys.exit()
 
@@ -40,6 +40,7 @@ class PyTest(TestCommand):
 
     def run_tests(self):
         import pytest
+
         errno = pytest.main(self.pytest_args)
         sys.exit(errno)
 
@@ -53,29 +54,30 @@ setup(
     long_description=readme,
     author_email=about['__email__'],
     description=about['__description__'],
-    packages=[
-        'django_docutils',
-    ],
+    packages=['django_docutils',],
     include_package_data=True,
     install_requires=install_reqs,
     tests_require=tests_reqs,
     cmdclass={'test': PyTest},
-    license="BSD",
+    license="MIT",
     zip_safe=False,
-    keywords=['django,' 'docutils', 'documentation utilities', 'reST',
-              'reStructuredText', 'rst'],
+    keywords=[
+        'django',
+        'docutils',
+        'documentation utilities',
+        'reST',
+        'reStructuredText',
+        'rst',
+    ],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
 )

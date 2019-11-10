@@ -1,7 +1,6 @@
-include AUTHORS.rst
 include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
 include requirements/base.txt requirements/test.txt
-recursive-include django_docutils *.html *.png *.gif *js *.css *jpg *jpeg *svg *py
+recursive-include django_docutils *.py

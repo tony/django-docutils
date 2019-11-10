@@ -2,20 +2,18 @@ language: python
 sudo: false
 python:
   - "3.7"
-  - "2.7"
   - pypy3
-  - pypy
 env:
-  - DJANGO_VERSION=1.10
-  - DJANGO_VERSION=1.9
-  - DJANGO_VERSION=1.8
+  - DJANGO_VERSION=2.2
+  - DJANGO_VERSION=2.1
+  - DJANGO_VERSION=1.11
 
 install:
   - export PIP_USE_MIRRORS=true
   - pip install --upgrade pytest  # https://github.com/travis-ci/travis-ci/issues/4873
   - pip install --upgrade pip wheel virtualenv setuptools
   - pip install -r requirements/test.txt
-  - pip install DJANGO==$DJANGO_VERSION
+  - pip install DJANGO~=$DJANGO_VERSION
 
 script: coverage run --source django_docutils setup.py test
 
