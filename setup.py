@@ -59,7 +59,7 @@ setup(
     install_requires=install_reqs,
     tests_require=tests_reqs,
     cmdclass={'test': PyTest},
-    license="BSD",
+    license="MIT",
     zip_safe=False,
     keywords=[
         'django,' 'docutils',
@@ -72,7 +72,7 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
