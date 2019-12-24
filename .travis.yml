@@ -2,22 +2,17 @@ language: python
 sudo: false
 dist: bionic  # 18.04
 if: (type = push AND branch IN (master)) OR (type = pull_request)
-
+cache: pip
 python:
   - 3.7
   - pypy3
 env:
   - DJANGO_VERSION=3.0
   - DJANGO_VERSION=2.2
-cache: pip
 install:
-  - export PIP_USE_MIRRORS=true
-  - pip install --upgrade pytest  # https://github.com/travis-ci/travis-ci/issues/4873
-  - pip install --upgrade pip wheel virtualenv setuptools
+  - pip install -e .
   - pip install -r requirements/test.txt
   - pip install DJANGO~=$DJANGO_VERSION
-
-script: coverage run --source django_docutils setup.py test
-
+script: py.test --cov=django_docutils
 after_success:
   - bash <(curl -s https://codecov.io/bash)

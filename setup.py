@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 import os
 import sys
-
-from setuptools.command.test import test as TestCommand
 
 try:
     from setuptools import setup
@@ -31,20 +28,6 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 
-class PyTest(TestCommand):
-    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.pytest_args = []
-
-    def run_tests(self):
-        import pytest
-
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
-
-
 readme = open('README.rst').read()
 
 setup(
@@ -58,7 +41,6 @@ setup(
     include_package_data=True,
     install_requires=install_reqs,
     tests_require=tests_reqs,
-    cmdclass={'test': PyTest},
     license="MIT",
     zip_safe=False,
     keywords=[
