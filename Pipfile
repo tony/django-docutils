@@ -16,6 +16,7 @@ django-docutils = {path = ".",editable = true}
 isort = "*"
 black = "==19.3b0"
 sphinx-issues = "*"
+pytest-cov = "*"
 
 [packages]
 e1839a8 = {path = ".",editable = true}
