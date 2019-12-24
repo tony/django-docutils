@@ -9,7 +9,7 @@ env:
   - DJANGO_VERSION=2.2
   - DJANGO_VERSION=2.1
   - DJANGO_VERSION=1.11
-
+cache: pip
 install:
   - export PIP_USE_MIRRORS=true
   - pip install --upgrade pytest  # https://github.com/travis-ci/travis-ci/issues/4873
