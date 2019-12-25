@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load rst %}
+{% load render_entrypoint from webpack_loader %}
+
+{% block content_inner %}
+<div class="docutils-html content fixed-toc-content">
+{% restructuredtext content inject_ads=inject_ads %}
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+{% render_entrypoint 'toc_scroller' 'js' %}
+{% endblock %}
