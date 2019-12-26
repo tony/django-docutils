@@ -5,3 +5,4 @@ pytest-cov
 factory_boy
 pytest-factoryboy
 dj-inmemorystorage
+responses
