@@ -13,6 +13,10 @@ readme = 'README.rst'  # Markdown files are supported
 
 repository = "https://github.com/tony/django-docutils"
 homepage = "https://django-docutils.git-pull.com"
+documentation = "https://django-docutils.git-pull.com"
+
+[tool.poetry.urls]
+"Issue Tracker" = "https://github.com/tony/django-docutils/issues"
 
 [tool.poetry.dependencies]
 python = ">3.6"
