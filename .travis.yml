@@ -6,6 +6,7 @@ cache:
   - pip
   - directories:
     - ~/.cache/pypoetry
+    - .venv
 python:
   - 3.7
   - pypy3
