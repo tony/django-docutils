@@ -23,7 +23,7 @@ documentation = "https://django-docutils.git-pull.com"
 "Issue Tracker" = "https://github.com/tony/django-docutils/issues"
 
 [tool.poetry.dependencies]
-python = ">3.6"
+python = "^3.6"
 Django = ">=2.2"
 docutils = ">=0.12"
 tldextract = {version = "^2.2.2", optional = true}
@@ -33,6 +33,22 @@ pygments = {version = "^2.5.2", optional = true}
 [tool.poetry.extras]
 favicon = ["tldextract", "tqdm"]
 intersphinx = ["tqdm"]
+
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.7.9"
+isort = "^4.3.21"
+black = "^19.10b0"
+sphinx = ">=2.0.0"
+alagitpull = "<1"
+sphinx_issues = "<2"
+pytest = "<6"
+coverage = "^5.0.1"
+pytest-cov = "^2.8.1"
+factory-boy = "^2.12.0"
+pytest-factoryboy = "^2.0.3"
+dj-inmemorystorage = "^2.0.0"
+responses = "^0.10.9"
 
 [tool.black]
 skip-string-normalization = true
