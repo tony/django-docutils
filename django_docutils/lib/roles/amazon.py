@@ -1,12 +1,21 @@
 from urllib.error import HTTPError
 
-# from based.lib.amazon.products import get_client
 from bitly_api import bitly_api
 from django.conf import settings
 
 from django_docutils.references.models import Reference
 
 from .common import generic_remote_url_role
+
+
+def get_client():
+    from amazon.api import AmazonAPI
+
+    return AmazonAPI(
+        settings.AMAZON_PRODUCT_API_ACCESS_KEY,
+        settings.AMAZON_PRODUCT_API_SECRET_KEY,
+        settings.AMAZON_ASSOCIATES_TRACKING_ID,
+    )
 
 
 def amazon_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
