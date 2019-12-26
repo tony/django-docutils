@@ -10,8 +10,7 @@ env:
   - DJANGO_VERSION=3.0
   - DJANGO_VERSION=2.2
 install:
-  - pip install -e .
-  - pip install -r requirements/test.txt
+  - python setup.py develop
   - pip install DJANGO~=$DJANGO_VERSION
 script: py.test --cov=django_docutils
 after_success:
