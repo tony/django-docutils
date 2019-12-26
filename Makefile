@@ -1,4 +1,5 @@
 WATCH_FILES= find . -type f -not -path '*/\.*' | grep -i '.*[.]py$$' 2> /dev/null
+PY_FILES= ${WATCH_FILES}
 
 
 test:
