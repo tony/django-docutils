@@ -6,3 +6,4 @@ django-randomslugfield
 django_slugify_processor
 django-dirtyfields
 lxml
+tldextract
