@@ -6,6 +6,11 @@ from django.apps import apps
 
 
 @pytest.fixture
+def EmptyModel(favicon_app):
+    return favicon_app.get_model('EmptyModel')
+
+
+@pytest.fixture
 def Favicon(favicon_app):
     return favicon_app.get_model('Favicon')
 
@@ -20,7 +25,7 @@ def RSTPostPage(favicon_app):
     return favicon_app.get_model('RSTPostPage')
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def favicon_app(settings, request):
     app_name = 'test_app'
     app_import_string = f'django_docutils.favicon.tests.{app_name}'

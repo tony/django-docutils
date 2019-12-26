@@ -5,6 +5,10 @@ from django_docutils.references.models import ReferenceBase
 from django_docutils.rst_post.models import RSTPostBase, RSTPostPageBase
 
 
+class EmptyModel(models.Model):
+    pass
+
+
 class Reference(ReferenceBase):
     pass
 
