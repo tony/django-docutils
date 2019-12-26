@@ -4,5 +4,6 @@ coverage
 pytest-cov
 factory_boy
 pytest-factoryboy
+pytest-django
 dj-inmemorystorage
 responses
