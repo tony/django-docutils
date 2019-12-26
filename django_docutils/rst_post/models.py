@@ -9,7 +9,7 @@ from django.db.models.fields.related import resolve_relation
 from django.urls import reverse
 from django.urls.exceptions import NoReverseMatch
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import (
     AutoSlugField,
     CreationDateTimeField,

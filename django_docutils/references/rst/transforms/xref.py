@@ -2,7 +2,7 @@ from os import path
 
 from django.conf import settings
 from django.utils.module_loading import import_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from docutils import nodes
 from docutils.transforms import Transform
 from docutils.utils import relative_path
