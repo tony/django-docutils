@@ -53,7 +53,6 @@ def pytest_configure():
                     'file': 'django_docutils.lib.roles.file.file_role',
                     'exe': 'django_docutils.lib.roles.file.exe_role',
                     'manifest': 'django_docutils.lib.roles.file.manifest_role',
-                    'amzn': 'django_docutils.lib.roles.amazon.amazon_role',
                     'rtd': 'django_docutils.lib.roles.readthedocs.readthedocs_role',
                     'url': 'django_docutils.lib.roles.url.url_role',
                     'leanpub': 'django_docutils.lib.roles.leanpub.leanpub_role',
