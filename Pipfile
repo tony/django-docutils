@@ -19,7 +19,7 @@ sphinx-issues = "*"
 pytest-cov = "*"
 
 [packages]
-e1839a8 = {path = ".",editable = true}
+django-docutils = {editable = true,path = "."}
 
 [requires]
 python_version = "3"
