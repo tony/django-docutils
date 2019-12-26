@@ -10,8 +10,8 @@ env:
   - DJANGO_VERSION=3.0
   - DJANGO_VERSION=2.2
 install:
-  - python setup.py develop
-  - pip install DJANGO~=$DJANGO_VERSION
-script: py.test --cov=django_docutils
+  - poetry install  # python setup.py develop
+  - poetry run pip install DJANGO~=$DJANGO_VERSION
+script: poetry run py.test --cov=django_docutils
 after_success:
   - bash <(curl -s https://codecov.io/bash)
