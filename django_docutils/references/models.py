@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Reference(models.Model):
+class ReferenceBase(models.Model):
 
     r"""Reference for targets, including the intersphinx network.
 
