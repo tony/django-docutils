@@ -1,8 +1,3 @@
-import pytest
-
-# from django.apps import apps
-
-
 def pytest_configure():
     from django.conf import settings
 
@@ -18,6 +13,7 @@ def pytest_configure():
         SECRET_KEY='not very secret in tests',
         USE_I18N=True,
         USE_L10N=True,
+        USE_TZ=True,
         STATIC_URL='/static/',
         ROOT_URLCONF='tests.urls',
         TEMPLATES=[
@@ -112,7 +108,6 @@ def pytest_configure():
             'guardian',
         ),
         PASSWORD_HASHERS=('django.contrib.auth.hashers.MD5PasswordHasher',),
-        USE_TZ=True,
         ANONYMOUS_USER_NAME='AnonymousCoward',
     )
 
@@ -122,29 +117,3 @@ def pytest_configure():
         django.setup()
     except AttributeError:
         pass
-
-
-@pytest.fixture(scope='session', autouse=True)
-def django_db_use_migrations():
-    return False
-
-
-# @pytest.fixture(autouse=True)
-# def favicon_app(settings, request, django_db_use_migrations):
-#     app_name = 'test_app'
-#     app_import_string = f'django_docutils.favicon.tests.{app_name}'
-#
-#     if app_import_string not in settings.INSTALLED_APPS:
-#         settings.INSTALLED_APPS = settings.INSTALLED_APPS + (app_import_string,)
-#
-#     def resource_a_teardown():
-#         print('\nresources_a_teardown()')
-#         settings.INSTALLED_APPS = (
-#             s for s in settings.INSTALLED_APPS if s != app_import_string
-#         )
-#
-#         assert app_import_string not in settings.INSTALLED_APPS
-#
-#     request.addfinalizer(resource_a_teardown)
-#
-#     return apps.get_app_config(app_name)
