@@ -11,7 +11,6 @@ pytest = "<6"
 flake8 = "<4"
 tox = "*"
 Sphinx = ">=2.0.0"
-django-docutils = {path = ".",editable = true}
 isort = "<5"
 black = "==19.10b0"
 sphinx-issues = "*"
