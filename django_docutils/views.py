@@ -11,11 +11,21 @@ class DocutilsResponse(TemplateResponse):
 
     template_name = 'base.html'
 
-    def __init__(self, request, template, rst, context=None, content_type=None,
-            status=None, charset=None, using=None):
+    def __init__(
+        self,
+        request,
+        template,
+        rst,
+        context=None,
+        content_type=None,
+        status=None,
+        charset=None,
+        using=None,
+    ):
         self.rst_name = rst
         super(DocutilsResponse, self).__init__(
-            request, template, context, content_type, status, charset, using)
+            request, template, context, content_type, status, charset, using
+        )
 
     @property
     def rendered_content(self):
@@ -27,7 +37,6 @@ class DocutilsResponse(TemplateResponse):
         content explicitly using the value of this property.
         """
 
-
         if django.VERSION < (1, 10):
             context = self._resolve_context(self.context_data)
         else:
@@ -35,7 +44,10 @@ class DocutilsResponse(TemplateResponse):
 
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
-        context['content'] = mark_safe(select_template(self.rst_name, using='docutils').render())
+
+        context['content'] = mark_safe(
+            select_template(self.rst_name, using='docutils').render()
+        )
 
         if django.VERSION < (1, 10):
             template = self._resolve_template(self.template_name)
@@ -67,6 +79,7 @@ class DocutilsView(TemplateView):
         if self.rst_name is None:
             raise ImproperlyConfigured(
                 "DocutilsView requires either a definition of "
-                "'rst_name' or an implementation of 'get_rst_names()'")
+                "'rst_name' or an implementation of 'get_rst_names()'"
+            )
         else:
             return [self.rst_name]

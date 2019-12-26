@@ -16,7 +16,6 @@ from django_docutils import models
 
 
 class TestDjango_docutils(unittest.TestCase):
-
     def setUp(self):
         pass
 

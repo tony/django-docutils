@@ -73,25 +73,38 @@ alagitpull_external_hosts_new_window = True
 htmlhelp_basename = '%sdoc' % about['__title__']
 
 latex_documents = [
-    ('index', '{0}.tex'.format(about['__package_name__']),
-     '{0} Documentation'.format(about['__title__']),
-     about['__author__'], 'manual'),
+    (
+        'index',
+        '{0}.tex'.format(about['__package_name__']),
+        '{0} Documentation'.format(about['__title__']),
+        about['__author__'],
+        'manual',
+    ),
 ]
 
 man_pages = [
-    ('index', about['__package_name__'],
-     '{0} Documentation'.format(about['__title__']),
-     about['__author__'], 1),
+    (
+        'index',
+        about['__package_name__'],
+        '{0} Documentation'.format(about['__title__']),
+        about['__author__'],
+        1,
+    ),
 ]
 
 texinfo_documents = [
-    ('index', '{0}'.format(about['__package_name__']),
-     '{0} Documentation'.format(about['__title__']),
-     about['__author__'], about['__package_name__'],
-     about['__description__'], 'Miscellaneous'),
+    (
+        'index',
+        '{0}'.format(about['__package_name__']),
+        '{0} Documentation'.format(about['__title__']),
+        about['__author__'],
+        about['__package_name__'],
+        about['__description__'],
+        'Miscellaneous',
+    ),
 ]
 
 intersphinx_mapping = {
     'py': ('https://docs.python.org/2', None),
-    'pip': ('http://sphinx.readthedocs.io/en/latest/', None)
+    'pip': ('http://sphinx.readthedocs.io/en/latest/', None),
 }

@@ -12,10 +12,8 @@ from .directives import register_pygments_directive
 
 try:
     from django.template.base import TemplateDoesNotExist
-except ImportError: # >= 1.9
+except ImportError:  # >= 1.9
     from django.template.exceptions import TemplateDoesNotExist
-
-
 
 
 class Docutils(BaseEngine):
@@ -46,7 +44,6 @@ class Docutils(BaseEngine):
 
 
 class DocutilsTemplate(object):
-
     def __init__(self, source, options):
         self.source = source
         self.options = options
@@ -57,10 +54,7 @@ class DocutilsTemplate(object):
             context['request'] = request
             context['csrf_input'] = csrf_input_lazy(request)
             context['csrf_token'] = csrf_token_lazy(request)
-        context = {
-            'source': self.source,
-            'writer_name': 'html'
-        }
+        context = {'source': self.source, 'writer_name': 'html'}
 
         return core.publish_parts(**context)['html_body']
 
