@@ -7,3 +7,4 @@ django_slugify_processor
 django-dirtyfields
 lxml
 tldextract
+tqdm
