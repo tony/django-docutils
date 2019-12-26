@@ -2,6 +2,6 @@ pytest<6
 flake8
 coverage
 pytest-cov
-factory
+factory_boy
 pytest-factoryboy
 dj-inmemorystorage
