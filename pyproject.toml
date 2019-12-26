@@ -1,3 +1,19 @@
+[tool.poetry]
+name = "django-docutils"
+version = "0.4.0"
+description = "Documentation Utilities (Docutils, reStructuredText) for django.)"
+
+license = "MIT"
+
+authors = [
+    "Tony Narlock <tony@git-pull.com>"
+]
+
+readme = 'README.rst'  # Markdown files are supported
+
+repository = "https://github.com/tony/django-docutils"
+homepage = "https://django-docutils.git-pull.com"
+
 [tool.black]
 skip-string-normalization = true
 include = '\.pyi?$'
