@@ -2,8 +2,7 @@ from urllib.error import HTTPError
 
 from bitly_api import bitly_api
 from django.conf import settings
-
-from django_docutils.references.models import Reference
+from django.utils.module_loading import import_string
 
 from .common import generic_remote_url_role
 
@@ -38,6 +37,7 @@ def amazon_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
        text: my book
     """
     amzn = get_client()
+    Reference = import_string(settings.REFERENCE_MODEL)
 
     def url_handler(target):
         try:
