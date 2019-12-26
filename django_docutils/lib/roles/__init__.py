@@ -1,10 +1,9 @@
 import inspect
 
 from django.utils.module_loading import import_string
-
 from docutils.parsers.rst import roles
 
-from based.app.references.rst.roles import XRefRole
+from django_docutils.references.rst.roles import XRefRole
 
 from ..settings import BASED_LIB_RST
 

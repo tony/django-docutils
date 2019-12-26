@@ -12,10 +12,10 @@ def get_model_from_post_app(app_config):
     :returns: Post sub-model for app
     :rtype: Model
     """
-    from based.app.posts.models import PostBase
+    from django_docutils.rst_post.models import RSTPostBase
 
     for model in app_config.get_models():
-        if issubclass(model, PostBase):
+        if issubclass(model, RSTPostBase):
             return model
 
 

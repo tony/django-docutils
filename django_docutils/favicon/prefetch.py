@@ -120,7 +120,7 @@ def yield_page_doctrees(PostPage):
     """Yield site pages in a docutils document format
 
     :param PostPage: Any model implementing PostPageBase
-    :type: :class:`based.app.posts.models.PostPageBase`
+    :type: :class:`django_docutils.rst_post.models.RSTPostPageBase`
     :yields: Document of pages in side
     :rtype: :class:`docutils.nodes.document`
     """

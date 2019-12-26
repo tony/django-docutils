@@ -1,11 +1,35 @@
 from django.utils.functional import cached_property
+from django.views.generic.base import ContextMixin, TemplateView
 
-from based.django.views.generic import TemplateTitleView
 from django_docutils.lib.publisher import (
     publish_doctree,
     publish_html_from_doctree,
     publish_toc_from_doctree,
 )
+
+from .text import smart_title
+
+
+class TitleMixin(ContextMixin):
+    title = None
+    subtitle = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.title:
+            context['title'] = smart_title(self.title)
+        if self.subtitle:
+            context['subtitle'] = smart_title(self.subtitle)
+        return context
+
+
+class TemplateTitleView(TemplateView, TitleMixin):
+    title = None
+    subtitle = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class RSTMixin:
