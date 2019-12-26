@@ -28,5 +28,5 @@ def test_find_rst_files_in_app(sample_app_config):
 
 
 def test_get_model_from_post_app():
-    app = apps.get_app_config('test_post_app')
-    assert get_model_from_post_app(app) == app.get_model('Post')
+    app = apps.get_app_config('test_app')
+    assert get_model_from_post_app(app) == app.get_model('RSTPost')

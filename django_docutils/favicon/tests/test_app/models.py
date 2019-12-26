@@ -1,7 +1,12 @@
 from django.db import models
 
 from django_docutils.favicon.models import Favicon as FaviconBase
+from django_docutils.references.models import Reference as ReferenceBase
 from django_docutils.rst_post.models import RSTPostBase, RSTPostPageBase
+
+
+class Reference(ReferenceBase):
+    pass
 
 
 class Favicon(FaviconBase):

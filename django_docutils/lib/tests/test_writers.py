@@ -1,5 +1,4 @@
 from django.utils.encoding import force_bytes
-
 from docutils.core import publish_doctree
 from docutils.writers.html5_polyglot import Writer
 

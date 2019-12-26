@@ -1,11 +1,10 @@
 from urllib.error import HTTPError
 
+# from based.lib.amazon.products import get_client
+from bitly_api import bitly_api
 from django.conf import settings
 
-from bitly_api import bitly_api
-
-from based.app.references.models import Reference
-from based.lib.amazon.products import get_client
+from django_docutils.references.models import Reference
 
 from .common import generic_remote_url_role
 
