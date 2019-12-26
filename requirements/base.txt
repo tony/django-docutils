@@ -1,2 +1,8 @@
 django>=2.2
 docutils>=0.12
+django-guardian
+django_extensions
+django-inmemorystorage
+django-randomslugfield
+django_slugify_processor
+django-dirtyfields
