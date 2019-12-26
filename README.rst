@@ -77,6 +77,52 @@ view:
        template_name = 'base.html'
        rst_name = 'home.rst'
 
+## Settings
+
+
+.. code-block:: python
+
+    BASED_LIB_TEXT = {  # Optional
+        'uncapitalized_word_filters': ['django_docutils.lib.text.is_uncapitalized_word']
+    }
+
+    BASED_ADS = {  # If injecting ads
+        'AMAZON_AD_CODE': """
+        <script type="text/javascript">
+        amzn_assoc_placement = "adunit0";
+        amzn_assoc_search_bar = "true";
+        amzn_assoc_tracking_id = "mytracking-20";
+        amzn_assoc_search_bar_position = "bottom";
+        amzn_assoc_ad_mode = "search";
+        amzn_assoc_ad_type = "smart";
+        amzn_assoc_marketplace = "amazon";
+        amzn_assoc_region = "US";
+        amzn_assoc_title = "You may be interested in";
+        amzn_assoc_default_search_phrase = "{keyword}";
+        amzn_assoc_default_category = "All";
+        amzn_assoc_linkid = "6efef5538142e4a4031b04de66b6e804";
+        </script>
+        <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+        """,
+        'AMAZON_AD_STRIP': (
+            '<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&'
+            'adInstanceId=521gc14d-d9f1-4691-8af2-a38de0d0cbad"></script>'
+        ),
+        'GOOGLE_AD_CODE': """
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+        </script>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-5555555555555555"
+             data-ad-slot="5555555555"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        """,
+    }
+
 .. |pypi| image:: https://img.shields.io/pypi/v/django-docutils.svg
     :alt: Python Package
     :target: http://badge.fury.io/py/django-docutils
