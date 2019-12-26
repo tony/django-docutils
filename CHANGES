@@ -10,8 +10,9 @@ Current
 - Add black + isort and format code with it
 - Remove vulture
 - Remove python 2.x support, python 3.3 and 3.4 (reached end of life)
-- Update to new django versions (2.0, 2.1, 2.2)
-- Remove unsupported django versions (1.8, 1.9, 1.10)
+- Update to new django versions (2.2 and 2.3)
+- Remove unsupported django versions (1.8, 1.9, 1.10, 2.0, 2.1)
+- Cleanup CI, add caching
 
 0.4.0 <2017-02-21>
 ------------------
