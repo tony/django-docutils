@@ -83,7 +83,7 @@ view:
 .. code-block:: python
 
     BASED_LIB_TEXT = {  # Optional
-        'uncapitalized_word_filters': ['django_docutils.lib.text.is_uncapitalized_word']
+        'uncapitalized_word_filters': ['project.my_module.my_capitalization_fn']
     }
 
     BASED_ADS = {  # If injecting ads
