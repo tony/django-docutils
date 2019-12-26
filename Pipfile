@@ -20,6 +20,8 @@ pytest-cov = "*"
 
 [packages]
 django-docutils = {editable = true,path = "."}
+docutils = ">=0.12"
+Django = ">=2.2"
 
 [requires]
 python_version = "3"
