@@ -16,9 +16,7 @@ sdist
 develop-eggs
 pip-wheel-metadata
 .installed.cfg
-lib
 lib64
-!django_docutils/lib
 
 # Installer logs
 pip-log.txt
