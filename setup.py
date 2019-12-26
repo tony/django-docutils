@@ -12,12 +12,6 @@ about = {}
 with open("django_docutils/__about__.py") as fp:
     exec(fp.read(), about)
 
-with open('requirements/base.txt') as f:
-    install_reqs = [line for line in f.read().split('\n') if line]
-
-with open('requirements/test.txt') as f:
-    tests_reqs = [line for line in f.read().split('\n') if line]
-
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     print("You probably want to also tag the version now:")
@@ -39,8 +33,6 @@ setup(
     description=about['__description__'],
     packages=['django_docutils',],
     include_package_data=True,
-    install_requires=install_reqs,
-    tests_require=tests_reqs,
     license="MIT",
     zip_safe=False,
     keywords=[
