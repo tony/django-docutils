@@ -114,8 +114,6 @@ def pytest_configure():
         PASSWORD_HASHERS=('django.contrib.auth.hashers.MD5PasswordHasher',),
         USE_TZ=True,
         ANONYMOUS_USER_NAME='AnonymousCoward',
-        GUARDIAN_GET_INIT_ANONYMOUS_USER='django_docutils.rst_post.models.get_anonymous_user_instance',
-        GUARDIAN_MONKEY_PATCH=False,
     )
 
     try:
