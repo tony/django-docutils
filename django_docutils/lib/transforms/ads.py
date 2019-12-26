@@ -75,7 +75,9 @@ class InjectAds(Transform):
                     settings.BASED_ADS['AMAZON_AD_STRIP'],
                 ]
             )
-            # ad_code = settings.BASED_ADS['AMZN_AD_CODE'].format(keyword=self.ad_keywords[0])
+            # ad_code = settings.BASED_ADS['AMZN_AD_CODE'].format(
+            #     keyword=self.ad_keywords[0]
+            # )
 
             # append node to end of section
             append_html_to_node(node, ad_code)
