@@ -60,7 +60,7 @@ def split_m2m_metadata(metadata):
     return m2m_metadata, metadata
 
 
-def load_post_data(model, metadata, TAXONOMIES=[]):  # NOQA: C901
+def load_post_data(model, metadata):  # NOQA: C901
     """Fully load metadata and contents into objects (including m2m relations)
 
     :param model: Model class, any polymorphic sub-class of
@@ -121,14 +121,6 @@ def load_post_data(model, metadata, TAXONOMIES=[]):  # NOQA: C901
         m.subtitle = m.pages.first().subtitle
         m.save()
 
-    # add page taxonomy relations
-    if TAXONOMIES != []:
-        for m2m_field, model in TAXONOMIES.items():
-            if m2m_field in m2m_metadata:
-                for t in m2m_metadata[m2m_field]:
-                    getattr(m, m2m_field).add(
-                        model.objects.get(title__iexact=t.strip())
-                    )
     return m
 
 
