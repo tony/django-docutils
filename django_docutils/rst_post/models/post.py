@@ -55,7 +55,9 @@ class RSTPostBase(dirtyfields.DirtyFieldsMixin, models.Model):
 
     slug_id = RandomSlugField(length=8, unique=True, editable=False)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET(get_anonymous_user_instance)
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET(get_anonymous_user_instance),
+        null=True,
     )
     is_draft = models.BooleanField(default=False, editable=False, db_index=True)
     created = CreationDateTimeField(_('created'))
