@@ -2,8 +2,8 @@ session_name: django-docutils
 start_directory: ./ # load session relative to config location (project root).
 before_script: poetry install --no-ansi --quiet
 shell_command_before: 
-# - poetry shell --quiet --no-ansi 2> /dev/null && clear >$(tty)
-- source $(poetry env list --full-path | head -n 1 2> /dev/null)/bin/activate 2>&1
+- poetry shell --quiet --no-ansi 2> /dev/null && clear >$(tty)
+# - source $(poetry env list --full-path | head -n 1 2> /dev/null)/bin/activate 2>&1
 windows:
 - window_name: django-docutils
   focus: True
