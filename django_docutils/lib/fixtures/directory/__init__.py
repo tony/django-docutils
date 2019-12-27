@@ -12,7 +12,6 @@ Here is what a layout of "dir"-type RST fixtures look like:
 
 fixtures/
 - myproject/
-  - manifest.json: post content configuration information (e.g. title,
-    taxonomy)
+  - manifest.json: post content configuration information (e.g. title, taxonomy)
   - README.rst: reStructuredText content
 """

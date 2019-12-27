@@ -73,10 +73,6 @@ class RSTPostBase(dirtyfields.DirtyFieldsMixin, models.Model):
         )
         super().save(**kwargs)
 
-    def taxonomy_tags(self, taxonomy_field):
-        """Used by category_tags template tag to show taxonomies."""
-        return getattr(self, taxonomy_field).get_queryset()
-
     @cached_property
     def content_type(self):
         return ContentType.objects.get_for_model(self)
