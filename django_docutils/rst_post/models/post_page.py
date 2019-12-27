@@ -74,18 +74,6 @@ class RSTPostPageBase(models.Model):
     def post_url_key(self):
         return self.post.__class__.__name__.lower() + 's'
 
-    def get_edit_url(self):
-        try:
-            return reverse(
-                f'{self.post_url_key}:update-view',
-                kwargs={'slug_id': self.post.slug_id, 'page': self.page_number},
-            )
-        except NoReverseMatch:
-            return reverse(
-                f'{self.post_url_key}:update-view',
-                kwargs={'slug_title': self.post.slug_title, 'page': self.page_number},
-            )
-
     @cached_property
     def document(self):
         """Return page content in a docutils' document
