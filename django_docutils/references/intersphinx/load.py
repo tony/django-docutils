@@ -27,13 +27,15 @@ import posixpath
 from os import path
 
 import requests
+from django.conf import settings
+from django.utils.module_loading import import_string
 from six import PY3
 from six.moves.urllib.parse import urlsplit, urlunsplit
 from tqdm import trange
 
-from ..models import Reference
 from .utils import InventoryFile
 
+Reference = import_string(settings.REFERENCE_MODEL)
 intersphinx_cache_limit = 5
 intersphinx_timeout = None
 INVENTORY_FILENAME = 'objects.inv'
