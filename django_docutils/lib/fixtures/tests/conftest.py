@@ -1,3 +1,4 @@
+import shutil
 import sys
 
 import py
@@ -63,6 +64,7 @@ def create_bare_app(project_tmpdir, request, settings, app_name):
         )
 
         assert app_name not in settings.INSTALLED_APPS
+        shutil.rmtree(str(bare_app))
 
     request.addfinalizer(resource_a_teardown)
 
