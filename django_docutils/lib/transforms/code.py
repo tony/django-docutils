@@ -2,7 +2,6 @@ import re
 
 from docutils import nodes
 from docutils.transforms import Transform
-
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 from pygments.token import Token
@@ -106,9 +105,10 @@ class CodeTransform(Transform):
             else:
                 from pygments.lexers import guess_lexer
                 from pygments.lexers.special import TextLexer
+                from pygments.lexers.mime import MIMELexer
 
                 guess = guess_lexer(text)
-                if guess.__class__ != TextLexer:
+                if not any(guess.__class__ != l for l in [MIMELexer, TextLexer]):
                     newlexer = guess
 
             if newlexer:
