@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.utils.module_loading import import_string
-
 from docutils import nodes
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
@@ -60,7 +59,7 @@ class BasedHTMLTranslator(HTMLTranslator):
             atts['href'] = '#' + node['refid']
             atts['class'] += ' internal'
 
-        from based.app.favicon.rst.nodes import icon
+        from django_docutils.favicon.rst.nodes import icon
 
         if isinstance(node[0], icon):
             atts['class'] = ''
