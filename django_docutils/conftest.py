@@ -3,7 +3,7 @@ def pytest_configure():
 
     settings.configure(
         DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage',
-        FAVICON_MODEL='django_docutils.favicon.tests.test_app.models.Favicon',
+        FAVICON_MODEL='test_app.Favicon',
         REFERENCE_MODEL='django_docutils.favicon.tests.test_app.models.Reference',
         DEBUG_PROPAGATE_EXCEPTIONS=True,
         DATABASES={

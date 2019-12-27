@@ -1,16 +1,14 @@
 import logging
 
 import tldextract
-from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.utils.module_loading import import_string
 from tqdm import tqdm, trange
 
+from django_docutils.favicon.models import get_favicon_model
 from django_docutils.favicon.rst.transforms.favicon import plain_references
 from django_docutils.favicon.scrape import get_favicon
 
 logger = logging.getLogger(__name__)
-Favicon = import_string(settings.FAVICON_MODEL)
 
 
 def yield_references(document, url_pattern=None):
@@ -57,6 +55,7 @@ def is_favicon_stored(fqdn):
     """
     # don't redown if fqdn favicon already exists
     try:
+        Favicon = get_favicon_model()
         favicon = Favicon.objects.get(domain=fqdn)
 
         # check for the file itself
@@ -105,6 +104,7 @@ def prefetch_favicon(url, progress=None):
         logger.debug(f'Error occurred fetch icon for {fqdn}: {e}')
         return
 
+    Favicon = get_favicon_model()
     return Favicon.objects.update_or_create(
         domain=fqdn,
         defaults={

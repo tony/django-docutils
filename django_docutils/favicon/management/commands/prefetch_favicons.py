@@ -3,7 +3,7 @@ from django.db import DEFAULT_DB_ALIAS, connections, transaction
 
 from django_docutils.lib.favicon.prefetch import prefetch_favicons
 
-from ...models import Favicon
+from ...models import get_favicon_model
 
 
 class Command(BaseCommand):
@@ -12,6 +12,7 @@ class Command(BaseCommand):
     def handle(self, **options):
         if options['clear']:
             self.stdout.write('Wiping favicons')
+            Favicon = get_favicon_model()
             for f in Favicon.objects.all():
                 f.delete()
 

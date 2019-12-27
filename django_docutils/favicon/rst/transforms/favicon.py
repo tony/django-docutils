@@ -1,13 +1,11 @@
 import tldextract
-from django.conf import settings
 from django.db.models import Q
-from django.utils.module_loading import import_string
 from docutils import nodes
 from docutils.transforms import Transform
 
-from ..nodes import icon
+from django_docutils.favicon.models import get_favicon_model
 
-Favicon = import_string(settings.FAVICON_MODEL)
+from ..nodes import icon
 
 
 def resolve_favicon(url):
@@ -22,6 +20,8 @@ def resolve_favicon(url):
     """
     # e.g. forums.bbc.co.uk
     fqdn = tldextract.extract(url).fqdn
+
+    Favicon = get_favicon_model()
 
     try:
         return Favicon.objects.get(domain=fqdn).favicon.url
@@ -39,6 +39,8 @@ class FaviconTransform(Transform):
         # first run, iterate through references, extract FQDN's, add to query
         for node in self.document.traverse(plain_references):
             q.add(Q(domain__exact=tldextract.extract(node['refuri']).fqdn), Q.OR)
+
+        Favicon = get_favicon_model()
 
         # pull all fqdn's with a favicon
         favicons = Favicon.objects.filter(q)
