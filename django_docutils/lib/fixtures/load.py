@@ -24,7 +24,6 @@ The information for series-related data is in the "Series" key of the
 """
 import os
 
-# from based.app.taxonomy.models import TAXONOMIES
 from django.contrib.auth import get_user_model
 from django_slugify_processor.text import slugify
 
@@ -41,10 +40,12 @@ from django_docutils.lib.fixtures.utils import (
 )
 from django_docutils.lib.metadata.process import process_metadata
 from django_docutils.lib.settings import BASED_LIB_RST
+from django_docutils.taxonomy.models import get_taxonomy_models
 
 docutils_settings = BASED_LIB_RST.get('docutils', {})
 
 User = get_user_model()
+TAXONOMIES = get_taxonomy_models()
 
 
 def split_m2m_metadata(metadata):
@@ -61,7 +62,7 @@ def split_m2m_metadata(metadata):
     return m2m_metadata, metadata
 
 
-def load_post_data(model, metadata, TAXONOMIES=[]):  # NOQA: C901
+def load_post_data(model, metadata):  # NOQA: C901
     """Fully load metadata and contents into objects (including m2m relations)
 
     :param model: Model class, any polymorphic sub-class of
