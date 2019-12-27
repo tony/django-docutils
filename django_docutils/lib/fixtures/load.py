@@ -24,7 +24,6 @@ The information for series-related data is in the "Series" key of the
 """
 import os
 
-# from based.app.taxonomy.models import TAXONOMIES
 from django.contrib.auth import get_user_model
 from django_slugify_processor.text import slugify
 
@@ -65,7 +64,7 @@ def load_post_data(model, metadata, TAXONOMIES=[]):  # NOQA: C901
     """Fully load metadata and contents into objects (including m2m relations)
 
     :param model: Model class, any polymorphic sub-class of
-        based.app.posts.models.Post
+        django_docutils.rst_post.models.RSTPost
     :type model: :class:`django:django.db.models.Model`
     :param metadata:
     :type metadata: dict
@@ -141,7 +140,7 @@ def load_app_rst_fixtures(app_config, model=None):
     :param app_config: Configuration for django app
     :type app_config: :class:`django.apps.AppConfig`
     :param model: Model class, any polymorphic sub-class of
-        based.app.posts.models.Post
+        django_docutils.rst_post.models.RSTPost
 
         Entirely optional, only used for test cases so far.:w
     :type model: :class:`django:django.db.models.Model`
