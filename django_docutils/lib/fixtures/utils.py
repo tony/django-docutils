@@ -46,12 +46,14 @@ def find_rst_files(path, absolute=False, recursive=False):
     return files
 
 
-def find_app_configs_with_fixtures():
+def find_app_configs_with_fixtures(has_rst_files=True):
     """Return a list of apps with fixtures dir.
 
     In Django 1.11 fixture_dirs grabs a directory of all fixtures, in our
     situation, we want to grab the correct model.
 
+    :param has_rst_files: Only return apps with .rst files in fixtures
+    :type has_rst_files: bool
     :returns: list of app configs with fixtures directory
     :rtype: list of :django:class`django.apps.AppConfig`
     """
@@ -59,6 +61,9 @@ def find_app_configs_with_fixtures():
     for app_config in apps.get_app_configs():
         app_dir = os.path.join(app_config.path, 'fixtures')
         if os.path.isdir(app_dir):
+            if has_rst_files:
+                if len(find_rst_files(app_dir, recursive=True)) < 1:
+                    continue
             app_configs.append(app_config)
 
     return app_configs
