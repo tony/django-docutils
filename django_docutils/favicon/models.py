@@ -10,15 +10,15 @@ def get_favicon_model():
     Return the Favicon model that is active in this project.
     """
     try:
-        return django_apps.get_model(settings.FAVICON_MODEL, require_ready=False)
+        return django_apps.get_model(settings.BASED_FAVICON_MODEL, require_ready=False)
     except ValueError:
         raise ImproperlyConfigured(
-            "FAVICON_MODEL must be of the form 'app_label.model_name'"
+            "BASED_FAVICON_MODEL must be of the form 'app_label.model_name'"
         )
     except LookupError:
         raise ImproperlyConfigured(
-            "FAVICON_MODEL refers to model '%s' that has not been installed"
-            % settings.FAVICON_MODEL
+            "BASED_FAVICON_MODEL refers to model '%s' that has not been installed"
+            % settings.BASED_FAVICON_MODEL
         )
 
 

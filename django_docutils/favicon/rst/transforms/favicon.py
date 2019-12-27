@@ -7,6 +7,8 @@ from django_docutils.favicon.models import get_favicon_model
 
 from ..nodes import icon
 
+Favicon = get_favicon_model()
+
 
 def resolve_favicon(url):
     """Given a URL to a website, see if a Favicon exists in db.
@@ -20,8 +22,6 @@ def resolve_favicon(url):
     """
     # e.g. forums.bbc.co.uk
     fqdn = tldextract.extract(url).fqdn
-
-    Favicon = get_favicon_model()
 
     try:
         return Favicon.objects.get(domain=fqdn).favicon.url
@@ -39,8 +39,6 @@ class FaviconTransform(Transform):
         # first run, iterate through references, extract FQDN's, add to query
         for node in self.document.traverse(plain_references):
             q.add(Q(domain__exact=tldextract.extract(node['refuri']).fqdn), Q.OR)
-
-        Favicon = get_favicon_model()
 
         # pull all fqdn's with a favicon
         favicons = Favicon.objects.filter(q)

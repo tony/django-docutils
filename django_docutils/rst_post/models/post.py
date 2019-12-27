@@ -1,8 +1,9 @@
 import dirtyfields
-from django.apps import apps
+from django.apps import apps as django_apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
@@ -15,10 +16,24 @@ from django_slugify_processor.text import slugify
 from randomslugfield import RandomSlugField
 
 
+def get_post_model():
+    try:
+        return django_apps.get_model(settings.BASED_POST_MODEL, require_ready=False)
+    except ValueError:
+        raise ImproperlyConfigured(
+            "BASED_POST_MODEL must be of the form 'app_label.model_name'"
+        )
+    except LookupError:
+        raise ImproperlyConfigured(
+            "BASED_POST_MODEL refers to model '%s' that has not been installed"
+            % settings.BASED_POST_MODEL
+        )
+
+
 def get_post_models():
     """Return high-level PageBase models. Skips subclasses of PostBase."""
     models = []
-    for model in apps.get_models():
+    for model in django_apps.get_models():
         if issubclass(model, RSTPostBase) and model.__subclasses__():
             models.append(model)
     return models

@@ -3,8 +3,6 @@ def pytest_configure():
 
     settings.configure(
         DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage',
-        FAVICON_MODEL='test_app.Favicon',
-        REFERENCE_MODEL='django_docutils.favicon.tests.test_app.models.Reference',
         DEBUG_PROPAGATE_EXCEPTIONS=True,
         DATABASES={
             'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'}
@@ -22,6 +20,9 @@ def pytest_configure():
                 'APP_DIRS': True,
             },
         ],
+        BASED_FAVICON_MODEL='test_app.Favicon',
+        BASED_REFERENCE_MODEL='test_app.Reference',
+        BASED_POST_MODEL='test_app.Post',
         BASED_LIB_RST={
             'metadata_processors': [
                 'django_docutils.lib.metadata.processors.process_datetime',

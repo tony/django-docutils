@@ -1,21 +1,21 @@
 from os import path
 
-from django.conf import settings
-from django.utils.module_loading import import_string
 from django.utils.translation import gettext_lazy as _
 from docutils import nodes
 from docutils.transforms import Transform
 from docutils.utils import relative_path
 
+from django_docutils.references.models import get_reference_model
+
 from ..nodes import pending_xref
+
+Reference = get_reference_model()
 
 
 class XRefTransform(Transform):
     default_priority = 5
 
     def apply(self):
-        Reference = import_string(settings.REFERENCE_MODEL)
-
         references = Reference.objects.all().values()
 
         for node in self.document.traverse(pending_xref):
