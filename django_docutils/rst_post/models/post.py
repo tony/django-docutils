@@ -1,7 +1,6 @@
 import dirtyfields
 from django.apps import apps as django_apps
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
@@ -39,7 +38,11 @@ def get_post_models():
     return models
 
 
-def get_anonymous_user_instance(UserModel=get_user_model()):
+def get_anonymous_user_instance(UserModel=None):
+    if UserModel is None:
+        from django.contrib.auth import get_user_model
+
+        UserModel = get_user_model()
     user, _ = UserModel.objects.get_or_create(
         username=settings.ANONYMOUS_USER_NAME, email='noone@localhost'
     )
