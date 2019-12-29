@@ -40,3 +40,8 @@ sync_pipfile:
 	pipenv install --skip-lock --dev -r requirements/dev.txt && \
 	pipenv install --skip-lock --dev -r requirements/test.txt && \
 	pipenv install --skip-lock --dev -e .
+
+
+clean:
+	rm -rf *.egg-info dist build
+

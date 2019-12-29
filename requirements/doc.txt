@@ -1,4 +1,0 @@
--r ./base.txt
-sphinx>=2.0.0
-alagitpull<1
-sphinx_issues<2

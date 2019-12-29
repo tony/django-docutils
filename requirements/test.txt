@@ -1,4 +1,0 @@
-pytest<6
-flake8
-coverage
-pytest-cov
