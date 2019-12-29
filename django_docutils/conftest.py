@@ -106,7 +106,6 @@ def pytest_configure():
             'django.contrib.staticfiles',
             'django_extensions',
             'django_docutils.favicon.tests.test_app',
-            'guardian',
         ),
         PASSWORD_HASHERS=('django.contrib.auth.hashers.MD5PasswordHasher',),
         ANONYMOUS_USER_NAME='AnonymousCoward',
