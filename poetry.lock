@@ -201,14 +201,6 @@ six = ">=1.2"
 
 [[package]]
 category = "main"
-description = "Implementation of per object permissions for Django."
-name = "django-guardian"
-optional = false
-python-versions = ">=3.5"
-version = "2.1.0"
-
-[[package]]
-category = "main"
 description = "A Django field that automatically generates random slugs."
 name = "django-randomslugfield"
 optional = false
@@ -828,7 +820,7 @@ favicon = ["tldextract", "tqdm"]
 intersphinx = ["tqdm"]
 
 [metadata]
-content-hash = "283047209e06ecd6fde0aac8aca11bc3ee01aff3ba465dd47643dbcd0d74c5e5"
+content-hash = "e18d78de6634e84a760d0057f00dcadcee3a55a060e2eaeb1d415623199cfdfd"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -927,10 +919,6 @@ django-dirtyfields = [
 django-extensions = [
     {file = "django-extensions-2.2.5.tar.gz", hash = "sha256:b58320d3fe3d6ae7d1d8e38959713fa92272f4921e662d689058d942a5b444f7"},
     {file = "django_extensions-2.2.5-py2.py3-none-any.whl", hash = "sha256:a9db7c56a556d244184f589f2437b4228de86ee45e5ebb837fb20c6d54e95ea5"},
-]
-django-guardian = [
-    {file = "django-guardian-2.1.0.tar.gz", hash = "sha256:8cf4efd67a863eb32beafd4335a38ffb083630f8ab2045212d27f8f9c3abe5a6"},
-    {file = "django_guardian-2.1.0-py3-none-any.whl", hash = "sha256:e638c9a23eeac534bb68b133975539ed8782f733ab6f35c0b23b4c39cd06b1bb"},
 ]
 django-randomslugfield = [
     {file = "django-randomslugfield-0.3.0.zip", hash = "sha256:8f5866d9383f020fb7f270a218ddc65b6a33d3833633a0c995c68f28cac59efb"},
