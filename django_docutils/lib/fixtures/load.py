@@ -73,10 +73,12 @@ def load_post_data(model, metadata):  # NOQA: C901
 
     m2m_metadata, metadata = split_m2m_metadata(metadata)
 
-    try:
-        metadata['author'] = User.objects.get(username=metadata['author'])
-    except User.DoesNotExist:
-        metadata['author'] = None
+    # try:
+    #     metadata['author'] = User.objects.get(username=metadata['author'])
+    # except (User.DoesNotExist, ProgrammingError):
+    #     metadata['author'] = None
+
+    metadata['author_name'] = metadata.pop('author', 'Anonymous')
 
     pages = metadata.pop('pages')
 
