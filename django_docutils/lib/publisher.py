@@ -1,17 +1,11 @@
 from django.utils.encoding import force_bytes, force_text
 from django.utils.safestring import mark_safe
-
 from docutils import io, nodes, readers
-from docutils.core import (
-    Publisher,
-    publish_doctree as docutils_publish_doctree,
-)
-
-from django_docutils.lib.transforms.ads import InjectAds
+from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 
 from .directives import register_based_directives
 from .roles import register_based_roles
-from .settings import BASED_LIB_RST
+from .settings import BASED_LIB_RST, INJECT_FONT_AWESOME
 from .transforms.toc import Contents
 from .writers import BasedWriter
 
@@ -155,7 +149,13 @@ def publish_html_from_doctree(
     writer = BasedWriter()
 
     if inject_ads:
+        from django_docutils.lib.transforms.ads import InjectAds
         doctree.transformer.add_transform(InjectAds.keywords(ad_keywords))
+
+    if INJECT_FONT_AWESOME:
+        from django_docutils.lib.transforms.font_awesome import InjectFontAwesome
+        doctree.transformer.add_transform(InjectFontAwesome)
+
     doctree.transformer.apply_transforms()
 
     if toc_only:  # special flag to only return toc, used for sidebars
