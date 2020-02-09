@@ -14,7 +14,7 @@ class InjectFontAwesome(Transform):
 
     def apply(self):
         for target in self.document.traverse(nodes.reference):
-            if target.hasattr('refuri'):
+            if target.hasattr('refuri') and isinstance(target[0], nodes.Text):
                 url = target['refuri']
                 for url_pattern, classes in url_patterns.items():
                     if re.match(url_pattern, url):
