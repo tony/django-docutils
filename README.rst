@@ -82,6 +82,38 @@ view:
 
 .. code-block:: python
 
+    BASED_LIB_RST = {  # Optional, automatically maps roles, directives and transformers
+        'docutils': {
+            'raw_enabled': True,
+            'strip_comments': True,
+            'initial_header_level': 2,
+        },
+        'roles': {
+            'local': {
+                'gh': 'django_docutils.lib.roles.github.github_role',
+                'twitter': 'django_docutils.lib.roles.twitter.twitter_role',
+                'email': 'django_docutils.lib.roles.email.email_role',
+            }
+        },
+        'font_awesome': {  # Transformer to inject <em class="<class>"></em>
+            'url_patterns': {
+                r'.*github.com.*': 'fab fa-github',
+                r'.*twitter.com.*': 'fab fa-twitter',
+                r'.*amzn.to.*': 'fab fa-amazon',
+                r'.*amazon.com.*': 'fab fa-amazon',
+                r'.*news.ycombinator.com*': 'fab fa-hacker-news',
+                r'.*leanpub.com.*': 'fab fa-leanpub',
+                r'.*python.org.*': 'fab fa-python',
+                r'.*pypi.org.*': 'fab fa-python',
+                r'.*djangoproject.com.*': 'fab fa-python',
+                r'.*wikipedia.org.*': 'fab fa-wikipedia',
+                r'((rtfd|readthedocs).)*$': 'fab fa-books',
+                r'^mailto:.*': 'fas fa-envelope',
+                r'((?!mywebsite.com|localhost).)*$': 'fas fa-external-link',
+            }
+        },
+    }
+
     BASED_LIB_TEXT = {  # Optional
         'uncapitalized_word_filters': ['project.my_module.my_capitalization_fn']
     }
