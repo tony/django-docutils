@@ -13,6 +13,8 @@ Current
 - Update to new django versions (2.2 and 2.3)
 - Remove unsupported django versions (1.8, 1.9, 1.10, 2.0, 2.1)
 - Cleanup CI, add caching
+- Add ``InjectFontAwesome`` transformer to inject icon ``<em>`` tags for
+  font awesome based on regex patterns
 
 0.4.0 <2017-02-21>
 ------------------
