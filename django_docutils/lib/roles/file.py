@@ -39,6 +39,7 @@ def file_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     return [sn], []
 
 
+# TODO: Let font-awesome classes be configured via settings
 def manifest_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """Role for manifests (package.json, file outputs)
 
@@ -52,7 +53,7 @@ def manifest_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     classes = ['manifest']
 
     # add .fa class since this isn't a link
-    classes.append('fa')
+    classes.append('fa-file-alt far')
 
     sn = nodes.emphasis(title, title)
 
