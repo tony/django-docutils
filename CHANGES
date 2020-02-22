@@ -15,6 +15,8 @@ Current
 - Cleanup CI, add caching
 - Add ``InjectFontAwesome`` transformer to inject icon ``<em>`` tags for
   font awesome based on regex patterns
+- Additional support for detecting font-awesome patterns and injecting the
+  icon in other transformers (e.g. ``XRefTransform``)
 
 0.4.0 <2017-02-21>
 ------------------
