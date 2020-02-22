@@ -5,6 +5,7 @@ from docutils import nodes
 from docutils.transforms import Transform
 from docutils.utils import relative_path
 
+from django_docutils.lib.transforms.font_awesome import fa_classes_from_url
 from django_docutils.references.models import get_reference_model
 
 from ..nodes import pending_xref
@@ -54,6 +55,7 @@ class XRefTransform(Transform):
                 refuri=uri,
                 reftitle=_('(in %s v%s)') % (proj, version),
             )
+
             if node.get('refexplicit'):
                 # use whatever title was given
                 newnode.append(contnode)
@@ -71,6 +73,12 @@ class XRefTransform(Transform):
             else:
                 # else use the given display name (used for :ref:)
                 newnode.append(contnode.__class__(dispname, dispname))
+
+            fa_classes = fa_classes_from_url(url=uri)
+            if fa_classes != '':
+                fa_tag = f'<em class="{fa_classes}"></em>'
+                newnode.insert(0, nodes.raw('', fa_tag, format='html'))
+
             node.replace_self(newnode)
 
     def visit_pending_xref(self, node):
