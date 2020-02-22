@@ -22,12 +22,12 @@ def file_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     classes = []
 
     # add .fa class since this isn't a link
-    classes.append('fa')
+    classes.append('far')
 
     if title.endswith('/'):
-        classes.append('directory')
+        classes.append('fa-folder')
     else:
-        classes.append('filepath')
+        classes.append('fa-file-alt')
         extension = os.path.splitext(title)[1]
         if extension:
             classes.append(extension.lstrip('.'))
