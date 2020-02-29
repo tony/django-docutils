@@ -17,7 +17,7 @@ class BasedHTMLTranslator(HTMLTranslator):
         pass
 
     def visit_table(self, node):
-        node['classes'].extend(['table', 'is-responsive'])
+        node['classes'].extend(['table'])
         HTMLTranslator.visit_table(self, node)
 
     def visit_reference(self, node):
@@ -131,17 +131,6 @@ class BasedHTMLTranslator(HTMLTranslator):
         if len(node.parent) >= 2 and isinstance(node.parent[1], nodes.subtitle):
             atts['CLASS'] = 'subtitle'
 
-        if h_level <= 4:
-            desktop_class = f'is-size-{h_level}-desktop'
-            tablet_class = 'is-size-{}-tablet'.format(h_level + 1)
-            mobile_class = 'is-size-{}-mobile'.format(h_level + 2)
-            bulma_responsive_classes = '{} {} {}'.format(
-                desktop_class, tablet_class, mobile_class
-            )
-            if 'CLASS' in atts:
-                atts['class'] += f' {bulma_responsive_classes}'
-            else:
-                atts['class'] = bulma_responsive_classes
         self.body.append(self.starttag(node, 'h%s' % h_level, '', **atts))
         atts = {}
         if node.hasattr('refid'):
