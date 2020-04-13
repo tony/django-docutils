@@ -43,7 +43,7 @@ black = {version = "^19.10b0", optional = true}
 sphinx = {version = "<3", optional = true}
 sphinx_issues = {version = "<2", optional = true}
 pytest = "<6"
-coverage = "^5.0.1"
+coverage = "^5.1"
 pytest-cov = "^2.8.1"
 factory-boy = "^2.12.0"
 pytest-factoryboy = "^2.0.3"
