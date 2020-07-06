@@ -38,7 +38,7 @@ bitly-api = {git = "https://github.com/develtech/bitly-api-python.git", rev = "p
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.9"
-isort = "^4.3.21"
+isort = "^5.0.4"
 black = {version = "^19.10b0", optional = true}
 sphinx = {version = "<3", optional = true}
 sphinx_issues = {version = "<2", optional = true}
