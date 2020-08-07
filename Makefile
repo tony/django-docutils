@@ -1,6 +1,6 @@
 WATCH_FILES= find . -type f -not -path '*/\.*' | grep -i '.*[.]py$$' 2> /dev/null
 PY_FILES= ${WATCH_FILES}
-
+SHELL := /bin/bash
 
 test:
 	py.test $(test)
@@ -18,10 +18,10 @@ watch_test:
 	if command -v entr > /dev/null; then ${WATCH_FILES} | entr -c $(MAKE) test; else $(MAKE) test entr_warn; fi
 
 build_docs:
-	cd doc && $(MAKE) html
+	pushd docs; $(MAKE) html; popd
 
 watch_docs:
-	cd doc && $(MAKE) watch_docs
+	pushd docs; $(MAKE) watch_docs; popd
 
 black:
 	black `${PY_FILES}`
