@@ -3,7 +3,7 @@ PY_FILES= ${WATCH_FILES}
 SHELL := /bin/bash
 
 test:
-	py.test $(test)
+	poetry run py.test $(test)
 
 entr_warn:
 	@echo "----------------------------------------------------------"
@@ -24,13 +24,13 @@ watch_docs:
 	pushd docs; $(MAKE) watch_docs; popd
 
 black:
-	black `${PY_FILES}`
+	poetry black `${PY_FILES}`
 
 isort:
-	isort `${PY_FILES}`
+	poetry isort `${PY_FILES}`
 
 flake8:
-	flake8 django_docutils tests
+	poetry flake8 django_docutils tests
 
 watch_flake8:
 	if command -v entr > /dev/null; then ${WATCH_FILES} | entr -c $(MAKE) flake8; else $(MAKE) flake8 entr_warn; fi
