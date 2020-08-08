@@ -1,4 +1,4 @@
-|pypi| |build-status| |coverage| |license|
+|pypi| |docs| |build-status| |coverage| |license|
 
 django-docutils, docutils (reStructuredText) support for Django
 
@@ -159,9 +159,13 @@ view:
     :alt: Python Package
     :target: http://badge.fury.io/py/django-docutils
 
-.. |build-status| image:: https://img.shields.io/travis/tony/django-docutils.svg
+.. |docs| image:: https://github.com/tony/django-docutils/workflows/docs/badge.svg
+   :alt: Docs
+   :target: https://github.com/tony/django-docutils/actions?query=workflow%3Adocs
+
+.. |build-status| image:: https://github.com/tony/django-docutils/workflows/tests/badge.svg
    :alt: Build Status
-   :target: https://travis-ci.org/tony/django-docutils
+   :target: https://github.com/tony/django-docutils/actions?query=workflow%3Atests
 
 .. |coverage| image:: https://codecov.io/gh/tony/django-docutils/branch/master/graph/badge.svg
     :alt: Code Coverage
