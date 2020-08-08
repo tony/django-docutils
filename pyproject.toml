@@ -1,7 +1,3 @@
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
-
 [tool.poetry]
 name = "django-docutils"
 version = "0.4.0"
