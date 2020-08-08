@@ -2,8 +2,8 @@
 Changelog
 =========
 
-Current
--------
+django-docutils 0.5.0-current
+-----------------------------
 - pipenv -> poetry
 - readthedocs -> self-hosted docs
 - travis -> github actions
