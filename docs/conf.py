@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 
 import alagitpull
 
 # Get the project root dir, which is the parent dir of this
 cwd = os.getcwd()
 project_root = os.path.dirname(cwd)
+
+sys.path.insert(0, project_root)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "_ext")))
+
 
 # package data
 about = {}
@@ -15,14 +20,10 @@ with open("../django_docutils/__about__.py") as fp:
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
+    'sphinx.ext.napoleon',
     'alagitpull',
     'sphinx_issues',
 ]
-
-releases_unstable_prehistory = True
-releases_document_name = ["history"]
-releases_issue_uri = "https://github.com/tony/django-docutils/issues/%s"
-releases_release_uri = "https://github.com/tony/django-docutils/tree/v%s"
 
 issues_github_path = about['__github__']
 
@@ -105,6 +106,5 @@ texinfo_documents = [
 ]
 
 intersphinx_mapping = {
-    'py': ('https://docs.python.org/2', None),
-    'pip': ('http://sphinx.readthedocs.io/en/latest/', None),
+    'python': ('http://docs.python.org/', None),
 }
