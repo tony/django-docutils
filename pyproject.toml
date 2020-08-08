@@ -37,25 +37,61 @@ lxml = "^4.4.2"
 bitly-api = {git = "https://github.com/develtech/bitly-api-python.git", rev = "python-3", optional = true}
 
 [tool.poetry.dev-dependencies]
-flake8 = "^3.7.9"
-isort = "^4.3.21"
-black = {version = "^19.10b0", optional = true}
-sphinx = {version = "<3", optional = true}
-sphinx_issues = {version = "<2", optional = true}
-pytest = "<6"
-coverage = "^5.0.1"
-pytest-cov = "^2.8.1"
+### Docs ###
+sphinx = [
+  {version="<2", python="<3"},
+  {version="*", python=">=3"}
+]
+recommonmark = {version = "^0.6.0"}
+alagitpull = {version = "^0.0.25-rc.2", allow-prereleases = true}
+sphinx-issues = {version = "^1.2.0"}
+
+### Testing ###
+pytest = [
+  {version="<4.7.0", python="<3"},
+  {version="*", python=">=3"}
+]
+pathlib2 = {version="<2.3.5", python="<3"}  # Untangle pytest peer-dependency
+pytest-rerunfailures = "*"
+pytest-mock = [
+  {version="<3.0.0", python="<3"},
+  {version="*", python=">=3"}
+]
 factory-boy = "^2.12.0"
 pytest-factoryboy = "^2.0.3"
 pytest-django = "^3.7.0"
 dj-inmemorystorage = "^2.0.0"
 responses = "^0.10.9"
-alagitpull = {version = "<1", optional = true}
+
+### Coverage ###
+codecov = "*"
+coverage = "*"
+pytest-cov = [
+  {version="<2.10.0", python="<3"},
+  {version="*", python=">=3"}
+]
+
+### Format ###
+black = {version="==19.10b0", python="^3.6"}
+isort = [
+  {version="<5", python="<3.6"},
+  {version="*", python=">=3.6"}
+]
+
+### Lint ###
+flake8 = "*"
+
+### Deploy ###
+twine = "*"
 
 [tool.poetry.extras]
+docs = ["sphinx", "sphinx-issues", "alagitpull", "recommonmark"]
+coverage = ["codecov", "coverage", "pytest-cov"]
+format = ["black", "isort"]
+lint = ["flake8"]
+deploy = ["deploy"]
 favicon = ["tldextract", "tqdm"]
 intersphinx = ["tqdm"]
-docs = ["alagitpull", "sphinx", "sphinx_issues"]
 
 [tool.black]
 skip-string-normalization = true
