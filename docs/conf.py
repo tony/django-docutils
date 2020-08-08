@@ -58,6 +58,7 @@ html_sidebars = {
 }
 
 html_theme_options = {
+    'logo': "img/icons/logo.svg",
     'github_user': 'tony',
     'github_repo': 'django-docutils',
     'github_type': 'star',
