@@ -2,6 +2,12 @@
 Changelog
 =========
 
+current
+-------
+- Remove twine extra dependency
+- Remove setup.py (in favor of poetry, which we used to build and publish
+  as of django-docutils 0.5.0)
+
 django-docutils 0.5.0 (2020-08-08)
 ----------------------------------
 - Use our new bitly api fork at https://pypi.org/project/bitly-api-py3/ /
