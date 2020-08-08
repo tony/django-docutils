@@ -10,6 +10,9 @@ authors = [
 ]
 
 readme = 'README.rst'  # Markdown files are supported
+packages = [
+    { include = "django_docutils" }
+]
 
 repository = "https://github.com/tony/django-docutils"
 homepage = "https://django-docutils.git-pull.com"
