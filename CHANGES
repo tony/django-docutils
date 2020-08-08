@@ -2,9 +2,6 @@
 Changelog
 =========
 
-History
--------
-
 Current
 -------
 - Add black + isort and format code with it
@@ -18,37 +15,37 @@ Current
 - Additional support for detecting font-awesome patterns and injecting the
   icon in other transformers (e.g. ``XRefTransform``)
 
-0.4.0 <2017-02-21>
-------------------
+django-docutils 0.4.0 (2017-02-21)
+----------------------------------
 - Django template tag
 - Some README documentation
 
-0.3.4 <2017-02-12>
-------------------
+django-docutils 0.3.4 (2017-02-12)
+----------------------------------
 - Add requirements/test.txt to manifest
 
-0.3.3 <2017-02-12>
-------------------
+django-docutils 0.3.3 (2017-02-12)
+----------------------------------
 - Add requirements/base.txt to manifest
 
-0.3.2 <2017-02-12>
-------------------
+django-docutils 0.3.2 (2017-02-12)
+----------------------------------
 - Another tweak to get pypi readme up
 
-0.3.1 <2017-02-12>
-------------------
+django-docutils 0.3.1 (2017-02-12)
+----------------------------------
 - Some changes to attempt to fix pypi README
 
-0.3.0 <2017-02-12>
-------------------
+django-docutils 0.3.0 (2017-02-12)
+----------------------------------
 - Package updates and fixes
 
-0.2.0 <2017-01-01>
-------------------
+django-docutils 0.2.0 (2017-01-01)
+----------------------------------
 - Support for Django 1.10.0
 
-0.1.0 <2015-06-20>
-------------------
+django-docutils 0.1.0 (2015-06-20)
+----------------------------------
 - First release on PyPI.
 
 .. vim: set filetype=rst:
