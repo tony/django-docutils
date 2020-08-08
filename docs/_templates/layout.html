@@ -11,25 +11,25 @@
   <link rel="manifest" href="/manifest.json">
   {% endif -%}
   {%- if theme_show_meta_og_tags == true %}
-  <meta name="description" content="Documentation Utilities (Docutils, reStructuredText) for django.">
+  <meta name="description" content="{{ theme_project_description }}">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ theme_project_url }}/">
-  <meta property="og:title" content="django-docutils">
-  <meta property="og:description" content="vcs abstraction layer">
+  <meta property="og:title" content="{{ theme_project_title }}">
+  <meta property="og:description" content="{{ theme_project_description }}">
   <meta property="og:image" itemprop="image" content="{{ theme_project_url }}/_static/img/icons/android-chrome-192x192.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="{{ theme_project_url }} ">
-  <meta property="twitter:title" content="django-docutils">
-  <meta property="twitter:description" content="Documentation Utilities (Docutils, reStructuredText) for django">
+  <meta property="twitter:title" content="{{ theme_project_title }}">
+  <meta property="twitter:description" content="{{ theme_project_description }}">
   <meta property="twitter:image" content="{{ theme_project_url }}/_static/img/icons/android-chrome-512x512.png">
   {% endif -%}
   {%- if theme_show_meta_app_icon_tags == true %}
   <meta name="theme-color" content="#ffffff">
-  <meta name="application-name" content="django-docutils">
+  <meta name="application-name" content="{{ theme_project_name }}">
   
   <link rel="shortcut icon" href="/_static/img/icons/favicon.ico">
   <link rel="icon" type="image/png" sizes="512x512" href="/_static/img/icons/android-chrome-512x512.png">
@@ -39,7 +39,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/_static/img/icons/favicon-16x16.png">
   
   <!-- Apple -->
-  <meta name="apple-mobile-web-app-title" content="django-docutils">
+  <meta name="apple-mobile-web-app-title" content="{{ theme_project_name }}">
   
   <link rel="apple-touch-icon" sizes="192x192" href="/_static/img/icons/android-chrome-192x192.png">
   <link rel="mask-icon" href="/_static/img/icons/logo.svg" color="grey">
