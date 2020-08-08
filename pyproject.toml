@@ -81,16 +81,12 @@ isort = [
 ### Lint ###
 flake8 = "*"
 
-### Deploy ###
-twine = "*"
-
 [tool.poetry.extras]
 docs = ["sphinx", "sphinx-issues", "alagitpull"]
 test = ["pytest", "pathlib2", "pytest-rerunfailures", "pytest-mock", "factory-boy", "pytest-factoryboy", "pytest-django", "dj-inmemorystorage", "responses"]
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
 lint = ["flake8"]
-deploy = ["deploy"]
 favicon = ["tldextract", "tqdm"]
 intersphinx = ["tqdm"]
 
