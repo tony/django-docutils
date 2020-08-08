@@ -42,7 +42,6 @@ sphinx = [
   {version="<2", python="<3"},
   {version="*", python=">=3"}
 ]
-recommonmark = {version = "^0.6.0"}
 alagitpull = {version = "^0.1.0"}
 sphinx-issues = {version = "^1.2.0"}
 
@@ -85,7 +84,7 @@ flake8 = "*"
 twine = "*"
 
 [tool.poetry.extras]
-docs = ["sphinx", "sphinx-issues", "alagitpull", "recommonmark"]
+docs = ["sphinx", "sphinx-issues", "alagitpull"]
 test = ["pytest", "pathlib2", "pytest-rerunfailures", "pytest-mock", "factory-boy", "pytest-factoryboy", "pytest-django", "dj-inmemorystorage", "responses"]
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
