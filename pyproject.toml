@@ -9,17 +9,18 @@ authors = [
     "Tony Narlock <tony@git-pull.com>"
 ]
 
-readme = 'README.rst'  # Markdown files are supported
+readme = 'README.rst'
 packages = [
     { include = "django_docutils" }
 ]
+keywords = ["django", "docutils", "reStructuredText"]
 
-repository = "https://github.com/tony/django-docutils"
 homepage = "https://django-docutils.git-pull.com"
-documentation = "https://django-docutils.git-pull.com"
 
 [tool.poetry.urls]
-"Issue Tracker" = "https://github.com/tony/django-docutils/issues"
+"Bug Tracker" = "https://github.com/tony/django-docutils/issues"
+Documentation = "https://django-docutils.git-pull.com"
+Repository = "https://github.com/tony/django-docutils"
 
 [tool.poetry.dependencies]
 python = "^3.5"
@@ -42,7 +43,7 @@ sphinx = [
   {version="*", python=">=3"}
 ]
 recommonmark = {version = "^0.6.0"}
-alagitpull = {version = "^0.0.25-rc.2", allow-prereleases = true}
+alagitpull = {version = "^0.1.0"}
 sphinx-issues = {version = "^1.2.0"}
 
 ### Testing ###

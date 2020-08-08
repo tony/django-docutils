@@ -1,4 +1,4 @@
-|pypi| |docs| |build-status| |coverage| |license|
+|pypi| |build-status| |coverage| |license|
 
 django-docutils, docutils (reStructuredText) support for Django
 
@@ -169,8 +169,3 @@ view:
 
 .. |license| image:: https://img.shields.io/github/license/tony/django-docutils.svg
     :alt: License 
-
-.. |docs| image:: https://readthedocs.org/projects/django-docutils/badge/?version=latest
-    :alt: Documentation Status
-    :scale: 100%
-    :target: https://readthedocs.org/projects/django-docutils/

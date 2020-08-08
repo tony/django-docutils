@@ -63,6 +63,12 @@ html_theme_options = {
     'github_banner': True,
     'projects': alagitpull.projects,
     'project_name': about['__title__'],
+    'project_title': about['__title__'],
+    'project_description': about['__description__'],
+    'project_url': about['__docs__'],
+    'show_meta_manifest_tag': True,
+    'show_meta_og_tags': True,
+    'show_meta_app_icon_tags': True,
 }
 
 alagitpull_internal_hosts = [
