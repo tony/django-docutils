@@ -1177,9 +1177,10 @@ favicon = ["tldextract", "tqdm"]
 format = []
 intersphinx = ["tqdm"]
 lint = []
+test = []
 
 [metadata]
-content-hash = "1e412dac107ebd193b670e4398ba960e638f81d983edd5d5f42b7f20a633e204"
+content-hash = "718ee1ea40742d90120d910be2518a0fd393c2a41ef30bf1f314c83fe9514b4a"
 lock-version = "1.0"
 python-versions = "^3.5"
 
