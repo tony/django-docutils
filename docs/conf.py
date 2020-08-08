@@ -45,6 +45,7 @@ pygments_style = 'sphinx'
 
 html_theme_path = [alagitpull.get_path()]
 html_static_path = ['_static']
+html_extra_path = ['manifest.json']
 html_theme = 'alagitpull'
 html_sidebars = {
     '**': [
