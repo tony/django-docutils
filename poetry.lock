@@ -12,7 +12,7 @@ description = "Cleverly-named alabaster sub-theme for git-pull projects"
 name = "alagitpull"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "0.0.26rc4"
+version = "0.1.0"
 
 [package.dependencies]
 alabaster = "<0.8"
@@ -40,7 +40,7 @@ tests = ["pytest", "pytest-asyncio"]
 [[package]]
 category = "dev"
 description = "Atomic file writes."
-marker = "python_version >= \"3\" and sys_platform == \"win32\" or sys_platform == \"win32\""
+marker = "python_version >= \"3\" and sys_platform == \"win32\""
 name = "atomicwrites"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -49,6 +49,7 @@ version = "1.4.0"
 [[package]]
 category = "dev"
 description = "Classes Without Boilerplate"
+marker = "python_version >= \"3.6\" and python_version < \"4.0\" or python_version >= \"3\""
 name = "attrs"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -63,6 +64,7 @@ tests = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.i
 [[package]]
 category = "dev"
 description = "Internationalization utilities"
+marker = "python_version >= \"3\""
 name = "babel"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -83,7 +85,6 @@ version = "0.3"
 reference = "5882a0ed134840ef8937179179fd1eb3a131bf03"
 type = "git"
 url = "https://github.com/develtech/bitly-api-python.git"
-
 [[package]]
 category = "dev"
 description = "The uncompromising code formatter."
@@ -361,6 +362,7 @@ version = "2.10"
 [[package]]
 category = "dev"
 description = "Getting image size from png/jpeg/jpeg2000/gif file"
+marker = "python_version >= \"3\""
 name = "imagesize"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -393,6 +395,7 @@ version = "0.5.0"
 [[package]]
 category = "dev"
 description = "iniconfig: brain-dead simple config-ini parsing"
+marker = "python_version >= \"3\""
 name = "iniconfig"
 optional = false
 python-versions = "*"
@@ -442,6 +445,7 @@ dev = ["testpath"]
 [[package]]
 category = "dev"
 description = "A very fast and expressive template engine."
+marker = "python_version >= \"3\""
 name = "jinja2"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
@@ -491,6 +495,7 @@ source = ["Cython (>=0.29.7)"]
 [[package]]
 category = "dev"
 description = "Safely add untrusted strings to HTML/XML markup."
+marker = "python_version >= \"3\""
 name = "markupsafe"
 optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
@@ -507,6 +512,7 @@ version = "0.6.1"
 [[package]]
 category = "dev"
 description = "More routines for operating on iterables, beyond itertools"
+marker = "python_version >= \"3\""
 name = "more-itertools"
 optional = false
 python-versions = ">=3.5"
@@ -527,7 +533,7 @@ six = "*"
 [[package]]
 category = "dev"
 description = "Object-oriented filesystem paths"
-marker = "python_version >= \"3\" and python_version < \"3.6\" or python_version < \"3.6\""
+marker = "python_version >= \"3\" and python_version < \"3.6\""
 name = "pathlib2"
 optional = false
 python-versions = "*"
@@ -559,6 +565,7 @@ testing = ["nose", "coverage"]
 [[package]]
 category = "dev"
 description = "plugin and hook calling mechanisms for python"
+marker = "python_version >= \"3\""
 name = "pluggy"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -575,6 +582,7 @@ dev = ["pre-commit", "tox"]
 [[package]]
 category = "dev"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
+marker = "python_version >= \"3\""
 name = "py"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -616,6 +624,7 @@ version = "2.6.1"
 [[package]]
 category = "dev"
 description = "Python parsing module"
+marker = "python_version >= \"3\""
 name = "pyparsing"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
@@ -881,6 +890,7 @@ version = "1.15.0"
 [[package]]
 category = "dev"
 description = "This package provides 26 stemmers for 25 languages generated from Snowball algorithms."
+marker = "python_version >= \"3\""
 name = "snowballstemmer"
 optional = false
 python-versions = "*"
@@ -937,6 +947,7 @@ tests = ["pytest", "mock"]
 [[package]]
 category = "dev"
 description = "sphinxcontrib-applehelp is a sphinx extension which outputs Apple help books"
+marker = "python_version >= \"3\""
 name = "sphinxcontrib-applehelp"
 optional = false
 python-versions = ">=3.5"
@@ -949,6 +960,7 @@ test = ["pytest"]
 [[package]]
 category = "dev"
 description = "sphinxcontrib-devhelp is a sphinx extension which outputs Devhelp document."
+marker = "python_version >= \"3\""
 name = "sphinxcontrib-devhelp"
 optional = false
 python-versions = ">=3.5"
@@ -961,6 +973,7 @@ test = ["pytest"]
 [[package]]
 category = "dev"
 description = "sphinxcontrib-htmlhelp is a sphinx extension which renders HTML help files"
+marker = "python_version >= \"3\""
 name = "sphinxcontrib-htmlhelp"
 optional = false
 python-versions = ">=3.5"
@@ -973,6 +986,7 @@ test = ["pytest", "html5lib"]
 [[package]]
 category = "dev"
 description = "A sphinx extension which renders display math in HTML via JavaScript"
+marker = "python_version >= \"3\""
 name = "sphinxcontrib-jsmath"
 optional = false
 python-versions = ">=3.5"
@@ -984,6 +998,7 @@ test = ["pytest", "flake8", "mypy"]
 [[package]]
 category = "dev"
 description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp document."
+marker = "python_version >= \"3\""
 name = "sphinxcontrib-qthelp"
 optional = false
 python-versions = ">=3.5"
@@ -996,6 +1011,7 @@ test = ["pytest"]
 [[package]]
 category = "dev"
 description = "sphinxcontrib-serializinghtml is a sphinx extension which outputs \"serialized\" HTML files (json and pickle)."
+marker = "python_version >= \"3\""
 name = "sphinxcontrib-serializinghtml"
 optional = false
 python-versions = ">=3.5"
@@ -1037,6 +1053,7 @@ requests-file = ">=1.4"
 [[package]]
 category = "dev"
 description = "Python Library for Tom's Obvious, Minimal Language"
+marker = "python_version >= \"3.6\" and python_version < \"4.0\" or python_version >= \"3\""
 name = "toml"
 optional = false
 python-versions = "*"
@@ -1129,7 +1146,7 @@ version = "0.5.1"
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version >= \"3\" and python_version < \"3.8\" and (python_version >= \"3\" and python_version < \"3.8\" or python_version < \"3.8\") or python_version >= \"3\" and python_version < \"3.8\" or python_version < \"3.8\""
+marker = "python_version >= \"3\" and python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=2.7"
@@ -1142,7 +1159,7 @@ testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 [[package]]
 category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version >= \"3\" and python_version < \"3.8\" and (python_version >= \"3\" and python_version < \"3.8\" or python_version < \"3.8\") or python_version >= \"3\" and python_version < \"3.8\" or python_version < \"3.8\""
+marker = "python_version >= \"3\" and python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1163,7 +1180,7 @@ lint = []
 test = []
 
 [metadata]
-content-hash = "da5095ebdca5cd55a45445a500143085d1d7730ec62f30af8c5a227e733180e4"
+content-hash = "0b5984363212e7057d178ecbcde43405eb2ca5b24d9421f398222abcde55acf1"
 lock-version = "1.0"
 python-versions = "^3.5"
 
@@ -1173,8 +1190,8 @@ alabaster = [
     {file = "alabaster-0.7.12.tar.gz", hash = "sha256:a661d72d58e6ea8a57f7a86e37d86716863ee5e92788398526d58b26a4e4dc02"},
 ]
 alagitpull = [
-    {file = "alagitpull-0.0.26rc4-py2.py3-none-any.whl", hash = "sha256:fcedb1ef821589aef88d9ca098f21a1a9a7aa42915c46441ce89737c74f0b3b9"},
-    {file = "alagitpull-0.0.26rc4.tar.gz", hash = "sha256:18a45b65e48915be7a499684ee28e8e4162ab670ab2a6e6623749066b024050e"},
+    {file = "alagitpull-0.1.0-py2.py3-none-any.whl", hash = "sha256:5b9ed87ee410c6fa40a63a91d2f25919a10e20c6d39e080356b067f3ff6f379b"},
+    {file = "alagitpull-0.1.0.tar.gz", hash = "sha256:f6076f81a738c3291b598d8016b248edf5adf25d1d348c2599eff92c1eedaed9"},
 ]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
