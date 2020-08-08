@@ -1180,7 +1180,7 @@ lint = []
 test = []
 
 [metadata]
-content-hash = "718ee1ea40742d90120d910be2518a0fd393c2a41ef30bf1f314c83fe9514b4a"
+content-hash = "0357d0c04510bf01e09136438abeb9dc931380c85bde9aa3cd644ccde2287930"
 lock-version = "1.0"
 python-versions = "^3.5"
 
