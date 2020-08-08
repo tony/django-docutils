@@ -39,7 +39,7 @@ output/*.html
 output/*/index.html
 
 # Sphinx
-doc/_build
+docs/_build
 
 .eggs/
 .cache/

@@ -107,7 +107,7 @@ class BasedHTMLTranslator(HTMLTranslator):
                 self.body.append(self.starttag(node, 'h1', '', CLASS='title is-1'))
                 close_tag = '</h1>\n'
                 self.in_document_title = len(self.body)
-            elif (node.parent, nodes.section):
+            elif isinstance(node.parent, nodes.section):
                 # now, handle plain-old headers
                 # this is pretty verbose, break it off into another method
                 close_tag = self._visit_section_title(node, close_tag)

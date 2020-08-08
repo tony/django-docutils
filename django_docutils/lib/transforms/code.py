@@ -104,11 +104,11 @@ class CodeTransform(Transform):
                 newlexer = RstLexer()
             else:
                 from pygments.lexers import guess_lexer
-                from pygments.lexers.special import TextLexer
                 from pygments.lexers.mime import MIMELexer
+                from pygments.lexers.special import TextLexer
 
                 guess = guess_lexer(text)
-                if not any(guess.__class__ != l for l in [MIMELexer, TextLexer]):
+                if not any(guess.__class__ != lex for lex in [MIMELexer, TextLexer]):
                     newlexer = guess
 
             if newlexer:
