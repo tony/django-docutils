@@ -4,6 +4,9 @@ Changelog
 
 Current
 -------
+- pipenv -> poetry
+- readthedocs -> self-hosted docs
+- travis -> github actions
 - Add black + isort and format code with it
 - Remove vulture
 - Remove python 2.x support, python 3.3 and 3.4 (reached end of life)
