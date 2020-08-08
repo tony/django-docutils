@@ -11,5 +11,6 @@ Contents:
    readme
    installation
    usage
+   api
    contributing
    history
