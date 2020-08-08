@@ -23,7 +23,7 @@ documentation = "https://django-docutils.git-pull.com"
 "Issue Tracker" = "https://github.com/tony/django-docutils/issues"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.5"
 Django = ">=2.2"
 docutils = ">=0.12"
 tldextract =  "^2.2.2"
