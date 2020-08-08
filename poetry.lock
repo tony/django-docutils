@@ -75,16 +75,13 @@ pytz = ">=2015.7"
 
 [[package]]
 category = "main"
-description = "An API for bit.ly"
-name = "bitly-api"
-optional = true
+description = "An API for bit.ly forked for Python 3 support"
+marker = "python_version >= \"3\""
+name = "bitly-api-py3"
+optional = false
 python-versions = "*"
 version = "0.3"
 
-[package.source]
-reference = "5882a0ed134840ef8937179179fd1eb3a131bf03"
-type = "git"
-url = "https://github.com/develtech/bitly-api-python.git"
 [[package]]
 category = "dev"
 description = "The uncompromising code formatter."
@@ -289,8 +286,18 @@ category = "main"
 description = "pipeline for slugification edgecases in django"
 name = "django-slugify-processor"
 optional = false
-python-versions = "*"
-version = "0.8.4"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "0.9.0"
+
+[package.dependencies]
+Django = ">=1.11"
+
+[package.dependencies.django-extensions]
+python = ">=3"
+version = "*"
+
+[package.extras]
+test = ["django-extensions (<2.2.6)"]
 
 [[package]]
 category = "main"
@@ -1156,7 +1163,7 @@ lint = []
 test = []
 
 [metadata]
-content-hash = "f4e5aefe3fc6a07e3ba4ef97e3b99334f0a792b16774e5b2dc8732e0328dfab8"
+content-hash = "3cebdad63e73d49b19a4726991f9024e1a155caa8b357734841804471f8f84db"
 lock-version = "1.0"
 python-versions = "^3.5"
 
@@ -1189,7 +1196,10 @@ babel = [
     {file = "Babel-2.8.0-py2.py3-none-any.whl", hash = "sha256:d670ea0b10f8b723672d3a6abeb87b565b244da220d76b4dba1b66269ec152d4"},
     {file = "Babel-2.8.0.tar.gz", hash = "sha256:1aac2ae2d0d8ea368fa90906567f5c08463d98ade155c0c4bfedd6a0f7160e38"},
 ]
-bitly-api = []
+bitly-api-py3 = [
+    {file = "bitly_api_py3-0.3-py3-none-any.whl", hash = "sha256:8de147966d2d3980c6437c49804f5ad25d24ef784f1b3d187055c001fef7d53e"},
+    {file = "bitly_api_py3-0.3.tar.gz", hash = "sha256:5274c1e20b7c87cbae43b438114448a2af41a9815e561ea40813f3892c10f9ea"},
+]
 black = [
     {file = "black-19.10b0-py36-none-any.whl", hash = "sha256:1b30e59be925fafc1ee4565e5e08abef6b03fe455102883820fe5ee2e4734e0b"},
     {file = "black-19.10b0.tar.gz", hash = "sha256:c2edb73a08e9e0e6f65a0e6af18b059b8b1cdd5bef997d7a0b181df93dc81539"},
@@ -1327,7 +1337,8 @@ django-randomslugfield = [
     {file = "django-randomslugfield-0.3.0.zip", hash = "sha256:8f5866d9383f020fb7f270a218ddc65b6a33d3833633a0c995c68f28cac59efb"},
 ]
 django-slugify-processor = [
-    {file = "django-slugify-processor-0.8.4.tar.gz", hash = "sha256:f1c384f4443dc09560144acdffa098de064d6fa355cdd5c1dba0145f107d560c"},
+    {file = "django-slugify-processor-0.9.0.tar.gz", hash = "sha256:92d273982dc29ea8edcab3ca2a6c3dacead36fc3e99164ceaf02e129433b03be"},
+    {file = "django_slugify_processor-0.9.0-py2.py3-none-any.whl", hash = "sha256:7bdc73ab3acf8cf790a5b851e8893f3857db8e86b12a4f09b89b03a44f0abff0"},
 ]
 docutils = [
     {file = "docutils-0.16-py2.py3-none-any.whl", hash = "sha256:0c5b78adfbf7762415433f5515cd5c9e762339e23369dbe8000d84a4bf4ab3af"},

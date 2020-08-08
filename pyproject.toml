@@ -34,7 +34,8 @@ django-randomslugfield =  "*"
 django-slugify-processor = "*"
 django-dirtyfields = ">1.3.0"
 lxml = "*"
-bitly-api = {git = "https://github.com/develtech/bitly-api-python.git", rev = "python-3", optional = true}
+bitly-api = {version="*", python="<3"}
+bitly-api-py3 = {version="*", python=">=3"}
 
 [tool.poetry.dev-dependencies]
 ### Docs ###
