@@ -2,8 +2,8 @@
 Changelog
 =========
 
-django-docutils 0.5.0-current
------------------------------
+django-docutils 0.5.0 (2020-08-08)
+----------------------------------
 - Use our new bitly api fork at https://pypi.org/project/bitly-api-py3/ /
   https://github.com/develtech/bitly-api-python
 - pipenv -> poetry
