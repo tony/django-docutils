@@ -9,17 +9,18 @@ authors = [
     "Tony Narlock <tony@git-pull.com>"
 ]
 
-readme = 'README.rst'  # Markdown files are supported
+readme = 'README.rst'
 packages = [
     { include = "django_docutils" }
 ]
+keywords = ["django", "docutils", "reStructuredText"]
 
-repository = "https://github.com/tony/django-docutils"
 homepage = "https://django-docutils.git-pull.com"
-documentation = "https://django-docutils.git-pull.com"
 
 [tool.poetry.urls]
-"Issue Tracker" = "https://github.com/tony/django-docutils/issues"
+"Bug Tracker" = "https://github.com/tony/django-docutils/issues"
+Documentation = "https://django-docutils.git-pull.com"
+Repository = "https://github.com/tony/django-docutils"
 
 [tool.poetry.dependencies]
 python = "^3.5"
