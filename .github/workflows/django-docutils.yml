@@ -63,7 +63,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry install -E "docs test coverage lint format"
+        poetry install -E "docs test coverage lint format favicon"
         poetry run pip install DJANGO~=${{ matrix.django-version }}
 
     - name: Lint with flake8

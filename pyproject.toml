@@ -13,6 +13,14 @@ readme = 'README.rst'
 packages = [
     { include = "django_docutils" }
 ]
+classifiers = [
+  'Development Status :: 2 - Pre-Alpha',
+  'Framework :: Django',
+  'Intended Audience :: Developers',
+  'License :: OSI Approved :: MIT License',
+  'Natural Language :: English',
+  'Programming Language :: Python :: 3'
+]
 keywords = ["django", "docutils", "reStructuredText"]
 
 homepage = "https://django-docutils.git-pull.com"
@@ -26,8 +34,8 @@ Repository = "https://github.com/tony/django-docutils"
 python = "^3.5"
 Django = ">=2.2"
 docutils = "*"
-tldextract =  "*"
-tqdm = "*"
+tldextract =  {version="*", optional=true}
+tqdm =  {version="*", optional=true}
 pygments = "<3"
 django-extensions = "^2.2.5"
 django-randomslugfield =  "*"
@@ -82,13 +90,15 @@ isort = [
 flake8 = "*"
 
 [tool.poetry.extras]
+favicon = ["tldextract", "tqdm"]
+intersphinx = ["tqdm"]
+
+# Development stuff
 docs = ["sphinx", "sphinx-issues", "alagitpull"]
 test = ["pytest", "pathlib2", "pytest-rerunfailures", "pytest-mock", "factory-boy", "pytest-factoryboy", "pytest-django", "dj-inmemorystorage", "responses"]
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
 lint = ["flake8"]
-favicon = ["tldextract", "tqdm"]
-intersphinx = ["tqdm"]
 
 [tool.black]
 skip-string-normalization = true

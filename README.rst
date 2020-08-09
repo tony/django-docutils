@@ -16,6 +16,15 @@ Install django-docutils:
 
     pip install django-docutils
 
+    # if fetching favicons
+    pip install django-docutils[favicon]
+
+    # intersphinx support
+    pip install django-docutils[intersphinx]
+
+    # both
+    pip install django-docutils[favicon,intersphinx]
+
 Template filter
 ---------------
 

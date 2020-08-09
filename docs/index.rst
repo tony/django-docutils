@@ -9,7 +9,6 @@ Contents:
    :maxdepth: 2
 
    readme
-   installation
    usage
    api
    contributing
