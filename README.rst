@@ -86,9 +86,8 @@ view:
        template_name = 'base.html'
        rst_name = 'home.rst'
 
-## Settings
-
-
+Settings
+--------
 .. code-block:: python
 
     BASED_LIB_RST = {  # Optional, automatically maps roles, directives and transformers
