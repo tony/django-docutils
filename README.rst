@@ -171,9 +171,9 @@ Settings
    :alt: Docs
    :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"Publish+Docs"
 
-.. |build-status| image:: https://github.com/tony/django-docutils/workflows/django-docutils%20CI/badge.svg
+.. |build-status| image:: https://github.com/tony/django-docutils/workflows/test/badge.svg
    :alt: Build Status
-   :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"django-docutils+CI"
+   :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"tests"
 
 .. |coverage| image:: https://codecov.io/gh/tony/django-docutils/branch/master/graph/badge.svg
     :alt: Code Coverage
