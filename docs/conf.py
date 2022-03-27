@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
+# flake8: noqa E501
 import os
 import sys
-
-import alagitpull
+from pathlib import Path
 
 # Get the project root dir, which is the parent dir of this
-cwd = os.getcwd()
-project_root = os.path.dirname(cwd)
+cwd = Path.cwd()
+project_root = cwd.parent
 
-sys.path.insert(0, project_root)
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "_ext")))
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(cwd / "_ext"))
 
 
 # package data
@@ -21,8 +21,13 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
-    'alagitpull',
-    'sphinx_issues',
+    "sphinx_autodoc_typehints",
+    "sphinx_issues",
+    "sphinx_click.ext",  # sphinx-click
+    "sphinx_inline_tabs",
+    "sphinx_copybutton",
+    "sphinxext.opengraph",
+    "sphinxext.rediraffe",
 ]
 
 issues_github_path = about['__github__'].replace('https://github.com/', '')
@@ -41,43 +46,44 @@ release = '%s' % (about['__version__'])
 
 exclude_patterns = ['_build']
 
-pygments_style = 'sphinx'
+pygments_style = "monokai"
+pygments_dark_style = "monokai"
 
-html_theme_path = [alagitpull.get_path()]
-html_static_path = ['_static']
-html_extra_path = ['manifest.json']
-html_theme = 'alagitpull'
+html_favicon = "_static/favicon.ico"
+html_static_path = ["_static"]
+html_css_files = ["css/custom.css"]
+html_extra_path = ["manifest.json"]
+html_theme = "furo"
+html_theme_options = {}
+
 html_sidebars = {
-    '**': [
-        'about.html',
-        'navigation.html',
-        'relations.html',
-        'more.html',
-        'searchbox.html',
+    "**": [
+        "sidebar/scroll-start.html",
+        "sidebar/brand.html",
+        "sidebar/search.html",
+        "sidebar/navigation.html",
+        "sidebar/projects.html",
+        "sidebar/scroll-end.html",
     ]
 }
 
-html_theme_options = {
-    'logo': "img/icons/logo.svg",
-    'github_user': 'tony',
-    'github_repo': 'django-docutils',
-    'github_type': 'star',
-    'github_banner': True,
-    'projects': alagitpull.projects,
-    'project_name': about['__title__'],
-    'project_title': about['__title__'],
-    'project_description': about['__description__'],
-    'project_url': about['__docs__'],
-    'show_meta_manifest_tag': True,
-    'show_meta_og_tags': True,
-    'show_meta_app_icon_tags': True,
-}
+# sphinxext.opengraph
+ogp_site_url = about["__docs__"]
+ogp_image = "_static/img/icons/icon-192x192.png"
+ogp_desscription_length = about["__description__"]
+ogp_site_name = about["__title__"]
 
-alagitpull_internal_hosts = [
-    'django-docutils.git-pull.com',
-    '0.0.0.0',
-]
-alagitpull_external_hosts_new_window = True
+# sphinx-copybutton
+copybutton_prompt_text = (
+    r">>> |\.\.\. |> |\$ |\# | In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+)
+copybutton_prompt_is_regexp = True
+copybutton_remove_prompts = True
+
+# sphinxext-rediraffe
+rediraffe_redirects = "redirects.txt"
+rediraffe_branch = "master~1"
+
 
 htmlhelp_basename = '%sdoc' % about['__title__']
 

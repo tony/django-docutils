@@ -1,12 +1,13 @@
 # Makefile for Sphinx documentation
 #
 SHELL := /bin/bash
-PYVERSION=$(shell python -c "import sys;v=sys.version_info[0];sys.stdout.write(str(v))")
 HTTP_PORT     = 8028
+PYVERSION=$(shell python -c "import sys;v=sys.version_info[0];sys.stdout.write(str(v))")
+WATCH_FILES= find .. -type f -not -path '*/\.*' | grep -i '.*[.]\(rst\|md\)\$\|.*[.]py\$\|CHANGES\|TODO\|.*conf\.py' 2> /dev/null
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = poetry run sphinx-build
+SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
 
@@ -174,28 +175,35 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
+redirects:
+	$(SPHINXBUILD) -b rediraffewritediff $(ALLSPHINXOPTS) $(BUILDDIR)/redirect
+	@echo
+	@echo "Build finished. The redirects are in rediraffe_redirects."
+
 checkbuild:
 	rm -rf $(BUILDDIR)
 	$(SPHINXBUILD) -n -q ./ $(BUILDDIR)
-
-WATCH_FILES= find .. -type f -not -path '*/\.*' | grep -i '.*[.]rst\$\|.*[.]py\$\|CHANGES\|TODO\|.*conf\.py' 2> /dev/null
 
 watch:
 	if command -v entr > /dev/null; then ${WATCH_FILES} | entr -c $(MAKE) html; else $(MAKE) html; fi
 
 serve:
-	@echo '=============================================================='
+	@echo '================================================='
 	@echo
 	@echo 'docs server running at http://localhost:${HTTP_PORT}/'
 	@echo
-	@echo '=============================================================='
-	@if test ${PYVERSION} -eq 2; then $(MAKE) serve_py2; else make serve_py3; fi
-
-serve_py2:
-	pushd _build/html; python2 -m SimpleHTTPServer ${HTTP_PORT}; popd
+	@echo '================================================='
+	@$(MAKE) serve_py3
 
 serve_py3:
 	python -m http.server ${HTTP_PORT} --directory _build/html
 
 dev:
 	$(MAKE) -j watch serve
+
+start:
+	poetry run sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) --port ${HTTP_PORT} $(O)
+
+design:
+	# This adds additional watch directories (for _static file changes) and disable incremental builds
+	poetry run sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) --port ${HTTP_PORT} --watch "." -a $(O)
