@@ -167,9 +167,9 @@ Settings
     :alt: Python Package
     :target: http://badge.fury.io/py/django-docutils
 
-.. |docs| image:: https://github.com/tony/django-docutils/workflows/Publish%20Docs/badge.svg
+.. |docs| image:: https://github.com/tony/django-docutils/workflows/docs/badge.svg
    :alt: Docs
-   :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"Publish+Docs"
+   :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"Docs"
 
 .. |build-status| image:: https://github.com/tony/django-docutils/workflows/test/badge.svg
    :alt: Build Status
