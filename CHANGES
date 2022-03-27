@@ -15,10 +15,12 @@
   - Fix poetry installation and caching
 - Update development packages (black, isort)
 - Add .tool-versions, .python-version
+- Run code through black w/o `--skip-string-normalization`
 
 ### Documentation
 
 - Move theme to furo
+- Move to markdown
 
 ## django-docutils 0.5.1 (2020-08-09)
 
