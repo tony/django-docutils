@@ -1,7 +1,7 @@
 include CONTRIBUTING.rst
-include HISTORY.rst
+include CHANGES
 include LICENSE
-include README.rst
+include README.md
+include .tmuxp.yaml .tmuxp-before-script.sh
 recursive-include docs *.rst
-include requirements/base.txt requirements/test.txt
 recursive-include django_docutils *.py
