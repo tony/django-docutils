@@ -171,7 +171,7 @@ Settings
    :alt: Docs
    :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"Docs"
 
-.. |build-status| image:: https://github.com/tony/django-docutils/workflows/test/badge.svg
+.. |build-status| image:: https://github.com/tony/django-docutils/workflows/tests/badge.svg
    :alt: Build Status
    :target: https://github.com/tony/django-docutils/actions?query=workflow%3A"tests"
 
