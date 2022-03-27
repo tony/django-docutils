@@ -180,4 +180,5 @@ Settings
     :target: https://codecov.io/gh/tony/django-docutils
 
 .. |license| image:: https://img.shields.io/github/license/tony/django-docutils.svg
-    :alt: License 
+    :alt: License
+    :target: https://github.com/tony/django-docutils/blob/master/LICENSE
