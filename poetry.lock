@@ -213,14 +213,14 @@ Django = ">=1.11"
 
 [[package]]
 name = "django-extensions"
-version = "2.2.9"
+version = "3.1.5"
 description = "Extensions for Django"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 
 [package.dependencies]
-six = ">=1.2"
+Django = ">=2.2"
 
 [[package]]
 name = "django-randomslugfield"
@@ -1125,7 +1125,7 @@ test = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1718504020adf65048113ba967e0c1e00cb94d089f7c0d32cf37b25112982e54"
+content-hash = "9ed1809fbe8050bf81c080c6f5b1075e39e750f6aadf461e0ea38fb9d44744b1"
 
 [metadata.files]
 alabaster = [
@@ -1276,8 +1276,8 @@ django-dirtyfields = [
     {file = "django_dirtyfields-1.8.1-py3-none-any.whl", hash = "sha256:e85ea09133b6e9ca4937d3c77f9104c763a80680817385dbf19de43e76668018"},
 ]
 django-extensions = [
-    {file = "django-extensions-2.2.9.tar.gz", hash = "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6"},
-    {file = "django_extensions-2.2.9-py2.py3-none-any.whl", hash = "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"},
+    {file = "django-extensions-3.1.5.tar.gz", hash = "sha256:28e1e1bf49f0e00307ba574d645b0af3564c981a6dfc87209d48cb98f77d0b1a"},
+    {file = "django_extensions-3.1.5-py3-none-any.whl", hash = "sha256:9238b9e016bb0009d621e05cf56ea8ce5cce9b32e91ad2026996a7377ca28069"},
 ]
 django-randomslugfield = [
     {file = "django-randomslugfield-0.3.0.zip", hash = "sha256:8f5866d9383f020fb7f270a218ddc65b6a33d3833633a0c995c68f28cac59efb"},
