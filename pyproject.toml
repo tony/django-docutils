@@ -50,8 +50,7 @@ django-randomslugfield =  "*"
 django-slugify-processor = "*"
 django-dirtyfields = ">1.3.0"
 lxml = "*"
-bitly-api = {version="*", python="<3"}
-bitly-api-py3 = {version="*", python=">=3"}
+bitly-api-py3 = "*"
 
 [tool.poetry.dev-dependencies]
 ### Docs ###
