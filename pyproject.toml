@@ -100,7 +100,3 @@ test = ["pytest", "pytest-rerunfailures", "pytest-mock", "pytest-watcher", "fact
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
 lint = ["flake8"]
-
-[tool.black]
-skip-string-normalization = true
-include = '\.pyi?$'
