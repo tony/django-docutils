@@ -109,7 +109,9 @@ def prefetch_favicon(url, progress=None):
         defaults={
             'domain': fqdn,
             'favicon': SimpleUploadedFile(
-                name=f'{fqdn}.ico', content=favicon_content, content_type='image/ico',
+                name=f'{fqdn}.ico',
+                content=favicon_content,
+                content_type='image/ico',
             ),
         },
     )

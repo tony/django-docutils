@@ -144,7 +144,9 @@ def test_is_favicon_stored_file_missing(monkeypatch, Favicon):
     favicon = Favicon.objects.create(
         domain=fqdn,
         favicon=SimpleUploadedFile(
-            name=f'{fqdn}.ico', content=b'lol', content_type='image/ico',
+            name=f'{fqdn}.ico',
+            content=b'lol',
+            content_type='image/ico',
         ),
     )
 

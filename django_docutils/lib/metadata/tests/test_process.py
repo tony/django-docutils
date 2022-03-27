@@ -1,7 +1,6 @@
 import datetime
 
 from django.utils.encoding import force_bytes
-
 from docutils.core import publish_doctree
 
 from django_docutils.lib.metadata.extract import extract_metadata

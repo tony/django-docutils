@@ -1,5 +1,4 @@
 from django.utils.module_loading import import_string
-
 from docutils.parsers.rst import directives
 
 from ..settings import BASED_LIB_RST

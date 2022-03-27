@@ -42,8 +42,9 @@ INVENTORY_FILENAME = 'objects.inv'
 
 if False:
     # For type annotation
+    from typing import IO, Any, Dict, List, Tuple, Union  # NOQA
+
     from sphinx import Config, Sphinx
-    from typing import Any, Dict, IO, List, Tuple, Union  # NOQA
 
     if PY3:
         unicode = str

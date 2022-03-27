@@ -1,5 +1,4 @@
 from django.urls import NoReverseMatch, reverse
-
 from docutils import nodes, utils
 
 from ..utils import split_explicit_title
@@ -28,6 +27,7 @@ def site_url_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
 def post_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     from django.apps import apps
+
     from django_docutils.lib.fixtures.utils import get_model_from_post_app
 
     # split :post:appname:`post_id` into :post:appname:

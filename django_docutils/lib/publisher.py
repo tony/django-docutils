@@ -150,10 +150,12 @@ def publish_html_from_doctree(
 
     if inject_ads:
         from django_docutils.lib.transforms.ads import InjectAds
+
         doctree.transformer.add_transform(InjectAds.keywords(ad_keywords))
 
     if INJECT_FONT_AWESOME:
         from django_docutils.lib.transforms.font_awesome import InjectFontAwesome
+
         doctree.transformer.add_transform(InjectFontAwesome)
 
     doctree.transformer.apply_transforms()

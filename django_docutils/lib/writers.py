@@ -66,7 +66,7 @@ class BasedHTMLTranslator(HTMLTranslator):
         self.body.append(self.starttag(node, 'a', '', **atts))
 
     def visit_title(self, node):
-        """ Changes:
+        """Changes:
         - add backlinks for Contents refid headers
           since they are baked inside the Section (parent) of the anchor
           since we're using an ad-hoc contents transformation process

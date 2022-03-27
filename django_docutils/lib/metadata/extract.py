@@ -1,6 +1,5 @@
 from django.template.defaultfilters import truncatewords
 from django.utils.html import strip_tags
-
 from docutils import nodes
 
 

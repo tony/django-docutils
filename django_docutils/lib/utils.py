@@ -9,9 +9,10 @@ import re
 from docutils import nodes
 
 if False:
+    from typing import Any, Tuple, Type, unicode  # NOQA
+
     from docutils import nodes  # NOQA
     from sphinx import Pattern
-    from typing import Any, Tuple, Type, unicode  # NOQA
 
 # \x00 means the "<" was backslash-escaped (from sphinx)
 explicit_title_re = re.compile(r'^(.+?)\s*(?<!\x00)<(.*?)>$', re.DOTALL)

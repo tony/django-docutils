@@ -14,7 +14,8 @@ from six import PY3
 
 if False:
     # For type annotation
-    from typing import Callable, Dict, IO, Iterator, Tuple  # NOQA
+    from typing import IO, Callable, Dict, Iterator, Tuple  # NOQA
+
     from sphinx.builders import Builder  # NOQA
     from sphinx.environment import BuildEnvironment  # NOQA
 
@@ -195,7 +196,12 @@ class InventoryFile:
                     if dispname == name:
                         dispname = '-'
                     entry = '{} {}:{} {} {} {}\n'.format(
-                        name, domainname, typ, prio, uri, dispname,
+                        name,
+                        domainname,
+                        typ,
+                        prio,
+                        uri,
+                        dispname,
                     )
                     f.write(compressor.compress(entry.encode('utf-8')))
             f.write(compressor.flush())

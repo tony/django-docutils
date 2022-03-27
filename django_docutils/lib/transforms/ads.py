@@ -6,7 +6,6 @@ from docutils.transforms import Transform
 
 from django_docutils.lib.utils import append_html_to_node, find_root_sections
 
-
 """
 Ideas:
 

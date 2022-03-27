@@ -27,12 +27,12 @@ foo
 @pytest.mark.django_db(transaction=True)
 def test_publish_post_explicitness():
     """If title, subtitle, created, updated, etc. is declared in metadata,
-       that is treated as a source of truth, and the database entry must
-       respect that, upon initial import and subsequent re-imports.
+    that is treated as a source of truth, and the database entry must
+    respect that, upon initial import and subsequent re-imports.
 
-       @todo a test also needs to be made for this and the directory style
-       configurations.
-       @todo parametrize this with message, source, results
+    @todo a test also needs to be made for this and the directory style
+    configurations.
+    @todo parametrize this with message, source, results
     """
 
     assert publish_post(source='') == {}
