@@ -696,19 +696,19 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-issues"
-version = "1.2.0"
+version = "3.0.1"
 description = "A Sphinx extension for linking to your project's issue tracker"
 category = "dev"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 
 [package.dependencies]
 sphinx = "*"
 
 [package.extras]
-dev = ["pytest", "flake8 (==3.6.0)", "pre-commit (==1.13.0)", "tox", "mock", "flake8-bugbear (==18.8.0)"]
-lint = ["flake8 (==3.6.0)", "pre-commit (==1.13.0)", "flake8-bugbear (==18.8.0)"]
-tests = ["pytest", "mock"]
+dev = ["pytest (>=6.2.0)", "flake8 (==3.9.2)", "flake8-bugbear (==20.11.1)", "pre-commit (>=2.7,<3.0)", "tox"]
+lint = ["flake8 (==3.9.2)", "flake8-bugbear (==20.11.1)", "pre-commit (>=2.7,<3.0)"]
+tests = ["pytest (>=6.2.0)"]
 
 [[package]]
 name = "sphinxcontrib-applehelp"
@@ -868,7 +868,7 @@ test = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "9382945c5bb41f4ca63b96fe11b821f07a7f02c87266da8d30b8c90c0e83b686"
+content-hash = "2f46a0b8cc40836128da1301e25cd66a77a7ad36384395a4c7a0002099ac712d"
 
 [metadata.files]
 alabaster = [
@@ -1283,8 +1283,8 @@ sphinx = [
     {file = "Sphinx-3.5.3.tar.gz", hash = "sha256:ce9c228456131bab09a3d7d10ae58474de562a6f79abb3dc811ae401cf8c1abc"},
 ]
 sphinx-issues = [
-    {file = "sphinx-issues-1.2.0.tar.gz", hash = "sha256:845294736c7ac4c09c706f13431f709e1164037cbb00f6bf623ae16eccf509f3"},
-    {file = "sphinx_issues-1.2.0-py2.py3-none-any.whl", hash = "sha256:1208e1869742b7800a45b3c47ab987b87b2ad2024cbc36e0106e8bba3549dd22"},
+    {file = "sphinx-issues-3.0.1.tar.gz", hash = "sha256:b7c1dc1f4808563c454d11c1112796f8c176cdecfee95f0fd2302ef98e21e3d6"},
+    {file = "sphinx_issues-3.0.1-py3-none-any.whl", hash = "sha256:8b25dc0301159375468f563b3699af7a63720fd84caf81c1442036fcd418b20c"},
 ]
 sphinxcontrib-applehelp = [
     {file = "sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},
