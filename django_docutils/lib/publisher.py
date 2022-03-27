@@ -1,4 +1,4 @@
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
 from docutils import io, nodes, readers
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
@@ -92,7 +92,7 @@ def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None
         toc_topic += toc_contents
     toc_tree += toc_topic
     toc = publish_parts_from_doctree(toc_tree, writer=writer)
-    return mark_safe(force_text(toc['html_body']))
+    return mark_safe(force_str(toc['html_body']))
 
 
 def publish_doctree(source, settings_overrides=docutils_settings):
@@ -170,6 +170,6 @@ def publish_html_from_doctree(
     )
 
     if show_title:
-        return mark_safe(force_text(parts['html_body']))
+        return mark_safe(force_str(parts['html_body']))
     else:
-        return mark_safe(force_text(parts['fragment']))
+        return mark_safe(force_str(parts['fragment']))
