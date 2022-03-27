@@ -15,9 +15,9 @@ if False:
     from sphinx import Pattern
 
 # \x00 means the "<" was backslash-escaped (from sphinx)
-explicit_title_re = re.compile(r'^(.+?)\s*(?<!\x00)<(.*?)>$', re.DOTALL)
+explicit_title_re = re.compile(r"^(.+?)\s*(?<!\x00)<(.*?)>$", re.DOTALL)
 
-ws_re = re.compile(r'\s+')  # type: Pattern
+ws_re = re.compile(r"\s+")  # type: Pattern
 
 
 def split_explicit_title(text):
@@ -38,7 +38,7 @@ def chop_after_docinfo(source):
     :rtype: string
     """
     # find the last docinfo element
-    index = re.findall(r':[\w_]+: [\w \-_\,]+\n', source)[-1]
+    index = re.findall(r":[\w_]+: [\w \-_\,]+\n", source)[-1]
 
     # find the character position of last docinfo element + len of it
     rest = source[source.rindex(index) + len(index) :]
@@ -54,7 +54,7 @@ def chop_after_title(source):
     :rtype: string
     """
     # find the last docinfo element
-    index = re.findall(r'[=-]{3,}\n.*\n[-=]{3,}', source, re.MULTILINE)[-1]
+    index = re.findall(r"[=-]{3,}\n.*\n[-=]{3,}", source, re.MULTILINE)[-1]
 
     # find the character position of last docinfo element + len of it
     rest = source[source.rindex(index) + len(index) :]
@@ -103,9 +103,9 @@ def append_html_to_node(node, ad_code):
     """
     html = '<div class="has-text-centered">'
     html += ad_code
-    html += '</div>'
+    html += "</div>"
 
-    html_node = nodes.raw('', html, format='html')
+    html_node = nodes.raw("", html, format="html")
 
     node.append(html_node)
     node.replace_self(node)

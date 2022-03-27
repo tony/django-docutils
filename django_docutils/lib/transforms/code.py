@@ -33,7 +33,7 @@ class InlineHtmlFormatter(HtmlFormatter):
             tokens = list(source)
 
             # filter out the trailing newline token
-            if tokens[-1] == (Token.Text, '\n'):
+            if tokens[-1] == (Token.Text, "\n"):
                 del tokens[-1]
 
             return ((t, v) for t, v in tokens)
@@ -49,28 +49,28 @@ class InlineHtmlFormatter(HtmlFormatter):
             and not self.nobackground
             and self.style.background_color is not None
         ):
-            style.append(f'background: {self.style.background_color}')
+            style.append(f"background: {self.style.background_color}")
         if self.cssstyles:
             style.append(self.cssstyles)
-        style = '; '.join(style)
+        style = "; ".join(style)
 
         yield 0, (
-            '<span'
+            "<span"
             + (self.cssclass and ' class="%s"' % self.cssclass)
             + (style and (' style="%s"' % style))
-            + '>'
+            + ">"
         )
         yield from inner
-        yield 0, '</span>\n'
+        yield 0, "</span>\n"
 
     def _wrap_pre(self, inner):
         yield from inner
 
 
 formatter = InlineHtmlFormatter(
-    cssclass='highlight docutils literal inline-code',
+    cssclass="highlight docutils literal inline-code",
     noclasses=False,
-    lineseparator='',  # removes \n from end of inline snippet
+    lineseparator="",  # removes \n from end of inline snippet
 )
 
 
@@ -90,15 +90,15 @@ class CodeTransform(Transform):
             newtext = None
             newlexer = None
 
-            if text.startswith('$ '):
+            if text.startswith("$ "):
                 from django_docutils.lib.directives.code import BashSessionLexer
 
                 newlexer = BashSessionLexer()
-            elif text.startswith('{%') or text.startswith('{{'):
+            elif text.startswith("{%") or text.startswith("{{"):
                 from pygments.lexers.templates import DjangoLexer
 
                 newlexer = DjangoLexer()
-            elif re.match(r'^:\w+:', text):  # match :rolename: beginning
+            elif re.match(r"^:\w+:", text):  # match :rolename: beginning
                 from pygments.lexers.markup import RstLexer
 
                 newlexer = RstLexer()
@@ -128,12 +128,12 @@ class CodeTransform(Transform):
                 Let's replace the newline escape (``\n``) with a space.
                 """
                 text = text.strip()  # trim any whitespace around text
-                text = text.replace('\n', ' ')  # switch out newlines w/ space
+                text = text.replace("\n", " ")  # switch out newlines w/ space
 
                 newtext = highlight(text, newlexer, formatter)
 
             if newtext:
-                newnode = nodes.raw('', newtext, format='html')
+                newnode = nodes.raw("", newtext, format="html")
 
             if newnode and node.parent:
                 node.replace_self(newnode)

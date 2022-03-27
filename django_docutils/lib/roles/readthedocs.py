@@ -22,11 +22,11 @@ def readthedocs_role(name, rawtext, text, lineno, inliner, options={}, content=[
     """
 
     def url_handler(target):
-        if ':' in target:
-            project, path = target.split(':')
-            return 'https://{project}.readthedocs.io/en/latest/{path}'.format(
+        if ":" in target:
+            project, path = target.split(":")
+            return "https://{project}.readthedocs.io/en/latest/{path}".format(
                 project=project, path=path
             )
-        return f'https://{target}.readthedocs.io'
+        return f"https://{target}.readthedocs.io"
 
     return generic_url_role(name, text, url_handler)

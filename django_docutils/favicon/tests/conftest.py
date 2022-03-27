@@ -7,34 +7,34 @@ from django.apps import apps
 
 @pytest.fixture
 def EmptyModel(favicon_app):
-    return favicon_app.get_model('EmptyModel')
+    return favicon_app.get_model("EmptyModel")
 
 
 @pytest.fixture
 def Favicon(favicon_app):
-    return favicon_app.get_model('Favicon')
+    return favicon_app.get_model("Favicon")
 
 
 @pytest.fixture
 def RSTPost(favicon_app):
-    return favicon_app.get_model('RSTPost')
+    return favicon_app.get_model("RSTPost")
 
 
 @pytest.fixture
 def RSTPostPage(favicon_app):
-    return favicon_app.get_model('RSTPostPage')
+    return favicon_app.get_model("RSTPostPage")
 
 
 @pytest.fixture
 def favicon_app(settings, request):
-    app_name = 'test_app'
-    app_import_string = f'django_docutils.favicon.tests.{app_name}'
+    app_name = "test_app"
+    app_import_string = f"django_docutils.favicon.tests.{app_name}"
 
     if app_import_string not in settings.INSTALLED_APPS:
         settings.INSTALLED_APPS = settings.INSTALLED_APPS + (app_import_string,)
 
     def resource_a_teardown():
-        print('\nresources_a_teardown()')
+        print("\nresources_a_teardown()")
         settings.INSTALLED_APPS = (
             s for s in settings.INSTALLED_APPS if s != app_import_string
         )

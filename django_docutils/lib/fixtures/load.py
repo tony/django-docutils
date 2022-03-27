@@ -41,7 +41,7 @@ from django_docutils.lib.fixtures.utils import (
 from django_docutils.lib.metadata.process import process_metadata
 from django_docutils.lib.settings import BASED_LIB_RST
 
-docutils_settings = BASED_LIB_RST.get('docutils', {})
+docutils_settings = BASED_LIB_RST.get("docutils", {})
 
 User = get_user_model()
 
@@ -78,23 +78,23 @@ def load_post_data(model, metadata):  # NOQA: C901
     # except (User.DoesNotExist, ProgrammingError):
     #     metadata['author'] = None
 
-    metadata['author_name'] = metadata.pop('author', 'Anonymous')
+    metadata["author_name"] = metadata.pop("author", "Anonymous")
 
-    pages = metadata.pop('pages')
+    pages = metadata.pop("pages")
 
     m, created = model.objects.update_or_create(
-        slug_id=metadata['slug_id'], defaults=metadata
+        slug_id=metadata["slug_id"], defaults=metadata
     )
 
     # assure metadata fields stick with auto-generated fields
-    for field in ['created', 'modified', 'slug_title']:
+    for field in ["created", "modified", "slug_title"]:
         if field in metadata:
             if getattr(m, field) != metadata[field]:
                 setattr(m, field, metadata[field])
 
     # assure slugs update if title different (if not manually overwridden)
     # todo, only run this if title changed
-    if not created and m.title and 'slug_title' not in metadata:
+    if not created and m.title and "slug_title" not in metadata:
         m.slug_title = slugify(m.title)
 
     if m.is_dirty():
@@ -108,7 +108,7 @@ def load_post_data(model, metadata):  # NOQA: C901
     # re-add one-to-many post -> page associations
     for page_number, page_data in enumerate(pages, 1):
         _, post_page = split_page_data(page_data)
-        post_page['page_number'] = page_number
+        post_page["page_number"] = page_number
 
         p = PostPage(**post_page)
         p.save()
@@ -145,11 +145,11 @@ def load_app_rst_fixtures(app_config, model=None):
         model = get_model_from_post_app(app_config)  # load the app model
 
     rst_files = [  # load single-file posts
-        os.path.join(app_config.path, 'fixtures', f)
+        os.path.join(app_config.path, "fixtures", f)
         for f in find_rst_files_in_app(app_config)
     ]
     dir_projects = [  # load directory-style posts (potentially multiple posts)
-        os.path.join(app_config.path, 'fixtures', d)
+        os.path.join(app_config.path, "fixtures", d)
         for d in find_rst_dirs_in_app(app_config)
     ]
 
@@ -164,7 +164,7 @@ def load_app_rst_fixtures(app_config, model=None):
         docinfo = process_metadata(extract_dir_config(_dir))
         files = [os.path.join(_dir, f) for f in find_series_files(docinfo, _dir)]
 
-        docinfo.pop('series', None)  # pop off the series order
+        docinfo.pop("series", None)  # pop off the series order
 
         post_data = publish_post(source_path=files, defaults=docinfo)
         m = load_post_data(model, post_data)

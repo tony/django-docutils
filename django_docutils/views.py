@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 
 class DocutilsResponse(TemplateResponse):
 
-    template_name = 'base.html'
+    template_name = "base.html"
 
     def __init__(
         self,
@@ -45,8 +45,8 @@ class DocutilsResponse(TemplateResponse):
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
 
-        context['content'] = mark_safe(
-            select_template(self.rst_name, using='docutils').render()
+        context["content"] = mark_safe(
+            select_template(self.rst_name, using="docutils").render()
         )
 
         if django.VERSION < (1, 10):

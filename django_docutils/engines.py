@@ -17,13 +17,13 @@ except ImportError:  # >= 1.9
 
 
 class Docutils(BaseEngine):
-    app_dirname = 'templates'
+    app_dirname = "templates"
 
     def __init__(self, params):
         params = params.copy()
-        self.options = params.pop('OPTIONS').copy()
-        self.options.setdefault('debug', settings.DEBUG)
-        self.options.setdefault('file_charset', settings.FILE_CHARSET)
+        self.options = params.pop("OPTIONS").copy()
+        self.options.setdefault("debug", settings.DEBUG)
+        self.options.setdefault("file_charset", settings.FILE_CHARSET)
         super(Docutils, self).__init__(params)
         self.engine = Engine(self.dirs, self.app_dirs, **self.options)
 
@@ -51,12 +51,12 @@ class DocutilsTemplate(object):
     def render(self, context=None, request=None):
         context = self.options
         if request is not None:
-            context['request'] = request
-            context['csrf_input'] = csrf_input_lazy(request)
-            context['csrf_token'] = csrf_token_lazy(request)
-        context = {'source': self.source, 'writer_name': 'html'}
+            context["request"] = request
+            context["csrf_input"] = csrf_input_lazy(request)
+            context["csrf_token"] = csrf_token_lazy(request)
+        context = {"source": self.source, "writer_name": "html"}
 
-        return core.publish_parts(**context)['html_body']
+        return core.publish_parts(**context)["html_body"]
 
 
 register_pygments_directive()

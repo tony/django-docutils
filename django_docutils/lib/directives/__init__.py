@@ -26,7 +26,7 @@ def register_based_directives():
     if not BASED_LIB_RST:
         return
 
-    if 'directives' in BASED_LIB_RST:
-        for dir_name, dir_cls_str in BASED_LIB_RST['directives'].items():
+    if "directives" in BASED_LIB_RST:
+        for dir_name, dir_cls_str in BASED_LIB_RST["directives"].items():
             class_ = import_string(dir_cls_str)
             directives.register_directive(dir_name, class_)

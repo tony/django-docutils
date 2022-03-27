@@ -23,7 +23,7 @@ class RSTPostPageBase(models.Model):
     """Where the content of a post resides. Posts can have multiple pages."""
 
     body = models.TextField()
-    subtitle = models.CharField(_('sub title'), max_length=255, null=True, blank=True)
+    subtitle = models.CharField(_("sub title"), max_length=255, null=True, blank=True)
     page_number = models.PositiveSmallIntegerField(null=True)
 
     class Meta:
@@ -31,7 +31,7 @@ class RSTPostPageBase(models.Model):
 
     def __str__(self):
         if self.subtitle:
-            return '{title}: {subtitle}'.format(
+            return "{title}: {subtitle}".format(
                 title=self.post.title, subtitle=self.subtitle
             )
         return self.post.title
@@ -57,22 +57,22 @@ class RSTPostPageBase(models.Model):
     def get_absolute_url(self):
         try:
             return reverse(
-                f'{self.post_url_key}:detail-view',
+                f"{self.post_url_key}:detail-view",
                 kwargs={
-                    'slug_id': self.post.slug_id,
-                    'slug_title': self.post.slug_title,
-                    'page': self.page_number,
+                    "slug_id": self.post.slug_id,
+                    "slug_title": self.post.slug_title,
+                    "page": self.page_number,
                 },
             )
         except NoReverseMatch:
             return reverse(
-                f'{self.post_url_key}:detail-view',
-                kwargs={'slug_title': self.post.slug_title, 'page': self.page_number},
+                f"{self.post_url_key}:detail-view",
+                kwargs={"slug_title": self.post.slug_title, "page": self.page_number},
             )
 
     @cached_property
     def post_url_key(self):
-        return self.post.__class__.__name__.lower() + 's'
+        return self.post.__class__.__name__.lower() + "s"
 
     @cached_property
     def document(self):

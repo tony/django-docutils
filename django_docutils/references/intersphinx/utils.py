@@ -39,25 +39,25 @@ class InventoryFileReader:
     def __init__(self, stream):
         # type: (IO) -> None
         self.stream = stream
-        self.buffer = b''
+        self.buffer = b""
         self.eof = False
 
     def read_buffer(self):
         # type: () -> None
         chunk = self.stream.read(BUFSIZE)
-        if chunk == b'':
+        if chunk == b"":
             self.eof = True
         self.buffer += chunk
 
     def readline(self):
         # type: () -> unicode
-        pos = self.buffer.find(b'\n')
+        pos = self.buffer.find(b"\n")
         if pos != -1:
-            line = self.buffer[:pos].decode('utf-8')
+            line = self.buffer[:pos].decode("utf-8")
             self.buffer = self.buffer[pos + 1 :]
         elif self.eof:
-            line = self.buffer.decode('utf-8')
-            self.buffer = b''
+            line = self.buffer.decode("utf-8")
+            self.buffer = b""
         else:
             self.read_buffer()
             line = self.readline()
@@ -77,19 +77,19 @@ class InventoryFileReader:
         while not self.eof:
             self.read_buffer()
             yield decompressor.decompress(self.buffer)
-            self.buffer = b''
+            self.buffer = b""
         yield decompressor.flush()
 
     def read_compressed_lines(self):
         # type: () -> Iterator[unicode]
-        buf = b''
+        buf = b""
         for chunk in self.read_compressed_chunks():
             buf += chunk
-            pos = buf.find(b'\n')
+            pos = buf.find(b"\n")
             while pos != -1:
-                yield buf[:pos].decode('utf-8')
+                yield buf[:pos].decode("utf-8")
                 buf = buf[pos + 1 :]
-                pos = buf.find(b'\n')
+                pos = buf.find(b"\n")
 
 
 class InventoryFile:
@@ -98,12 +98,12 @@ class InventoryFile:
         # type: (IO, unicode, Callable) -> Inventory
         reader = InventoryFileReader(stream)
         line = reader.readline().rstrip()
-        if line == '# Sphinx inventory version 1':
+        if line == "# Sphinx inventory version 1":
             return cls.load_v1(reader, uri, joinfunc)
-        elif line == '# Sphinx inventory version 2':
+        elif line == "# Sphinx inventory version 2":
             return cls.load_v2(reader, uri, joinfunc)
         else:
-            raise ValueError('invalid inventory header: %s' % line)
+            raise ValueError("invalid inventory header: %s" % line)
 
     @classmethod
     def load_v1(cls, stream, uri, join):
@@ -115,17 +115,17 @@ class InventoryFile:
             name, type, location = line.rstrip().split(None, 2)
             location = join(uri, location)
             # version 1 did not add anchors to the location
-            if type == 'mod':
-                type = 'py:module'
-                location += '#module-' + name
+            if type == "mod":
+                type = "py:module"
+                location += "#module-" + name
             else:
-                type = 'py:' + type
-                location += '#' + name
+                type = "py:" + type
+                location += "#" + name
             invdata.setdefault(type, {})[name] = (
                 projname,
                 version,
                 location,
-                '-',
+                "-",
             )  # NOQA
         return invdata
 
@@ -136,27 +136,27 @@ class InventoryFile:
         projname = stream.readline().rstrip()[11:]
         version = stream.readline().rstrip()[11:]
         line = stream.readline()
-        if 'zlib' not in line:
+        if "zlib" not in line:
             raise ValueError(
-                'invalid inventory header (not compressed): %s' % line
+                "invalid inventory header (not compressed): %s" % line
             )  # NOQA
 
         for line in stream.read_compressed_lines():
             # be careful to handle names with embedded spaces correctly
             m = re.match(
-                r'(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)', line.rstrip()
+                r"(?x)(.+?)\s+(\S*:\S*)\s+(-?\d+)\s+(\S+)\s+(.*)", line.rstrip()
             )
             if not m:
                 continue
             name, type, prio, location, dispname = m.groups()
             if (
-                type == 'py:module' and type in invdata and name in invdata[type]
+                type == "py:module" and type in invdata and name in invdata[type]
             ):  # due to a bug in 1.1 and below,
                 # two inventory entries are created
                 # for Python modules, and the first
                 # one is correct
                 continue
-            if location.endswith('$'):
+            if location.endswith("$"):
                 location = location[:-1] + name
             location = join(uri, location)
             invdata.setdefault(type, {})[name] = (projname, version, location, dispname)
@@ -167,18 +167,18 @@ class InventoryFile:
         # type: (unicode, BuildEnvironment, Builder) -> None
         def escape(string):
             # type: (unicode) -> unicode
-            return re.sub('\\s+', ' ', string)
+            return re.sub("\\s+", " ", string)
 
-        with open(os.path.join(filename), 'wb') as f:
+        with open(os.path.join(filename), "wb") as f:
             # header
             f.write(
                 (
-                    '# Sphinx inventory version 2\n'
-                    '# Project: %s\n'
-                    '# Version: %s\n'
-                    '# The remainder of this file is compressed using zlib.\n'
+                    "# Sphinx inventory version 2\n"
+                    "# Project: %s\n"
+                    "# Version: %s\n"
+                    "# The remainder of this file is compressed using zlib.\n"
                     % (escape(env.config.project), escape(env.config.version))  # NOQA
-                ).encode('utf-8')
+                ).encode("utf-8")
             )
 
             # body
@@ -189,13 +189,13 @@ class InventoryFile:
                 ):
                     if anchor.endswith(name):
                         # this can shorten the inventory by as much as 25%
-                        anchor = anchor[: -len(name)] + '$'
+                        anchor = anchor[: -len(name)] + "$"
                     uri = builder.get_target_uri(docname)
                     if anchor:
-                        uri += '#' + anchor
+                        uri += "#" + anchor
                     if dispname == name:
-                        dispname = '-'
-                    entry = '{} {}:{} {} {} {}\n'.format(
+                        dispname = "-"
+                    entry = "{} {}:{} {} {} {}\n".format(
                         name,
                         domainname,
                         typ,
@@ -203,5 +203,5 @@ class InventoryFile:
                         uri,
                         dispname,
                     )
-                    f.write(compressor.compress(entry.encode('utf-8')))
+                    f.write(compressor.compress(entry.encode("utf-8")))
             f.write(compressor.flush())

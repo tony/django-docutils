@@ -28,7 +28,7 @@ some content
 
     doctree = publish_doctree(source=force_bytes(content))
 
-    assert extract_title(doctree) == 'Hello world'
+    assert extract_title(doctree) == "Hello world"
 
 
 def test_extract_subtitle():
@@ -52,11 +52,11 @@ some content
 
     doctree = publish_doctree(source=force_bytes(content))
 
-    assert extract_subtitle(doctree) == 'moo'
+    assert extract_subtitle(doctree) == "moo"
 
 
 def test_extract_metadata(tmpdir):
-    docutils_settings = BASED_LIB_RST.get('docutils', {})
+    docutils_settings = BASED_LIB_RST.get("docutils", {})
     content = """
 ===========
 Content ok!
@@ -80,8 +80,8 @@ some content
     )
 
     assert extract_metadata(doctree) == {
-        'programming_languages': 'javascript',
-        'topics': 'webpack',
-        'created': '2017-07-30',
-        'author': 'tony',
+        "programming_languages": "javascript",
+        "topics": "webpack",
+        "created": "2017-07-30",
+        "author": "tony",
     }

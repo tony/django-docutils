@@ -30,7 +30,7 @@ class InjectAds(Transform):
     default_priority = 100
 
     #: list of keywords for the ad system, default 'linux'
-    ad_keywords = ['linux']
+    ad_keywords = ["linux"]
 
     #: minimum amount of chars in a section to show and add
     #: https://support.google.com/adsense/answer/1346295?hl=en#Ad_limit_per_page  # NOQA
@@ -70,8 +70,8 @@ class InjectAds(Transform):
 
             ad_code = random.choice(
                 [
-                    settings.BASED_ADS['GOOGLE_AD_CODE'],
-                    settings.BASED_ADS['AMAZON_AD_STRIP'],
+                    settings.BASED_ADS["GOOGLE_AD_CODE"],
+                    settings.BASED_ADS["AMAZON_AD_STRIP"],
                 ]
             )
             # ad_code = settings.BASED_ADS['AMZN_AD_CODE'].format(
@@ -94,4 +94,4 @@ class InjectAds(Transform):
 
             node = last_section[-1]  # end of section
 
-            append_html_to_node(node, settings.BASED_ADS['GOOGLE_AD_CODE'])
+            append_html_to_node(node, settings.BASED_ADS["GOOGLE_AD_CODE"])

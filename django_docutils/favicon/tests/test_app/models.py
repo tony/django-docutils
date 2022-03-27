@@ -19,7 +19,7 @@ class Favicon(FaviconBase):
 
 class RSTPost(RSTPostBase):
     root_page = models.ForeignKey(
-        'RSTPostPage', null=True, on_delete=models.SET_NULL, related_name='+'
+        "RSTPostPage", null=True, on_delete=models.SET_NULL, related_name="+"
     )
 
 
@@ -30,5 +30,5 @@ class RSTPostSubclass(RSTPost):
 class RSTPostPage(RSTPostPageBase):
 
     post = models.ForeignKey(
-        RSTPost, on_delete=models.CASCADE, related_name='pages', null=True
+        RSTPost, on_delete=models.CASCADE, related_name="pages", null=True
     )

@@ -35,7 +35,7 @@ def find_series_files(config, path):
     """
 
     files_in_path = find_rst_files(path, absolute=True)
-    files_in_series = [os.path.join(path, f) for f in config['series']]
+    files_in_series = [os.path.join(path, f) for f in config["series"]]
 
     # assert series in config matches files present in directory, if not
     # throw exception
@@ -43,9 +43,9 @@ def find_series_files(config, path):
 
     if not has_files:
         raise BasedException(
-            'Files in {} ({}) do not match the ones listed in'
+            "Files in {} ({}) do not match the ones listed in"
             'the "series" metadata ({}).'.format(
-                path, ', '.join(files_in_path), ', '.join(files_in_series)
+                path, ", ".join(files_in_path), ", ".join(files_in_series)
             )
         )
 
@@ -63,8 +63,8 @@ def is_dir_project(path):
     :rtype: boolean
     """
     required_files = [
-        os.path.join(path, 'README.rst'),
-        os.path.join(path, 'manifest.json'),
+        os.path.join(path, "README.rst"),
+        os.path.join(path, "manifest.json"),
     ]
 
     return all(os.path.exists(f) for f in required_files)
@@ -77,7 +77,7 @@ def find_rst_dirs_in_app(app_config):
     :type app_config: :class:`django.apps.AppConfig`
     :returns: list of files relative to app's fixture dir path
     """
-    fixtures_dir = os.path.join(app_config.path, 'fixtures')
+    fixtures_dir = os.path.join(app_config.path, "fixtures")
     return find_rst_dir_projects(fixtures_dir)
 
 

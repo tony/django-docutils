@@ -18,11 +18,11 @@ def leanpub_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
 
     def url_handler(target):
-        if ':' in target:
-            project, path = target.split(':')
-            return 'https://leanpub.com/{project}/{path}'.format(
+        if ":" in target:
+            project, path = target.split(":")
+            return "https://leanpub.com/{project}/{path}".format(
                 project=project, path=path
             )
-        return f'https://leanpub.com/{target}'
+        return f"https://leanpub.com/{target}"
 
     return generic_url_role(name, text, url_handler)

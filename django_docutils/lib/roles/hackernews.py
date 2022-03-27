@@ -17,7 +17,7 @@ def hackernews_role(name, rawtext, text, lineno, inliner, options={}, content=[]
     """
 
     def url_handler(target):
-        target = quote(target.replace(' ', '_'))
-        return f'https://news.ycombinator.com/item?id={target}'
+        target = quote(target.replace(" ", "_"))
+        return f"https://news.ycombinator.com/item?id={target}"
 
     return generic_url_role(name, text, url_handler)

@@ -17,7 +17,7 @@ class BasedHTMLTranslator(HTMLTranslator):
         pass
 
     def visit_table(self, node):
-        node['classes'].extend(['table'])
+        node["classes"].extend(["table"])
         HTMLTranslator.visit_table(self, node)
 
     def visit_reference(self, node):
@@ -30,40 +30,40 @@ class BasedHTMLTranslator(HTMLTranslator):
         - add class insite for insite urls (note, internal is already used
           for reference links in the *same* document)
         """
-        atts = {'class': 'reference'}
+        atts = {"class": "reference"}
 
-        if 'refuri' in node:
-            atts['href'] = node['refuri']
-            if self.settings.cloak_email_addresses and atts['href'].startswith(
-                'mailto:'
+        if "refuri" in node:
+            atts["href"] = node["refuri"]
+            if self.settings.cloak_email_addresses and atts["href"].startswith(
+                "mailto:"
             ):
-                atts['href'] = self.cloak_mailto(atts['href'])
+                atts["href"] = self.cloak_mailto(atts["href"])
                 self.in_mailto = True
-            atts['class'] += ' external'
+            atts["class"] += " external"
             if (
-                not any(node['refuri'] in host for host in settings.ALLOWED_HOSTS)
-                and not node['refuri'].startswith('#')
-                and not node['refuri'].startswith('/')
+                not any(node["refuri"] in host for host in settings.ALLOWED_HOSTS)
+                and not node["refuri"].startswith("#")
+                and not node["refuri"].startswith("/")
             ):
-                atts['target'] = '_blank'
-                atts['class'] += ' offsite'
+                atts["target"] = "_blank"
+                atts["class"] += " offsite"
                 # sphinx sites, a ref wrapping a nodes.literal is a code link
                 if isinstance(node[0], nodes.literal):
-                    atts['class'] += ' code'
+                    atts["class"] += " code"
             else:
-                atts['class'] += ' insite'
+                atts["class"] += " insite"
         else:
             assert (
-                'refid' in node
+                "refid" in node
             ), 'References must have "refuri" or "refid" attribute.'
-            atts['href'] = '#' + node['refid']
-            atts['class'] += ' internal'
+            atts["href"] = "#" + node["refid"]
+            atts["class"] += " internal"
 
         from django_docutils.favicon.rst.nodes import icon
 
         if isinstance(node[0], icon):
-            atts['class'] = ''
-        self.body.append(self.starttag(node, 'a', '', **atts))
+            atts["class"] = ""
+        self.body.append(self.starttag(node, "a", "", **atts))
 
     def visit_title(self, node):
         """Changes:
@@ -73,21 +73,21 @@ class BasedHTMLTranslator(HTMLTranslator):
           that builds toc separately from the main content (see templatetags)
         - s/with-subtitle/subtitle for bulma css
         """
-        close_tag = '</p>\n'
+        close_tag = "</p>\n"
 
         # add backlinks to refid (toc header backlinks)
         # This assures headers link to themselves, so users can copy a link
         # to the anchor, rather than docutils default behavior of linking back
         # to the doc
         if isinstance(node.parent, nodes.section):
-            node['refid'] = node.parent['ids'][0]
+            node["refid"] = node.parent["ids"][0]
 
         # specific cases we don't use h{1-6} tags for
         parent_node_classes = [
-            (nodes.topic, ['p', ''], {'CLASS': 'topic-title first'}, None),
-            (nodes.sidebar, ['p', ''], {'CLASS': 'sidebar-title'}, None),
-            (nodes.Admonition, ['p', ''], {'CLASS': 'admonition-title'}, None),
-            (nodes.table, ['caption', ''], {}, '</caption>'),
+            (nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None),
+            (nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None),
+            (nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None),
+            (nodes.table, ["caption", ""], {}, "</caption>"),
         ]
 
         # if node is wrapped in a certain type and processed, toggle this
@@ -104,8 +104,8 @@ class BasedHTMLTranslator(HTMLTranslator):
         # since we used a for loop above, we can't elif this
         if not is_processed:
             if isinstance(node.parent, nodes.document):
-                self.body.append(self.starttag(node, 'h1', '', CLASS='title is-1'))
-                close_tag = '</h1>\n'
+                self.body.append(self.starttag(node, "h1", "", CLASS="title is-1"))
+                close_tag = "</h1>\n"
                 self.in_document_title = len(self.body)
             elif isinstance(node.parent, nodes.section):
                 # now, handle plain-old headers
@@ -129,18 +129,18 @@ class BasedHTMLTranslator(HTMLTranslator):
         h_level = self.section_level + self.initial_header_level - 1
         atts = {}
         if len(node.parent) >= 2 and isinstance(node.parent[1], nodes.subtitle):
-            atts['CLASS'] = 'subtitle'
+            atts["CLASS"] = "subtitle"
 
-        self.body.append(self.starttag(node, 'h%s' % h_level, '', **atts))
+        self.body.append(self.starttag(node, "h%s" % h_level, "", **atts))
         atts = {}
-        if node.hasattr('refid'):
-            atts['class'] = 'toc-backref'
-            atts['href'] = '#' + node['refid']
+        if node.hasattr("refid"):
+            atts["class"] = "toc-backref"
+            atts["href"] = "#" + node["refid"]
         if atts:
-            self.body.append(self.starttag({}, 'a', '', **atts))
-            close_tag = '</a></h%s>\n' % (h_level)
+            self.body.append(self.starttag({}, "a", "", **atts))
+            close_tag = "</a></h%s>\n" % (h_level)
         else:
-            close_tag = '</h%s>\n' % (h_level)
+            close_tag = "</h%s>\n" % (h_level)
         return close_tag
 
     def visit_docinfo(self, node):
@@ -149,12 +149,12 @@ class BasedHTMLTranslator(HTMLTranslator):
 
     def visit_icon(self, node):
         atts = {}
-        if 'style' in node:
-            atts['style'] = node['style']
-        self.body.append(self.starttag(node, 'em', '', **atts))
+        if "style" in node:
+            atts["style"] = node["style"]
+        self.body.append(self.starttag(node, "em", "", **atts))
 
     def depart_icon(self, node):
-        self.body.append('</em>')
+        self.body.append("</em>")
 
 
 class BasedWriter(Writer):
@@ -181,8 +181,8 @@ class BasedWriter(Writer):
         if not BASED_LIB_RST:
             return transforms
 
-        if 'transforms' in BASED_LIB_RST:
-            for transforms_cls_str in BASED_LIB_RST['transforms']:
+        if "transforms" in BASED_LIB_RST:
+            for transforms_cls_str in BASED_LIB_RST["transforms"]:
                 transforms += [import_string(transforms_cls_str)]
 
         return transforms

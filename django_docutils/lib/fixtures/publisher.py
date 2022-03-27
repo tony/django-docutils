@@ -96,13 +96,13 @@ from ..publisher import publish_doctree
 from ..settings import BASED_LIB_RST
 from .utils import split_page_data
 
-docutils_settings = BASED_LIB_RST.get('docutils', {})
+docutils_settings = BASED_LIB_RST.get("docutils", {})
 
 #: post fields with m2m relations
-M2M_FIELDS = ['programming_languages', 'topics', 'platforms', 'series']
+M2M_FIELDS = ["programming_languages", "topics", "platforms", "series"]
 
 #: fields that overwrite manual values
-AUTO_FIELDS = ['created', 'modified', 'slug_title']
+AUTO_FIELDS = ["created", "modified", "slug_title"]
 
 
 def publish_post(source=None, source_path=None, defaults={}, overrides={}):
@@ -147,7 +147,7 @@ def publish_post(source=None, source_path=None, defaults={}, overrides={}):
             pages.append(page_data)
 
     if pages:
-        post_data['pages'] = pages
+        post_data["pages"] = pages
     return post_data
 
 
@@ -180,11 +180,11 @@ def publish_page(source=None, source_path=None, defaults={}, overrides={}):
     # Step 2: pluck document node-related attributes from document
     document_data = {}
     try:
-        document_data['body'] = chop_after_heading_smartly(source)
+        document_data["body"] = chop_after_heading_smartly(source)
     except IndexError:
         pass
-    document_data['title'] = extract_title(doctree)
-    document_data['subtitle'] = extract_subtitle(doctree)
+    document_data["title"] = extract_title(doctree)
+    document_data["subtitle"] = extract_subtitle(doctree)
 
     # clean empty values
     document_data = {k: v for k, v in document_data.items() if v}

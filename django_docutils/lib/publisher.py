@@ -9,21 +9,21 @@ from .settings import BASED_LIB_RST, INJECT_FONT_AWESOME
 from .transforms.toc import Contents
 from .writers import BasedWriter
 
-docutils_settings = BASED_LIB_RST.get('docutils', {})
+docutils_settings = BASED_LIB_RST.get("docutils", {})
 
 
 def publish_parts_from_doctree(
     document,
     destination_path=None,
     writer=None,
-    writer_name='pseudoxml',
+    writer_name="pseudoxml",
     settings=None,
     settings_spec=None,
     settings_overrides=None,
     config_section=None,
     enable_exit_status=False,
 ):
-    reader = readers.doctree.Reader(parser_name='null')
+    reader = readers.doctree.Reader(parser_name="null")
     pub = Publisher(
         reader,
         None,
@@ -48,19 +48,19 @@ def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None
 
     # document tree template:
     toc_tree = nodes.document(
-        '', '', source='toc-generator', classes=['fixed-toc-menu menu']
+        "", "", source="toc-generator", classes=["fixed-toc-menu menu"]
     )
-    toc_tree += nodes.paragraph('', 'Contents', classes=['menu-label'])
+    toc_tree += nodes.paragraph("", "Contents", classes=["menu-label"])
     # Set up a Contents instance:
     # The Contents transform requires a "pending" startnode and
     # generation options startnode
-    pending = nodes.pending(Contents, rawsource='')
+    pending = nodes.pending(Contents, rawsource="")
 
     contents_transform = Contents(doctree, pending)
 
     # this assures we get backlinks pointing to themselves
     # so users can copy anchor from headers
-    contents_transform.backlinks = 'entry'
+    contents_transform.backlinks = "entry"
 
     toc_contents = contents_transform.build_contents(doctree)
 
@@ -68,7 +68,7 @@ def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None
         return None
 
     # run the contents builder and append the result to the template:
-    toc_topic = nodes.topic(classes=['contents', 'toc'])
+    toc_topic = nodes.topic(classes=["contents", "toc"])
 
     # if multi-page post, add page contents and inject into current page
     if pages and len(pages) > 1 and current_page:
@@ -77,22 +77,22 @@ def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None
             reference = nodes.reference(
                 page.get_absolute_url(), page.subtitle, refuri=page.get_absolute_url()
             )
-            item = nodes.list_item('', reference)
+            item = nodes.list_item("", reference)
             if page == current_page:
                 # make sure current page link is active
-                reference['classes'] = ['is-active']
+                reference["classes"] = ["is-active"]
 
                 # append toc to the active page
-                toc_contents['classes'].append('is-active')
+                toc_contents["classes"].append("is-active")
                 item += toc_contents
             # add the rest of te page entries
             page_entries.append(item)
-        toc_topic += nodes.bullet_list('', *page_entries, classes=['menu-list'])
+        toc_topic += nodes.bullet_list("", *page_entries, classes=["menu-list"])
     else:
         toc_topic += toc_contents
     toc_tree += toc_topic
     toc = publish_parts_from_doctree(toc_tree, writer=writer)
-    return mark_safe(force_str(toc['html_body']))
+    return mark_safe(force_str(toc["html_body"]))
 
 
 def publish_doctree(source, settings_overrides=docutils_settings):
@@ -170,6 +170,6 @@ def publish_html_from_doctree(
     )
 
     if show_title:
-        return mark_safe(force_str(parts['html_body']))
+        return mark_safe(force_str(parts["html_body"]))
     else:
-        return mark_safe(force_str(parts['fragment']))
+        return mark_safe(force_str(parts["fragment"]))

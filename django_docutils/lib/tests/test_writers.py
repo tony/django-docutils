@@ -8,7 +8,7 @@ from django_docutils.lib.writers import BasedWriter
 
 
 def test_HTMLWriter_hides_docinfo():
-    docutils_settings = BASED_LIB_RST.get('docutils', {})
+    docutils_settings = BASED_LIB_RST.get("docutils", {})
 
     content = """
 ===========
@@ -34,12 +34,12 @@ some content
     parts = publish_parts_from_doctree(
         doctree, writer=Writer(), settings_overrides=docutils_settings
     )
-    assert 'key1' in parts['html_body']
+    assert "key1" in parts["html_body"]
 
     # Our writer should *not* output docinto
     parts = publish_parts_from_doctree(
         doctree, writer=BasedWriter(), settings_overrides=docutils_settings
     )
 
-    assert 'key1' not in parts['html_body']
-    assert 'first section' in parts['html_body']
+    assert "key1" not in parts["html_body"]
+    assert "first section" in parts["html_body"]

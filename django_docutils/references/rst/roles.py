@@ -56,12 +56,12 @@ class XRefRole:
 
     def _fix_parens(self, env, has_explicit_title, title, target):
         if not has_explicit_title:
-            if title.endswith('()'):
+            if title.endswith("()"):
                 # remove parentheses
                 title = title[:-2]
-            title += '()'  # add func parens (changed from sphnx, used env)
+            title += "()"  # add func parens (changed from sphnx, used env)
         # remove parentheses from the target too
-        if target.endswith('()'):
+        if target.endswith("()"):
             target = target[:-2]
         return title, target
 
@@ -69,24 +69,24 @@ class XRefRole:
         # env = inliner.document.settings.env
         env = {}
         if not typ:
-            typ = env.temp_data.get('default_role')
+            typ = env.temp_data.get("default_role")
             if not typ:
                 typ = env.config.default_role
             if not typ:
-                raise Exception('cannot determine default role!')
+                raise Exception("cannot determine default role!")
         else:
             typ = typ.lower()
-        if ':' not in typ:
-            domain, role = '', typ  # type: unicode, unicode
-            classes = ['xref', role]
+        if ":" not in typ:
+            domain, role = "", typ  # type: unicode, unicode
+            classes = ["xref", role]
         else:
-            domain, role = typ.split(':', 1)
-            classes = ['xref', domain, f'{domain}-{role}']
+            domain, role = typ.split(":", 1)
+            classes = ["xref", domain, f"{domain}-{role}"]
         # if the first character is a bang, don't cross-reference at all
-        if text[0:1] == '!':
+        if text[0:1] == "!":
             text = utils.unescape(text)[1:]
             if self.fix_parens:
-                text, tgt = self._fix_parens(env, False, text, '')
+                text, tgt = self._fix_parens(env, False, text, "")
             innernode = self.innernodeclass(rawtext, text, classes=classes)
             return self.result_nodes(inliner.document, env, innernode, is_ref=False)
         # split title and target in role content
@@ -108,11 +108,11 @@ class XRefRole:
             env, refnode, has_explicit_title, title, target
         )
         # now that the target and title are finally determined, set them
-        refnode['reftarget'] = target
+        refnode["reftarget"] = target
         refnode += self.innernodeclass(rawtext, title, classes=classes)
         # we also need the source document
-        refnode['refdoc'] = 'docname'  # TODO: pass docname here
-        refnode['refwarn'] = self.warn_dangling
+        refnode["refdoc"] = "docname"  # TODO: pass docname here
+        refnode["refwarn"] = self.warn_dangling
         # result_nodes allow further modification of return values
         return self.result_nodes(inliner.document, env, refnode, is_ref=True)
 
@@ -125,7 +125,7 @@ class XRefRole:
         reference node and must return a new (or the same) ``(title, target)``
         tuple.
         """
-        return title, ws_re.sub(' ', target)
+        return title, ws_re.sub(" ", target)
 
     def result_nodes(self, document, env, node, is_ref):
         # type: (nodes.document, BuildEnvironment, nodes.Node, bool) -> Tuple[List[nodes.Node], List[nodes.Node]]  # NOQA
@@ -143,18 +143,18 @@ class PyXRefRole(XRefRole):
         # refnode['py:module'] = env.ref_context.get('py:module')
         # refnode['py:class'] = env.ref_context.get('py:class')
         if not has_explicit_title:
-            title = title.lstrip('.')  # only has a meaning for the target
-            target = target.lstrip('~')  # only has a meaning for the title
+            title = title.lstrip(".")  # only has a meaning for the target
+            target = target.lstrip("~")  # only has a meaning for the title
             # if the first character is a tilde, don't display the module/class
             # parts of the contents
-            if title[0:1] == '~':
+            if title[0:1] == "~":
                 title = title[1:]
-                dot = title.rfind('.')
+                dot = title.rfind(".")
                 if dot != -1:
                     title = title[dot + 1 :]
         # if the first character is a dot, search more specific namespaces
         # first else search builtins first
-        if target[0:1] == '.':
+        if target[0:1] == ".":
             target = target[1:]
-            refnode['refspecific'] = True
+            refnode["refspecific"] = True
         return title, target

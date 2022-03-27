@@ -34,25 +34,25 @@ first section
 some content
 """.strip()
 
-    tmpdir = tmpdir_factory.mktemp('sample_dir_project')
+    tmpdir = tmpdir_factory.mktemp("sample_dir_project")
 
     sample_app = create_bare_app(
         project_tmpdir=tmpdir,
         request=request,
         settings=settings,
-        app_name='sample_dir_app',
+        app_name="sample_dir_app",
     )
 
     sample_app_dir = py.path.local(sample_app.path)
 
-    sample_app_dir.join('__init__.py').write('')
+    sample_app_dir.join("__init__.py").write("")
 
     # give it a fixtures dir
-    fixtures_dir = sample_app_dir.ensure('fixtures', dir=True)
-    fixtures_dir.join('hi.rst').write('')
-    fixtures_dir.ensure('sample_project', dir=True)
-    fixtures_dir.join('sample_project').join('manifest.json').write(conf)
-    fixtures_dir.join('sample_project').join('README.rst').write(content)
+    fixtures_dir = sample_app_dir.ensure("fixtures", dir=True)
+    fixtures_dir.join("hi.rst").write("")
+    fixtures_dir.ensure("sample_project", dir=True)
+    fixtures_dir.join("sample_project").join("manifest.json").write(conf)
+    fixtures_dir.join("sample_project").join("README.rst").write(content)
 
     return sample_app
 
@@ -115,28 +115,28 @@ first section of page 3
 some content for page 3
 """.strip()
 
-    BASE_FOLDER = 'sample_dir_series_project1'
+    BASE_FOLDER = "sample_dir_series_project1"
 
     tmpdir = tmpdir_factory.mktemp(BASE_FOLDER)
 
-    sample_app = create_bare_app(tmpdir, request, settings, 'sample_dir_series_app')
+    sample_app = create_bare_app(tmpdir, request, settings, "sample_dir_series_app")
 
     sample_app_dir = py.path.local(sample_app.path)
 
-    sample_app_dir.join('__init__.py').write('')
+    sample_app_dir.join("__init__.py").write("")
 
     # give it a fixtures dir
-    fixtures_dir = sample_app_dir.ensure('fixtures', dir=True)
+    fixtures_dir = sample_app_dir.ensure("fixtures", dir=True)
 
     # the app's fixtures/ dir
-    fixtures_dir.join('hi.rst').write('')
+    fixtures_dir.join("hi.rst").write("")
     fixtures_dir.mkdir(BASE_FOLDER)
 
     # The RST project inside the app's fixtures dir
     project_dir = fixtures_dir.join(BASE_FOLDER)
-    project_dir.join('manifest.json').write(conf)
-    project_dir.join('README.rst').write(content)
-    project_dir.join('page2.rst').write(content2)
-    project_dir.join('page3.rst').write(content3)
+    project_dir.join("manifest.json").write(conf)
+    project_dir.join("README.rst").write(content)
+    project_dir.join("page2.rst").write(content2)
+    project_dir.join("page3.rst").write(content3)
 
     return sample_app

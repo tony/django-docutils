@@ -17,9 +17,9 @@ class TitleMixin(ContextMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.title:
-            context['title'] = smart_title(self.title)
+            context["title"] = smart_title(self.title)
         if self.subtitle:
-            context['subtitle'] = smart_title(self.subtitle)
+            context["subtitle"] = smart_title(self.subtitle)
         return context
 
 
@@ -48,15 +48,15 @@ class RSTMixin:
     @cached_property
     def content(self):
         return publish_html_from_doctree(
-            self.doctree, **getattr(self, 'rst_settings', {})
+            self.doctree, **getattr(self, "rst_settings", {})
         )
 
     def get_base_template(self):
         """TODO: move this out of RSTMixin, it is AMP related, not RST"""
-        if self.request.GET.get('is_amp', False):
-            return 'based/base-amp.html'
+        if self.request.GET.get("is_amp", False):
+            return "based/base-amp.html"
         else:
-            return 'base.html'
+            return "base.html"
 
 
 class RSTRawView(TemplateTitleView):
@@ -79,31 +79,31 @@ class RSTRawView(TemplateTitleView):
 
     """
 
-    template_name = 'rst/raw.html'
+    template_name = "rst/raw.html"
     file_path = None
     title = None
-    rst_settings = {'inject_ads': True}
+    rst_settings = {"inject_ads": True}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['content'] = open(self.file_path, 'r').read()
-        context['inject_ads'] = self.rst_settings['inject_ads']
+        context["content"] = open(self.file_path, "r").read()
+        context["inject_ads"] = self.rst_settings["inject_ads"]
         return context
 
 
 class RSTView(RSTRawView, RSTMixin):
-    template_name = 'rst/base.html'
+    template_name = "rst/base.html"
     file_path = None
     title = None
-    rst_settings = {'inject_ads': True}
+    rst_settings = {"inject_ads": True}
 
     @cached_property
     def raw_content(self):
-        return open(self.file_path, 'r').read()
+        return open(self.file_path, "r").read()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['content'] = self.content
-        context['sidebar'] = self.sidebar
+        context["content"] = self.content
+        context["sidebar"] = self.sidebar
 
         return context

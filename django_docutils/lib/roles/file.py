@@ -22,20 +22,20 @@ def file_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     classes = []
 
     # add .fa class since this isn't a link
-    classes.append('far')
+    classes.append("far")
 
-    if title.endswith('/'):
-        classes.append('fa-folder')
+    if title.endswith("/"):
+        classes.append("fa-folder")
     else:
-        classes.append('fa-file-alt')
+        classes.append("fa-file-alt")
         extension = os.path.splitext(title)[1]
         if extension:
-            classes.append(extension.lstrip('.'))
+            classes.append(extension.lstrip("."))
 
     sn = nodes.emphasis(title, title)
 
     # insert <span class="fa ..."> inside the <em>
-    sn.insert(0, nodes.inline('', '', classes=classes))
+    sn.insert(0, nodes.inline("", "", classes=classes))
     return [sn], []
 
 
@@ -50,15 +50,15 @@ def manifest_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     name = name.lower()
     title = utils.unescape(text)
 
-    classes = ['manifest']
+    classes = ["manifest"]
 
     # add .fa class since this isn't a link
-    classes.append('fa-file-alt far')
+    classes.append("fa-file-alt far")
 
     sn = nodes.emphasis(title, title)
 
     # insert <span class="fa ..."> inside the <em>
-    sn.insert(0, nodes.inline('', '', classes=classes))
+    sn.insert(0, nodes.inline("", "", classes=classes))
     return [sn], []
 
 
@@ -72,10 +72,10 @@ def exe_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     name = name.lower()
     title = utils.unescape(text)
 
-    classes = ['exe', 'fa']
+    classes = ["exe", "fa"]
 
     sn = nodes.emphasis(title, title)
 
     # insert <span class="fa ..."> inside the <em>
-    sn.insert(0, nodes.inline('', '', classes=classes))
+    sn.insert(0, nodes.inline("", "", classes=classes))
     return [sn], []

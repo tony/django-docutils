@@ -16,8 +16,8 @@ def _request_favicon(url):
     """Tries to download favicon from URL and checks if it's valid."""
     r = requests.get(url)
     r.raise_for_status()
-    if 'image' not in r.headers['Content-Type']:
-        raise BasedException('Not an image')
+    if "image" not in r.headers["Content-Type"]:
+        raise BasedException("Not an image")
     return r.content
 
 
@@ -44,7 +44,7 @@ def get_favicon(url):
                 return _request_favicon(favicon_url)
             except Exception as e:
                 logger.debug(
-                    'Could not retrieve {favicon_url}: \n{e}'.format(
+                    "Could not retrieve {favicon_url}: \n{e}".format(
                         favicon_url=favicon_url, e=e
                     )
                 )
@@ -52,12 +52,12 @@ def get_favicon(url):
     # Method 2: site root/favicon.ico
     try:
         parsed = urlparse(url)
-        parsed = parsed._replace(path='/favicon.ico')
+        parsed = parsed._replace(path="/favicon.ico")
         favicon_url = parsed.geturl()
         return _request_favicon(favicon_url)
     except Exception as e:
         logger.debug(
-            'Could not retrieve {favicon_url}.\n{e}'.format(
+            "Could not retrieve {favicon_url}.\n{e}".format(
                 favicon_url=favicon_url, e=e
             )
         )
@@ -71,8 +71,8 @@ Could not retrieve favicon for {url}. Both strategies failed
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     favicon = get_favicon(sys.argv[1])
-    file_ = open('/Users/me/favicon.ico', 'wb')
+    file_ = open("/Users/me/favicon.ico", "wb")
     file_.write(favicon)
     file_.close()

@@ -17,7 +17,7 @@ def wikipedia_role(name, rawtext, text, lineno, inliner, options={}, content=[])
     """
 
     def url_handler(target):
-        target = quote(target.replace(' ', '_'))
-        return f'https://en.wikipedia.org/wiki/{target}'
+        target = quote(target.replace(" ", "_"))
+        return f"https://en.wikipedia.org/wiki/{target}"
 
     return generic_url_role(name, text, url_handler)

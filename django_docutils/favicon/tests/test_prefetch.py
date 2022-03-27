@@ -35,22 +35,22 @@ Developing
 def test_yield_references():
     document = publish_doctree(TEST_RST_DOCUMENT)
     assert set(yield_references(document)) == {
-        'https://code.visualstudio.com/',
-        'https://atom.io/',
-        'http://vim.org',
-        'https://www.jetbrains.com/pycharm/',
+        "https://code.visualstudio.com/",
+        "https://atom.io/",
+        "http://vim.org",
+        "https://www.jetbrains.com/pycharm/",
     }
 
 
 def test_yield_references_patterns():
     document = publish_doctree(TEST_RST_DOCUMENT)
-    assert set(yield_references(document, url_pattern='atom')) == {'https://atom.io/'}
+    assert set(yield_references(document, url_pattern="atom")) == {"https://atom.io/"}
 
 
 @pytest.mark.django_db(transaction=True)
 def test_yield_page_doctrees(RSTPostPage):
-    RSTPostPage.objects.create(subtitle='lol', body=TEST_RST_DOCUMENT)
-    assert RSTPostPage.objects.filter(subtitle='lol').count()
+    RSTPostPage.objects.create(subtitle="lol", body=TEST_RST_DOCUMENT)
+    assert RSTPostPage.objects.filter(subtitle="lol").count()
 
     page_doctrees = list(yield_page_doctrees(RSTPostPage))
     assert len(page_doctrees)
@@ -62,9 +62,9 @@ def test_yield_page_doctrees(RSTPostPage):
 @pytest.mark.django_db(transaction=True)
 @responses.activate
 def test_prefetch_favicon_working():
-    url = 'http://vim.org'
-    favicon_url = f'{url}/images/favicon.ico'
-    favicon_content = b'lol'
+    url = "http://vim.org"
+    favicon_url = f"{url}/images/favicon.ico"
+    favicon_content = b"lol"
 
     responses.add(
         responses.GET,
@@ -73,7 +73,7 @@ def test_prefetch_favicon_working():
             favicon_url=favicon_url
         ),
         status=200,
-        content_type='text/html',
+        content_type="text/html",
     )
 
     responses.add(
@@ -81,7 +81,7 @@ def test_prefetch_favicon_working():
         favicon_url,
         body=favicon_content,
         status=200,
-        content_type='image/ico',
+        content_type="image/ico",
     )
 
     favicon, created = prefetch_favicon(url)
@@ -93,9 +93,9 @@ def test_prefetch_favicon_working():
 @responses.activate
 def test_prefetch_favicon_file_missing(monkeypatch):
     # case where the favicon is in ORM, but file not in storage
-    url = 'http://vim.org'
-    favicon_url = f'{url}/images/favicon.ico'
-    favicon_content = b'lol'
+    url = "http://vim.org"
+    favicon_url = f"{url}/images/favicon.ico"
+    favicon_content = b"lol"
 
     responses.add(
         responses.GET,
@@ -104,7 +104,7 @@ def test_prefetch_favicon_file_missing(monkeypatch):
             favicon_url=favicon_url
         ),
         status=200,
-        content_type='text/html',
+        content_type="text/html",
     )
 
     responses.add(
@@ -112,7 +112,7 @@ def test_prefetch_favicon_file_missing(monkeypatch):
         favicon_url,
         body=favicon_content,
         status=200,
-        content_type='image/ico',
+        content_type="image/ico",
     )
 
     def mock_file():
@@ -124,7 +124,7 @@ def test_prefetch_favicon_file_missing(monkeypatch):
 
     assert not prefetch_favicon(url)
     monkeypatch.setattr(
-        django_docutils.favicon.prefetch, 'is_favicon_stored', lambda fqdn: False
+        django_docutils.favicon.prefetch, "is_favicon_stored", lambda fqdn: False
     )
 
     favicon, created = prefetch_favicon(url)
@@ -135,35 +135,35 @@ def test_prefetch_favicon_file_missing(monkeypatch):
 @responses.activate
 def test_is_favicon_stored_file_missing(monkeypatch, Favicon):
     # case where the favicon is in ORM, but file not in storage
-    url = 'http://vim.org'
-    fqdn = 'vim.org'
+    url = "http://vim.org"
+    fqdn = "vim.org"
 
-    def mock_open(path, mode='r'):
+    def mock_open(path, mode="r"):
         raise FileNotFoundError
 
     favicon = Favicon.objects.create(
         domain=fqdn,
         favicon=SimpleUploadedFile(
-            name=f'{fqdn}.ico',
-            content=b'lol',
-            content_type='image/ico',
+            name=f"{fqdn}.ico",
+            content=b"lol",
+            content_type="image/ico",
         ),
     )
 
-    assert not prefetch_favicon(url), 'File should not redownload'
+    assert not prefetch_favicon(url), "File should not redownload"
 
-    monkeypatch.setattr(InMemoryFile, 'open', mock_open)
+    monkeypatch.setattr(InMemoryFile, "open", mock_open)
     with pytest.raises(FileNotFoundError):  # Assure monkeypatch
         favicon.favicon.file
 
     assert not is_favicon_stored(
         favicon.domain
-    ), 'favicon missing from storage should return False'
+    ), "favicon missing from storage should return False"
 
 
 @pytest.mark.django_db(transaction=True)
 @responses.activate
 def test_is_favicon_stored_favicon_not_in_db(monkeypatch):
     assert not is_favicon_stored(
-        'nonexistant_fqdn.com'
-    ), 'favicon missing from database should return False'
+        "nonexistant_fqdn.com"
+    ), "favicon missing from database should return False"

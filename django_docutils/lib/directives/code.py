@@ -46,8 +46,8 @@ from pygments.lexers.special import TextLexer
 
 #: Monkey patch Bash Session lexer to gobble up initial space after prompt
 BashSessionLexer._ps1rgx = re.compile(
-    r'^((?:(?:\[.*?\])|(?:\(\S+\))?(?:| |sh\S*?|\w+\S+[@:]\S+(?:\s+\S+)'
-    r'?|\[\S+[@:][^\n]+\].+))\s*[$#%] )(.*\n?)'
+    r"^((?:(?:\[.*?\])|(?:\(\S+\))?(?:| |sh\S*?|\w+\S+[@:]\S+(?:\s+\S+)"
+    r"?|\[\S+[@:][^\n]+\].+))\s*[$#%] )(.*\n?)"
 )
 
 # Options
@@ -57,7 +57,7 @@ BashSessionLexer._ps1rgx = re.compile(
 INLINESTYLES = False
 
 #: The default formatter
-DEFAULT = HtmlFormatter(cssclass='highlight code-block', noclasses=INLINESTYLES)
+DEFAULT = HtmlFormatter(cssclass="highlight code-block", noclasses=INLINESTYLES)
 
 #: Add name -> formatter pairs for every variant you want to use
 VARIANTS = {
@@ -86,5 +86,5 @@ class CodeBlock(Directive):
             lexer = TextLexer()
         # take an arbitrary option if more than one is given
         formatter = self.options and VARIANTS[list(self.options)[0]] or DEFAULT
-        parsed = highlight('\n'.join(self.content), lexer, formatter)
-        return [nodes.raw('', parsed, format='html')]
+        parsed = highlight("\n".join(self.content), lexer, formatter)
+        return [nodes.raw("", parsed, format="html")]

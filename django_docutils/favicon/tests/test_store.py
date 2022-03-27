@@ -7,11 +7,11 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 def test_stored_favicon(Favicon):
     favicon = Favicon()
 
-    favicon_content = b'imgcontent'
+    favicon_content = b"imgcontent"
 
-    favicon.domain = 'test.com'
+    favicon.domain = "test.com"
     favicon.favicon = SimpleUploadedFile(
-        name='test_image.jpg', content=favicon_content, content_type='image/ico'
+        name="test_image.jpg", content=favicon_content, content_type="image/ico"
     )
 
     favicon.save()

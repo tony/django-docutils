@@ -7,7 +7,7 @@ from django_docutils.lib.fixtures.publisher import publish_post
 
 @pytest.mark.django_db(transaction=True)
 def test_publish_post_from_source_file(tmpdir):
-    test_file = tmpdir.join('test.rst')
+    test_file = tmpdir.join("test.rst")
     test_file.write(
         """
 ===
@@ -35,7 +35,7 @@ def test_publish_post_explicitness():
     @todo parametrize this with message, source, results
     """
 
-    assert publish_post(source='') == {}
+    assert publish_post(source="") == {}
 
     # test with title
     assert (
@@ -46,7 +46,7 @@ Document title
 ==============
     """.strip()
         )
-        == {'title': 'Document title'}
+        == {"title": "Document title"}
     )
 
     # test with subtitle
@@ -61,7 +61,7 @@ Document subtitle
 -----------------
     """.strip()
         )
-        == {'title': 'Document title', 'pages': [{'subtitle': 'Document subtitle'}]}
+        == {"title": "Document title", "pages": [{"subtitle": "Document subtitle"}]}
     )
 
     # test with content
@@ -82,11 +82,11 @@ hi
     """.strip()
         )
         == {
-            'title': 'Document title',
-            'pages': [
+            "title": "Document title",
+            "pages": [
                 {
-                    'subtitle': 'Document subtitle',
-                    'body': """
+                    "subtitle": "Document subtitle",
+                    "body": """
 Content
 -------
 
@@ -114,11 +114,11 @@ hi1
     """.strip()
         )
         == {
-            'title': 'Document title',
-            'pages': [
+            "title": "Document title",
+            "pages": [
                 {
-                    'subtitle': 'Document subtitle',
-                    'body': """
+                    "subtitle": "Document subtitle",
+                    "body": """
 Content
 -------
 
@@ -149,13 +149,13 @@ hi2
     """.strip()
         )
         == {
-            'title': 'Document title',
-            'author': settings.ANONYMOUS_USER_NAME,
-            'slug_id': 'tEst',
-            'pages': [
+            "title": "Document title",
+            "author": settings.ANONYMOUS_USER_NAME,
+            "slug_id": "tEst",
+            "pages": [
                 {
-                    'subtitle': 'Document subtitle',
-                    'body': """
+                    "subtitle": "Document subtitle",
+                    "body": """
 Content
 -------
 
@@ -186,11 +186,11 @@ moo
     """.strip()
         )
         == {
-            'title': 'Overridden Title',
-            'pages': [
+            "title": "Overridden Title",
+            "pages": [
                 {
-                    'subtitle': 'Overridden Subtitle',
-                    'body': """
+                    "subtitle": "Overridden Subtitle",
+                    "body": """
 Content
 -------
 
@@ -222,12 +222,12 @@ hi
     """.strip()
         )
         == {
-            'title': 'Overridden Title',
-            'slug_id': 'tEst',
-            'pages': [
+            "title": "Overridden Title",
+            "slug_id": "tEst",
+            "pages": [
                 {
-                    'subtitle': 'Overridden Subtitle',
-                    'body': """
+                    "subtitle": "Overridden Subtitle",
+                    "body": """
 Content
 -------
 
@@ -241,8 +241,8 @@ hi""".strip(),
 def test_publish_post_defaults():
     # default value pass-through
     assert publish_post(
-        source='', defaults={'moo': 'moo', 'title': 'default title'}
-    ) == {'moo': 'moo', 'title': 'default title'}
+        source="", defaults={"moo": "moo", "title": "default title"}
+    ) == {"moo": "moo", "title": "default title"}
 
     # title and subtitle from doc override defaults
     assert (
@@ -255,12 +255,12 @@ Document title
 Document subtitle
 -----------------
     """.strip(),
-            defaults={'moo': 'moo'},
+            defaults={"moo": "moo"},
         )
         == {
-            'title': 'Document title',
-            'moo': 'moo',
-            'pages': [{'subtitle': 'Document subtitle'}],
+            "title": "Document title",
+            "moo": "moo",
+            "pages": [{"subtitle": "Document subtitle"}],
         }
     )
 
@@ -285,19 +285,19 @@ Content
 hi
     """.strip(),
             defaults={
-                'title': 'You should not',
-                'subtitle': 'See this',
-                'a_default_property': 'a_default_value',
+                "title": "You should not",
+                "subtitle": "See this",
+                "a_default_property": "a_default_value",
             },
         )
         == {
-            'title': 'Overridden Title',
-            'slug_id': 'tEst',
-            'a_default_property': 'a_default_value',
-            'pages': [
+            "title": "Overridden Title",
+            "slug_id": "tEst",
+            "a_default_property": "a_default_value",
+            "pages": [
                 {
-                    'subtitle': 'Overridden Subtitle',
-                    'body': """
+                    "subtitle": "Overridden Subtitle",
+                    "body": """
 Content
 -------
 
@@ -310,14 +310,14 @@ hi""".strip(),
 
 def test_publish_post_overrides():
     # default value pass-through
-    assert publish_post(source='', overrides={'moo': 'moo'}) == {'moo': 'moo'}
+    assert publish_post(source="", overrides={"moo": "moo"}) == {"moo": "moo"}
 
     # override defaults
     assert publish_post(
-        source='',
-        defaults={'moo': 'moo', 'title': 'default title'},
-        overrides={'moo': 'moo2'},
-    ) == {'moo': 'moo2', 'title': 'default title'}
+        source="",
+        defaults={"moo": "moo", "title": "default title"},
+        overrides={"moo": "moo2"},
+    ) == {"moo": "moo2", "title": "default title"}
 
     # override overrides doc title/subtitle
     assert (
@@ -330,9 +330,9 @@ Document title
 Document subtitle
 -----------------
     """.strip(),
-            overrides={'title': 'Over', 'subtitle': 'Written'},
+            overrides={"title": "Over", "subtitle": "Written"},
         )
-        == {'title': 'Over', 'pages': [{'subtitle': 'Written'}]}
+        == {"title": "Over", "pages": [{"subtitle": "Written"}]}
     )
 
     # overrides overrides docinfo
@@ -356,20 +356,20 @@ Content
 hi
     """.strip(),
             overrides={
-                'title': 'You should',
-                'subtitle': 'See this',
-                'slug_id': 'and this',
-                'a_default_property': 'a_default_value',
+                "title": "You should",
+                "subtitle": "See this",
+                "slug_id": "and this",
+                "a_default_property": "a_default_value",
             },
         )
         == {
-            'title': 'You should',
-            'slug_id': 'and this',
-            'a_default_property': 'a_default_value',
-            'pages': [
+            "title": "You should",
+            "slug_id": "and this",
+            "a_default_property": "a_default_value",
+            "pages": [
                 {
-                    'subtitle': 'See this',
-                    'body': """
+                    "subtitle": "See this",
+                    "body": """
 Content
 -------
 

@@ -38,13 +38,13 @@ class FaviconTransform(Transform):
 
         # first run, iterate through references, extract FQDN's, add to query
         for node in self.document.traverse(plain_references):
-            q.add(Q(domain__exact=tldextract.extract(node['refuri']).fqdn), Q.OR)
+            q.add(Q(domain__exact=tldextract.extract(node["refuri"]).fqdn), Q.OR)
 
         # pull all fqdn's with a favicon
         favicons = Favicon.objects.filter(q)
 
         for node in self.document.traverse(plain_references):
-            fqdn = tldextract.extract(node['refuri']).fqdn
+            fqdn = tldextract.extract(node["refuri"]).fqdn
             try:
                 favicon_url = next(  # Find favicon matching fqdn
                     (f.favicon.url for f in favicons if f.domain == fqdn), None
@@ -55,10 +55,10 @@ class FaviconTransform(Transform):
             if favicon_url:
                 nodecopy = node.deepcopy()
                 ico = icon(
-                    '',
-                    '',
-                    style=f'background-image: url({favicon_url})',
-                    classes=['ico'],
+                    "",
+                    "",
+                    style=f"background-image: url({favicon_url})",
+                    classes=["ico"],
                 )
                 nodecopy.insert(0, ico)
                 node.replace_self(nodecopy)
@@ -79,8 +79,8 @@ def plain_references(node):
     """
     if isinstance(node, nodes.reference):
         # skip nodes already with xref icon classes or no refuri
-        no_classes = 'classes' not in node or not node['classes']
-        has_refuri = 'refuri' in node
-        if no_classes and has_refuri and node['refuri'].startswith('http'):
+        no_classes = "classes" not in node or not node["classes"]
+        has_refuri = "refuri" in node
+        if no_classes and has_refuri and node["refuri"].startswith("http"):
             return True
     return False

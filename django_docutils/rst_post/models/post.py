@@ -44,31 +44,31 @@ def get_anonymous_user_instance(UserModel=None):
 
         UserModel = get_user_model()
     user, _ = UserModel.objects.get_or_create(
-        username=settings.ANONYMOUS_USER_NAME, email='noone@localhost'
+        username=settings.ANONYMOUS_USER_NAME, email="noone@localhost"
     )
     return user
 
 
 class RSTPostBase(dirtyfields.DirtyFieldsMixin, models.Model):
-    title = models.CharField(_('title'), max_length=255)
+    title = models.CharField(_("title"), max_length=255)
 
     slug_title = AutoSlugField(
-        _('slug'), populate_from='title', slugify_function=slugify
+        _("slug"), populate_from="title", slugify_function=slugify
     )
 
     slug_id = RandomSlugField(length=8, unique=True, editable=False)
-    author_name = models.CharField(_('Author name'), max_length=255)
+    author_name = models.CharField(_("Author name"), max_length=255)
     is_draft = models.BooleanField(default=False, editable=False, db_index=True)
-    created = CreationDateTimeField(_('created'))
-    modified = ModificationDateTimeField(_('modified'))
+    created = CreationDateTimeField(_("created"))
+    modified = ModificationDateTimeField(_("modified"))
 
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
         abstract = True
 
     def save(self, **kwargs):
         self.update_modified = kwargs.pop(
-            'update_modified', getattr(self, 'update_modified', True)
+            "update_modified", getattr(self, "update_modified", True)
         )
         super().save(**kwargs)
 
@@ -83,7 +83,7 @@ class RSTPostBase(dirtyfields.DirtyFieldsMixin, models.Model):
     def __str__(self):
         title = self.title
         if self.subtitle:
-            title += ': ' + self.subtitle
+            title += ": " + self.subtitle
         return title
 
     @classmethod

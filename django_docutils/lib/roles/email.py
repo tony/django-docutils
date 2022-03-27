@@ -15,6 +15,6 @@ def email_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
 
     def url_handler(target):
-        return f'mailto:{target}'
+        return f"mailto:{target}"
 
     return generic_url_role(name, text, url_handler)

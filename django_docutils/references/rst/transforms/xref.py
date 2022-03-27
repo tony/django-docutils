@@ -21,48 +21,48 @@ class XRefTransform(Transform):
 
         for node in self.document.traverse(pending_xref):
             contnode = node[0].deepcopy()
-            domain = 'std'
-            project, target = node['reftarget'].split(':', 1)
+            domain = "std"
+            project, target = node["reftarget"].split(":", 1)
 
             ref = next(
                 (
                     r
                     for r in references
-                    if r['target'] == target and r['project'] == project
+                    if r["target"] == target and r["project"] == project
                 ),
                 None,
             )
 
             if not ref:
-                ref = next((r for r in references if r['target'] == target), None)
+                ref = next((r for r in references if r["target"] == target), None)
 
             proj, version, uri, dispname = (
-                ref['project'],
-                ref['project_version'],
-                ref['uri'],
-                ref['display_name'],
+                ref["project"],
+                ref["project_version"],
+                ref["uri"],
+                ref["display_name"],
             )
 
             if not dispname:
-                dispname = '-'
-            if '://' not in uri and node.get('refdoc'):
+                dispname = "-"
+            if "://" not in uri and node.get("refdoc"):
                 # get correct path in case of subdirectories
-                uri = path.join(relative_path(node['refdoc'], '.'), uri)
+                uri = path.join(relative_path(node["refdoc"], "."), uri)
             newnode = nodes.reference(
-                '',
-                '',
+                "",
+                "",
                 internal=False,
                 refuri=uri,
-                reftitle=_('(in %s v%s)') % (proj, version),
+                reftitle=_("(in %s v%s)") % (proj, version),
             )
 
-            if node.get('refexplicit'):
+            if node.get("refexplicit"):
                 # use whatever title was given
                 newnode.append(contnode)
-            elif dispname == '-' or (domain == 'std' and node['reftype'] == 'keyword'):
+            elif dispname == "-" or (domain == "std" and node["reftype"] == "keyword"):
                 # use whatever title was given, but strip prefix
                 title = contnode.astext()
-                if project and title.startswith(project + ':'):
+                if project and title.startswith(project + ":"):
                     newnode.append(
                         contnode.__class__(
                             title[len(project) + 1 :], title[len(project) + 1 :]
@@ -75,9 +75,9 @@ class XRefTransform(Transform):
                 newnode.append(contnode.__class__(dispname, dispname))
 
             fa_classes = fa_classes_from_url(url=uri)
-            if fa_classes != '':
+            if fa_classes != "":
                 fa_tag = f'<em class="{fa_classes}"></em>'
-                newnode.insert(0, nodes.raw('', fa_tag, format='html'))
+                newnode.insert(0, nodes.raw("", fa_tag, format="html"))
 
             node.replace_self(newnode)
 

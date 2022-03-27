@@ -15,6 +15,6 @@ def pypi_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
 
     def url_handler(target):
-        return f'https://pypi.python.org/pypi/{target}'
+        return f"https://pypi.python.org/pypi/{target}"
 
     return generic_url_role(name, text, url_handler)

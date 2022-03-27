@@ -5,10 +5,10 @@ from django_docutils.references.intersphinx.load import load_mappings
 
 
 class Command(BaseCommand):
-    help = 'Installs / Updates growth rst file(s) in the database.'
+    help = "Installs / Updates growth rst file(s) in the database."
 
     def handle(self, **options):
-        self.using = options['database']
+        self.using = options["database"]
         with transaction.atomic(using=self.using):
             self.loaddata()
 
@@ -21,11 +21,11 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--database',
-            action='store',
-            dest='database',
+            "--database",
+            action="store",
+            dest="database",
             default=DEFAULT_DB_ALIAS,
-            help='Nominates a specific database to load fixtures into. '
+            help="Nominates a specific database to load fixtures into. "
             'Defaults to the "default" database.',
         )
 

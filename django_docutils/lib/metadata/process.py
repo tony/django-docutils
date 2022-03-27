@@ -47,8 +47,8 @@ def process_metadata(metadata):
     if not BASED_LIB_RST:
         return metadata
 
-    if 'metadata_processors' in BASED_LIB_RST:
-        for processor_str in BASED_LIB_RST['metadata_processors']:
+    if "metadata_processors" in BASED_LIB_RST:
+        for processor_str in BASED_LIB_RST["metadata_processors"]:
             processor_fn = import_string(processor_str)
             metadata = processor_fn(metadata)
 

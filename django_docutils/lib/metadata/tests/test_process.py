@@ -33,13 +33,13 @@ some content
     analyzed_metadata = process_metadata(raw_metadata.copy())
     assert set(raw_metadata.keys()) == set(analyzed_metadata.keys())
 
-    assert isinstance(analyzed_metadata['created'], datetime.date)
+    assert isinstance(analyzed_metadata["created"], datetime.date)
 
     assert process_metadata(raw_metadata) != {
-        'programming_languages': 'javascript',
-        'topics': 'webpack',
-        'created': '2017-07-30',
-        'author': 'tony',
+        "programming_languages": "javascript",
+        "topics": "webpack",
+        "created": "2017-07-30",
+        "author": "tony",
     }
 
 
@@ -71,12 +71,12 @@ some content
     analyzed_metadata = process_metadata(raw_metadata.copy())
     assert set(raw_metadata.keys()) == set(analyzed_metadata.keys())
 
-    created = analyzed_metadata['created']
+    created = analyzed_metadata["created"]
 
     assert isinstance(created, datetime.date)
     assert created.year == 2017
     assert created.month == 7
     assert created.day == 30
-    assert created.strftime('%I') == '02'
-    assert created.strftime('%p') == 'PM'
+    assert created.strftime("%I") == "02"
+    assert created.strftime("%p") == "PM"
     assert created.minute == 30

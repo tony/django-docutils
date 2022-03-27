@@ -33,9 +33,9 @@ hi
     # assert default behavior
     post = load_post_data(RSTPost, post_data)
 
-    assert post.title == 'Document title'
-    assert post.pages.first().subtitle == 'Document subtitle'
-    assert post.slug_id == 'tEst'
+    assert post.title == "Document title"
+    assert post.pages.first().subtitle == "Document subtitle"
+    assert post.slug_id == "tEst"
 
 
 @pytest.mark.django_db(transaction=True)
@@ -61,9 +61,9 @@ hi
 
     post_data = publish_post(sample_page_body)
 
-    assert post_data['created'].year == 2017
-    assert post_data['created'].month == 1
-    assert post_data['created'].day == 25
+    assert post_data["created"].year == 2017
+    assert post_data["created"].month == 1
+    assert post_data["created"].day == 25
 
     # assert default behavior
     post = load_post_data(RSTPost, post_data)
@@ -79,7 +79,7 @@ hi
     assert post.created.month == 1
     assert post.created.day == 25
 
-    now = datetime.datetime.now(pytz.timezone('UTC'))
+    now = datetime.datetime.now(pytz.timezone("UTC"))
 
     assert post.modified.year == now.year
     assert post.modified.month == now.month
@@ -88,7 +88,7 @@ hi
 
 @pytest.mark.django_db(transaction=True)
 def test_correct_slug_title_on_initial_and_reimport(RSTPost):
-    slug_title = 'my_brief_url'
+    slug_title = "my_brief_url"
     sample_page_body = """
 ==============
 Document title
@@ -112,7 +112,7 @@ hi
 
     post_data = publish_post(sample_page_body)
 
-    assert post_data['slug_title'] == slug_title
+    assert post_data["slug_title"] == slug_title
 
     # assert default behavior
     post = load_post_data(RSTPost, post_data)
@@ -150,12 +150,12 @@ hi
 
     # assert default behavior
     post = load_post_data(RSTPost, post_data)
-    assert post.slug_title == slugify(post_data['title'])
+    assert post.slug_title == slugify(post_data["title"])
 
     # simulate re-import with updated title
-    new_title = 'a new title yay'
+    new_title = "a new title yay"
     new_slug_title = slugify(new_title)
-    post_data['title'] = new_title
+    post_data["title"] = new_title
     post = load_post_data(RSTPost, post_data)
 
     assert post.slug_title == new_slug_title
@@ -168,11 +168,11 @@ def test_load_app_rst_fixtures_minimal(sample_app_config, RSTPost):
 
 @pytest.mark.django_db(transaction=True)
 def test_load_post_data_minimal(RSTPost):
-    pages = [{'body': 'moo', 'subtitle': 'my subtitle'}]
+    pages = [{"body": "moo", "subtitle": "my subtitle"}]
 
     post = load_post_data(
         RSTPost,
-        {'author': settings.ANONYMOUS_USER_NAME, 'slug_id': 'aFeuM8e', 'pages': pages},
+        {"author": settings.ANONYMOUS_USER_NAME, "slug_id": "aFeuM8e", "pages": pages},
     )
 
     assert isinstance(post, RSTPost)

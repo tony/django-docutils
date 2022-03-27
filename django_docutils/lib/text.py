@@ -3,8 +3,8 @@ import re
 from django.conf import settings
 from django.utils.module_loading import import_string
 
-_word_re = re.compile(r'\w+', re.UNICODE)
-_word_beginning_split_re = re.compile(r'([\s\(\{\[\<]+)', re.UNICODE)
+_word_re = re.compile(r"\w+", re.UNICODE)
+_word_beginning_split_re = re.compile(r"([\s\(\{\[\<]+)", re.UNICODE)
 
 
 def is_uncapitalized_word(value):
@@ -39,8 +39,8 @@ def is_uncapitalized_word(value):
     except AttributeError:
         return
 
-    if 'uncapitalized_word_filters' in config:
-        for filter_fn_str in config['uncapitalized_word_filters']:
+    if "uncapitalized_word_filters" in config:
+        for filter_fn_str in config["uncapitalized_word_filters"]:
             filter_ = import_string(filter_fn_str)
             if filter_(value):
                 return True
@@ -62,6 +62,6 @@ def smart_title(value):
     Django can still be capitalized, but it must already be like that.
     """
 
-    return ''.join(
+    return "".join(
         [smart_capfirst(item) for item in _word_beginning_split_re.split(value) if item]
     )

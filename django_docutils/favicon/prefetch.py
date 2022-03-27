@@ -23,10 +23,10 @@ def yield_references(document, url_pattern=None):
     nodes = document.traverse(plain_references)
     for node in nodes:
         if url_pattern:  # if --pattern entered
-            if url_pattern not in node['refuri']:
+            if url_pattern not in node["refuri"]:
                 continue
 
-        yield node['refuri']
+        yield node["refuri"]
 
 
 def prefetch_favicons(url_pattern=None, PostPage=None):
@@ -62,7 +62,7 @@ def is_favicon_stored(fqdn):
         try:
             if favicon.favicon.file:
                 logger.debug(
-                    '{} for {} already exists, skipping'.format(
+                    "{} for {} already exists, skipping".format(
                         favicon.favicon.file, fqdn
                     )
                 )
@@ -93,7 +93,7 @@ def prefetch_favicon(url, progress=None):
 
     # optional tqdm progress bar pass-in
     if progress:
-        progress.set_description(f'Downloading favicon {fqdn}')
+        progress.set_description(f"Downloading favicon {fqdn}")
 
     if is_favicon_stored(fqdn):  # don't redownload
         return
@@ -101,17 +101,17 @@ def prefetch_favicon(url, progress=None):
     try:
         favicon_content = get_favicon(url)
     except Exception as e:
-        logger.debug(f'Error occurred fetch icon for {fqdn}: {e}')
+        logger.debug(f"Error occurred fetch icon for {fqdn}: {e}")
         return
 
     return Favicon.objects.update_or_create(
         domain=fqdn,
         defaults={
-            'domain': fqdn,
-            'favicon': SimpleUploadedFile(
-                name=f'{fqdn}.ico',
+            "domain": fqdn,
+            "favicon": SimpleUploadedFile(
+                name=f"{fqdn}.ico",
                 content=favicon_content,
-                content_type='image/ico',
+                content_type="image/ico",
             ),
         },
     )

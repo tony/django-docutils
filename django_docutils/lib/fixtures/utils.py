@@ -35,7 +35,7 @@ def find_rst_files(path, absolute=False, recursive=False):
     """
     files = []
     for _root, dirname, filenames in os.walk(path):
-        for filename in fnmatch.filter(filenames, '*.rst'):
+        for filename in fnmatch.filter(filenames, "*.rst"):
             p = os.path.relpath(_root, path)
             if absolute:
                 files.append(os.path.normpath(os.path.join(path, p, filename)))
@@ -59,7 +59,7 @@ def find_app_configs_with_fixtures(has_rst_files=True):
     """
     app_configs = []
     for app_config in apps.get_app_configs():
-        app_dir = os.path.join(app_config.path, 'fixtures')
+        app_dir = os.path.join(app_config.path, "fixtures")
         if os.path.isdir(app_dir):
             if has_rst_files:
                 if len(find_rst_files(app_dir, recursive=True)) < 1:
@@ -76,7 +76,7 @@ def find_rst_files_in_app(app_config):
     :type app_config: :class:`django.apps.AppConfig`
     :returns: list of files relative to app's fixtures dir path
     """
-    fixtures_dir = os.path.join(app_config.path, 'fixtures')
+    fixtures_dir = os.path.join(app_config.path, "fixtures")
     return find_rst_files(fixtures_dir)
 
 
@@ -90,7 +90,7 @@ def split_page_data(post_data):
     a subtitle.
     """
     page_data = {}
-    for field in ['body', 'subtitle', 'draft']:
+    for field in ["body", "subtitle", "draft"]:
         try:
             page_data[field] = post_data.pop(field)
         except KeyError:  # handle corner case, no subtitle/body

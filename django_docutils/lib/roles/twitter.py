@@ -14,9 +14,9 @@ def twitter_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
 
     def url_handler(target):
-        if '@' in target:
-            target = target.replace('@', '')
+        if "@" in target:
+            target = target.replace("@", "")
 
-        return f'https://twitter.com/{target}'
+        return f"https://twitter.com/{target}"
 
     return generic_url_role(name, text, url_handler)

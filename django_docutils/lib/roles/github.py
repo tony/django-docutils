@@ -27,11 +27,11 @@ def github_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     """
 
     def url_handler(target):
-        if '#' in target:
-            user_n_repo, issue = target.split('#')
+        if "#" in target:
+            user_n_repo, issue = target.split("#")
             if issue.isnumeric():
-                return f'https://github.com/{user_n_repo}/issues/{issue}'
+                return f"https://github.com/{user_n_repo}/issues/{issue}"
 
-        return f'https://github.com/{target}'
+        return f"https://github.com/{target}"
 
     return generic_url_role(name, text, url_handler)

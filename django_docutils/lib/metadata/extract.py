@@ -28,7 +28,7 @@ def extract_metadata(document):
     output = {}
     for docinfo in document.traverse(nodes.docinfo):
         for element in docinfo.children:
-            if element.tagname == 'field':  # custom fields (e.g. summary)
+            if element.tagname == "field":  # custom fields (e.g. summary)
                 name_elem, body_elem = element.children
                 name = name_elem.astext()
                 value = body_elem.astext()
@@ -62,9 +62,9 @@ def extract_abstract(doctree, length=100):
 
     """
     paragraph_nodes = doctree.traverse(nodes.paragraph)
-    text = ''
+    text = ""
     for node in paragraph_nodes:
         text += node.astext()
-        if len(text.split(' ')) > 100:
+        if len(text.split(" ")) > 100:
             break
     return truncatewords(strip_tags(text), 100)

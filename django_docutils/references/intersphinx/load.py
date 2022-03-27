@@ -38,7 +38,7 @@ from .utils import InventoryFile
 Reference = get_reference_model()
 intersphinx_cache_limit = 5
 intersphinx_timeout = None
-INVENTORY_FILENAME = 'objects.inv'
+INVENTORY_FILENAME = "objects.inv"
 
 if False:
     # For type annotation
@@ -52,17 +52,17 @@ if False:
     Inventory = Dict[unicode, Dict[unicode, Tuple[unicode, unicode, unicode, unicode]]]
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/2/', None),
-    'django': (
-        'https://docs.djangoproject.com/en/1.11/',
-        'https://docs.djangoproject.com/en/1.11/_objects/',
+    "python": ("https://docs.python.org/2/", None),
+    "django": (
+        "https://docs.djangoproject.com/en/1.11/",
+        "https://docs.djangoproject.com/en/1.11/_objects/",
     ),
-    'flask': ('http://flask.pocoo.org/docs/', None),
-    'flask-sqlalchemy': ('http://flask-sqlalchemy.pocoo.org/2.2/', None),
-    'werkzeug': ('http://werkzeug.pocoo.org/docs/0.12/', None),
-    'jinja': ('http://jinja.pocoo.org/docs/dev', None),
-    'sqlalchemy': ('http://docs.sqlalchemy.org/en/latest/', None),
-    'uwsgi': ('https://uwsgi-docs.readthedocs.io/en/latest/', None),
+    "flask": ("http://flask.pocoo.org/docs/", None),
+    "flask-sqlalchemy": ("http://flask-sqlalchemy.pocoo.org/2.2/", None),
+    "werkzeug": ("http://werkzeug.pocoo.org/docs/0.12/", None),
+    "jinja": ("http://jinja.pocoo.org/docs/dev", None),
+    "sqlalchemy": ("http://docs.sqlalchemy.org/en/latest/", None),
+    "uwsgi": ("https://uwsgi-docs.readthedocs.io/en/latest/", None),
 }
 
 
@@ -73,7 +73,7 @@ class InventoryAdapter:
     def __init__(self, env):
         self.env = env
 
-        if not hasattr(env, 'intersphinx_cache'):
+        if not hasattr(env, "intersphinx_cache"):
             self.env.intersphinx_cache = {}
             self.env.intersphinx_inventory = {}
             self.env.intersphinx_named_inventory = {}
@@ -115,8 +115,8 @@ def _strip_basic_auth(url):
     """
     frags = list(urlsplit(url))
     # swap out "user[:pass]@hostname" for "hostname"
-    if '@' in frags[1]:
-        frags[1] = frags[1].split('@')[1]
+    if "@" in frags[1]:
+        frags[1] = frags[1].split("@")[1]
     return urlunsplit(frags)
 
 
@@ -170,9 +170,9 @@ def _get_safe_url(url):
     else:
         frags = list(parts)
         if parts.port:
-            frags[1] = f'{parts.username}@{parts.hostname}:{parts.port}'
+            frags[1] = f"{parts.username}@{parts.hostname}:{parts.port}"
         else:
-            frags[1] = f'{parts.username}@{parts.hostname}'
+            frags[1] = f"{parts.username}@{parts.hostname}"
 
         return urlunsplit(frags)
 
@@ -182,40 +182,40 @@ def fetch_inventory(uri, inv, srcdir=None, requests_config={}):  # NOQA: C901
     """Fetch, parse and return an intersphinx inventory file."""
     # both *uri* (base URI of the links to generate) and *inv* (actual
     # location of the inventory file) can be local or remote URIs
-    localuri = '://' not in uri
+    localuri = "://" not in uri
     if not localuri:
         # case: inv URI points to remote resource; strip any existing auth
         uri = _strip_basic_auth(uri)
     try:
-        if '://' in inv:
+        if "://" in inv:
             f = _read_from_url(inv, requests_config=requests_config)
         else:
-            f = open(path.join(srcdir, inv), 'rb')
+            f = open(path.join(srcdir, inv), "rb")
     except Exception as err:
         print(
-            'intersphinx inventory %r not fetchable due to %s: %s',
+            "intersphinx inventory %r not fetchable due to %s: %s",
             inv,
             err.__class__,
             err,
         )
         return
     try:
-        if hasattr(f, 'url'):
+        if hasattr(f, "url"):
             newinv = f.url  # type: ignore
             if inv != newinv:
-                print('intersphinx inventory has moved: %s -> %s', inv, newinv)
+                print("intersphinx inventory has moved: %s -> %s", inv, newinv)
 
-                if uri in (inv, path.dirname(inv), path.dirname(inv) + '/'):
+                if uri in (inv, path.dirname(inv), path.dirname(inv) + "/"):
                     uri = path.dirname(newinv)
         with f:
             try:
                 join = localuri and path.join or posixpath.join
                 invdata = InventoryFile.load(f, uri, join)
             except ValueError as exc:
-                raise ValueError('unknown or unsupported inventory version: %r' % exc)
+                raise ValueError("unknown or unsupported inventory version: %r" % exc)
     except Exception as err:
         print(
-            'intersphinx inventory %r not readable due to %s: %s',
+            "intersphinx inventory %r not readable due to %s: %s",
             inv,
             err.__class__.__name__,
             err,
@@ -237,7 +237,7 @@ def load_mappings():  # NOQA: C901
             # new format
             name, (uri, inv) = key, value  # type: ignore
             if not isinstance(name, str):
-                print('intersphinx identifier %r is not string. Ignored', name)
+                print("intersphinx identifier %r is not string. Ignored", name)
                 continue
         else:
             # old format, no name
@@ -256,7 +256,7 @@ def load_mappings():  # NOQA: C901
             # decide whether the inventory must be read: always read local
             # files; remote ones only if the cache time is expired
             safe_inv_url = _get_safe_url(inv)  # type: ignore
-            print('loading intersphinx inventory from %s...' % safe_inv_url)
+            print("loading intersphinx inventory from %s..." % safe_inv_url)
             invdata = fetch_inventory(uri, inv)
             if invdata:
                 inventories[uri] = (name, invdata)
@@ -288,7 +288,7 @@ def load_mappings():  # NOQA: C901
         for k, v in inventory_values.items():
             ok = (k, v) in record_values.items()
             if not ok:
-                print(f'item {k}, {v} not in records ({record_values})')
+                print(f"item {k}, {v} not in records ({record_values})")
                 return False
         return True
 
@@ -296,18 +296,18 @@ def load_mappings():  # NOQA: C901
     # merge them all into a big ass list
     for project, invdata in named_vals:
         for domain_and_type, invdata2 in invdata.items():
-            domain, type_ = domain_and_type.split(':')
+            domain, type_ = domain_and_type.split(":")
             for target, values in invdata2.items():
                 proj, version, uri, dispname = values
                 combined_inventory.append(
                     {
-                        'domain': domain,
-                        'type': type_,
-                        'project': project,
-                        'project_version': version,
-                        'target': target,
-                        'uri': uri,
-                        'display_name': dispname,
+                        "domain": domain,
+                        "type": type_,
+                        "project": project,
+                        "project_version": version,
+                        "target": target,
+                        "uri": uri,
+                        "display_name": dispname,
                     }
                 )
 
@@ -318,7 +318,7 @@ def load_mappings():  # NOQA: C901
             (
                 ref
                 for ref in references
-                if reference_is_match(ref, item, ['target', 'project', 'type'])
+                if reference_is_match(ref, item, ["target", "project", "type"])
             ),
             None,
         )
@@ -347,13 +347,13 @@ def load_mappings():  # NOQA: C901
         #     r.save()
         if not r:
             r = Reference(
-                domain=item['domain'],
-                type=item['type'],
-                project=item['project'],
-                project_version=item['project_version'],
-                target=item['target'],
-                uri=item['uri'],
-                display_name=item['display_name'],
+                domain=item["domain"],
+                type=item["type"],
+                project=item["project"],
+                project_version=item["project_version"],
+                target=item["target"],
+                uri=item["uri"],
+                display_name=item["display_name"],
             )
             to_insert.append(r)
 

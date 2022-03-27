@@ -12,6 +12,6 @@ def extract_dir_config(path):
     :returns: metadata from json file
     :rtype: dict
     """
-    config_file = os.path.join(path, 'manifest.json')
+    config_file = os.path.join(path, "manifest.json")
     config_dict = json.loads(open(config_file).read())
     return {k.lower(): v for k, v in config_dict.items()}

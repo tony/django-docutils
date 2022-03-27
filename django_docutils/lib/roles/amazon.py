@@ -43,17 +43,17 @@ def amazon_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
     def url_handler(target):
         try:
-            r = Reference.objects.get(project='amazon', target=target)
+            r = Reference.objects.get(project="amazon", target=target)
         except Reference.DoesNotExist:
             query = amzn.lookup(ItemId=target)
             url = query.offer_url
 
             access_token = settings.BITLY_ACCESS_TOKEN
             bitly = bitly_api.Connection(access_token=access_token)
-            url = bitly.shorten(url)['url']
+            url = bitly.shorten(url)["url"]
 
             r = Reference(
-                project='amazon',
+                project="amazon",
                 type=name,
                 target=target,
                 display_name=query.title,

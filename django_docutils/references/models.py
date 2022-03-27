@@ -74,32 +74,32 @@ class ReferenceBase(models.Model):
         max_length=255,
     )
     project = models.CharField(
-        _('Project, e.g. py3k, python, sqlalchemy'), max_length=255
+        _("Project, e.g. py3k, python, sqlalchemy"), max_length=255
     )
     project_version = models.CharField(
-        _('Version of project documentation'), max_length=255
+        _("Version of project documentation"), max_length=255
     )
-    target = models.CharField(_('Docutils/Sphinx target'), max_length=255)
-    uri = models.URLField(_('Link to reference'), max_length=255)
+    target = models.CharField(_("Docutils/Sphinx target"), max_length=255)
+    uri = models.URLField(_("Link to reference"), max_length=255)
     display_name = models.CharField(
-        _('Optional name for the reference item'), max_length=255, null=True
+        _("Optional name for the reference item"), max_length=255, null=True
     )
 
     @property
     def full_target(self):
-        return f'{self.project}:{self.target}'
+        return f"{self.project}:{self.target}"
 
     @property
     def full_reference(self):
         if self.domain:
-            return ':{}:{}:`{}:{}`'.format(
+            return ":{}:{}:`{}:{}`".format(
                 self.domain, self.type, self.project, self.full_target
             )
         else:
-            return f':{self.type}:`{self.target}`'
+            return f":{self.type}:`{self.target}`"
 
     class Meta:
-        unique_together = ('project', 'target', 'type')
+        unique_together = ("project", "target", "type")
         abstract = True
 
     def __str__(self):

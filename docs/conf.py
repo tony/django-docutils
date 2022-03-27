@@ -18,9 +18,9 @@ with open("../django_docutils/__about__.py") as fp:
     exec(fp.read(), about)
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.napoleon',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
     "sphinx_issues",
     "sphinx_click.ext",  # sphinx-click
@@ -32,21 +32,21 @@ extensions = [
 ]
 myst_enable_extensions = ["colon_fence", "substitution", "replacements"]
 
-issues_github_path = about['__github__'].replace('https://github.com/', '')
+issues_github_path = about["__github__"].replace("https://github.com/", "")
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
 
-master_doc = 'index'
+master_doc = "index"
 
-project = about['__title__']
-copyright = about['__copyright__']
+project = about["__title__"]
+copyright = about["__copyright__"]
 
-version = '%s' % ('.'.join(about['__version__'].split('.'))[:2])
-release = '%s' % (about['__version__'])
+version = "%s" % (".".join(about["__version__"].split("."))[:2])
+release = "%s" % (about["__version__"])
 
-exclude_patterns = ['_build']
+exclude_patterns = ["_build"]
 
 pygments_style = "monokai"
 pygments_dark_style = "monokai"
@@ -87,40 +87,40 @@ rediraffe_redirects = "redirects.txt"
 rediraffe_branch = "master~1"
 
 
-htmlhelp_basename = '%sdoc' % about['__title__']
+htmlhelp_basename = "%sdoc" % about["__title__"]
 
 latex_documents = [
     (
-        'index',
-        '{0}.tex'.format(about['__package_name__']),
-        '{0} Documentation'.format(about['__title__']),
-        about['__author__'],
-        'manual',
+        "index",
+        "{0}.tex".format(about["__package_name__"]),
+        "{0} Documentation".format(about["__title__"]),
+        about["__author__"],
+        "manual",
     ),
 ]
 
 man_pages = [
     (
-        'index',
-        about['__package_name__'],
-        '{0} Documentation'.format(about['__title__']),
-        about['__author__'],
+        "index",
+        about["__package_name__"],
+        "{0} Documentation".format(about["__title__"]),
+        about["__author__"],
         1,
     ),
 ]
 
 texinfo_documents = [
     (
-        'index',
-        '{0}'.format(about['__package_name__']),
-        '{0} Documentation'.format(about['__title__']),
-        about['__author__'],
-        about['__package_name__'],
-        about['__description__'],
-        'Miscellaneous',
+        "index",
+        "{0}".format(about["__package_name__"]),
+        "{0} Documentation".format(about["__title__"]),
+        about["__author__"],
+        about["__package_name__"],
+        about["__description__"],
+        "Miscellaneous",
     ),
 ]
 
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/', None),
+    "python": ("http://docs.python.org/", None),
 }

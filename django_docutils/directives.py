@@ -78,11 +78,11 @@ class CodeBlock(Directive):
             lexer = TextLexer()
         # take an arbitrary option if more than one is given
         formatter = self.options and VARIANTS[list(self.options)[0]] or DEFAULT
-        parsed = highlight(u'\n'.join(self.content), lexer, formatter)
-        return [nodes.raw('', parsed, format='html')]
+        parsed = highlight("\n".join(self.content), lexer, formatter)
+        return [nodes.raw("", parsed, format="html")]
 
 
-def register_pygments_directive(directive='code-block'):
+def register_pygments_directive(directive="code-block"):
     """Register pygments directive.
 
     Parameters

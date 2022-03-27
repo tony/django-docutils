@@ -60,12 +60,12 @@ def register_based_roles():
     if not BASED_LIB_RST:
         return
 
-    if 'roles' not in BASED_LIB_RST:
+    if "roles" not in BASED_LIB_RST:
         return
 
-    based_roles = BASED_LIB_RST['roles']
+    based_roles = BASED_LIB_RST["roles"]
 
-    local_roles = based_roles.get('local', None)
+    local_roles = based_roles.get("local", None)
 
     if local_roles:
         register_role_mapping(local_roles)
@@ -114,11 +114,11 @@ def register_role_mapping(role_mapping):
             #         'warn_dangling': True
             #     }
             # ),
-            if 'innernodeclass' in role_cb_kwargs and isinstance(
-                role_cb_kwargs['innernodeclass'], str
+            if "innernodeclass" in role_cb_kwargs and isinstance(
+                role_cb_kwargs["innernodeclass"], str
             ):
-                role_cb_kwargs['innernodeclass'] = import_string(
-                    role_cb_kwargs['innernodeclass']
+                role_cb_kwargs["innernodeclass"] = import_string(
+                    role_cb_kwargs["innernodeclass"]
                 )
 
         # Docutils roles accept a function or callable class as a callback
