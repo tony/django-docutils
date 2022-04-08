@@ -55,7 +55,7 @@ bitly-api-py3 = "*"
 [tool.poetry.dev-dependencies]
 ### Docs ###
 sphinx = "*" 
-furo = "^2022.2.23"
+furo = "^2022.4.7"
 sphinx-autobuild = "^2021.3.14"
 sphinx-autodoc-typehints = "~1.17.0"
 sphinx-click = "*"
