@@ -88,6 +88,7 @@ isort = "*"
 
 ### Lint ###
 flake8 = "*"
+mypy = "*"
 
 [tool.poetry.extras]
 favicon = ["tldextract", "tqdm"]
@@ -120,4 +121,4 @@ test = [
 ]
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
-lint = ["flake8"]
+lint = ["flake8", "mypy"]
