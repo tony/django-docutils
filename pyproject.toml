@@ -55,16 +55,16 @@ bitly-api-py3 = "*"
 [tool.poetry.dev-dependencies]
 ### Docs ###
 sphinx = "*"
-furo = "^2022.2.23"
-sphinx-autobuild = "^2021.3.14"
-sphinx-autodoc-typehints = "~1.17.0"
+furo = "*"
+sphinx-autobuild = "*"
+sphinx-autodoc-typehints = "*"
 sphinx-click = "*"
-sphinx-issues = "^3.0.0"
+sphinx-issues = "*"
 sphinx-inline-tabs = "*"
 sphinxext-opengraph = "*"
-sphinx-copybutton = "^0.5.0"
+sphinx-copybutton = "*"
 sphinxext-rediraffe = "*"
-myst_parser = "~0.17.0"
+myst_parser = "*"
 
 ### Testing ###
 pytest = "*"
