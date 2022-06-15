@@ -668,7 +668,7 @@ testing = ["django", "django-configurations (>=2.0)"]
 
 [[package]]
 name = "pytest-factoryboy"
-version = "2.4.0"
+version = "2.5.0"
 description = "Factory Boy support for pytest."
 category = "dev"
 optional = false
@@ -1581,8 +1581,8 @@ pytest-django = [
     {file = "pytest_django-4.5.2-py3-none-any.whl", hash = "sha256:c60834861933773109334fe5a53e83d1ef4828f2203a1d6a0fa9972f4f75ab3e"},
 ]
 pytest-factoryboy = [
-    {file = "pytest-factoryboy-2.4.0.tar.gz", hash = "sha256:1bc04f928487b51263a5b7a7695078b9165fd2d5160d88ea5ce5a797469fe89e"},
-    {file = "pytest_factoryboy-2.4.0-py3-none-any.whl", hash = "sha256:afeeaa94d1f6027b1bc59112f55ec918fe1e43859f7765e1188eb36fc1c3b393"},
+    {file = "pytest-factoryboy-2.5.0.tar.gz", hash = "sha256:8abcfe5396a2cadf0b2d6fc1ba607d05f191db915eac95733ab741cb30968a46"},
+    {file = "pytest_factoryboy-2.5.0-py3-none-any.whl", hash = "sha256:37c6b3a17689b197025260ad06047d0dd8ec54a70556995b22617e9df1fd8797"},
 ]
 pytest-mock = [
     {file = "pytest-mock-3.7.0.tar.gz", hash = "sha256:5112bd92cc9f186ee96e1a92efc84969ea494939c3aead39c50f421c4cc69534"},
