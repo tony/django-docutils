@@ -1,10 +1,15 @@
 import fnmatch
 import os
+import typing as t
 
 from django.apps import apps
+from django.apps.config import AppConfig
+
+if t.TYPE_CHECKING:
+    from django_docutils.rst_post.models import RSTPostBase
 
 
-def get_model_from_post_app(app_config):
+def get_model_from_post_app(app_config: AppConfig) -> t.Optional[t.Type["RSTPostBase"]]:
     """Return post model for app.
 
     :param app_config: Configuration for django app
@@ -18,8 +23,12 @@ def get_model_from_post_app(app_config):
         if issubclass(model, RSTPostBase):
             return model
 
+    return None
 
-def find_rst_files(path, absolute=False, recursive=False):
+
+def find_rst_files(
+    path: str, absolute: bool = False, recursive: bool = False
+) -> t.List[str]:
     """Find .rst files in directory.
 
     This is reused in dir-style projects.
@@ -46,7 +55,7 @@ def find_rst_files(path, absolute=False, recursive=False):
     return files
 
 
-def find_app_configs_with_fixtures(has_rst_files=True):
+def find_app_configs_with_fixtures(has_rst_files: bool = True) -> t.List[AppConfig]:
     """Return a list of apps with fixtures dir.
 
     In Django 1.11 fixture_dirs grabs a directory of all fixtures, in our
@@ -69,7 +78,7 @@ def find_app_configs_with_fixtures(has_rst_files=True):
     return app_configs
 
 
-def find_rst_files_in_app(app_config):
+def find_rst_files_in_app(app_config: AppConfig) -> t.List[str]:
     """Return fixtures reStructuredText files from fixtures dir for app.
 
     :param app_config: Configuration for django app
@@ -80,7 +89,9 @@ def find_rst_files_in_app(app_config):
     return find_rst_files(fixtures_dir)
 
 
-def split_page_data(post_data):
+def split_page_data(
+    post_data: t.Dict[str, t.Any]
+) -> t.Tuple[t.Dict[str, t.Any], t.Dict[str, t.Any]]:
     """Pluck the page data from the post data and return both.
 
     publish_post is pure and doesn't know what a post/page is.
