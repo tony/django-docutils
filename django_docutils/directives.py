@@ -1,13 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
-from docutils import nodes
-from docutils.parsers.rst import Directive, directives
-from pygments import highlight
-from pygments.formatters import HtmlFormatter
-from pygments.lexers import TextLexer, get_lexer_by_name
-
-# -*- coding: utf-8 -*-
 """
 The Pygments reStructuredText directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,6 +34,16 @@ Look at the `directive documentation`_ to get all the gory details.
 :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
 :license: BSD, see LICENSE for details.
 """
+import typing as t
+
+from docutils import nodes
+from docutils.parsers.rst import Directive, directives
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import TextLexer, get_lexer_by_name
+
+if t.TYPE_CHECKING:
+    from pygments.formatter import Formatter
 
 # Options
 # ~~~~~~~
@@ -55,7 +56,7 @@ INLINESTYLES = False
 DEFAULT = HtmlFormatter(noclasses=INLINESTYLES)
 
 #: Add name -> formatter pairs for every variant you want to use
-VARIANTS = {
+VARIANTS: t.Dict[str, t.Type["Formatter"]] = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
