@@ -27,7 +27,9 @@ def _check_root_page(cls: t.Type[models.Model]):
         else:  # check for the correct relation inside root_page
             # incase of model class import strings, e.g. 'MyPostPage'
             # instead of MyPostPage
+            assert root_page.related_model is not None
             related_model = resolve_relation(cls, root_page.related_model)
+            assert isinstance(related_model, models.base.ModelBase)
             if not issubclass(related_model, RSTPostPageBase):
                 return [
                     checks.Error(
