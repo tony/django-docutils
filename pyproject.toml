@@ -146,3 +146,7 @@ plugins = ["mypy_django_plugin.main"]
 
 [tool.django-stubs]
 django_settings_module = "tests.settings"
+
+[build-system]
+requires = ["poetry_core>=1.0.0", "poetry>=1.1.12"]
+build-backend = "poetry.core.masonry.api"
