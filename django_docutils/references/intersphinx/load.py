@@ -24,11 +24,11 @@ This works as follows:
 """
 import functools
 import posixpath
+import typing as t
 from os import path
+from urllib.parse import urlsplit, urlunsplit
 
 import requests
-from six import PY3
-from six.moves.urllib.parse import urlsplit, urlunsplit
 from tqdm import trange
 
 from django_docutils.references.models import get_reference_model
@@ -40,16 +40,14 @@ intersphinx_cache_limit = 5
 intersphinx_timeout = None
 INVENTORY_FILENAME = "objects.inv"
 
+if t.TYPE_CHECKING:
+    from sphinx.config import Config
+    from sphinx.util.typing import Inventory
+
 if False:
     # For type annotation
     from typing import IO, Any, Dict, List, Tuple, Union  # NOQA
 
-    from sphinx import Config, Sphinx
-
-    if PY3:
-        unicode = str
-
-    Inventory = Dict[unicode, Dict[unicode, Tuple[unicode, unicode, unicode, unicode]]]
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/2/", None),
@@ -79,18 +77,15 @@ class InventoryAdapter:
             self.env.intersphinx_named_inventory = {}
 
     @property
-    def cache(self):
-        # type: () -> Dict[unicode, Tuple[unicode, int, Inventory]]
+    def cache(self) -> t.Dict[str, t.Tuple[str, int, "Inventory"]]:
         return self.env.intersphinx_cache
 
     @property
-    def main_inventory(self):
-        # type: () -> Inventory
+    def main_inventory(self) -> "Inventory":
         return self.env.intersphinx_inventory
 
     @property
-    def named_inventory(self):
-        # type: () -> Dict[unicode, Inventory]
+    def named_inventory(self) -> t.Dict[str, "Inventory"]:
         return self.env.intersphinx_named_inventory
 
     def clear(self):
@@ -98,8 +93,7 @@ class InventoryAdapter:
         self.env.intersphinx_named_inventory.clear()
 
 
-def _strip_basic_auth(url):
-    # type: (unicode) -> unicode
+def _strip_basic_auth(url: str) -> str:
     """Returns *url* with basic auth credentials removed. Also returns the
     basic auth username and password if they're present in *url*.
 
@@ -120,8 +114,11 @@ def _strip_basic_auth(url):
     return urlunsplit(frags)
 
 
-def _read_from_url(url, requests_config={}, intersphinx_timeout=intersphinx_timeout):
-    # type: (unicode, Config) -> IO
+def _read_from_url(
+    url: str,
+    requests_config: t.Optional["Config"] = None,
+    intersphinx_timeout=intersphinx_timeout,
+) -> t.IO:
     """Reads data from *url* with an HTTP *GET*.
 
     This function supports fetching from resources which use basic HTTP auth as
@@ -151,8 +148,7 @@ def _read_from_url(url, requests_config={}, intersphinx_timeout=intersphinx_time
     return r.raw
 
 
-def _get_safe_url(url):
-    # type: (unicode) -> unicode
+def _get_safe_url(url: str) -> str:
     """Gets version of *url* with basic auth passwords obscured. This function
     returns results suitable for printing and logging.
 
@@ -177,8 +173,12 @@ def _get_safe_url(url):
         return urlunsplit(frags)
 
 
-def fetch_inventory(uri, inv, srcdir=None, requests_config={}):  # NOQA: C901
-    # type: (Sphinx, unicode, Any) -> Any
+def fetch_inventory(
+    uri: str,
+    inv: t.Any,
+    srcdir: t.Optional[str] = None,
+    requests_config: t.Optional["Config"] = None,
+) -> t.Any:  # NOQA: C901
     """Fetch, parse and return an intersphinx inventory file."""
     # both *uri* (base URI of the links to generate) and *inv* (actual
     # location of the inventory file) can be local or remote URIs
@@ -190,6 +190,7 @@ def fetch_inventory(uri, inv, srcdir=None, requests_config={}):  # NOQA: C901
         if "://" in inv:
             f = _read_from_url(inv, requests_config=requests_config)
         else:
+            assert srcdir is not None
             f = open(path.join(srcdir, inv), "rb")
     except Exception as err:
         print(
@@ -225,13 +226,12 @@ def fetch_inventory(uri, inv, srcdir=None, requests_config={}):  # NOQA: C901
 
 
 def load_mappings():  # NOQA: C901
-    # type: (Sphinx) -> None
     inventories = {}
     """Load all intersphinx mappings into the environment."""
     for key, value in intersphinx_mapping.items():
-        name = None  # type: unicode
-        uri = None  # type: unicode
-        inv = None  # type: Union[unicode, Tuple[unicode, ...]]
+        name: str = None
+        uri: str = None
+        inv: Inventory = None
 
         if isinstance(value, (list, tuple)):
             # new format

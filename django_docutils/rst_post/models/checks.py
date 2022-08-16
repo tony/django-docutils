@@ -7,7 +7,7 @@ from .post import RSTPostBase
 from .post_page import RSTPostPageBase
 
 
-def _check_root_page(cls):
+def _check_root_page(cls: models.Model):
     """System check for root_page field on PostBase models."""
     try:
         root_page = cls._meta.get_field("root_page")
