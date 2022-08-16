@@ -1,16 +1,19 @@
 import logging
+import typing as t
 
 from django.core.files.uploadedfile import SimpleUploadedFile
+from docutils import nodes
 
 from django_docutils.favicon.models import get_favicon_model
 from django_docutils.favicon.rst.transforms.favicon import plain_references
 from django_docutils.favicon.scrape import get_favicon
 
 logger = logging.getLogger(__name__)
+
 Favicon = get_favicon_model()
 
 
-def yield_references(document, url_pattern=None):
+def yield_references(document: nodes.document, url_pattern: t.Optional[str] = None):
     """Yield site pages in a docutils document format
 
     :param document:
@@ -18,13 +21,19 @@ def yield_references(document, url_pattern=None):
     :rtype: string
     :yields: Document of pages in side
     """
-    nodes = document.traverse(plain_references)
-    for node in nodes:
-        if url_pattern:  # if --pattern entered
-            if url_pattern not in node["refuri"]:
+    for node in document.traverse(plain_references):
+        if isinstance(node, nodes.reference):  # TODO: PEP 647 typeguard possible?
+
+            # if --pattern entered
+            if (
+                url_pattern
+                and node.hasattr("refuri")
+                and url_pattern not in node["refuri"]
+            ):
                 continue
 
-        yield node["refuri"]
+            if node.get("refuri"):
+                yield node["refuri"]
 
 
 def prefetch_favicons(url_pattern=None, PostPage=None):
