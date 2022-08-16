@@ -12,9 +12,8 @@ project_root = cwd.parent
 sys.path.insert(0, str(project_root))
 sys.path.insert(0, str(cwd / "_ext"))
 
-
 # package data
-about = {}
+about: t.Dict[str, str] = {}
 with open("../django_docutils/__about__.py") as fp:
     exec(fp.read(), about)
 
