@@ -86,11 +86,11 @@ class ReferenceBase(models.Model):
     )
 
     @property
-    def full_target(self):
+    def full_target(self) -> str:
         return f"{self.project}:{self.target}"
 
     @property
-    def full_reference(self):
+    def full_reference(self) -> str:
         if self.domain:
             return ":{}:{}:`{}:{}`".format(
                 self.domain, self.type, self.project, self.full_target
@@ -102,5 +102,5 @@ class ReferenceBase(models.Model):
         unique_together = ("project", "target", "type")
         abstract = True
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.full_reference
