@@ -24,7 +24,6 @@ The information for series-related data is in the "Series" key of the
 """
 import os
 
-from django.contrib.auth import get_user_model
 from django_slugify_processor.text import slugify
 
 from django_docutils.lib.fixtures.directory.extract import extract_dir_config
@@ -42,8 +41,6 @@ from django_docutils.lib.metadata.process import process_metadata
 from django_docutils.lib.settings import BASED_LIB_RST
 
 docutils_settings = BASED_LIB_RST.get("docutils", {})
-
-User = get_user_model()
 
 
 def split_m2m_metadata(metadata):
