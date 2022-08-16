@@ -1,20 +1,11 @@
 # Changelog
 
-## django-docutils 0.6.0 (2022-03-27)
-
-### Compatibility
-
-- Drop python 3.5 to 3.7 (minimum version python 3.8)
-- Minimum django version 3.0
+## django-docutils 0.7.x (unreleased)
 
 ### Development
 
 Infrastructure updates for static type checking and doctest examples.
 
-- CI:
-  - Fix CI variables
-  - Rename Publish Docs -> docs
-  - Fix poetry installation and caching
 - Update development packages (black, isort)
 - Add .tool-versions, .python-version
 - Run code through black w/o `--skip-string-normalization`
@@ -35,6 +26,19 @@ Infrastructure updates for static type checking and doctest examples.
 - CI: Remove `.pre-commit-config.yaml`, users should know enough to handle these
   things themselves, via #342
 
+## django-docutils 0.6.0 (2022-03-27)
+
+### Compatibility
+
+- Drop python 3.5 to 3.7 (minimum version python 3.8)
+- Minimum django version 3.0
+
+### Development
+
+- CI:
+  - Fix CI variables
+  - Rename Publish Docs -> docs
+  - Fix poetry installation and caching
 ### Documentation
 
 - Move theme to furo
