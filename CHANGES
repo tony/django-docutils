@@ -9,6 +9,8 @@
 
 ### Development
 
+Infrastructure updates for static type checking and doctest examples.
+
 - CI:
   - Fix CI variables
   - Rename Publish Docs -> docs
@@ -16,6 +18,22 @@
 - Update development packages (black, isort)
 - Add .tool-versions, .python-version
 - Run code through black w/o `--skip-string-normalization`
+
+- Initial [doctests] support added, via #342 
+
+  [doctests]: https://docs.python.org/3/library/doctest.html
+
+- Initial [mypy] validation, via #342 
+
+  [mypy]: https://github.com/python/mypy
+
+- CI (tests, docs): Improve caching of python dependencies via
+  `action/setup-python`'s v3/4's new poetry caching, via #342
+
+- CI (docs): Skip if no `PUBLISH` condition triggered, via #342
+
+- CI: Remove `.pre-commit-config.yaml`, users should know enough to handle these
+  things themselves, via #342
 
 ### Documentation
 
