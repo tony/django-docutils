@@ -163,7 +163,7 @@ BASED_ADS = {  # If injecting ads
 ## More information
 
 - Python 3.8+
-- Django 3.0+
+- Django 3.1+
 
 [![Docs](https://github.com/tony/django-docutils/workflows/docs/badge.svg)](https://github.com/tony/django-docutils/actions?query=workflow%3A%22Docs%22)
 [![Build Status](https://github.com/tony/django-docutils/workflows/tests/badge.svg)](https://github.com/tony/django-docutils/actions?query=workflow%3A%22tests%22)
