@@ -2,6 +2,7 @@
 # flake8: noqa E501
 import os
 import sys
+import typing as t
 from pathlib import Path
 
 # Get the project root dir, which is the parent dir of this
@@ -56,7 +57,8 @@ html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
 html_extra_path = ["manifest.json"]
 html_theme = "furo"
-html_theme_options = {
+html_theme_path: t.List[str] = []
+html_theme_options: t.Dict[str, t.Union[str, t.List[t.Dict[str, str]]]] = {
     "light_logo": "img/icons/logo.svg",
     "dark_logo": "img/icons/logo.svg",
     "footer_icons": [
