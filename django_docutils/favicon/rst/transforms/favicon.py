@@ -1,4 +1,3 @@
-import tldextract
 from django.db.models import Q
 from docutils import nodes
 from docutils.transforms import Transform
@@ -20,6 +19,8 @@ def resolve_favicon(url):
     :returns: Full Storage based favicon url path, or None
     :rtype: str|None
     """
+    import tldextract
+
     # e.g. forums.bbc.co.uk
     fqdn = tldextract.extract(url).fqdn
 
@@ -34,6 +35,8 @@ class FaviconTransform(Transform):
     default_priority = 20
 
     def apply(self):
+        import tldextract
+
         q = Q()
 
         # first run, iterate through references, extract FQDN's, add to query

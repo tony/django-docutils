@@ -1,8 +1,6 @@
 import logging
 
-import tldextract
 from django.core.files.uploadedfile import SimpleUploadedFile
-from tqdm import tqdm, trange
 
 from django_docutils.favicon.models import get_favicon_model
 from django_docutils.favicon.rst.transforms.favicon import plain_references
@@ -30,6 +28,8 @@ def yield_references(document, url_pattern=None):
 
 
 def prefetch_favicons(url_pattern=None, PostPage=None):
+    from tqdm import tqdm, trange
+
     # PostPage=get_postpage_models()[0]
     urls = []
     t = trange(PostPage.objects.count())
@@ -89,6 +89,8 @@ def prefetch_favicon(url, progress=None):
     :type url: str
     :rtype: (model, created date)|None
     """
+    import tldextract
+
     fqdn = tldextract.extract(url).fqdn
 
     # optional tqdm progress bar pass-in
