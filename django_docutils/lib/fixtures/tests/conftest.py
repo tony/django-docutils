@@ -4,23 +4,9 @@ import sys
 import py
 import pytest
 
-import factory
 from django.apps import apps
-from django.contrib.auth import get_user_model
-from pytest_factoryboy import register
 
 from django_docutils.favicon.tests.conftest import RSTPost, favicon_app  # NOQA
-
-
-class UserFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = get_user_model()
-
-    username = factory.Sequence(lambda n: "user%03d" % n)
-    password = factory.Sequence(lambda n: "pass%03d" % n)
-
-
-register(UserFactory)
 
 
 def create_bare_app(project_tmpdir, request, settings, app_name):

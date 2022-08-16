@@ -17,18 +17,17 @@ class Favicon(FaviconBase):
     pass
 
 
-class RSTPost(RSTPostBase):
+class RSTPost(RSTPostBase, models.Model):
     root_page = models.ForeignKey(
         "RSTPostPage", null=True, on_delete=models.SET_NULL, related_name="+"
     )
 
 
-class RSTPostSubclass(RSTPost):
+class RSTPostSubclass(RSTPost, models.Model):
     pass
 
 
-class RSTPostPage(RSTPostPageBase):
-
+class RSTPostPage(RSTPostPageBase, models.Model):
     post = models.ForeignKey(
         RSTPost, on_delete=models.CASCADE, related_name="pages", null=True
     )

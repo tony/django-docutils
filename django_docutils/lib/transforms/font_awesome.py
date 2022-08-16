@@ -1,4 +1,5 @@
 import re
+import typing as t
 
 from docutils import nodes, utils
 from docutils.transforms import Transform
@@ -12,15 +13,16 @@ permissible_nodes = [nodes.Text]
 def fa_classes_from_url(url: str) -> str:
     for url_pattern, classes in url_patterns.items():
         if re.match(url_pattern, url):
-
             return classes
 
     return ""
 
 
-def inject_font_awesome_to_ref_node(target: nodes.Node, url: str):
+def inject_font_awesome_to_ref_node(
+    target: nodes.TextElement, url: str
+) -> t.Optional[nodes.TextElement]:
     fa_classes = fa_classes_from_url(url=url)
-    if fa_classes != "":
+    if fa_classes != "" and len(target) > 0:
         fa_tag = f'<em class="{fa_classes}"></em>'
         title = utils.unescape(target[0])
         rn = nodes.reference("", "", internal=True, refuri=url)

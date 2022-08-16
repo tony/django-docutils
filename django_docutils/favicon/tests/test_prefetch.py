@@ -31,6 +31,8 @@ Developing
 .. _PyCharm: https://www.jetbrains.com/pycharm/
 """
 
+skip_or_deps = pytest.importorskip("tldextract") and pytest.importorskip("tqdm")
+
 
 def test_yield_references():
     document = publish_doctree(TEST_RST_DOCUMENT)

@@ -1,3 +1,5 @@
+import typing as t
+
 from django.core import checks
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
@@ -7,7 +9,7 @@ from .post import RSTPostBase
 from .post_page import RSTPostPageBase
 
 
-def _check_root_page(cls):
+def _check_root_page(cls: t.Type[models.Model]):
     """System check for root_page field on PostBase models."""
     try:
         root_page = cls._meta.get_field("root_page")
@@ -25,7 +27,9 @@ def _check_root_page(cls):
         else:  # check for the correct relation inside root_page
             # incase of model class import strings, e.g. 'MyPostPage'
             # instead of MyPostPage
+            assert root_page.related_model is not None
             related_model = resolve_relation(cls, root_page.related_model)
+            assert isinstance(related_model, models.base.ModelBase)
             if not issubclass(related_model, RSTPostPageBase):
                 return [
                     checks.Error(

@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import DEFAULT_DB_ALIAS, connections, transaction
 
@@ -6,8 +5,6 @@ from django_docutils.lib.directives import register_based_directives
 from django_docutils.lib.fixtures.load import load_app_rst_fixtures
 from django_docutils.lib.fixtures.utils import find_app_configs_with_fixtures
 from django_docutils.lib.roles import register_based_roles
-
-User = get_user_model()
 
 
 class Command(BaseCommand):

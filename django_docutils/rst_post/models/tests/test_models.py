@@ -4,7 +4,7 @@ from django.core import checks
 from django.db import models
 
 from django_docutils.favicon.tests.test_app.models import RSTPost, RSTPostSubclass
-from django_docutils.rst_post.models import (
+from django_docutils.rst_post.models import (  # type: ignore
     RSTPostBase,
     RSTPostPageBase,
     get_post_models,

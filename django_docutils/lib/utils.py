@@ -5,23 +5,22 @@ Some stuff is ported from sphinx:
 - explicit_title_re, ws_re, set_role_source_info, split_explicit_title
 """
 import re
+import typing as t
 
 from docutils import nodes
 
-if False:
-    from typing import Any, Tuple, Type, unicode  # NOQA
+if t.TYPE_CHECKING:
+    from typing import Any, Tuple, Type  # NOQA
 
     from docutils import nodes  # NOQA
-    from sphinx import Pattern
 
 # \x00 means the "<" was backslash-escaped (from sphinx)
 explicit_title_re = re.compile(r"^(.+?)\s*(?<!\x00)<(.*?)>$", re.DOTALL)
 
-ws_re = re.compile(r"\s+")  # type: Pattern
+ws_re: "re.Pattern" = re.compile(r"\s+")
 
 
-def split_explicit_title(text):
-    # type: (unicode) -> Tuple[bool, unicode, unicode]
+def split_explicit_title(text: str) -> t.Tuple[bool, str, str]:
     """Split role content into title and target, if given (from sphinx)."""
     match = explicit_title_re.match(text)  # type: ignore
     if match:
@@ -29,7 +28,7 @@ def split_explicit_title(text):
     return False, text, text
 
 
-def chop_after_docinfo(source):
+def chop_after_docinfo(source: str) -> str:
     """Return the source of a document after DocInfo metadata.
 
     :param source: Source of RST document
@@ -45,7 +44,7 @@ def chop_after_docinfo(source):
     return rest.strip()
 
 
-def chop_after_title(source):
+def chop_after_title(source: str) -> str:
     """Return the source of a document after DocInfo metadata.
 
     :param source: Source of RST document
@@ -61,7 +60,7 @@ def chop_after_title(source):
     return rest.strip()
 
 
-def chop_after_heading_smartly(source):
+def chop_after_heading_smartly(source: str) -> str:
     """Return the content after subtitle, or, if exists, docinfo.
 
     This is a universal chop that can be used whether a document has docinfo,
@@ -80,7 +79,7 @@ def chop_after_heading_smartly(source):
         return chop_after_title(source)
 
 
-def find_root_sections(document):
+def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None, None]:
     """Yield top level section nodes
 
     :param document: docutils document
@@ -88,12 +87,12 @@ def find_root_sections(document):
     :yields: upper level titles of document
     :rtype: :class:`docutils.nodes.Node`
     """
-    for node in document:
+    for node in document.findall():
         if isinstance(node, nodes.section):  # traverse root-level sections
             yield node
 
 
-def append_html_to_node(node, ad_code):
+def append_html_to_node(node: nodes.Element, ad_code, str) -> None:
     """Inject HTML in this node
 
     :param node: node of the section to find last paragraph of
@@ -109,3 +108,5 @@ def append_html_to_node(node, ad_code):
 
     node.append(html_node)
     node.replace_self(node)
+
+    return None

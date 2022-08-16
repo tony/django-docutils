@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import DEFAULT_DB_ALIAS, connections, transaction
 
-from django_docutils.lib.favicon.prefetch import prefetch_favicons
+from django_docutils.favicon.prefetch import prefetch_favicons
 
 from ...models import get_favicon_model
 
