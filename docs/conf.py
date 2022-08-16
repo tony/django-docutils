@@ -6,7 +6,7 @@ import typing as t
 from pathlib import Path
 
 # Get the project root dir, which is the parent dir of this
-cwd = Path.cwd()
+cwd = Path(__file__).parent
 project_root = cwd.parent
 
 sys.path.insert(0, str(project_root))
@@ -14,7 +14,7 @@ sys.path.insert(0, str(cwd / "_ext"))
 
 # package data
 about: t.Dict[str, str] = {}
-with open("../django_docutils/__about__.py") as fp:
+with open(project_root / "django_docutils" / "__about__.py") as fp:
     exec(fp.read(), about)
 
 extensions = [
