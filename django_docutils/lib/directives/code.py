@@ -33,8 +33,8 @@
     :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 """
-
 import re
+import typing as t
 
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
@@ -43,6 +43,10 @@ from pygments.formatters.html import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
 from pygments.lexers.shell import BashSessionLexer
 from pygments.lexers.special import TextLexer
+
+if t.TYPE_CHECKING:
+    from pygments.formatter import Formatter
+
 
 #: Monkey patch Bash Session lexer to gobble up initial space after prompt
 BashSessionLexer._ps1rgx = re.compile(
@@ -60,7 +64,7 @@ INLINESTYLES = False
 DEFAULT = HtmlFormatter(cssclass="highlight code-block", noclasses=INLINESTYLES)
 
 #: Add name -> formatter pairs for every variant you want to use
-VARIANTS = {
+VARIANTS: t.Dict[str, t.Type["Formatter"]] = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
