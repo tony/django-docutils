@@ -447,6 +447,7 @@ class AugeasLexer(RegexLexer):
 class SlashLanguageLexer(ExtendedRegexLexer):
     _nkw = r"(?=[^a-zA-Z_0-9])"
 
+    @staticmethod
     def move_state(new_state):
         return ("#pop", new_state)
 
