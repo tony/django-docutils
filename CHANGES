@@ -28,6 +28,8 @@ Infrastructure updates for static type checking and doctest examples.
 - CI: Remove `.pre-commit-config.yaml`, users should know enough to handle these
   things themselves, via #342
 
+- CI: Add codeql analysis step
+
 ## django-docutils 0.6.0 (2022-03-27)
 
 ### Compatibility
