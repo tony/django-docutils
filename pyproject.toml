@@ -90,6 +90,7 @@ isort = "*"
 ### Lint ###
 flake8 = "*"
 mypy = "*"
+django-stubs = "^1.12.0"
 
 [tool.poetry.extras]
 favicon = ["tldextract", "tqdm"]
@@ -122,4 +123,4 @@ test = [
 ]
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
-lint = ["flake8", "mypy"]
+lint = ["flake8", "mypy", "django-stubs"]

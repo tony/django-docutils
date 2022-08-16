@@ -245,6 +245,38 @@ Django = ">=2.2"
 test = ["django-extensions"]
 
 [[package]]
+name = "django-stubs"
+version = "1.12.0"
+description = "Mypy stubs for Django"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+django = "*"
+django-stubs-ext = ">=0.4.0"
+mypy = ">=0.930"
+tomli = "*"
+types-pytz = "*"
+types-PyYAML = "*"
+typing-extensions = "*"
+
+[package.extras]
+compatible-mypy = ["mypy (>=0.930,<0.970)"]
+
+[[package]]
+name = "django-stubs-ext"
+version = "0.5.0"
+description = "Monkey-patching and extensions for django-stubs"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = "*"
+typing-extensions = "*"
+
+[[package]]
 name = "docutils"
 version = "0.18.1"
 description = "Docutils -- Python Documentation Utilities"
@@ -1100,6 +1132,22 @@ slack = ["slack-sdk"]
 telegram = ["requests"]
 
 [[package]]
+name = "types-pytz"
+version = "2022.1.2"
+description = "Typing stubs for pytz"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-pyyaml"
+version = "6.0.11"
+description = "Typing stubs for PyYAML"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.3.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -1163,7 +1211,7 @@ test = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "5f7c97ceb9bb140a4852c45f5b3f2991e743fe3c9e9b3fa1694e25d025379b50"
+content-hash = "f8296e9d306feae61cb9ccba725cbb69f17628d9f21eb7ef0a2c91e764ffda97"
 
 [metadata.files]
 alabaster = [
@@ -1288,6 +1336,8 @@ django-slugify-processor = [
     {file = "django-slugify-processor-1.1.1.tar.gz", hash = "sha256:b284a4e7865ea2f0f9b41b8e02f6238780d23bdc75a13421ba74622371f03647"},
     {file = "django_slugify_processor-1.1.1-py3-none-any.whl", hash = "sha256:c683904f0afe5c625ceac62b58029d938292c10dd2ca4acb548fb8accfd72090"},
 ]
+django-stubs = []
+django-stubs-ext = []
 docutils = [
     {file = "docutils-0.18.1-py2.py3-none-any.whl", hash = "sha256:23010f129180089fbcd3bc08cfefccb3b890b0050e1ca00c867036e9d161b98c"},
     {file = "docutils-0.18.1.tar.gz", hash = "sha256:679987caf361a7539d76e584cbeddc311e3aee937877c87346f31debc63e9d06"},
@@ -1630,6 +1680,14 @@ tornado = [
 tqdm = [
     {file = "tqdm-4.64.0-py2.py3-none-any.whl", hash = "sha256:74a2cdefe14d11442cedf3ba4e21a3b84ff9a2dbdc6cfae2c34addb2a14a5ea6"},
     {file = "tqdm-4.64.0.tar.gz", hash = "sha256:40be55d30e200777a307a7585aee69e4eabb46b4ec6a4b4a5f2d9f11e7d5408d"},
+]
+types-pytz = [
+    {file = "types-pytz-2022.1.2.tar.gz", hash = "sha256:1a8b25c225c5e6bd8468aa9eb45ddd3b337f6716d4072ad0aa4ef1e41478eebc"},
+    {file = "types_pytz-2022.1.2-py3-none-any.whl", hash = "sha256:8aa9fd2af9dee5f5bd7221c6804c9addeafa7ebc0008f544d4ace02b066818a4"},
+]
+types-pyyaml = [
+    {file = "types-PyYAML-6.0.11.tar.gz", hash = "sha256:7f7da2fd11e9bc1e5e9eb3ea1be84f4849747017a59fc2eee0ea34ed1147c2e0"},
+    {file = "types_PyYAML-6.0.11-py3-none-any.whl", hash = "sha256:8f890028123607379c63550179ddaec4517dc751f4c527a52bb61934bf495989"},
 ]
 typing-extensions = []
 tzdata = [
