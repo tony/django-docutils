@@ -147,6 +147,19 @@ plugins = ["mypy_django_plugin.main"]
 [tool.django-stubs]
 django_settings_module = "tests.settings"
 
+[[tool.mypy.overrides]]
+module = [
+  "amazon.*",
+  "bitly_api.*",
+  "factory.*",
+  "inmemorystorage.*",
+  "randomslugfield.*",
+  "dirtyfields.*",
+  "django_extensions.*",
+  "django_slugify_processor.*"
+]
+ignore_missing_imports = true
+
 [build-system]
 requires = ["poetry_core>=1.0.0", "poetry>=1.1.12"]
 build-backend = "poetry.core.masonry.api"
