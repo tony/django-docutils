@@ -1,3 +1,5 @@
+import typing as t
+
 from django.core import checks
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
@@ -7,7 +9,7 @@ from .post import RSTPostBase
 from .post_page import RSTPostPageBase
 
 
-def _check_root_page(cls: models.Model):
+def _check_root_page(cls: t.Type[models.Model]):
     """System check for root_page field on PostBase models."""
     try:
         root_page = cls._meta.get_field("root_page")

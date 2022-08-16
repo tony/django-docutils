@@ -1,6 +1,5 @@
 from django import template
-from django.template.base import kwarg_re
-from django.template.defaulttags import Node
+from django.template.base import Node, kwarg_re
 from django.template.exceptions import TemplateSyntaxError
 
 from ..publisher import publish_html_from_source
