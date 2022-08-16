@@ -1,3 +1,5 @@
+import typing as t
+
 from docutils import nodes, utils
 
 from django_docutils.lib.utils import split_explicit_title, ws_re
@@ -5,8 +7,8 @@ from django_docutils.lib.utils import split_explicit_title, ws_re
 from .nodes import pending_xref
 from .utils import set_role_source_info
 
-if False:
-    from typing import Type, unicode  # NOQA
+if t.TYPE_CHECKING:
+    from sphinx.environment import BuildEnvironment
 
 
 class XRefRole:
@@ -34,18 +36,17 @@ class XRefRole:
     * Subclassing and overwriting `process_link()` and/or `result_nodes()`.
     """
 
-    nodeclass = pending_xref  # type: Type[nodes.Node]
-    innernodeclass = nodes.literal
+    nodeclass: t.Type[nodes.Element] = pending_xref
+    innernodeclass: t.Type[nodes.TextElement] = nodes.literal
 
     def __init__(
         self,
-        fix_parens=False,
-        lowercase=False,
-        nodeclass=None,
-        innernodeclass=None,
-        warn_dangling=False,
-    ):
-        # type: (bool, bool, Type[nodes.Node], Type[nodes.Node], bool) -> None
+        fix_parens: bool = False,
+        lowercase: bool = False,
+        nodeclass: t.Optional[t.Type[nodes.Element]] = None,
+        innernodeclass: t.Optional[t.Type[nodes.TextElement]] = None,
+        warn_dangling: bool = False,
+    ) -> None:
         self.fix_parens = fix_parens
         self.lowercase = lowercase
         self.warn_dangling = warn_dangling
@@ -54,7 +55,7 @@ class XRefRole:
         if innernodeclass is not None:
             self.innernodeclass = innernodeclass
 
-    def _fix_parens(self, env, has_explicit_title, title, target):
+    def _fix_parens(self, env, has_explicit_title, title, target) -> t.Tuple[str, str]:
         if not has_explicit_title:
             if title.endswith("()"):
                 # remove parentheses
@@ -77,7 +78,7 @@ class XRefRole:
         else:
             typ = typ.lower()
         if ":" not in typ:
-            domain, role = "", typ  # type: unicode, unicode
+            domain, role = "", typ  # type: str, str
             classes = ["xref", role]
         else:
             domain, role = typ.split(":", 1)
@@ -118,8 +119,14 @@ class XRefRole:
 
     # methods that can be overwritten
 
-    def process_link(self, env, refnode, has_explicit_title, title, target):
-        # type: (BuildEnvironment, nodes.reference, bool, unicode, unicode) -> Tuple[unicode, unicode]  # NOQA
+    def process_link(
+        self,
+        env: "BuildEnvironment",
+        refnode: nodes.Element,
+        has_explicit_title: bool,
+        title: str,
+        target: str,
+    ) -> t.Tuple[str, str]:
         """Called after parsing title and target text, and creating the
         reference node (given in *refnode*).  This method can alter the
         reference node and must return a new (or the same) ``(title, target)``
@@ -127,8 +134,13 @@ class XRefRole:
         """
         return title, ws_re.sub(" ", target)
 
-    def result_nodes(self, document, env, node, is_ref):
-        # type: (nodes.document, BuildEnvironment, nodes.Node, bool) -> Tuple[List[nodes.Node], List[nodes.Node]]  # NOQA
+    def result_nodes(
+        self,
+        document: nodes.document,
+        env: "BuildEnvironment",
+        node: nodes.Node,
+        is_ref: bool,
+    ) -> t.Tuple[t.List[nodes.Node], t.List[nodes.Node]]:
         """Called before returning the finished nodes.  *node* is the reference
         node if one was created (*is_ref* is then true), else the content node.
         This method can add other nodes and must return a ``(nodes, messages)``
@@ -138,8 +150,14 @@ class XRefRole:
 
 
 class PyXRefRole(XRefRole):
-    def process_link(self, env, refnode, has_explicit_title, title, target):
-        # type: (BuildEnvironment, nodes.Node, bool, unicode, unicode) -> Tuple[unicode, unicode]  # NOQA
+    def process_link(
+        self,
+        env: "BuildEnvironment",
+        refnode: nodes.Element,
+        has_explicit_title: bool,
+        title: str,
+        target: str,
+    ) -> t.Tuple[str, str]:
         # refnode['py:module'] = env.ref_context.get('py:module')
         # refnode['py:class'] = env.ref_context.get('py:class')
         if not has_explicit_title:
