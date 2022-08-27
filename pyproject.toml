@@ -60,7 +60,6 @@ furo = "*"
 sphinx-autobuild = "*"
 sphinx-autodoc-typehints = "*"
 sphinx-click = "*"
-sphinx-issues = "*"
 sphinx-inline-tabs = "*"
 sphinxext-opengraph = "*"
 sphinx-copybutton = "*"
@@ -106,7 +105,6 @@ intersphinx = ["tqdm"]
 # Development stuff
 docs = [
   "sphinx",
-  "sphinx-issues",
   "sphinx-click",
   "sphinx-autodoc-typehints",
   "sphinx-autobuild",
