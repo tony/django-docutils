@@ -4,6 +4,10 @@
 
 - _Add your latest changes from PRs here_
 
+### Development
+
+- Add [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) (#352)
+
 ### Documentation
 
 - Move CHANGES to sphinx-autoissues, #350
