@@ -368,6 +368,18 @@ sphinx = ">=4.0,<6.0"
 sphinx-basic-ng = "*"
 
 [[package]]
+name = "gp-libs"
+version = "0.0.1a9"
+description = "Internal utilities for projects following git-pull python package spec"
+category = "dev"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[package.dependencies]
+docutils = ">=0.18.0,<0.19.0"
+myst_parser = "*"
+
+[[package]]
 name = "idna"
 version = "3.3"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -1294,7 +1306,7 @@ test = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "c97033ad0878cdf00c4df23c9357f6e91dc8ee9433d9fb8ebde259b731aa2273"
+content-hash = "a6dff4b8b6239946a7cf522b0ab99d02bb1abe84718a6faf264db2c63f310a62"
 
 [metadata.files]
 alabaster = [
@@ -1490,6 +1502,10 @@ flake8-comprehensions = [
 furo = [
     {file = "furo-2022.6.21-py3-none-any.whl", hash = "sha256:061b68e323345e27fcba024cf33a1e77f3dfd8d9987410be822749a706e2add6"},
     {file = "furo-2022.6.21.tar.gz", hash = "sha256:9aa983b7488a4601d13113884bfb7254502c8729942e073a0acb87a5512af223"},
+]
+gp-libs = [
+    {file = "gp-libs-0.0.1a9.tar.gz", hash = "sha256:835608ba29220c4d77e7e3f5a9ae27368ac1eb4b43f0cd1e6cdec9c27e9a9e3a"},
+    {file = "gp_libs-0.0.1a9-py3-none-any.whl", hash = "sha256:2c055bd65f0880325a800775a2ee4c23dacc9eb8a56408fdb665a66da7d38ed3"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
