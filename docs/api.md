@@ -27,8 +27,12 @@
 ## Code block
 
 ```{eval-rst}
-.. autoclass:: django_docutils.directives.CodeBlock :members: :inherited-members: :private-members:
-:show-inheritance: :member-order: bysource
+.. autoclass:: django_docutils.directives.CodeBlock
+   :members:
+   :inherited-members:
+   :private-members:
+   :show-inheritance:
+   :member-order: bysource
 ```
 
 ## Exceptions

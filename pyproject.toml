@@ -57,6 +57,7 @@ bitly-api-py3 = "*"
 ### Docs ###
 sphinx = "*"
 furo = "*"
+gp-libs = "*"
 sphinx-autobuild = "*"
 sphinx-autodoc-typehints = "*"
 sphinx-click = "*"
@@ -64,7 +65,6 @@ sphinx-inline-tabs = "*"
 sphinxext-opengraph = "*"
 sphinx-copybutton = "*"
 sphinxext-rediraffe = "*"
-sphinx-autoissues = "*"
 myst_parser = "*"
 
 ### Testing ###
@@ -114,9 +114,9 @@ docs = [
   "sphinx-copybutton",
   "sphinxext-opengraph",
   "sphinx-inline-tabs",
-  "sphinx-autoissues",
   "myst_parser",
   "furo",
+  "gp-libs",
 ]
 test = [
   "pytest",
@@ -137,11 +137,11 @@ lint = [
   "mypy",
   "django-stubs",
   "types-docutils",
-  "types-pygments", 
+  "types-pygments",
   "types-six",
   "types-requests",
   "types-tqdm",
-  "lxml-stubs"
+  "lxml-stubs",
 ]
 
 [tool.mypy]
@@ -160,7 +160,7 @@ module = [
   "dirtyfields.*",
   "django_extensions.*",
   "django_slugify_processor.*",
-  "django_docutils.*"
+  "django_docutils.*",
 ]
 ignore_missing_imports = true
 
