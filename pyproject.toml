@@ -11,7 +11,7 @@ authors = [
 
 readme = "README.md"
 packages = [
-  { include = "django_docutils" },
+  { include = "*", from = "src" },
 ]
 classifiers = [
   'Development Status :: 2 - Pre-Alpha',
