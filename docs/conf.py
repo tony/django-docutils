@@ -93,6 +93,9 @@ html_sidebars = {
 # linkify_issues
 issue_url_tpl = "https://github.com/tony/django-docutils/issues/{issue_id}"
 
+# sphinx.ext.autodoc
+autodoc_mock_imports = ["django"]
+
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
 ogp_image = "_static/img/icons/icon-192x192.png"
