@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 # flake8: noqa E501
+import inspect
 import os
 import sys
 import typing as t
+from os.path import dirname, relpath
 from pathlib import Path
+
+import django_docutils
 
 # Get the project root dir, which is the parent dir of this
 cwd = Path(__file__).parent
@@ -21,6 +25,7 @@ with open(src_root / "django_docutils" / "__about__.py") as fp:
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.linkcode",
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
     "sphinx_click.ext",  # sphinx-click
@@ -150,3 +155,79 @@ texinfo_documents = [
 intersphinx_mapping = {
     "python": ("http://docs.python.org/", None),
 }
+
+
+def linkcode_resolve(
+    domain: str, info: t.Dict[str, str]
+) -> t.Union[None, str]:  # NOQA: C901
+    """
+    Determine the URL corresponding to Python object
+
+    Notes
+    -----
+    From https://github.com/numpy/numpy/blob/v1.15.1/doc/source/conf.py, 7c49cfa
+    on Jul 31. License BSD-3. https://github.com/numpy/numpy/blob/v1.15.1/LICENSE.txt
+    """
+    if domain != "py":
+        return None
+
+    modname = info["module"]
+    fullname = info["fullname"]
+
+    submod = sys.modules.get(modname)
+    if submod is None:
+        return None
+
+    obj = submod
+    for part in fullname.split("."):
+        try:
+            obj = getattr(obj, part)
+        except Exception:
+            return None
+
+    # strip decorators, which would resolve to the source of the decorator
+    # possibly an upstream bug in getsourcefile, bpo-1764286
+    try:
+        unwrap = inspect.unwrap
+    except AttributeError:
+        pass
+    else:
+        if callable(obj):
+            obj = unwrap(obj)
+
+    try:
+        fn = inspect.getsourcefile(obj)
+    except Exception:
+        fn = None
+    if not fn:
+        return None
+
+    try:
+        source, lineno = inspect.getsourcelines(obj)
+    except Exception:
+        lineno = None
+
+    if lineno:
+        linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
+    else:
+        linespec = ""
+
+    fn = relpath(fn, start=dirname(django_docutils.__file__))
+
+    if "dev" in about["__version__"]:
+        return "{}/blob/master/{}/{}/{}{}".format(
+            about["__github__"],
+            "src",
+            about["__package_name__"],
+            fn,
+            linespec,
+        )
+    else:
+        return "{}/blob/v{}/{}/{}/{}{}".format(
+            about["__github__"],
+            about["__version__"],
+            "src",
+            about["__package_name__"],
+            fn,
+            linespec,
+        )
