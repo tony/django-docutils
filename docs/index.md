@@ -9,7 +9,7 @@
 :hidden:
 
 quickstart
-api
+api/index
 ```
 
 ```{toctree}
@@ -19,5 +19,4 @@ api
 history
 contributing
 GitHub <https://github.com/tony/django-docutils>
-
 ```

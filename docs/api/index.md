@@ -8,9 +8,17 @@
 
 :::
 
-## Internals
+## Inside
 
-## Directives
+```{toctree}
+:maxdepth: 1
+
+lib/index
+```
+
+## Common
+
+### Directives
 
 ```{eval-rst}
 .. autofunction:: django_docutils.directives.register_pygments_directive
@@ -24,7 +32,7 @@
 .. autodata:: django_docutils.directives.VARIANTS
 ```
 
-## Code block
+### Code block
 
 ```{eval-rst}
 .. autoclass:: django_docutils.directives.CodeBlock
@@ -35,7 +43,7 @@
    :member-order: bysource
 ```
 
-## Exceptions
+### Exceptions
 
 ```{eval-rst}
 .. autoexception:: django_docutils.exc.BasedException
