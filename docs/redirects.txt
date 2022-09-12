@@ -1,1 +1,2 @@
 "usage.rst" "quickstart.md"
+"api.md" "api/index.md"
