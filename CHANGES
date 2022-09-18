@@ -4,6 +4,15 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.8.1 (unreleased)
+
+### Infrastructure
+
+- CI speedups (#361)
+
+  - Split out release to separate job so the PyPI Upload docker image isn't pulled on normal runs
+  - Clean up CodeQL
+
 ## django-docutils 0.8.0 (2022-09-11)
 
 ### Development
