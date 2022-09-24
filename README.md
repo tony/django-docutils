@@ -10,24 +10,6 @@ Install django-docutils:
 $ pip install django-docutils
 ```
 
-Favicons:
-
-```console
-$ pip install django-docutils[favicon]
-```
-
-intersphinx support:
-
-```console
-$ pip install django-docutils[intersphinx]
-```
-
-Both:
-
-```console
-$ pip install django-docutils[favicon,intersphinx]
-```
-
 ## Template filter
 
 If you want to use the template filter, add it to your `INSTALLED_APPS` in your settings file:

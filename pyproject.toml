@@ -43,8 +43,8 @@ Changes = "https://github.com/tony/django-docutils/blob/master/CHANGES"
 python = "^3.8"
 Django = ">=3.2"
 docutils = "*"
-tldextract = { version = "*", optional = true }
-tqdm = { version = "*", optional = true }
+tldextract = "*"
+tqdm = "*"
 pygments = "<3"
 django-extensions = "*"
 django-randomslugfield = "*"
@@ -101,9 +101,6 @@ types-tqdm = "^4.64.4"
 flake8-comprehensions = "^3.10.0"
 
 [tool.poetry.extras]
-favicon = ["tldextract", "tqdm"]
-intersphinx = ["tqdm"]
-
 # Development stuff
 docs = [
   "sphinx",

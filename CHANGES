@@ -4,7 +4,13 @@
 
 - _Add your latest changes from PRs here_
 
-## django-docutils 0.8.1 (unreleased)
+## django-docutils 0.9.0 (unreleased)
+
+### Breaking changes
+
+- `tqdm` and `tldextract` are not installed by default (#362)
+
+  This is for simplicity for the user (to note have to wrestle with sub-packages)
 
 ### Infrastructure
 
