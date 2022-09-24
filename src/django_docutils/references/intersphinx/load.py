@@ -29,7 +29,6 @@ from os import path
 from urllib.parse import urlsplit, urlunsplit
 
 import requests
-from tqdm import trange
 
 from django_docutils.references.models import get_reference_model
 
@@ -226,6 +225,8 @@ def fetch_inventory(
 
 
 def load_mappings():  # NOQA: C901
+    from tqdm import trange
+
     inventories = {}
     """Load all intersphinx mappings into the environment."""
     for key, value in intersphinx_mapping.items():
