@@ -17,7 +17,7 @@ def is_uncapitalized_word(value):
     imports. The filters accept one argument (the word). If you don't want the
     word/pattern capitalized, return True. Anything else capitalizes as normal.
 
-    How to create filters:;
+    How to create filters::
 
         def handle_uncapped_word(value):
             if value.startswith('django-'):
