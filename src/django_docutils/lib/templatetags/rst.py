@@ -26,7 +26,6 @@ class ReStructuredTextNode(Node):
         return publish_html_from_source(content, *args, **kwargs)
 
 
-@register.tag
 def restructuredtext(parser, token):
     """Parse raw reStructuredText into HTML. Supports keyword arguments!
 
@@ -72,3 +71,6 @@ def restructuredtext(parser, token):
             else:
                 args.append(parser.compile_filter(value))
     return ReStructuredTextNode(content, args, kwargs, asvar)
+
+
+register.tag("restructuredtext", restructuredtext)
