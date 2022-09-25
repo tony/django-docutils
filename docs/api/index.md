@@ -15,6 +15,7 @@
 
 lib/index
 favicon/index
+pygments/index
 directives
 engines
 exc
