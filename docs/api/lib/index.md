@@ -12,6 +12,7 @@ roles/index
 settings
 templatetags/index
 text
+transforms/index
 utils
 views
 writers
