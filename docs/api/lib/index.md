@@ -8,6 +8,7 @@
 directives/index
 fixtures/index
 publisher
+roles/index
 settings
 templatetags/index
 text
