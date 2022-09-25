@@ -23,15 +23,17 @@ def get_reference_model():
 
 class ReferenceBase(models.Model):
 
-    r"""Reference for targets, including the intersphinx network.
+    r"""Reference for targets, including the intersphinx network:
 
-    :py:mod:`py3k:module2`
-     |   |         |
-     |   |         ---- target
-     |   -- type          |
-     |-- domain      py3k:module2
-                       |    |
-             setname --|    |-- settarget
+    .. codeblock:: restructuredtext
+
+        :py:mod:`py3k:module2`
+         |   |         |
+         |   |         ---- target
+         |   -- type          |
+         |-- domain      py3k:module2
+                           |    |
+                 setname --|    |-- settarget
 
     An intersphinx collection can link to a "set", or a remote manifest of
     many references, such as in Python, Sphinx, or SQLAlchemy's documentation.
@@ -40,7 +42,7 @@ class ReferenceBase(models.Model):
     creates a manifest of targets project-wide. It collects these in an
     "inventory", which we namespace through : in the "target", e.g.
     "py3k:collections", where py3k is the namespace INTERSPHINX_MAPPING pointed
-    to python 3's documentation on the internet. e.g.:
+    to python 3's documentation on the internet. e.g.::
 
     intersphinx_mapping = {
         'https://docs.python.org/': inv_file,
