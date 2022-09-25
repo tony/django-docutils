@@ -5,9 +5,9 @@
 ```{toctree}
 :maxdepth: 1
 
+models
 intersphinx/index
 rst/index
-models
 ```
 
 ```{eval-rst}
