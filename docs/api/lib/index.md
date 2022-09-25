@@ -6,6 +6,7 @@
 :maxdepth: 1
 
 directives/index
+fixtures/index
 publisher
 settings
 templatetags/index
