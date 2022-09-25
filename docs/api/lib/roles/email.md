@@ -2,12 +2,6 @@
 
 # `lib.roles.email`
 
-```{toctree}
-:maxdepth: 1
-
-email
-```
-
 ```{eval-rst}
 .. automodule:: django_docutils.lib.roles.email
    :members:
