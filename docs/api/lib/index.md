@@ -7,6 +7,7 @@
 
 directives/index
 fixtures/index
+metadata/index
 publisher
 roles/index
 settings
