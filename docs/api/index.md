@@ -14,6 +14,7 @@
 :maxdepth: 1
 
 lib/index
+favicon/index
 directives
 engines
 exc
