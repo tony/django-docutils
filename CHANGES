@@ -4,6 +4,14 @@
 
 - _Add your latest changes from PRs here_
 
+### Packaging
+
+- Remove `MANIFEST.in`
+
+  poetry handles this via `include` in pyproject.toml
+
+- Remove `.readthedocs.yml`, unused as we self-host
+
 ## django-docutils 0.9.0 (2022-09-24)
 
 ### Breaking changes
