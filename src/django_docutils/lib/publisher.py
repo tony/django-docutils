@@ -143,7 +143,8 @@ def publish_html_from_doctree(
     :param pages: optional list of pages, if multi-page post
     :type pages: :class:`~django:django.db.models.query.QuerySet`
     :param current_page: current page (only applicable if pages)
-    :type current_page: :class:`django:django.db.models.Model
+    :type current_page: :class:`django:django.db.models.Model`
+
     """
 
     writer = BasedWriter()

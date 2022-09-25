@@ -15,13 +15,13 @@ def register_based_directives():
     settings to register to them.
 
     Why? Not all django projects want code highlighting (which requires
-    pygments). Let's use a TEMPLATES-style django config::
+    pygments). Let's use a TEMPLATES-style django config:
 
-    BASED_LIB_RST = {
-        'directives': {  #: directive-name: Directive class (import string)
-            'code-block': 'django_docutils.lib.directives.pygments.CodeBlock'
-        }
-    }
+    >>> BASED_LIB_RST = {
+    ...    'directives': {  #: directive-name: Directive class (import string)
+    ...        'code-block': 'django_docutils.lib.directives.pygments.CodeBlock'
+    ...    }
+    ... }
     """
     if not BASED_LIB_RST:
         return

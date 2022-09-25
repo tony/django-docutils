@@ -1,15 +1,15 @@
-(api_lib_directives)=
+(api_lib_templatetags)=
 
-# `lib.directives`
+# `lib.templatetags`
 
 ```{toctree}
 :maxdepth: 1
 
-code
+rst
 ```
 
 ```{eval-rst}
-.. automodule:: django_docutils.lib.directives
+.. automodule:: django_docutils.lib.templatetags
    :members:
    :private-members:
    :show-inheritance:

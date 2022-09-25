@@ -67,11 +67,14 @@ class BasedHTMLTranslator(HTMLTranslator):
 
     def visit_title(self, node):
         """Changes:
+
         - add backlinks for Contents refid headers
           since they are baked inside the Section (parent) of the anchor
           since we're using an ad-hoc contents transformation process
           that builds toc separately from the main content (see templatetags)
+
         - s/with-subtitle/subtitle for bulma css
+
         """
         close_tag = "</p>\n"
 
@@ -122,7 +125,7 @@ class BasedHTMLTranslator(HTMLTranslator):
         :param node: title node being visited
         :type node: :class:`docutils.nodes.title`
         :param close_tag: close tag (passed in from visit_title)
-        :type close_tag str
+        :type: close_tag str
         :rtype: str
         :returns: close_tag
         """
@@ -159,13 +162,13 @@ class BasedHTMLTranslator(HTMLTranslator):
 
 class BasedWriter(Writer):
 
-    """Based's hand-crafted docutils' writer::
+    """Based's hand-crafted docutils' writer:
 
-    BASED_LIB_RST = {
-        'transforms': [  #: docutils.transforms.Transform class (import string)
-            'django_docutils.lib.transforms.xref.XRefTransform'
-        ]
-    }
+    >>> BASED_LIB_RST = {
+    ...    'transforms': [  #: docutils.transforms.Transform class (import string)
+    ...        'django_docutils.lib.transforms.xref.XRefTransform'
+    ...    ]
+    ... }
     """
 
     def __init__(self):
