@@ -100,6 +100,13 @@ issue_url_tpl = "https://github.com/tony/django-docutils/issues/{issue_id}"
 # sphinx.ext.autodoc
 autodoc_mock_imports = ["django"]
 toc_object_entries_show_parents = "hide"
+autodoc_default_options = {
+    "undoc-members": True,
+    "members": True,
+    "private-members": True,
+    "show-inheritance": True,
+    "member-order": "bysource",
+}
 
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
