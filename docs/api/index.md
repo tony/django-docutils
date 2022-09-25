@@ -14,6 +14,11 @@
 :maxdepth: 1
 
 lib/index
+directives
+engines
+exc
+models
+views
 ```
 
 ## Common
