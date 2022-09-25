@@ -1,6 +1,0 @@
-include CHANGES
-include LICENSE
-include README.md
-include .tmuxp.yaml .tmuxp-before-script.sh
-recursive-include docs *.rst
-recursive-include django_docutils *.py
