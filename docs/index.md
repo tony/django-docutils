@@ -17,6 +17,5 @@ api/index
 :hidden:
 
 history
-contributing
 GitHub <https://github.com/tony/django-docutils>
 ```
