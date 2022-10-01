@@ -98,7 +98,7 @@ html_sidebars = {
 }
 
 # linkify_issues
-issue_url_tpl = "https://github.com/tony/django-docutils/issues/{issue_id}"
+issue_url_tpl = about["__github__"] + "/issues/{issue_id}"
 
 # sphinx.ext.autodoc
 autodoc_mock_imports = ["django"]
