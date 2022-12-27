@@ -26,7 +26,7 @@ jobs:
               - 'docs/**'
               - 'examples/**'
             python_files:
-              - 'django_docutils/**'
+              - 'src/django_docutils/**'
               - pyproject.toml
               - poetry.lock
 
