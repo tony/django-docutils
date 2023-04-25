@@ -563,14 +563,14 @@ doc = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-spelling"]
 
 [[package]]
 name = "faker"
-version = "18.4.0"
+version = "18.5.1"
 description = "Faker is a Python package that generates fake data for you."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "Faker-18.4.0-py3-none-any.whl", hash = "sha256:170ead9d0d140916168b142df69c44722b8f622ced2070802d0af9c476f0cb84"},
-    {file = "Faker-18.4.0.tar.gz", hash = "sha256:977ad0b7aa7a61ed57287d6a0723a827e9d3dd1f8cc82aaf08707f281b33bacc"},
+    {file = "Faker-18.5.1-py3-none-any.whl", hash = "sha256:137c6667583b0b458599b11305eed5a486e3932a14cb792b2b5b82ad1ad1a430"},
+    {file = "Faker-18.5.1.tar.gz", hash = "sha256:64e9ab619d75684cc0593aa9f336170b0b58fa77c07fc0ebc7b2b1258e53b67d"},
 ]
 
 [package.dependencies]
@@ -1517,14 +1517,14 @@ files = [
 
 [[package]]
 name = "sphinx"
-version = "6.2.0"
+version = "6.2.1"
 description = "Python documentation generator"
 category = "dev"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Sphinx-6.2.0.tar.gz", hash = "sha256:9ef22c2941bc3d0ff080d25a797f7521fc317e857395c712ddde97a19d5bb440"},
-    {file = "sphinx-6.2.0-py3-none-any.whl", hash = "sha256:ff1c2a1167bef9cdcd8ec71339e85fe10f26d4e9ef9382ef10b2687c876c936b"},
+    {file = "Sphinx-6.2.1.tar.gz", hash = "sha256:6d56a34697bb749ffa0152feafc4b19836c755d90a7c59b72bc7dfd371b9cc6b"},
+    {file = "sphinx-6.2.1-py3-none-any.whl", hash = "sha256:97787ff1fa3256a3eef9eda523a63dbf299f7b47e053cfcf684a1c2a8380c912"},
 ]
 
 [package.dependencies]
@@ -1647,14 +1647,14 @@ rtd = ["ipython", "myst-nb", "sphinx", "sphinx-book-theme", "sphinx-examples"]
 
 [[package]]
 name = "sphinx-inline-tabs"
-version = "2023.4.21"
+version = "2022.1.2b11"
 description = "Add inline tabbed content to your Sphinx documentation."
 category = "dev"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "sphinx_inline_tabs-2023.4.21-py3-none-any.whl", hash = "sha256:06809ac613f7c48ddd6e2fa588413e3fe92cff2397b56e2ccf0b0218f9ef6a78"},
-    {file = "sphinx_inline_tabs-2023.4.21.tar.gz", hash = "sha256:5df2f13f602c158f3f5f6c509e008aeada199a8c76d97ba3aa2822206683bebc"},
+    {file = "sphinx_inline_tabs-2022.1.2b11-py3-none-any.whl", hash = "sha256:bb4e807769ef52301a186d0678da719120b978a1af4fd62a1e9453684e962dbc"},
+    {file = "sphinx_inline_tabs-2022.1.2b11.tar.gz", hash = "sha256:afb9142772ec05ccb07f05d8181b518188fc55631b26ee803c694e812b3fdd73"},
 ]
 
 [package.dependencies]
@@ -2100,4 +2100,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "c7b96c7f6e860945a869a3bd5c3ab38d9a31791fbf74601e61db2596c5c8f8c2"
+content-hash = "44f0fbe91ea0a6c7fa309a4ac6f08e6fb80b3afc3d60d5f16b0d2e5c8afdca4d"
