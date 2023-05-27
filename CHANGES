@@ -4,6 +4,19 @@
 
 - _Add your latest changes from PRs here_
 
+_Maintenance only, no bug fixes or features_
+
+### Internal improvements
+
+- Move formatting, import sorting, and linting to [ruff].
+
+  This rust-based checker has dramatically improved performance. Linting and
+  formatting can be done almost instantly.
+
+  This change replaces black, isort, flake8 and flake8 plugins.
+
+[ruff]: https://ruff.rs
+
 ### Packaging
 
 - Remove `MANIFEST.in`
