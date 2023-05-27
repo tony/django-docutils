@@ -11,6 +11,9 @@
   poetry handles this via `include` in pyproject.toml
 
 - Remove `.readthedocs.yml`, unused as we self-host
+- poetry: 1.4.0 -> 1.5.0
+
+  See also: https://github.com/python-poetry/poetry/releases/tag/1.5.0
 
 ## django-docutils 0.9.0 (2022-09-24)
 
