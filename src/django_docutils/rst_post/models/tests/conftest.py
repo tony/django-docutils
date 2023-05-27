@@ -1,1 +1,1 @@
-from django_docutils.favicon.tests.conftest import *  # NOQA: F4
+from django_docutils.favicon.tests.conftest import *  # NOQA: F403
