@@ -84,6 +84,7 @@ coverage = "*"
 pytest-cov = "*"
 
 ### Lint ###
+black = "*"
 ruff = "*"
 mypy = "*"
 django-stubs = "*"
