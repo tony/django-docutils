@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-# flake8: noqa E501
+# flake8: noqa: E501
 import inspect
-import os
+import pathlib
 import sys
 import typing as t
 from os.path import dirname, relpath
-from pathlib import Path
 
 import django_docutils
 
@@ -13,7 +11,7 @@ if t.TYPE_CHECKING:
     from sphinx.application import Sphinx
 
 # Get the project root dir, which is the parent dir of this
-cwd = Path(__file__).parent
+cwd = pathlib.Path(__file__).parent
 project_root = cwd.parent
 src_root = project_root / "src"
 
@@ -22,7 +20,7 @@ sys.path.insert(0, str(cwd / "_ext"))
 
 # package data
 about: t.Dict[str, str] = {}
-with open(src_root / "django_docutils" / "__about__.py") as fp:
+with (src_root / "django_docutils" / "__about__.py").open() as fp:
     exec(fp.read(), about)
 
 extensions = [
@@ -249,7 +247,7 @@ def linkcode_resolve(
 def remove_tabs_js(app: "Sphinx", exc: Exception) -> None:
     # Fix for sphinx-inline-tabs#18
     if app.builder.format == "html" and not exc:
-        tabs_js = Path(app.builder.outdir) / "_static" / "tabs.js"
+        tabs_js = pathlib.Path(app.builder.outdir) / "_static" / "tabs.js"
         tabs_js.unlink(missing_ok=True)
 
 
