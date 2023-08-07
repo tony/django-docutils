@@ -1053,13 +1053,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pygments"
-version = "2.15.1"
+version = "2.16.1"
 description = "Pygments is a syntax highlighting package written in Python."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "Pygments-2.15.1-py3-none-any.whl", hash = "sha256:db2db3deb4b4179f399a09054b023b6a586b76499d36965813c71aa8ed7b5fd1"},
-    {file = "Pygments-2.15.1.tar.gz", hash = "sha256:8ace4d3c1dd481894b2005f560ead0f9f19ee64fe983366be1a21e171d12775c"},
+    {file = "Pygments-2.16.1-py3-none-any.whl", hash = "sha256:13fc09fa63bc8d8671a6d247e1eb303c4b343eaee81d861f3404db2935653692"},
+    {file = "Pygments-2.16.1.tar.gz", hash = "sha256:1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"},
 ]
 
 [package.extras]
@@ -1732,13 +1732,13 @@ files = [
 
 [[package]]
 name = "types-pygments"
-version = "2.15.0.2"
+version = "2.16.0.0"
 description = "Typing stubs for Pygments"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-Pygments-2.15.0.2.tar.gz", hash = "sha256:a1b56b792aa1015f6cecd092af00c71ecb12d9d5dd0a30313f9cb3839044389a"},
-    {file = "types_Pygments-2.15.0.2-py3-none-any.whl", hash = "sha256:60fc96777722942eafd4e7cd248568861aa8696246e3b1effcddabd51001a977"},
+    {file = "types-Pygments-2.16.0.0.tar.gz", hash = "sha256:aa93e4664e2d6cfea7570cde156e3966bf939f9c7d736cd179c4c8e94f7600b2"},
+    {file = "types_Pygments-2.16.0.0-py3-none-any.whl", hash = "sha256:4624a547d5ba73c971fac5d6fd327141e85e65f6123448bee76f0c8557652a71"},
 ]
 
 [package.dependencies]
