@@ -1,8 +1,10 @@
 # Changelog
 
-## django-docutils 0.10.x (unreleased)
+## django-docutils 0.11.x (unreleased)
 
 - _Add your latest changes from PRs here_
+
+## django-docutils 0.10.0 (2023-09-02)
 
 _Maintenance only, no bug fixes or features_
 
