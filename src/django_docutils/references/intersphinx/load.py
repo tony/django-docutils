@@ -209,7 +209,7 @@ def fetch_inventory(
                     uri = path.dirname(newinv)
         with f:
             try:
-                join = localuri and path.join or posixpath.join
+                join = localuri and path.join or posixpath.join  # type:ignore
                 invdata = InventoryFile.load(f, uri, join)
             except ValueError as exc:
                 raise ValueError("unknown or unsupported inventory version: %r" % exc)
@@ -230,9 +230,9 @@ def load_mappings():  # NOQA: C901
     inventories = {}
     """Load all intersphinx mappings into the environment."""
     for key, value in intersphinx_mapping.items():
-        name: str = None
-        uri: str = None
-        inv: Inventory = None
+        name: str = None  # type:ignore
+        uri: str = None  # type:ignore
+        inv: Inventory = None  # type:ignore
 
         if isinstance(value, (list, tuple)):
             # new format

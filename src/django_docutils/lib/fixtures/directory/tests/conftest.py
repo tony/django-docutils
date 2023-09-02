@@ -1,11 +1,11 @@
-import py
+import pathlib
 import pytest
 
 from django_docutils.lib.fixtures.tests.conftest import create_bare_app
 
 
 @pytest.fixture()
-def sample_dir_app_config(tmpdir_factory, request, settings):
+def sample_dir_app_config(tmp_path_factory, request, settings):
     """Return a Django AppConfig for a project with a directory-style
     fixture inside of it.
 
@@ -34,31 +34,38 @@ first section
 some content
 """.strip()
 
-    tmpdir = tmpdir_factory.mktemp("sample_dir_project")
+    tmp_path = tmp_path_factory.mktemp("sample_dir_project")
 
     sample_app = create_bare_app(
-        project_tmpdir=tmpdir,
+        project_tmp_path=tmp_path,
         request=request,
         settings=settings,
         app_name="sample_dir_app",
     )
 
-    sample_app_dir = py.path.local(sample_app.path)
+    sample_app_dir = pathlib.Path(sample_app.path)
 
-    sample_app_dir.join("__init__.py").write("")
+    (sample_app_dir / "__init__.py").write_text("")
 
     # give it a fixtures dir
-    fixtures_dir = sample_app_dir.ensure("fixtures", dir=True)
-    fixtures_dir.join("hi.rst").write("")
-    fixtures_dir.ensure("sample_project", dir=True)
-    fixtures_dir.join("sample_project").join("manifest.json").write(conf)
-    fixtures_dir.join("sample_project").join("README.rst").write(content)
+    fixtures_dir = sample_app_dir / "fixtures"
+
+    if not fixtures_dir.exists():
+        fixtures_dir.mkdir()
+    (fixtures_dir / "hi.rst").write_text("")
+
+    sample_project = fixtures_dir / "sample_project"
+    if not sample_project.exists():
+        sample_project.mkdir()
+
+    (sample_project / "manifest.json").write_text(conf)
+    (sample_project / "README.rst").write_text(content)
 
     return sample_app
 
 
 @pytest.fixture()
-def sample_dir_series_app_config(tmpdir_factory, request, settings):
+def sample_dir_series_app_config(tmp_path_factory, request, settings):
     """Returns a "multi-file" directory-style fixture.
 
     :rtype: :class:`django.apps.apps.AppConfig`
@@ -117,26 +124,30 @@ some content for page 3
 
     BASE_FOLDER = "sample_dir_series_project1"
 
-    tmpdir = tmpdir_factory.mktemp(BASE_FOLDER)
+    tmp_path = tmp_path_factory.mktemp(BASE_FOLDER)
 
-    sample_app = create_bare_app(tmpdir, request, settings, "sample_dir_series_app")
+    sample_app = create_bare_app(tmp_path, request, settings, "sample_dir_series_app")
 
-    sample_app_dir = py.path.local(sample_app.path)
+    sample_app_dir = pathlib.Path(sample_app.path)
 
-    sample_app_dir.join("__init__.py").write("")
+    (sample_app_dir / "__init__.py").write_text("")
 
     # give it a fixtures dir
-    fixtures_dir = sample_app_dir.ensure("fixtures", dir=True)
+    fixtures_dir = sample_app_dir / "fixtures"
+    if not fixtures_dir.exists():
+        fixtures_dir.mkdir()
 
     # the app's fixtures/ dir
-    fixtures_dir.join("hi.rst").write("")
-    fixtures_dir.mkdir(BASE_FOLDER)
+    (fixtures_dir / "hi.rst").write_text("")
+    base_folder = fixtures_dir / BASE_FOLDER
+
+    if not base_folder.exists():
+        base_folder.mkdir()
 
     # The RST project inside the app's fixtures dir
-    project_dir = fixtures_dir.join(BASE_FOLDER)
-    project_dir.join("manifest.json").write(conf)
-    project_dir.join("README.rst").write(content)
-    project_dir.join("page2.rst").write(content2)
-    project_dir.join("page3.rst").write(content3)
+    (base_folder / "manifest.json").write_text(conf)
+    (base_folder / "README.rst").write_text(content)
+    (base_folder / "page2.rst").write_text(content2)
+    (base_folder / "page3.rst").write_text(content3)
 
     return sample_app

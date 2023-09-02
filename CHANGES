@@ -15,6 +15,13 @@ _Maintenance only, no bug fixes or features_
 
   This change replaces isort, flake8 and flake8 plugins.
 
+- Tests: Remove reliance on [`py.local.path`](https://py.readthedocs.io/en/latest/path.html#py-path-local-local-file-system-path) (#369)
+
+  It has has been deprecated by pytest in favor of {class}`pathlib.Path` parts.
+- Remove some partial typings, in lieu of full typings in the future (#369)
+
+  This typings were unused and in some cases incorrect.
+
 [ruff]: https://ruff.rs
 
 ### Packaging
@@ -22,6 +29,7 @@ _Maintenance only, no bug fixes or features_
 - Add `pytz` required dependency
 
   Required, implicitly removed in newer django versions.
+
 - Remove `MANIFEST.in`
 
   poetry handles this via `include` in pyproject.toml

@@ -8,7 +8,6 @@ from django.views.generic.base import TemplateView
 
 
 class DocutilsResponse(TemplateResponse):
-
     template_name = "base.html"
 
     def __init__(

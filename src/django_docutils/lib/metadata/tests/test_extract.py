@@ -55,7 +55,7 @@ some content
     assert extract_subtitle(doctree) == "moo"
 
 
-def test_extract_metadata(tmpdir):
+def test_extract_metadata(tmp_path):
     docutils_settings = BASED_LIB_RST.get("docutils", {})
     content = """
 ===========

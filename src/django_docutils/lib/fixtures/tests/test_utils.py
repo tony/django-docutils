@@ -1,4 +1,4 @@
-import py
+import pathlib
 import pytest
 
 from django.apps import apps
@@ -13,23 +13,30 @@ from django_docutils.lib.fixtures.utils import (
 
 
 @pytest.fixture(scope="function")
-def bare_app_config_with_empty_fixture_dir(tmpdir_factory, request, settings):
-    tmpdir = tmpdir_factory.mktemp("bare_project")
+def bare_app_config_with_empty_fixture_dir(tmp_path_factory, request, settings):
+    tmp_path = tmp_path_factory.mktemp("bare_project")
 
-    app_config = create_bare_app(tmpdir, request, settings, "app_with_empty_fixtures")
-    sample_app_dir = py.path.local(app_config.path)
-    sample_app_dir.ensure("fixtures", dir=True)
+    app_config = create_bare_app(tmp_path, request, settings, "app_with_empty_fixtures")
+    sample_app_dir = pathlib.Path(app_config.path)
+    fixtures_dir = sample_app_dir / "fixtures"
+
+    if not fixtures_dir.exists():
+        fixtures_dir.mkdir()
     yield app_config
 
 
-def test_find_rst_files(tmpdir):
-    tmpdir.join("hi.rst").write("")
-    tmpdir.join("not_at_rst_file.html").write("")
-    tmpdir.mkdir("wat")
-    tmpdir.join("wat/moo.rst").write("")
-    tmpdir.join("wat/another.rst").write("")
+def test_find_rst_files(tmp_path):
+    (tmp_path / "hi.rst").write_text("")
+    (tmp_path / "not_at_rst_file.html").write_text("")
 
-    assert ["./hi.rst"] == find_rst_files(str(tmpdir))
+    other_dir = tmp_path / "other_dir"
+    if not other_dir.exists():
+        other_dir.mkdir()
+
+    (other_dir / "moo.rst").write_text("")
+    (other_dir / "another.rst").write_text("")
+
+    assert ["./hi.rst"] == find_rst_files(str(tmp_path))
 
 
 def test_find_app_configs_with_fixtures(sample_app_config):

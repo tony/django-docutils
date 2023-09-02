@@ -23,7 +23,6 @@ def yield_references(document: nodes.document, url_pattern: t.Optional[str] = No
     """
     for node in document.traverse(plain_references):
         if isinstance(node, nodes.reference):  # TODO: PEP 647 typeguard possible?
-
             # if --pattern entered
             if (
                 url_pattern
