@@ -27,7 +27,7 @@ def inject_font_awesome_to_ref_node(
         title = utils.unescape(target[0])
         rn = nodes.reference("", "", internal=True, refuri=url)
         rn += nodes.raw("", fa_tag, format="html")
-        rn += target[0].__class__(title, title)
+        rn += target[0].__class__(title, title)  # type:ignore
         return rn
     return None
 

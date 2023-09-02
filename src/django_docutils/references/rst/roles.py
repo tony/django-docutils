@@ -78,7 +78,7 @@ class XRefRole:
         else:
             typ = typ.lower()
         if ":" not in typ:
-            domain, role = "", typ  # type: str, str
+            domain, role = "", typ
             classes = ["xref", role]
         else:
             domain, role = typ.split(":", 1)
