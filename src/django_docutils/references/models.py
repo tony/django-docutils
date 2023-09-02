@@ -22,7 +22,6 @@ def get_reference_model():
 
 
 class ReferenceBase(models.Model):
-
     r"""Reference for targets, including the intersphinx network:
 
     .. codeblock:: restructuredtext

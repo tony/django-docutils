@@ -33,7 +33,6 @@ def inject_font_awesome_to_ref_node(
 
 
 class InjectFontAwesome(Transform):
-
     default_priority = 680
 
     def apply(self):

@@ -1,4 +1,4 @@
-import py
+import pathlib
 import pytest
 
 from django.apps import AppConfig
@@ -11,10 +11,12 @@ def test_load_app_rst_fixtures_bare(bare_app_config, RSTPost):
     """Verifies the fixture acts as expected."""
     assert isinstance(bare_app_config, AppConfig)
 
-    bare_app = py.path.local(bare_app_config.path)
-    fixtures_dir = bare_app.ensure("fixtures", dir=True)
-    test_file = fixtures_dir.join("test.rst")
-    test_file.write(
+    bare_app = pathlib.Path(bare_app_config.path)
+    fixtures_dir = bare_app / "fixtures"
+    if not fixtures_dir.exists():
+        fixtures_dir.mkdir()
+    test_file = fixtures_dir / "test.rst"
+    test_file.write_text(
         """
 ===
 moo

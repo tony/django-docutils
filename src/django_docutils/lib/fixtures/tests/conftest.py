@@ -1,7 +1,7 @@
+import pathlib
 import shutil
 import sys
 
-import py
 import pytest
 
 from django.apps import apps
@@ -9,15 +9,15 @@ from django.apps import apps
 from django_docutils.favicon.tests.conftest import RSTPost, favicon_app  # NOQA
 
 
-def create_bare_app(project_tmpdir, request, settings, app_name):
+def create_bare_app(project_tmp_path, request, settings, app_name):
     """Create a blank django project for PyTest that cleans out of scope.
 
     Intended for use inside of PyTest Fixtures.
 
-    :param project_tmpdir: root of the django project
+    :param project_tmp_path: root of the django project
 
        This cleans up automatically after the fixture falls out of scope.
-    :type project_tmpdir: :class:`py._path.local.LocalPath`
+    :type project_tmp_path: :class:`pathlib.Path`
     :param request: PyTest request object (dependency injected)
     :type request: :class:`pytest.fixtures.FixtureRequest`
     :param settings: django settings fixture (from pytest-django)
@@ -34,12 +34,14 @@ def create_bare_app(project_tmpdir, request, settings, app_name):
     :returns: a bare app config with temporary file structure created
     """
 
-    bare_app = project_tmpdir.mkdir(app_name)
+    bare_app = project_tmp_path / app_name
+    if not bare_app.exists():
+        bare_app.mkdir()
 
-    bare_app.join("__init__.py").write("")
+    (bare_app / "__init__.py").write_text("")
 
-    if project_tmpdir.strpath not in sys.path:
-        sys.path.append(project_tmpdir.strpath)
+    if str(project_tmp_path) not in sys.path:
+        sys.path.append(str(project_tmp_path))
     settings.INSTALLED_APPS = settings.INSTALLED_APPS + (app_name,)
 
     def resource_a_teardown():
@@ -58,7 +60,7 @@ def create_bare_app(project_tmpdir, request, settings, app_name):
 
 
 @pytest.fixture(scope="function")
-def bare_app_config(tmpdir_factory, request, settings):
+def bare_app_config(tmp_path_factory: pytest.TempPathFactory, request, settings):
     """Return a Django AppConfig for a blank project.
 
     It will automatically remove from INSTALLED_APPS and clean created
@@ -68,23 +70,26 @@ def bare_app_config(tmpdir_factory, request, settings):
     :returns: a bare app config with temporary file structure created
     """
 
-    tmpdir = tmpdir_factory.mktemp("bare_project")
+    tmp_path = tmp_path_factory.mktemp("bare_project")
 
-    return create_bare_app(tmpdir, request, settings, "bare_app")
+    return create_bare_app(tmp_path, request, settings, "bare_app")
 
 
 @pytest.fixture(scope="function")
-def sample_app_config(tmpdir_factory, request, settings):
-    tmpdir = tmpdir_factory.mktemp("sample_project")
+def sample_app_config(tmp_path_factory: pytest.TempPathFactory, request, settings):
+    tmp_path = tmp_path_factory.mktemp("sample_project")
 
-    sample_app = create_bare_app(tmpdir, request, settings, "sample_app")
+    sample_app = create_bare_app(tmp_path, request, settings, "sample_app")
 
-    sample_app_dir = py.path.local(sample_app.path)
+    sample_app_dir = pathlib.Path(sample_app.path)
 
     # give it a fixtures dir
-    fixtures_dir = sample_app_dir.ensure("fixtures", dir=True)
+    fixtures_dir = sample_app_dir / "fixtures"
 
-    fixtures_dir.join("hi.rst").write(
+    if not fixtures_dir.exists():
+        fixtures_dir.mkdir(parents=True)
+
+    (fixtures_dir / "hi.rst").write_text(
         """
 ===
 moo
@@ -96,9 +101,9 @@ moo
 foo
     """.strip()
     )
-    fixtures_dir.ensure("2017", dir=True)
-    fixtures_dir.join("2017").ensure("06", dir=True)
-    fixtures_dir.join("2017").join("06").ensure("04", dir=True)
-    fixtures_dir.join("2017").join("06").join("04").join("moo.rst").write("h")
+    deep_dir = fixtures_dir / "2017" / "06" / "04"
+    if not deep_dir.exists():
+        deep_dir.mkdir(parents=True)
+    (deep_dir / "moo.rst").write_text("h")
 
     return sample_app

@@ -6,9 +6,9 @@ from django_docutils.lib.fixtures.publisher import publish_post
 
 
 @pytest.mark.django_db(transaction=True)
-def test_publish_post_from_source_file(tmpdir):
-    test_file = tmpdir.join("test.rst")
-    test_file.write(
+def test_publish_post_from_source_file(tmp_path):
+    test_file = tmp_path / "test.rst"
+    test_file.write_text(
         """
 ===
 moo
