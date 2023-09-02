@@ -24,5 +24,5 @@ def test_dir_with_series(sample_dir_series_app_config):
     with pytest.raises(BasedException, match=r"Files in .*"):
         # test it with missing files
         missing_file_config = config.copy()
-        missing_file_config["series"].append("non-existant-file.rst")
+        missing_file_config["series"].append("non-existent-file.rst")
         find_series_files(missing_file_config, project_path)

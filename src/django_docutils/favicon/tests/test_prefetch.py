@@ -167,5 +167,5 @@ def test_is_favicon_stored_file_missing(monkeypatch, Favicon):
 @responses.activate
 def test_is_favicon_stored_favicon_not_in_db(monkeypatch):
     assert not is_favicon_stored(
-        "nonexistant_fqdn.com"
+        "nonexistent_fqdn.com"
     ), "favicon missing from database should return False"

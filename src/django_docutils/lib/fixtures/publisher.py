@@ -50,7 +50,7 @@ There are rules in which data takes precedence / cascades:
 3. docinfo (http://docutils.sourceforge.net/docs/ref/doctree.html#docinfo)
    is merged into the data.
 
-   If a title or subtitle is mentioned in it, it takes precendence over
+   If a title or subtitle is mentioned in it, it takes precedence over
    the documement node title/subtitle. For instance::
 
         =====

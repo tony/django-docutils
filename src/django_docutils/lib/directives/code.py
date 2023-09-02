@@ -70,7 +70,7 @@ VARIANTS: t.Dict[str, t.Type["Formatter"]] = {
 
 class CodeBlock(Directive):
 
-    """Source code syntax hightlighting."""
+    """Source code syntax highlighting."""
 
     required_arguments = 1
     optional_arguments = 0

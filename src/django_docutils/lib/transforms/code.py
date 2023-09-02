@@ -25,7 +25,7 @@ class InlineHtmlFormatter(HtmlFormatter):
         Now, AFTER this method, you're not out of the woods yet:
         _format_lines will still add a \n (which renders as a space again
         in the browser). For that, pass lineseparator='' into the
-        InlineHtmlFormatter class to supress that.
+        InlineHtmlFormatter class to suppress that.
 
         """
 

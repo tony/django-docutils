@@ -138,7 +138,7 @@ def publish_html_from_doctree(
     :type show_title: bool
     :param toc_only: special flag: return show TOC, used for sidebars
     :type toc_only: bool
-    :param ad_keywords: keywords to send to backend to serve targetted ads
+    :param ad_keywords: keywords to send to backend to serve targeted ads
     :type ad_keywords: list of strings
     :param pages: optional list of pages, if multi-page post
     :type pages: :class:`~django:django.db.models.query.QuerySet`
