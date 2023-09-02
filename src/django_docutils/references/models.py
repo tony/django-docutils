@@ -107,9 +107,7 @@ class ReferenceBase(models.Model):
     @property
     def full_reference(self) -> str:
         if self.domain:
-            return ":{}:{}:`{}:{}`".format(
-                self.domain, self.type, self.project, self.full_target
-            )
+            return f":{self.domain}:{self.type}:`{self.project}:{self.full_target}`"
         else:
             return f":{self.type}:`{self.target}`"
 

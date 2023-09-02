@@ -3,7 +3,7 @@ import os
 from docutils import nodes, utils
 
 
-def file_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def file_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for files.
 
     :file:`./path/to/moo` ->
@@ -13,6 +13,10 @@ def file_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
        text: ./path/to/moo/ (italicized + directory icon)
 
     """
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     name = name.lower()
     title = utils.unescape(text)
 
@@ -40,13 +44,17 @@ def file_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
 
 # TODO: Let font-awesome classes be configured via settings
-def manifest_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def manifest_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for manifests (package.json, file outputs)
 
     :manifest:`package.json` ->
        text: package.json (italicized + file icon)
 
     """
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     name = name.lower()
     title = utils.unescape(text)
 
@@ -62,13 +70,17 @@ def manifest_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     return [sn], []
 
 
-def exe_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def exe_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for executables.
 
     :exe:`./path/to/webpack` ->
        text: ./path/to/webpack (italicized + file icon)
 
     """
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     name = name.lower()
     title = utils.unescape(text)
 

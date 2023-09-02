@@ -50,14 +50,14 @@ def split_m2m_metadata(metadata):
     because they can't be placed into model w/o it being saved
     """
     m2m_metadata = {}
-    for k, v in metadata.items():
+    for k in metadata:
         if k in M2M_FIELDS:
             m2m_metadata[k] = metadata[k]
     metadata = {key: val for key, val in metadata.items() if key not in M2M_FIELDS}
     return m2m_metadata, metadata
 
 
-def load_post_data(model, metadata):  # NOQA: C901
+def load_post_data(model, metadata):
     """Fully load metadata and contents into objects (including m2m relations)
 
     :param model: Model class, any polymorphic sub-class of
@@ -85,9 +85,8 @@ def load_post_data(model, metadata):  # NOQA: C901
 
     # assure metadata fields stick with auto-generated fields
     for field in ["created", "modified", "slug_title"]:
-        if field in metadata:
-            if getattr(m, field) != metadata[field]:
-                setattr(m, field, metadata[field])
+        if field in metadata and getattr(m, field) != metadata[field]:
+            setattr(m, field, metadata[field])
 
     # assure slugs update if title different (if not manually overwridden)
     # todo, only run this if title changed

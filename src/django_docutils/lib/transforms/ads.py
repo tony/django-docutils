@@ -33,7 +33,7 @@ class InjectAds(Transform):
     ad_keywords = ["linux"]
 
     #: minimum amount of chars in a section to show and add
-    #: https://support.google.com/adsense/answer/1346295?hl=en#Ad_limit_per_page  # NOQA
+    #: https://support.google.com/adsense/answer/1346295?hl=en#Ad_limit_per_page
     ad_section_length_min = 1000
 
     #: minimum content on page to show an ad

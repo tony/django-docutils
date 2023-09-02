@@ -86,7 +86,7 @@ class RSTRawView(TemplateTitleView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["content"] = open(self.file_path, "r").read()
+        context["content"] = open(self.file_path).read()
         context["inject_ads"] = self.rst_settings["inject_ads"]
         return context
 
@@ -99,7 +99,7 @@ class RSTView(RSTRawView, RSTMixin):
 
     @cached_property
     def raw_content(self):
-        return open(self.file_path, "r").read()
+        return open(self.file_path).read()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

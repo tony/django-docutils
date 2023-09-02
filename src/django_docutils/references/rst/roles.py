@@ -71,8 +71,12 @@ class XRefRole:
             target = target[:-2]
         return title, target
 
-    def __call__(self, typ, rawtext, text, lineno, inliner, options={}, content=[]):
+    def __call__(self, typ, rawtext, text, lineno, inliner, options=None, content=None):
         # env = inliner.document.settings.env
+        if content is None:
+            content = []
+        if options is None:
+            options = {}
         env = {}
         if not typ:
             typ = env.temp_data.get("default_role")

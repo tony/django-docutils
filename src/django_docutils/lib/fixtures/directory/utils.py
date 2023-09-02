@@ -93,7 +93,7 @@ def find_rst_dir_projects(path):
     :rtype: list
     """
     paths = []
-    for _root, dirname, filenames in os.walk(path):
+    for _root, dirname, _filenames in os.walk(path):
         for dir_ in dirname:
             if is_dir_project(os.path.join(_root, dir_)):
                 paths.append(os.path.join(_root, dir_))

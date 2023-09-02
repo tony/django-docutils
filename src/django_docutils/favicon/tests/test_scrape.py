@@ -1,5 +1,4 @@
 import pytest
-
 import responses
 
 from django_docutils.exc import BasedException
@@ -34,9 +33,7 @@ def test_get_favicon_url_catches_shortcut_icon():
     responses.add(
         responses.GET,
         url,
-        body='<link rel="shortcut icon" href="{favicon_url}" />'.format(
-            favicon_url=favicon_url
-        ),
+        body=f'<link rel="shortcut icon" href="{favicon_url}" />',
         status=200,
         content_type="text/html",
     )
@@ -65,9 +62,7 @@ def test_get_favicon_url_falls_back_to_root_favicon_error_retrieve():
     responses.add(
         responses.GET,
         url,
-        body='<link rel="shortcut icon" href="{favicon_url}" />'.format(
-            favicon_url=favicon_url
-        ),
+        body=f'<link rel="shortcut icon" href="{favicon_url}" />',
         status=200,
         content_type="text/html",
     )

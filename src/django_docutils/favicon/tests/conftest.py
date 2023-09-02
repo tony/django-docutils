@@ -1,7 +1,6 @@
 # flake8: NOQA: F401
 
 import pytest
-
 from django.apps import apps
 
 
@@ -31,7 +30,7 @@ def favicon_app(settings, request):
     app_import_string = f"django_docutils.favicon.tests.{app_name}"
 
     if app_import_string not in settings.INSTALLED_APPS:
-        settings.INSTALLED_APPS = settings.INSTALLED_APPS + (app_import_string,)
+        settings.INSTALLED_APPS = (*settings.INSTALLED_APPS, app_import_string)
 
     def resource_a_teardown():
         print("\nresources_a_teardown()")

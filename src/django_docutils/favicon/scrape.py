@@ -44,9 +44,7 @@ def get_favicon(url):
                 return _request_favicon(favicon_url)
             except Exception as e:
                 logger.debug(
-                    "Could not retrieve {favicon_url}: \n{e}".format(
-                        favicon_url=favicon_url, e=e
-                    )
+                    f"Could not retrieve {favicon_url}: \n{e}"
                 )
 
     # Method 2: site root/favicon.ico
@@ -57,17 +55,13 @@ def get_favicon(url):
         return _request_favicon(favicon_url)
     except Exception as e:
         logger.debug(
-            "Could not retrieve {favicon_url}.\n{e}".format(
-                favicon_url=favicon_url, e=e
-            )
+            f"Could not retrieve {favicon_url}.\n{e}"
         )
 
     raise BasedException(
-        """
+        f"""
 Could not retrieve favicon for {url}. Both strategies failed
-        """.format(
-            url=url
-        )
+        """
     )
 
 

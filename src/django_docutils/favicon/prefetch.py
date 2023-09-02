@@ -70,9 +70,7 @@ def is_favicon_stored(fqdn):
         try:
             if favicon.favicon.file:
                 logger.debug(
-                    "{} for {} already exists, skipping".format(
-                        favicon.favicon.file, fqdn
-                    )
+                    f"{favicon.favicon.file} for {fqdn} already exists, skipping"
                 )
                 return True  # Favicon for fqdn + file already exists
         except FileNotFoundError:

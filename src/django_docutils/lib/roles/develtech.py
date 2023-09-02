@@ -4,7 +4,11 @@ from docutils import nodes, utils
 from ..utils import split_explicit_title
 
 
-def site_url_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def site_url_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     name = name.lower()
 
     has_explicit_title, title, target = split_explicit_title(text)
@@ -25,7 +29,11 @@ def site_url_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     return [rn], []
 
 
-def post_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def post_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     from django.apps import apps
 
     from django_docutils.lib.fixtures.utils import get_model_from_post_app

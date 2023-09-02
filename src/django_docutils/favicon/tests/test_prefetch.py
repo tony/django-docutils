@@ -1,5 +1,4 @@
 import pytest
-
 import responses
 from django.core.files.uploadedfile import SimpleUploadedFile
 from docutils.nodes import document
@@ -71,9 +70,7 @@ def test_prefetch_favicon_working():
     responses.add(
         responses.GET,
         url,
-        body='<link rel="shortcut icon" href="{favicon_url}" />'.format(
-            favicon_url=favicon_url
-        ),
+        body=f'<link rel="shortcut icon" href="{favicon_url}" />',
         status=200,
         content_type="text/html",
     )
@@ -102,9 +99,7 @@ def test_prefetch_favicon_file_missing(monkeypatch):
     responses.add(
         responses.GET,
         url,
-        body='<link rel="shortcut icon" href="{favicon_url}" />'.format(
-            favicon_url=favicon_url
-        ),
+        body=f'<link rel="shortcut icon" href="{favicon_url}" />',
         status=200,
         content_type="text/html",
     )

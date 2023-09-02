@@ -126,8 +126,8 @@ def publish_html_from_doctree(
     show_title=True,
     toc_only=False,
     inject_ads=False,
-    ad_keywords=[],
-    pages=[],
+    ad_keywords=None,
+    pages=None,
     current_page=None,
 ):
     """Return HTML from reStructuredText document (doctree).
@@ -147,6 +147,10 @@ def publish_html_from_doctree(
 
     """
 
+    if pages is None:
+        pages = []
+    if ad_keywords is None:
+        ad_keywords = []
     writer = BasedWriter()
 
     if inject_ads:

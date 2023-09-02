@@ -1,7 +1,7 @@
 from .common import generic_url_role
 
 
-def readthedocs_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def readthedocs_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to readthedocs.org page.
 
     :rtd:`django-pipeline` ->
@@ -21,12 +21,14 @@ def readthedocs_role(name, rawtext, text, lineno, inliner, options={}, content=[
        text: about virtalenvs
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         if ":" in target:
             project, path = target.split(":")
-            return "https://{project}.readthedocs.io/en/latest/{path}".format(
-                project=project, path=path
-            )
+            return f"https://{project}.readthedocs.io/en/latest/{path}"
         return f"https://{target}.readthedocs.io"
 
     return generic_url_role(name, text, url_handler)

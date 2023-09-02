@@ -1,7 +1,7 @@
 from .common import generic_url_role
 
 
-def twitter_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def twitter_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to twitter articles.
 
     :twitter:`@username` ->
@@ -13,6 +13,10 @@ def twitter_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
        text: follow on me on twitter
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         if "@" in target:
             target = target.replace("@", "")

@@ -31,9 +31,7 @@ class RSTPostPageBase(models.Model):
 
     def __str__(self):
         if self.subtitle:
-            return "{title}: {subtitle}".format(
-                title=self.post.title, subtitle=self.subtitle
-            )
+            return f"{self.post.title}: {self.subtitle}"
         return self.post.title
 
     @cached_property

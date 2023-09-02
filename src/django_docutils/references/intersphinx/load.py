@@ -184,7 +184,7 @@ def fetch_inventory(
     inv: t.Any,
     srcdir: t.Optional[str] = None,
     requests_config: t.Optional["Config"] = None,
-) -> t.Any:  # NOQA: C901
+) -> t.Any:
     """Fetch, parse and return an intersphinx inventory file."""
     # both *uri* (base URI of the links to generate) and *inv* (actual
     # location of the inventory file) can be local or remote URIs
@@ -231,7 +231,7 @@ def fetch_inventory(
         return invdata
 
 
-def load_mappings():  # NOQA: C901
+def load_mappings():
     from tqdm import trange
 
     inventories = {}

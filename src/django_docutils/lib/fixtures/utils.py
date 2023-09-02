@@ -43,7 +43,7 @@ def find_rst_files(
     :rtype: list
     """
     files = []
-    for _root, dirname, filenames in os.walk(path):
+    for _root, _dirname, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*.rst"):
             p = os.path.relpath(_root, path)
             if absolute:
@@ -70,9 +70,8 @@ def find_app_configs_with_fixtures(has_rst_files: bool = True) -> t.List[AppConf
     for app_config in apps.get_app_configs():
         app_dir = os.path.join(app_config.path, "fixtures")
         if os.path.isdir(app_dir):
-            if has_rst_files:
-                if len(find_rst_files(app_dir, recursive=True)) < 1:
-                    continue
+            if has_rst_files and len(find_rst_files(app_dir, recursive=True)) < 1:
+                continue
             app_configs.append(app_config)
 
     return app_configs

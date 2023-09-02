@@ -20,7 +20,7 @@ def get_client():
     )
 
 
-def amazon_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def amazon_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to amazon product.
 
     First, try to resolve via memoization (redis kv store).
@@ -39,6 +39,10 @@ def amazon_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
        link: amzn shortlink
        text: my book
     """
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     amzn = get_client()
 
     def url_handler(target):

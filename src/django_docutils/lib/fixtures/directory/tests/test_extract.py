@@ -1,6 +1,6 @@
 import datetime
-
 import pathlib
+
 from django_docutils.lib.fixtures.directory.extract import extract_dir_config
 from django_docutils.lib.metadata.process import process_metadata
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 import django
 from django.core.exceptions import ImproperlyConfigured
@@ -22,7 +21,7 @@ class DocutilsResponse(TemplateResponse):
         using=None,
     ):
         self.rst_name = rst
-        super(DocutilsResponse, self).__init__(
+        super().__init__(
             request, template, context, content_type, status, charset, using
         )
 
