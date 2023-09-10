@@ -1,3 +1,5 @@
+# ruff: noqa: PTH112 PTH118
+import contextlib
 import fnmatch
 import os
 import typing as t
@@ -101,8 +103,6 @@ def split_page_data(
     """
     page_data = {}
     for field in ["body", "subtitle", "draft"]:
-        try:
+        with contextlib.suppress(KeyError):
             page_data[field] = post_data.pop(field)
-        except KeyError:  # handle corner case, no subtitle/body
-            pass
     return post_data, page_data
