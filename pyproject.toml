@@ -86,7 +86,6 @@ types-docutils = "*"
 types-Pygments = "*"
 types-requests = "*"
 types-six = "*"
-lxml-stubs = "*"
 
 [tool.poetry.extras]
 # Development stuff
@@ -121,7 +120,6 @@ lint = [
   "types-pygments",
   "types-six",
   "types-requests",
-  "lxml-stubs",
 ]
 
 [tool.mypy]

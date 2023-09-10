@@ -563,20 +563,6 @@ six = "*"
 tornado = {version = "*", markers = "python_version > \"2.7\""}
 
 [[package]]
-name = "lxml-stubs"
-version = "0.4.0"
-description = "Type annotations for the lxml package"
-optional = false
-python-versions = "*"
-files = [
-    {file = "lxml-stubs-0.4.0.tar.gz", hash = "sha256:184877b42127256abc2b932ba8bd0ab5ea80bd0b0fee618d16daa40e0b71abee"},
-    {file = "lxml_stubs-0.4.0-py3-none-any.whl", hash = "sha256:3b381e9e82397c64ea3cc4d6f79d1255d015f7b114806d4826218805c10ec003"},
-]
-
-[package.extras]
-test = ["coverage[toml] (==5.2)", "pytest (>=6.0.0)", "pytest-mypy-plugins (==1.9.3)"]
-
-[[package]]
 name = "markdown-it-py"
 version = "3.0.0"
 description = "Python port of markdown-it. Markdown parsing, done right!"
@@ -1606,4 +1592,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "9d4cf3d5c83f4597a3e280e38768a8fffbe223e8c77312ecaf6989309783f989"
+content-hash = "f59839e245992f6cbb0ea61571f109e312c31a6919fb052c0b903eaa733e4c75"
