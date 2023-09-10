@@ -89,17 +89,6 @@ html5lib = ["html5lib"]
 lxml = ["lxml"]
 
 [[package]]
-name = "bitly-api-py3"
-version = "0.3"
-description = "An API for bit.ly forked for Python 3 support"
-optional = false
-python-versions = "*"
-files = [
-    {file = "bitly_api_py3-0.3-py3-none-any.whl", hash = "sha256:8de147966d2d3980c6437c49804f5ad25d24ef784f1b3d187055c001fef7d53e"},
-    {file = "bitly_api_py3-0.3.tar.gz", hash = "sha256:5274c1e20b7c87cbae43b438114448a2af41a9815e561ea40813f3892c10f9ea"},
-]
-
-[[package]]
 name = "black"
 version = "23.9.0"
 description = "The uncompromising code formatter."
@@ -1716,4 +1705,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "3d8688181e9e5b9a21212f2feecd67f25235833c46cf93f4eef3eb6445b93033"
+content-hash = "d5f2fc8cb43ef615d296540f5008df8c66237ba38b803978fb8a0a66973afe5d"
