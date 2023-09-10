@@ -143,8 +143,6 @@ django_settings_module = "tests.settings"
 
 [[tool.mypy.overrides]]
 module = [
-  "amazon.*",
-  "bitly_api.*",
   "factory.*",
   "inmemorystorage.*",
   "randomslugfield.*",
