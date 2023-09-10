@@ -125,7 +125,6 @@ django_settings_module = "tests.settings"
 [[tool.mypy.overrides]]
 module = [
   "inmemorystorage.*",
-  "django_extensions.*",
   "django_docutils.*",
 ]
 ignore_missing_imports = true
