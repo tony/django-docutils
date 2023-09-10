@@ -48,7 +48,6 @@ pygments = "<3"
 django-extensions = "*"
 django-randomslugfield = "*"
 django-slugify-processor = "*"
-django-dirtyfields = ">1.3.0"
 pytz = "^2023.3"
 
 [tool.poetry.group.dev.dependencies]
