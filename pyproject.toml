@@ -66,7 +66,6 @@ myst_parser = ">=0.18.1"
 ### Testing ###
 pytest = "*"
 pytest-rerunfailures = "*"
-pytest-mock = "*"
 pytest-watcher = "*"
 pytest-django = "*"
 dj-inmemorystorage = "*"
@@ -103,7 +102,6 @@ docs = [
 test = [
   "pytest",
   "pytest-rerunfailures",
-  "pytest-mock",
   "pytest-watcher",
   "pytest-django",
   "dj-inmemorystorage",

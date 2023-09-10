@@ -883,23 +883,6 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 testing = ["Django", "django-configurations (>=2.0)"]
 
 [[package]]
-name = "pytest-mock"
-version = "3.11.1"
-description = "Thin-wrapper around the mock package for easier use with pytest"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "pytest-mock-3.11.1.tar.gz", hash = "sha256:7f6b125602ac6d743e523ae0bfa71e1a697a2f5534064528c6ff84c2f7c2fc7f"},
-    {file = "pytest_mock-3.11.1-py3-none-any.whl", hash = "sha256:21c279fff83d70763b05f8874cc9cfb3fcacd6d354247a976f9529d19f9acf39"},
-]
-
-[package.dependencies]
-pytest = ">=5.0"
-
-[package.extras]
-dev = ["pre-commit", "pytest-asyncio", "tox"]
-
-[[package]]
 name = "pytest-rerunfailures"
 version = "12.0"
 description = "pytest plugin to re-run tests to eliminate flaky failures"
@@ -1561,4 +1544,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "021914aa14cd2548eac8aab951c14d476ff5b81acf363670473ca752eac3ec3b"
+content-hash = "b8c31d43cdb43a0a9050d76b6b2c9c5fc93450bbc7b35c5c52529099897338ba"
