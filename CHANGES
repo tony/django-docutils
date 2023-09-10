@@ -1,8 +1,10 @@
 # Changelog
 
-## django-docutils 0.13.x (unreleased)
+## django-docutils 0.14.x (unreleased)
 
 - _Add your latest changes from PRs here_
+
+## django-docutils 0.13.0 (2023-09-10)
 
 ### Breaking changes: Debloating, Part 2
 
