@@ -85,8 +85,6 @@ DJANGO_DOCUTILS_LIB_RST = {  # Optional, automatically maps roles, directives an
         'url_patterns': {
             r'.*github.com.*': 'fab fa-github',
             r'.*twitter.com.*': 'fab fa-twitter',
-            r'.*amzn.to.*': 'fab fa-amazon',
-            r'.*amazon.com.*': 'fab fa-amazon',
             r'.*news.ycombinator.com*': 'fab fa-hacker-news',
             r'.*leanpub.com.*': 'fab fa-leanpub',
             r'.*python.org.*': 'fab fa-python',
