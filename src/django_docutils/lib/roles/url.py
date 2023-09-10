@@ -1,7 +1,7 @@
 from .common import generic_url_role
 
 
-def url_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def url_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to url articles.
 
     :url:`https://google.com` ->
@@ -18,6 +18,10 @@ def url_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         return target
 

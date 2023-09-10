@@ -11,11 +11,11 @@ from django_docutils.lib.publisher import publish_doctree
 
 def get_postpage_models():
     """Return high-level PageBase models. Highest level PostPage."""
-    models = []
-    for model in apps.get_models():
-        if issubclass(model, RSTPostPageBase) and not model.__subclasses__():
-            models.append(model)
-    return models
+    return [
+        model
+        for model in apps.get_models()
+        if issubclass(model, RSTPostPageBase) and not model.__subclasses__()
+    ]
 
 
 class RSTPostPageBase(models.Model):
@@ -31,9 +31,7 @@ class RSTPostPageBase(models.Model):
 
     def __str__(self):
         if self.subtitle:
-            return "{title}: {subtitle}".format(
-                title=self.post.title, subtitle=self.subtitle
-            )
+            return f"{self.post.title}: {self.subtitle}"
         return self.post.title
 
     @cached_property

@@ -1,5 +1,4 @@
 import pytest
-
 from django.conf import settings
 
 from django_docutils.lib.fixtures.publisher import publish_post

@@ -1,3 +1,5 @@
+import typing as t
+
 import dirtyfields
 from django.apps import apps as django_apps
 from django.conf import settings
@@ -15,27 +17,41 @@ from django_slugify_processor.text import slugify
 from randomslugfield import RandomSlugField
 
 
+class BasedPostModelValueError(ImproperlyConfigured):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "BASED_POST_MODEL must be of the form 'app_label.model_name'",
+            *args,
+            **kwargs,
+        )
+
+
+class BasedPostModelLookupError(ImproperlyConfigured):
+    def __init__(self, model_name: str, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            f"BASED_POST_MODEL refers to model '{model_name}' that has not been "
+            "installed",
+            *args,
+            **kwargs,
+        )
+
+
 def get_post_model():
     try:
         return django_apps.get_model(settings.BASED_POST_MODEL, require_ready=False)
-    except ValueError:
-        raise ImproperlyConfigured(
-            "BASED_POST_MODEL must be of the form 'app_label.model_name'"
-        )
-    except LookupError:
-        raise ImproperlyConfigured(
-            "BASED_POST_MODEL refers to model '%s' that has not been installed"
-            % settings.BASED_POST_MODEL
-        )
+    except ValueError as e:
+        raise BasedPostModelValueError() from e
+    except LookupError as e:
+        raise BasedPostModelLookupError(settings.BASED_POST_MODEL) from e
 
 
 def get_post_models():
     """Return high-level PageBase models. Skips subclasses of PostBase."""
-    models = []
-    for model in django_apps.get_models():
-        if issubclass(model, RSTPostBase) and model.__subclasses__():
-            models.append(model)
-    return models
+    return [
+        model
+        for model in django_apps.get_models()
+        if issubclass(model, RSTPostBase) and model.__subclasses__()
+    ]
 
 
 def get_anonymous_user_instance(UserModel=None):
@@ -63,7 +79,7 @@ class RSTPostBase(dirtyfields.DirtyFieldsMixin, models.Model):
     modified = ModificationDateTimeField(_("modified"))
 
     class Meta:
-        ordering = ["-created"]
+        ordering: t.ClassVar = ["-created"]
         abstract = True
 
     def save(self, **kwargs):

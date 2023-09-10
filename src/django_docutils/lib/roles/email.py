@@ -1,7 +1,7 @@
 from .common import generic_url_role
 
 
-def email_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def email_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to email articles.
 
     :email:`me@localhost` ->
@@ -14,6 +14,10 @@ def email_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         return f"mailto:{target}"
 

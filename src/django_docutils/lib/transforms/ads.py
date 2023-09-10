@@ -1,4 +1,5 @@
 import random
+import typing as t
 
 from django.conf import settings
 from docutils import nodes
@@ -30,10 +31,10 @@ class InjectAds(Transform):
     default_priority = 100
 
     #: list of keywords for the ad system, default 'linux'
-    ad_keywords = ["linux"]
+    ad_keywords: t.ClassVar = ["linux"]
 
     #: minimum amount of chars in a section to show and add
-    #: https://support.google.com/adsense/answer/1346295?hl=en#Ad_limit_per_page  # NOQA
+    #: https://support.google.com/adsense/answer/1346295?hl=en#Ad_limit_per_page
     ad_section_length_min = 1000
 
     #: minimum content on page to show an ad

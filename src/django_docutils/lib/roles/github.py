@@ -1,7 +1,7 @@
 from .common import generic_url_role
 
 
-def github_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def github_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to GitHub repos and issues.
 
     :gh:`vim-airline` ->
@@ -26,6 +26,10 @@ def github_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
        text: this example issue
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         if "#" in target:
             user_n_repo, issue = target.split("#")

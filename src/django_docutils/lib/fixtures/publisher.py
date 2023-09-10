@@ -82,6 +82,9 @@ There are rules in which data takes precedence / cascades:
         }
 
 """
+import contextlib
+import pathlib
+
 from django.utils.encoding import force_bytes
 
 from django_docutils.lib.metadata.extract import (
@@ -105,7 +108,7 @@ M2M_FIELDS = ["programming_languages", "topics", "platforms", "series"]
 AUTO_FIELDS = ["created", "modified", "slug_title"]
 
 
-def publish_post(source=None, source_path=None, defaults={}, overrides={}):
+def publish_post(source=None, source_path=None, defaults=None, overrides=None):
     """Returns processed data from RST source, for DB insertion.
 
     The dict returned should nearly resemble a Post model.
@@ -124,7 +127,12 @@ def publish_post(source=None, source_path=None, defaults={}, overrides={}):
 
     """
 
+    if overrides is None:
+        overrides = {}
+    if defaults is None:
+        defaults = {}
     pages = []  # all posts contain one or more pages inside
+    sources = []
 
     if source is not None:
         if isinstance(source, str):
@@ -133,9 +141,13 @@ def publish_post(source=None, source_path=None, defaults={}, overrides={}):
             sources = source
     elif source_path:
         if isinstance(source_path, str):
-            sources = [open(source_path).read()]
+            with pathlib.Path(source_path).open() as sfile:
+                sources = [sfile.read()]
         elif isinstance(source_path, list):
-            sources = [open(spath).read() for spath in source_path]
+            sources = []
+            for spath in source_path:
+                with pathlib.Path(spath).open() as sfile:
+                    sources.append(sfile.read())
 
     for source in sources:
         page_data = publish_page(source=source, defaults=defaults, overrides=overrides)
@@ -151,7 +163,7 @@ def publish_post(source=None, source_path=None, defaults={}, overrides={}):
     return post_data
 
 
-def publish_page(source=None, source_path=None, defaults={}, overrides={}):
+def publish_page(source=None, source_path=None, defaults=None, overrides=None):
     """Publish a restructured text source or file, return metadata.
 
     :param source: source
@@ -164,8 +176,13 @@ def publish_page(source=None, source_path=None, defaults={}, overrides={}):
     ;param overrides: document information that persists, even if docinfo
     :type overrides: dict
     """
+    if overrides is None:
+        overrides = {}
+    if defaults is None:
+        defaults = {}
     if source_path:
-        source = open(source_path).read()
+        with pathlib.Path(source_path).open() as s:
+            source = s.read()
 
     doctree = publish_doctree(
         source=force_bytes(source), settings_overrides=docutils_settings
@@ -179,10 +196,9 @@ def publish_page(source=None, source_path=None, defaults={}, overrides={}):
 
     # Step 2: pluck document node-related attributes from document
     document_data = {}
-    try:
+    with contextlib.suppress(IndexError):
         document_data["body"] = chop_after_heading_smartly(source)
-    except IndexError:
-        pass
+
     document_data["title"] = extract_title(doctree)
     document_data["subtitle"] = extract_subtitle(doctree)
 

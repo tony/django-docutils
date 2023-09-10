@@ -1,7 +1,6 @@
 import datetime
 
 import pytest
-
 import pytz
 from django.conf import settings
 
@@ -89,7 +88,7 @@ hi
 @pytest.mark.django_db(transaction=True)
 def test_correct_slug_title_on_initial_and_reimport(RSTPost):
     slug_title = "my_brief_url"
-    sample_page_body = """
+    sample_page_body = f"""
 ==============
 Document title
 ==============
@@ -106,9 +105,7 @@ Content
 -------
 
 hi
-    """.format(
-        slug_title=slug_title
-    ).strip()
+    """.strip()
 
     post_data = publish_post(sample_page_body)
 

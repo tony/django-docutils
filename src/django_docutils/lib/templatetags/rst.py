@@ -26,6 +26,11 @@ class ReStructuredTextNode(Node):
         return publish_html_from_source(content, *args, **kwargs)
 
 
+class MalformedArgumentsToUrlTag(TemplateSyntaxError):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__("Malformed arguments to url tag", *args, **kwargs)
+
+
 def restructuredtext(parser, token):
     """Parse raw reStructuredText into HTML. Supports keyword arguments!
 
@@ -64,7 +69,8 @@ def restructuredtext(parser, token):
         for bit in bits:
             match = kwarg_re.match(bit)
             if not match:
-                raise TemplateSyntaxError("Malformed arguments to url tag")
+                raise MalformedArgumentsToUrlTag()
+
             name, value = match.groups()
             if name:
                 kwargs[name] = parser.compile_filter(value)

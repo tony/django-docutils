@@ -45,10 +45,12 @@ def generic_url_role(name, text, url_handler_fn, innernodeclass=nodes.Text):
     if not has_explicit_title:
         title = utils.unescape(title)
     else:
-        if "**" == title[:2] and "**" == title[-2:]:
+        if title[:2] == "**" and title[-2:] == "**":
             innernodeclass = nodes.strong
-            title = title.strip("**")
-        elif "*" == title[0] and "*" == title[-1]:
+            title = title.strip("**")  # noqa: B005
+            # In Python 3.9+
+            # title = title.removeprefix("**").removesuffix("**")
+        elif title[0] == "*" and title[-1] == "*":
             innernodeclass = nodes.emphasis
             title = title.strip("*")
 

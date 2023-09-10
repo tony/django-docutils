@@ -3,7 +3,6 @@ import shutil
 import sys
 
 import pytest
-
 from django.apps import apps
 
 from django_docutils.favicon.tests.conftest import RSTPost, favicon_app  # NOQA
@@ -42,7 +41,7 @@ def create_bare_app(project_tmp_path, request, settings, app_name):
 
     if str(project_tmp_path) not in sys.path:
         sys.path.append(str(project_tmp_path))
-    settings.INSTALLED_APPS = settings.INSTALLED_APPS + (app_name,)
+    settings.INSTALLED_APPS = (*settings.INSTALLED_APPS, app_name)
 
     def resource_a_teardown():
         print("\nresources_a_teardown()")

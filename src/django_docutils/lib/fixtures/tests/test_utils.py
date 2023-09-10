@@ -1,6 +1,6 @@
 import pathlib
-import pytest
 
+import pytest
 from django.apps import apps
 
 from django_docutils.lib.fixtures.tests.conftest import create_bare_app

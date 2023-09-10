@@ -3,7 +3,7 @@ from urllib.parse import quote
 from .common import generic_url_role
 
 
-def hackernews_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def hackernews_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to hackernews articles.
 
     :hn:`15610489` ->
@@ -16,6 +16,10 @@ def hackernews_role(name, rawtext, text, lineno, inliner, options={}, content=[]
        text: this hackernews article
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         target = quote(target.replace(" ", "_"))
         return f"https://news.ycombinator.com/item?id={target}"

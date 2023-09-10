@@ -3,7 +3,7 @@ from urllib.parse import quote
 from .common import generic_url_role
 
 
-def wikipedia_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def wikipedia_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to Wikipedia articles.
 
     :wikipedia:`Don't repeat yourself` ->
@@ -16,6 +16,10 @@ def wikipedia_role(name, rawtext, text, lineno, inliner, options={}, content=[])
        text: this wikipedia article
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         target = quote(target.replace(" ", "_"))
         return f"https://en.wikipedia.org/wiki/{target}"

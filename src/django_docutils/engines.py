@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 
-import io
 
 from django.conf import settings
 from django.template.backends.base import BaseEngine
@@ -20,7 +18,7 @@ class Docutils(BaseEngine):
         self.options = params.pop("OPTIONS").copy()
         self.options.setdefault("debug", settings.DEBUG)
         self.options.setdefault("file_charset", settings.FILE_CHARSET)
-        super(Docutils, self).__init__(params)
+        super().__init__(params)
         self.engine = Engine(self.dirs, self.app_dirs, **self.options)
 
     def from_string(self, template_code):
@@ -29,9 +27,9 @@ class Docutils(BaseEngine):
     def get_template(self, template_name):
         for template_file in self.iter_template_filenames(template_name):
             try:
-                with io.open(template_file, encoding=settings.FILE_CHARSET) as fp:
+                with open(template_file, encoding=settings.FILE_CHARSET) as fp:
                     template_code = fp.read()
-            except IOError:
+            except OSError:
                 continue
 
             return DocutilsTemplate(template_code, self.options)
@@ -39,7 +37,7 @@ class Docutils(BaseEngine):
             raise TemplateDoesNotExist(template_name)
 
 
-class DocutilsTemplate(object):
+class DocutilsTemplate:
     def __init__(self, source, options):
         self.source = source
         self.options = options

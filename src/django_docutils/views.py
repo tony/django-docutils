@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import django
 from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import select_template
 from django.template.response import TemplateResponse
@@ -22,7 +19,7 @@ class DocutilsResponse(TemplateResponse):
         using=None,
     ):
         self.rst_name = rst
-        super(DocutilsResponse, self).__init__(
+        super().__init__(
             request, template, context, content_type, status, charset, using
         )
 
@@ -36,10 +33,7 @@ class DocutilsResponse(TemplateResponse):
         content explicitly using the value of this property.
         """
 
-        if django.VERSION < (1, 10):
-            context = self._resolve_context(self.context_data)
-        else:
-            context = self.resolve_context(self.context_data)
+        context = self.resolve_context(self.context_data)
 
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
@@ -48,12 +42,19 @@ class DocutilsResponse(TemplateResponse):
             select_template(self.rst_name, using="docutils").render()
         )
 
-        if django.VERSION < (1, 10):
-            template = self._resolve_template(self.template_name)
-        else:
-            template = self.resolve_template(self.template_name)
+        template = self.resolve_template(self.template_name)
         content = template.render(context, self._request)
         return content
+
+
+class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "DocutilsView requires either a definition of 'rst_name' "
+            "or an implementation of 'get_rst_names()'",
+            *args,
+            **kwargs
+        )
 
 
 class DocutilsView(TemplateView):
@@ -76,9 +77,6 @@ class DocutilsView(TemplateView):
         Follows after get_template_names, but for scanning for rst content.
         """
         if self.rst_name is None:
-            raise ImproperlyConfigured(
-                "DocutilsView requires either a definition of "
-                "'rst_name' or an implementation of 'get_rst_names()'"
-            )
+            raise DocutilsViewRstNameImproperlyConfigured()
         else:
             return [self.rst_name]

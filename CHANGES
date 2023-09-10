@@ -4,6 +4,11 @@
 
 - _Add your latest changes from PRs here_
 
+### Internal improvements
+
+- [ruff]: Improved linting via additional ruff rules, including import sorting
+  (#368)
+
 ## django-docutils 0.10.0 (2023-09-02)
 
 _Maintenance only, no bug fixes or features_
@@ -20,6 +25,7 @@ _Maintenance only, no bug fixes or features_
 - Tests: Remove reliance on [`py.local.path`](https://py.readthedocs.io/en/latest/path.html#py-path-local-local-file-system-path) (#369)
 
   It has has been deprecated by pytest in favor of {class}`pathlib.Path` parts.
+
 - Remove some partial typings, in lieu of full typings in the future (#369)
 
   This typings were unused and in some cases incorrect.
@@ -40,8 +46,10 @@ _Maintenance only, no bug fixes or features_
 - poetry: 1.4.0 -> 1.5.1
 
   See also:
+
   - https://github.com/python-poetry/poetry/releases/tag/1.5.0
   - https://github.com/python-poetry/poetry/releases/tag/1.5.1
+
 - Add Django 4.2 to CI coverage and classifiers
 - Add Python 3.11 to classifiers
 

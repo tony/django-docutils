@@ -1,5 +1,4 @@
 import pytest
-
 from django.core import checks
 from django.db import models
 

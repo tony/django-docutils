@@ -1,7 +1,7 @@
 from .common import generic_url_role
 
 
-def leanpub_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+def leanpub_role(name, rawtext, text, lineno, inliner, options=None, content=None):
     """Role for linking to leanpub page.
 
     :leanpub:`the-tao-of-tmux` ->
@@ -17,12 +17,14 @@ def leanpub_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
        text: The Tao of tmux
     """
 
+    if content is None:
+        content = []
+    if options is None:
+        options = {}
     def url_handler(target):
         if ":" in target:
             project, path = target.split(":")
-            return "https://leanpub.com/{project}/{path}".format(
-                project=project, path=path
-            )
+            return f"https://leanpub.com/{project}/{path}"
         return f"https://leanpub.com/{target}"
 
     return generic_url_role(name, text, url_handler)

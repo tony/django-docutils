@@ -92,9 +92,10 @@ def find_rst_dir_projects(path):
     :returns: List of directories containing fixtures projects in dir format
     :rtype: list
     """
-    paths = []
-    for _root, dirname, filenames in os.walk(path):
-        for dir_ in dirname:
-            if is_dir_project(os.path.join(_root, dir_)):
-                paths.append(os.path.join(_root, dir_))
+    paths = [
+        os.path.join(_root, dir_)
+        for _root, dirname, _filenames in os.walk(path)
+        for dir_ in dirname
+        if is_dir_project(os.path.join(_root, dir_))
+    ]
     return paths

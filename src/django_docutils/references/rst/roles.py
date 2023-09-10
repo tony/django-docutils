@@ -11,6 +11,11 @@ if t.TYPE_CHECKING:
     from sphinx.environment import BuildEnvironment
 
 
+class CannotDetermineRole(Exception):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__("cannot determine default role!", *args, **kwargs)
+
+
 class XRefRole:
 
     """
@@ -66,15 +71,19 @@ class XRefRole:
             target = target[:-2]
         return title, target
 
-    def __call__(self, typ, rawtext, text, lineno, inliner, options={}, content=[]):
+    def __call__(self, typ, rawtext, text, lineno, inliner, options=None, content=None):
         # env = inliner.document.settings.env
+        if content is None:
+            content = []
+        if options is None:
+            options = {}
         env = {}
         if not typ:
             typ = env.temp_data.get("default_role")
             if not typ:
                 typ = env.config.default_role
             if not typ:
-                raise Exception("cannot determine default role!")
+                raise CannotDetermineRole()
         else:
             typ = typ.lower()
         if ":" not in typ:

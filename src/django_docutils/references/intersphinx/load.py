@@ -172,12 +172,19 @@ def _get_safe_url(url: str) -> str:
         return urlunsplit(frags)
 
 
+class UnsupportedInventoryVersionError(ValueError):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "unknown or unsupported inventory version", *args, **kwargs
+        )
+
+
 def fetch_inventory(
     uri: str,
     inv: t.Any,
     srcdir: t.Optional[str] = None,
     requests_config: t.Optional["Config"] = None,
-) -> t.Any:  # NOQA: C901
+) -> t.Any:
     """Fetch, parse and return an intersphinx inventory file."""
     # both *uri* (base URI of the links to generate) and *inv* (actual
     # location of the inventory file) can be local or remote URIs
@@ -190,7 +197,7 @@ def fetch_inventory(
             f = _read_from_url(inv, requests_config=requests_config)
         else:
             assert srcdir is not None
-            f = open(path.join(srcdir, inv), "rb")
+            f = open(path.join(srcdir, inv), "rb")  # noqa: SIM115
     except Exception as err:
         print(
             "intersphinx inventory %r not fetchable due to %s: %s",
@@ -212,7 +219,7 @@ def fetch_inventory(
                 join = localuri and path.join or posixpath.join  # type:ignore
                 invdata = InventoryFile.load(f, uri, join)
             except ValueError as exc:
-                raise ValueError("unknown or unsupported inventory version: %r" % exc)
+                raise UnsupportedInventoryVersionError() from exc
     except Exception as err:
         print(
             "intersphinx inventory %r not readable due to %s: %s",
@@ -224,7 +231,7 @@ def fetch_inventory(
         return invdata
 
 
-def load_mappings():  # NOQA: C901
+def load_mappings():
     from tqdm import trange
 
     inventories = {}
@@ -246,7 +253,7 @@ def load_mappings():  # NOQA: C901
         # we can safely assume that the uri<->inv mapping is not changed
         # during partial rebuilds since a changed intersphinx_mapping
         # setting will cause a full environment reread
-        if not isinstance(inv, tuple):
+        if not isinstance(inv, tuple):  # noqa SIM108
             invs = (inv,)
         else:
             invs = inv  # type: ignore

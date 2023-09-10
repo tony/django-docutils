@@ -1,6 +1,6 @@
 import pathlib
-import pytest
 
+import pytest
 from django.apps import AppConfig
 
 from django_docutils.lib.fixtures.load import load_app_rst_fixtures

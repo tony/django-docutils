@@ -23,7 +23,12 @@ class Contents(parts.Contents):
             title = section[0]
             auto = title.get("auto")  # May be set by SectNum.
             entrytext = self.copy_and_filter(title)
-            reference = nodes.reference("", "", refid=section["ids"][0], *entrytext)
+            reference = nodes.reference(
+                "",
+                "",
+                refid=section["ids"][0],
+                *entrytext,  # noqa: B026
+            )
             ref_id = self.document.set_id(reference)
             item = nodes.list_item("", reference)
             if (
