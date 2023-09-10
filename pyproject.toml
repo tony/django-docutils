@@ -84,7 +84,6 @@ django-stubs = "*"
 types-docutils = "*"
 types-Pygments = "*"
 types-requests = "*"
-types-six = "*"
 
 [tool.poetry.extras]
 # Development stuff
@@ -116,7 +115,6 @@ lint = [
   "django-stubs",
   "types-docutils",
   "types-pygments",
-  "types-six",
   "types-requests",
 ]
 

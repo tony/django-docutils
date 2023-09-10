@@ -1449,17 +1449,6 @@ files = [
 ]
 
 [[package]]
-name = "types-six"
-version = "1.16.21.9"
-description = "Typing stubs for six"
-optional = false
-python-versions = "*"
-files = [
-    {file = "types-six-1.16.21.9.tar.gz", hash = "sha256:746e6c25b8c48b3c8ab9efe7f68022839111de423d35ba4b206b88b12d75f233"},
-    {file = "types_six-1.16.21.9-py3-none-any.whl", hash = "sha256:1591a09430a3035326da5fdb71692d0b3cc36b25a440cc5929ca6241f3984705"},
-]
-
-[[package]]
 name = "types-urllib3"
 version = "1.26.25.14"
 description = "Typing stubs for urllib3"
@@ -1572,4 +1561,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "823a60b530adbf75b239a0418e8e821e3191c3782c0cb6ff5503b66b176474cb"
+content-hash = "660b1b8b06da9d9aeceaef3411a6b6df0967b7d158261e35ec8c397b270aa383"
