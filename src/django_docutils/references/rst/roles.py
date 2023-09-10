@@ -11,6 +11,11 @@ if t.TYPE_CHECKING:
     from sphinx.environment import BuildEnvironment
 
 
+class CannotDetermineRole(Exception):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__("cannot determine default role!", *args, **kwargs)
+
+
 class XRefRole:
 
     """
@@ -74,7 +79,7 @@ class XRefRole:
             if not typ:
                 typ = env.config.default_role
             if not typ:
-                raise Exception("cannot determine default role!")
+                raise CannotDetermineRole()
         else:
             typ = typ.lower()
         if ":" not in typ:
