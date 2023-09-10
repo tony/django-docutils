@@ -31,6 +31,9 @@ jobs:
           python -V
           poetry run python -V
 
+      - name: Lint with black . --check
+        run: poetry run black . --check
+
       - name: Lint with ruff
         run: poetry run ruff .
 
