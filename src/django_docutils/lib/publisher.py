@@ -1,7 +1,10 @@
+import typing as t
+
 from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
 from docutils import io, nodes, readers
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
+from docutils.writers.html5_polyglot import Writer
 
 from .directives import register_django_docutils_directives
 from .roles import register_django_docutils_roles
@@ -9,20 +12,23 @@ from .settings import DJANGO_DOCUTILS_LIB_RST, INJECT_FONT_AWESOME
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
 
+if t.TYPE_CHECKING:
+    from docutils import SettingsSpec
+
 docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
 
 def publish_parts_from_doctree(
-    document,
-    destination_path=None,
-    writer=None,
-    writer_name="pseudoxml",
-    settings=None,
-    settings_spec=None,
-    settings_overrides=None,
-    config_section=None,
-    enable_exit_status=False,
-):
+    document: nodes.document,
+    destination_path: str | None = None,
+    writer: Writer | None = None,
+    writer_name: str = "pseudoxml",
+    settings: t.Any | None = None,
+    settings_spec: "SettingsSpec | None" = None,
+    settings_overrides: t.Any | None = None,
+    config_section: str | None = None,
+    enable_exit_status: bool = False,
+) -> t.Dict[str, str]:
     reader = readers.doctree.Reader(parser_name="null")
     pub = Publisher(
         reader,
@@ -40,7 +46,12 @@ def publish_parts_from_doctree(
     return pub.writer.parts
 
 
-def publish_toc_from_doctree(doctree, writer=None):
+def publish_toc_from_doctree(
+    doctree: nodes.document,
+    writer: Writer | None = None,
+    pages: int | None = None,
+    current_page: int | None = None,
+) -> str:
     if not writer:
         writer = DjangoDocutilsWriter()
     # Create a new document tree with just the table of contents
@@ -76,7 +87,9 @@ def publish_toc_from_doctree(doctree, writer=None):
     return mark_safe(force_str(toc["html_body"]))
 
 
-def publish_doctree(source, settings_overrides=docutils_settings):
+def publish_doctree(
+    source: str | bytes, settings_overrides: t.Any = docutils_settings
+) -> nodes.document:
     """Split off ability to get doctree (a.k.a. document)
 
     It's valuable to be able to run transforms to alter and most importantly,
@@ -95,7 +108,19 @@ def publish_doctree(source, settings_overrides=docutils_settings):
     )
 
 
-def publish_html_from_source(source, **kwargs):
+if t.TYPE_CHECKING:
+    from typing_extensions import NotRequired, TypedDict, Unpack
+
+    class PublishHtmlDocTreeKwargs(TypedDict):
+        show_title: NotRequired[bool]
+        toc_only: NotRequired[bool]
+        pages: NotRequired[t.Optional[int]]
+        current_page: NotRequired[t.Optional[int]]
+
+
+def publish_html_from_source(
+    source: str, **kwargs: "Unpack[PublishHtmlDocTreeKwargs]"
+) -> str:
     """Return HTML from reStructuredText source string."""
 
     doctree = publish_doctree(source)
@@ -103,10 +128,10 @@ def publish_html_from_source(source, **kwargs):
 
 
 def publish_html_from_doctree(
-    doctree,
-    show_title=True,
-    toc_only=False,
-):
+    doctree: nodes.document,
+    show_title: bool = True,
+    toc_only: bool = False,
+) -> str:
     """Return HTML from reStructuredText document (doctree).
 
     :param value: Contents from template being placed into node
