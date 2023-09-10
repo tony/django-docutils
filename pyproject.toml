@@ -121,7 +121,6 @@ lint = [
   "types-pygments",
   "types-six",
   "types-requests",
-  "types-tqdm",
   "lxml-stubs",
 ]
 
