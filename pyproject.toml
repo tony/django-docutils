@@ -122,6 +122,7 @@ files = [
   "src/",
   "tests/",
 ]
+enable_incomplete_feature = ["Unpack"]
 
 [tool.django-stubs]
 django_settings_module = "tests.settings"
