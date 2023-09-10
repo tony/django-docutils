@@ -69,8 +69,6 @@ pytest = "*"
 pytest-rerunfailures = "*"
 pytest-mock = "*"
 pytest-watcher = "*"
-factory-boy = "*"
-pytest-factoryboy = "*"
 pytest-django = "*"
 dj-inmemorystorage = "*"
 responses = "*"
@@ -111,8 +109,6 @@ test = [
   "pytest-rerunfailures",
   "pytest-mock",
   "pytest-watcher",
-  "factory-boy",
-  "pytest-factoryboy",
   "pytest-django",
   "dj-inmemorystorage",
   "responses",
