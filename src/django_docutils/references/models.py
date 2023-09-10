@@ -5,20 +5,34 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class BasedReferenceModelValueError(ImproperlyConfigured):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "BASED_REFERENCE_MODEL must be of the form 'app_label.model_name'",
+            *args,
+            **kwargs,
+        )
+
+
+class BasedReferenceModelLookupError(ImproperlyConfigured):
+    def __init__(self, model_name: str, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            f"BASED_REFERENCE_MODEL refers to model '{model_name}' that has not been "
+            "installed",
+            *args,
+            **kwargs,
+        )
+
+
 def get_reference_model():
     try:
         return django_apps.get_model(
             settings.BASED_REFERENCE_MODEL, require_ready=False
         )
     except ValueError:
-        raise ImproperlyConfigured(
-            "BASED_REFERENCE_MODEL must be of the form 'app_label.model_name'"
-        )
+        raise BasedReferenceModelValueError()
     except LookupError:
-        raise ImproperlyConfigured(
-            "BASED_REFERENCE_MODEL refers to model '%s' that has not been installed"
-            % settings.BASED_REFERENCE_MODEL
-        )
+        raise BasedReferenceModelLookupError(settings.BASED_REFERENCE_MODEL)
 
 
 class ReferenceBase(models.Model):
