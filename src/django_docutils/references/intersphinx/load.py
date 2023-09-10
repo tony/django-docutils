@@ -172,6 +172,13 @@ def _get_safe_url(url: str) -> str:
         return urlunsplit(frags)
 
 
+class UnsupportedInventoryVersionError(ValueError):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "unknown or unsupported inventory version", *args, **kwargs
+        )
+
+
 def fetch_inventory(
     uri: str,
     inv: t.Any,
@@ -212,7 +219,7 @@ def fetch_inventory(
                 join = localuri and path.join or posixpath.join  # type:ignore
                 invdata = InventoryFile.load(f, uri, join)
             except ValueError as exc:
-                raise ValueError("unknown or unsupported inventory version: %r" % exc)
+                raise UnsupportedInventoryVersionError() from exc
     except Exception as err:
         print(
             "intersphinx inventory %r not readable due to %s: %s",
