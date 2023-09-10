@@ -5,8 +5,6 @@ import sys
 import pytest
 from django.apps import apps
 
-from django_docutils.favicon.tests.conftest import RSTPost, favicon_app  # NOQA
-
 
 def create_bare_app(project_tmp_path, request, settings, app_name):
     """Create a blank django project for PyTest that cleans out of scope.

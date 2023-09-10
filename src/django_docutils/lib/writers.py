@@ -59,10 +59,13 @@ class BasedHTMLTranslator(HTMLTranslator):
             atts["href"] = "#" + node["refid"]
             atts["class"] += " internal"
 
-        from django_docutils.favicon.rst.nodes import icon
+        try:
+            from django_docutils.favicon.rst.nodes import icon
 
-        if isinstance(node[0], icon):
-            atts["class"] = ""
+            if isinstance(node[0], icon):
+                atts["class"] = ""
+        except ImportError:
+            pass
         self.body.append(self.starttag(node, "a", "", **atts))
 
     def visit_title(self, node):

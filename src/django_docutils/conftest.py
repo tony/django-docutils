@@ -20,9 +20,6 @@ def pytest_configure():
                 "APP_DIRS": True,
             },
         ],
-        BASED_FAVICON_MODEL="test_app.Favicon",
-        BASED_REFERENCE_MODEL="test_app.Reference",
-        BASED_POST_MODEL="test_app.Post",
         BASED_LIB_RST={
             "metadata_processors": [
                 "django_docutils.lib.metadata.processors.process_datetime",
@@ -30,8 +27,6 @@ def pytest_configure():
                 "django_docutils.lib.metadata.processors.process_m2m_fields",
             ],
             "transforms": [  #: docutils.transforms.Transform class (import string)
-                "django_docutils.references.rst.transforms.xref.XRefTransform",
-                "django_docutils.favicon.rst.transforms.favicon.FaviconTransform",
                 "django_docutils.lib.transforms.code.CodeTransform",
             ],
             "docutils": {  #: Used in restructuredtext templatetags
@@ -58,37 +53,6 @@ def pytest_configure():
                     "hn": "django_docutils.lib.roles.hackernews.hackernews_role",
                     "wikipedia": "django_docutils.lib.roles.wikipedia.wikipedia_role",
                     "site_url": "django_docutils.lib.roles.develtech.site_url_role",
-                    "post:snippet": "django_docutils.lib.roles.develtech.post_role",
-                    "post:tip": "django_docutils.lib.roles.develtech.post_role",
-                    # Cross-reference stuff
-                    "doc": (
-                        "django_docutils.references.rst.roles.XRefRole",
-                        {
-                            "innernodeclass": "docutils.nodes.inline",
-                            "warn_dangling": True,
-                        },
-                    ),
-                    "ref": (
-                        "django_docutils.references.rst.roles.XRefRole",
-                        {
-                            "lowercase": True,
-                            "innernodeclass": "docutils.nodes.inline",
-                            "warn_dangling": True,
-                        },
-                    ),
-                    "class": "django_docutils.references.rst.roles.PyXRefRole",
-                    "meth": (
-                        "django_docutils.references.rst.roles.PyXRefRole",
-                        {"fix_parens": True},
-                    ),
-                    "func": (
-                        "django_docutils.references.rst.roles.PyXRefRole",
-                        {"fix_parens": True},
-                    ),
-                    "exc": "django_docutils.references.rst.roles.PyXRefRole",
-                    "envvar": "django_docutils.references.rst.roles.PyXRefRole",
-                    "data": "django_docutils.references.rst.roles.PyXRefRole",
-                    "attr": "django_docutils.references.rst.roles.PyXRefRole",
                 }
             },
         },
@@ -105,7 +69,6 @@ def pytest_configure():
             "django.contrib.sites",
             "django.contrib.staticfiles",
             "django_extensions",
-            "django_docutils.favicon.tests.test_app",
         ),
         PASSWORD_HASHERS=("django.contrib.auth.hashers.MD5PasswordHasher",),
         ANONYMOUS_USER_NAME="AnonymousCoward",

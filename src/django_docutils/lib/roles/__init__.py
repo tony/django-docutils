@@ -3,8 +3,6 @@ import inspect
 from django.utils.module_loading import import_string
 from docutils.parsers.rst import roles
 
-from django_docutils.references.rst.roles import XRefRole
-
 from ..settings import BASED_LIB_RST
 
 
@@ -130,7 +128,7 @@ def register_role_mapping(role_mapping):
         #
         # If they include kwargs, they are entered as a tuple with a second
         # element that's a dict of the kwargs passed into the role.
-        if inspect.isclass(role_) and issubclass(role_, XRefRole):
+        if inspect.isclass(role_):
             if role_cb_kwargs:
                 roles.register_local_role(role_name, role_(**role_cb_kwargs))
             else:

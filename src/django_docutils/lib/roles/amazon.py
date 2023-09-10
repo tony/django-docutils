@@ -3,11 +3,7 @@ from urllib.error import HTTPError
 from bitly_api import bitly_api
 from django.conf import settings
 
-from django_docutils.references.models import get_reference_model
-
 from .common import generic_remote_url_role
-
-Reference = get_reference_model()
 
 
 def get_client():
@@ -46,25 +42,14 @@ def amazon_role(name, rawtext, text, lineno, inliner, options=None, content=None
     amzn = get_client()
 
     def url_handler(target):
-        try:
-            r = Reference.objects.get(project="amazon", target=target)
-        except Reference.DoesNotExist:
-            query = amzn.lookup(ItemId=target)
-            url = query.offer_url
+        query = amzn.lookup(ItemId=target)
+        url = query.offer_url
 
-            access_token = settings.BITLY_ACCESS_TOKEN
-            bitly = bitly_api.Connection(access_token=access_token)
-            url = bitly.shorten(url)["url"]
+        access_token = settings.BITLY_ACCESS_TOKEN
+        bitly = bitly_api.Connection(access_token=access_token)
+        url = bitly.shorten(url)["url"]
 
-            r = Reference(
-                project="amazon",
-                type=name,
-                target=target,
-                display_name=query.title,
-                uri=url,
-            )
-            r.save()
-        return r.display_name, r.uri
+        return query.title, url
 
     try:
         return generic_remote_url_role(name, text, url_handler)
