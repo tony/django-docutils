@@ -1,7 +1,7 @@
 __title__ = "django-docutils"
 __package_name__ = "django_docutils"
 __description__ = "Documentation Utilities (Docutils, reStructuredText) for django."
-__version__ = "0.11.0.post0"
+__version__ = "0.12.0"
 __author__ = "Tony Narlock"
 __github__ = "https://github.com/tony/django-docutils"
 __pypi__ = "https://pypi.org/project/django-docutils/"
