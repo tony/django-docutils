@@ -3,7 +3,7 @@ import inspect
 import pathlib
 import sys
 import typing as t
-from os.path import dirname, relpath
+from os.path import relpath
 
 import django_docutils
 
@@ -168,9 +168,7 @@ intersphinx_mapping = {
 }
 
 
-def linkcode_resolve(
-    domain: str, info: t.Dict[str, str]
-) -> t.Union[None, str]:
+def linkcode_resolve(domain: str, info: t.Dict[str, str]) -> t.Union[None, str]:
     """
     Determine the URL corresponding to Python object
 
@@ -193,7 +191,7 @@ def linkcode_resolve(
     for part in fullname.split("."):
         try:
             obj = getattr(obj, part)
-        except Exception:
+        except Exception:  # noqa: PERF203
             return None
 
     # strip decorators, which would resolve to the source of the decorator
@@ -220,7 +218,7 @@ def linkcode_resolve(
 
     linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1) if lineno else ""
 
-    fn = relpath(fn, start=dirname(django_docutils.__file__))
+    fn = relpath(fn, start=pathlib.Path(django_docutils.__file__).parent)
 
     if "dev" in about["__version__"]:
         return "{}/blob/master/{}/{}/{}{}".format(
