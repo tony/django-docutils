@@ -1,3 +1,6 @@
+import pathlib
+import typing as t
+
 from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
 
@@ -82,11 +85,12 @@ class RSTRawView(TemplateTitleView):
     template_name = "rst/raw.html"
     file_path = None
     title = None
-    rst_settings = {"inject_ads": True}
+    rst_settings: t.ClassVar = {"inject_ads": True}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["content"] = open(self.file_path).read()
+        with pathlib.Path(self.file_path).open() as content:
+            context["content"] = content.read()
         context["inject_ads"] = self.rst_settings["inject_ads"]
         return context
 
@@ -95,11 +99,12 @@ class RSTView(RSTRawView, RSTMixin):
     template_name = "rst/base.html"
     file_path = None
     title = None
-    rst_settings = {"inject_ads": True}
+    rst_settings: t.ClassVar = {"inject_ads": True}
 
     @cached_property
     def raw_content(self):
-        return open(self.file_path).read()
+        with pathlib.Path(self.file_path).open() as raw_content:
+            return raw_content
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
