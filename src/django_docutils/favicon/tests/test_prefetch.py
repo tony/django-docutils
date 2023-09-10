@@ -151,7 +151,7 @@ def test_is_favicon_stored_file_missing(monkeypatch, Favicon):
 
     monkeypatch.setattr(InMemoryFile, "open", mock_open)
     with pytest.raises(FileNotFoundError):  # Assure monkeypatch
-        favicon.favicon.file
+        assert favicon.favicon.file
 
     assert not is_favicon_stored(
         favicon.domain
