@@ -367,23 +367,6 @@ files = [
 Django = ">=3.2"
 
 [[package]]
-name = "django-slugify-processor"
-version = "1.3.1"
-description = "pipeline for slugification edgecases in django"
-optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "django_slugify_processor-1.3.1-py3-none-any.whl", hash = "sha256:b72614b9b8566edbde46de7233500bb65c1e1f42fa17422f9f1f8bc543358219"},
-    {file = "django_slugify_processor-1.3.1.tar.gz", hash = "sha256:d05c3935832daae2b39b7af841ae911af7c0aa26e23e2a97c5309862459ec35a"},
-]
-
-[package.dependencies]
-Django = ">=2.2"
-
-[package.extras]
-test = ["django-extensions"]
-
-[[package]]
 name = "django-stubs"
 version = "4.2.4"
 description = "Mypy stubs for Django"
@@ -1519,4 +1502,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "c8ac58afd3d18e6077bc4801e5a01fcabbdda20b45b1ed55626b351a427aef1b"
+content-hash = "6a743c0a503ba74de76b91bd2506008b8d2e035e9af05f85b3d0357613ca9136"

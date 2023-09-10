@@ -46,7 +46,6 @@ Django = ">=3.2"
 docutils = "*"
 pygments = "<3"
 django-extensions = "*"
-django-slugify-processor = "*"
 pytz = "*"
 
 [tool.poetry.group.dev.dependencies]
