@@ -4,9 +4,9 @@ import typing as t
 from docutils import nodes, utils
 from docutils.transforms import Transform
 
-from django_docutils.lib.settings import BASED_LIB_RST
+from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
-url_patterns = BASED_LIB_RST.get("font_awesome", {}).get("url_patterns", {})
+url_patterns = DJANGO_DOCUTILS_LIB_RST.get("font_awesome", {}).get("url_patterns", {})
 permissible_nodes = [nodes.Text]
 
 

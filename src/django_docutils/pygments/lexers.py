@@ -1,6 +1,6 @@
 # ruff: noqa: RUF012
 """
-    Based on custom lexers for GitHub.com
+    DjangoDocutils on custom lexers for GitHub.com
 
     :copyright: Copyright 2012 by GitHub, Inc
     :license: BSD, see LICENSE for details.

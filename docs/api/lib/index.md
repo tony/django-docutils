@@ -6,7 +6,6 @@
 :maxdepth: 1
 
 directives/index
-fixtures/index
 metadata/index
 publisher
 roles/index

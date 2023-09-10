@@ -21,9 +21,7 @@ views
 
 
 lib/index
-favicon/index
 pygments/index
-references/index
 templatetags/index
 ```
 
@@ -57,5 +55,5 @@ templatetags/index
 ### Exceptions
 
 ```{eval-rst}
-.. autoexception:: django_docutils.exc.BasedException
+.. autoexception:: django_docutils.exc.DjangoDocutilsException
 ```

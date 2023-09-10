@@ -3,13 +3,13 @@ from django.utils.safestring import mark_safe
 from docutils import io, nodes, readers
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 
-from .directives import register_based_directives
-from .roles import register_based_roles
-from .settings import BASED_LIB_RST, INJECT_FONT_AWESOME
+from .directives import register_django_docutils_directives
+from .roles import register_django_docutils_roles
+from .settings import DJANGO_DOCUTILS_LIB_RST, INJECT_FONT_AWESOME
 from .transforms.toc import Contents
-from .writers import BasedWriter
+from .writers import DjangoDocutilsWriter
 
-docutils_settings = BASED_LIB_RST.get("docutils", {})
+docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
 
 def publish_parts_from_doctree(
@@ -42,7 +42,7 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None):
     if not writer:
-        writer = BasedWriter()
+        writer = DjangoDocutilsWriter()
     # Create a new document tree with just the table of contents
     # ==========================================================
 
@@ -106,8 +106,8 @@ def publish_doctree(source, settings_overrides=docutils_settings):
     :rtype: :class:`docutils.nodes.document`
     :returns: document/doctree for reStructuredText content
     """
-    register_based_directives()
-    register_based_roles()
+    register_django_docutils_directives()
+    register_django_docutils_roles()
 
     return docutils_publish_doctree(
         source=force_bytes(source), settings_overrides=settings_overrides
@@ -125,8 +125,6 @@ def publish_html_from_doctree(
     doctree,
     show_title=True,
     toc_only=False,
-    inject_ads=False,
-    ad_keywords=None,
     pages=None,
     current_page=None,
 ):
@@ -138,8 +136,6 @@ def publish_html_from_doctree(
     :type show_title: bool
     :param toc_only: special flag: return show TOC, used for sidebars
     :type toc_only: bool
-    :param ad_keywords: keywords to send to backend to serve targeted ads
-    :type ad_keywords: list of strings
     :param pages: optional list of pages, if multi-page post
     :type pages: :class:`~django:django.db.models.query.QuerySet`
     :param current_page: current page (only applicable if pages)
@@ -149,14 +145,7 @@ def publish_html_from_doctree(
 
     if pages is None:
         pages = []
-    if ad_keywords is None:
-        ad_keywords = []
-    writer = BasedWriter()
-
-    if inject_ads:
-        from django_docutils.lib.transforms.ads import InjectAds
-
-        doctree.transformer.add_transform(InjectAds.keywords(ad_keywords))
+    writer = DjangoDocutilsWriter()
 
     if INJECT_FONT_AWESOME:
         from django_docutils.lib.transforms.font_awesome import InjectFontAwesome

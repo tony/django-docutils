@@ -5,7 +5,6 @@
 ```{toctree}
 :maxdepth: 1
 
-ads
 code
 font_awesome
 toc

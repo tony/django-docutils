@@ -13,7 +13,7 @@ def is_uncapitalized_word(value):
     :param value: string value from template
     :type value: string
 
-    Functions can be declared via BASED_TEXT in django settings via string
+    Functions can be declared via DJANGO_DOCUTILS_TEXT in django settings via string
     imports. The filters accept one argument (the word). If you don't want the
     word/pattern capitalized, return True. Anything else capitalizes as normal.
 
@@ -28,14 +28,14 @@ def is_uncapitalized_word(value):
 
     In your settings::
 
-        BASED_LIB_TEXT = {
+        DJANGO_DOCUTILS_LIB_TEXT = {
             'uncapitalized_word_filters': [
                 'develtech.path.to.handle_uncapped_word'
             ]
         }
     """
     try:
-        config = settings.BASED_LIB_TEXT
+        config = settings.DJANGO_DOCUTILS_LIB_TEXT
     except AttributeError:
         return
 
