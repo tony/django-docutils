@@ -24,7 +24,6 @@ def pytest_configure():
             "metadata_processors": [
                 "django_docutils.lib.metadata.processors.process_datetime",
                 "django_docutils.lib.metadata.processors.process_anonymous_user",
-                "django_docutils.lib.metadata.processors.process_m2m_fields",
             ],
             "transforms": [  #: docutils.transforms.Transform class (import string)
                 "django_docutils.lib.transforms.code.CodeTransform",
