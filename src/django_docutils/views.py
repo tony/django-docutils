@@ -1,5 +1,3 @@
-
-import django
 from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import select_template
 from django.template.response import TemplateResponse
@@ -35,10 +33,7 @@ class DocutilsResponse(TemplateResponse):
         content explicitly using the value of this property.
         """
 
-        if django.VERSION < (1, 10):
-            context = self._resolve_context(self.context_data)
-        else:
-            context = self.resolve_context(self.context_data)
+        context = self.resolve_context(self.context_data)
 
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
@@ -47,10 +42,7 @@ class DocutilsResponse(TemplateResponse):
             select_template(self.rst_name, using="docutils").render()
         )
 
-        if django.VERSION < (1, 10):
-            template = self._resolve_template(self.template_name)
-        else:
-            template = self.resolve_template(self.template_name)
+        template = self.resolve_template(self.template_name)
         content = template.render(context, self._request)
         return content
 
