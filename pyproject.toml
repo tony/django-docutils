@@ -47,7 +47,7 @@ docutils = "*"
 pygments = "<3"
 django-extensions = "*"
 django-slugify-processor = "*"
-pytz = "^2023.3"
+pytz = "*"
 
 [tool.poetry.group.dev.dependencies]
 ### Docs ###
