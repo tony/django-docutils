@@ -15,18 +15,32 @@ from django_slugify_processor.text import slugify
 from randomslugfield import RandomSlugField
 
 
+class BasedPostModelValueError(ImproperlyConfigured):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "BASED_POST_MODEL must be of the form 'app_label.model_name'",
+            *args,
+            **kwargs,
+        )
+
+
+class BasedPostModelLookupError(ImproperlyConfigured):
+    def __init__(self, model_name: str, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            f"BASED_POST_MODEL refers to model '{model_name}' that has not been "
+            "installed",
+            *args,
+            **kwargs,
+        )
+
+
 def get_post_model():
     try:
         return django_apps.get_model(settings.BASED_POST_MODEL, require_ready=False)
     except ValueError:
-        raise ImproperlyConfigured(
-            "BASED_POST_MODEL must be of the form 'app_label.model_name'"
-        )
+        raise BasedPostModelValueError()
     except LookupError:
-        raise ImproperlyConfigured(
-            "BASED_POST_MODEL refers to model '%s' that has not been installed"
-            % settings.BASED_POST_MODEL
-        )
+        raise BasedPostModelLookupError(settings.BASED_POST_MODEL)
 
 
 def get_post_models():
