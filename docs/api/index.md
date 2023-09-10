@@ -21,9 +21,7 @@ views
 
 
 lib/index
-favicon/index
 pygments/index
-references/index
 templatetags/index
 ```
 
