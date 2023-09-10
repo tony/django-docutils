@@ -1,5 +1,4 @@
 import pathlib
-import typing as t
 
 from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
@@ -50,9 +49,7 @@ class RSTMixin:
 
     @cached_property
     def content(self):
-        return publish_html_from_doctree(
-            self.doctree, **getattr(self, "rst_settings", {})
-        )
+        return publish_html_from_doctree()
 
     def get_base_template(self):
         """TODO: move this out of RSTMixin, it is AMP related, not RST"""
@@ -72,7 +69,7 @@ class RSTRawView(TemplateTitleView):
 
        {% block content %}
          <div id="content_wrapper" class="content docutils-html fixed-toc-content">
-           {% restructuredtext content show_title=False inject_ads=False %}
+           {% restructuredtext content show_title=False %}
          </div>
        {% endblock content %}
 
@@ -85,13 +82,11 @@ class RSTRawView(TemplateTitleView):
     template_name = "rst/raw.html"
     file_path = None
     title = None
-    rst_settings: t.ClassVar = {"inject_ads": True}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         with pathlib.Path(self.file_path).open() as content:
             context["content"] = content.read()
-        context["inject_ads"] = self.rst_settings["inject_ads"]
         return context
 
 
@@ -99,7 +94,6 @@ class RSTView(RSTRawView, RSTMixin):
     template_name = "rst/base.html"
     file_path = None
     title = None
-    rst_settings: t.ClassVar = {"inject_ads": True}
 
     @cached_property
     def raw_content(self):

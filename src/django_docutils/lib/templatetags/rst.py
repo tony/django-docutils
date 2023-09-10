@@ -38,13 +38,9 @@ def restructuredtext(parser, token):
 
         {% restructuredtext content %}
 
-        {% restructuredtext content inject_ads=False %}
-
         {% restructuredtext content toc_only=True %}
 
         {% restructuredtext content show_title=False %}
-
-        {% restructuredtext content inject_ads=True ad_keywords=ad_keywords %}
 
     Why does toc_only=true needed (why do you need to call twice just to get
     a ToC)? Because of how docutils parses.

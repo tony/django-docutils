@@ -125,8 +125,6 @@ def publish_html_from_doctree(
     doctree,
     show_title=True,
     toc_only=False,
-    inject_ads=False,
-    ad_keywords=None,
     pages=None,
     current_page=None,
 ):
@@ -138,8 +136,6 @@ def publish_html_from_doctree(
     :type show_title: bool
     :param toc_only: special flag: return show TOC, used for sidebars
     :type toc_only: bool
-    :param ad_keywords: keywords to send to backend to serve targeted ads
-    :type ad_keywords: list of strings
     :param pages: optional list of pages, if multi-page post
     :type pages: :class:`~django:django.db.models.query.QuerySet`
     :param current_page: current page (only applicable if pages)
@@ -149,14 +145,7 @@ def publish_html_from_doctree(
 
     if pages is None:
         pages = []
-    if ad_keywords is None:
-        ad_keywords = []
     writer = BasedWriter()
-
-    if inject_ads:
-        from django_docutils.lib.transforms.ads import InjectAds
-
-        doctree.transformer.add_transform(InjectAds.keywords(ad_keywords))
 
     if INJECT_FONT_AWESOME:
         from django_docutils.lib.transforms.font_awesome import InjectFontAwesome
