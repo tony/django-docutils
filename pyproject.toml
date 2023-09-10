@@ -45,7 +45,7 @@ python = "^3.8"
 Django = ">=3.2"
 docutils = "*"
 pygments = "<3"
-pytz = "*"
+pytz = { version = "*", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 ### Docs ###
@@ -95,6 +95,9 @@ docs = [
   "myst_parser",
   "furo",
   "gp-libs",
+]
+pytz = [
+  "pytz"
 ]
 test = [
   "pytest",

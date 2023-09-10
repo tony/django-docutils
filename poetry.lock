@@ -1483,9 +1483,10 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 coverage = []
 docs = []
 lint = []
+pytz = ["pytz"]
 test = []
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "27e2f4c64de80ecc1f4e961976453d05c9fc1b9d21169f7ceff88d95cf5c8c54"
+content-hash = "9f47e177daa5a1d7a72e3864db3bf8cdc1b8c25a6af7321c1efcc6c619cb243d"
