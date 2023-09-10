@@ -25,14 +25,14 @@ This also includes references to ads, e.g. `inject_ads`, `add_keywords`, and
 
 If you want to use these, please file an issue on the tracker.
 
-### Remove old references to `based` prefixes to `django_docutils` (#374)
+#### Remove old references to `based` prefixes to `django_docutils` (#374)
 
 _Fixes #373_
 
 - Settings: `BASED` -> `DJANGO_DOCUTILS`, e.g. `BASED_LIB` ->
   `DJANGO_DOCUTILS_LIB`.
 
-### Remove dependency on `tqdm` and `tldextract` (#374)
+#### Remove dependency on `tqdm` and `tldextract` (#374)
 
 _Fixes #363_
 
