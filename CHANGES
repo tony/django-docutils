@@ -11,6 +11,12 @@
 - [ruff]: Improved linting via additional ruff rules, including import sorting
   (#368)
 
+### Post releases
+
+#### django-docutils 0.11.0post0 (2023-09-10)
+
+- Run black formatter on codebase.
+
 ## django-docutils 0.10.0 (2023-09-02)
 
 _Maintenance only, no bug fixes or features_
