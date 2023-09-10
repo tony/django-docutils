@@ -49,7 +49,9 @@ class RSTMixin:
 
     @cached_property
     def content(self):
-        return publish_html_from_doctree()
+        return publish_html_from_doctree(
+            self.doctree, **getattr(self, "rst_settings", {})
+        )
 
     def get_base_template(self):
         """TODO: move this out of RSTMixin, it is AMP related, not RST"""
