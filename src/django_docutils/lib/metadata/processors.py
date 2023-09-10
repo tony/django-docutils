@@ -1,10 +1,18 @@
 import datetime
 
-import pytz
 from django.conf import settings
+
+HAS_PYTZ = False
+try:
+    import pytz
+
+    HAS_PYTZ = True
+except ImportError:
+    pass
 
 
 def process_datetime(metadata):
+    """Optionally supports localizing times via pytz."""
     timezone_formats = [  # timezone formats to try, most detailed to least
         "%Y-%m-%d %I:%M%p",
         "%Y-%m-%d",
@@ -20,9 +28,11 @@ def process_datetime(metadata):
                     break
                 except ValueError:
                     continue
-            metadata[time_key] = pytz.timezone(settings.TIME_ZONE).localize(
-                metadata[time_key], is_dst=None
-            )
+
+            if HAS_PYTZ:
+                metadata[time_key] = pytz.timezone(settings.TIME_ZONE).localize(
+                    metadata[time_key], is_dst=None
+                )
     return metadata
 
 
