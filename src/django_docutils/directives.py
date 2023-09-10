@@ -42,6 +42,7 @@ from pygments.formatters import HtmlFormatter
 from pygments.lexers import TextLexer, get_lexer_by_name
 
 if t.TYPE_CHECKING:
+    from docutils.nodes import system_message
     from pygments.formatter import Formatter
 
 # Options
@@ -69,7 +70,7 @@ class CodeBlock(Directive):
     option_spec: t.ClassVar = {key: directives.flag for key in VARIANTS}
     has_content = True
 
-    def run(self):
+    def run(self) -> t.Tuple[list[nodes.Node], list["system_message"]]:
         self.assert_has_content()
         try:
             lexer = get_lexer_by_name(self.arguments[0])
@@ -82,7 +83,7 @@ class CodeBlock(Directive):
         return [nodes.raw("", parsed, format="html")]
 
 
-def register_pygments_directive(directive="code-block"):
+def register_pygments_directive(directive: str = "code-block") -> None:
     """Register pygments directive.
 
     Parameters
