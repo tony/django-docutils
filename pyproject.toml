@@ -138,7 +138,6 @@ django_settings_module = "tests.settings"
 [[tool.mypy.overrides]]
 module = [
   "inmemorystorage.*",
-  "randomslugfield.*",
   "django_extensions.*",
   "django_slugify_processor.*",
   "django_docutils.*",
