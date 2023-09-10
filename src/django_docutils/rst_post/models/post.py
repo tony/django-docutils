@@ -1,3 +1,5 @@
+import typing as t
+
 import dirtyfields
 from django.apps import apps as django_apps
 from django.conf import settings
@@ -37,19 +39,19 @@ class BasedPostModelLookupError(ImproperlyConfigured):
 def get_post_model():
     try:
         return django_apps.get_model(settings.BASED_POST_MODEL, require_ready=False)
-    except ValueError:
-        raise BasedPostModelValueError()
-    except LookupError:
-        raise BasedPostModelLookupError(settings.BASED_POST_MODEL)
+    except ValueError as e:
+        raise BasedPostModelValueError() from e
+    except LookupError as e:
+        raise BasedPostModelLookupError(settings.BASED_POST_MODEL) from e
 
 
 def get_post_models():
     """Return high-level PageBase models. Skips subclasses of PostBase."""
-    models = []
-    for model in django_apps.get_models():
-        if issubclass(model, RSTPostBase) and model.__subclasses__():
-            models.append(model)
-    return models
+    return [
+        model
+        for model in django_apps.get_models()
+        if issubclass(model, RSTPostBase) and model.__subclasses__()
+    ]
 
 
 def get_anonymous_user_instance(UserModel=None):
@@ -77,7 +79,7 @@ class RSTPostBase(dirtyfields.DirtyFieldsMixin, models.Model):
     modified = ModificationDateTimeField(_("modified"))
 
     class Meta:
-        ordering = ["-created"]
+        ordering: t.ClassVar = ["-created"]
         abstract = True
 
     def save(self, **kwargs):
