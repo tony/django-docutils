@@ -4,6 +4,38 @@
 
 - _Add your latest changes from PRs here_
 
+### Breaking changes
+
+django-docutils is a hastily-extracted hunk of specialized django code - and only now is getting
+dedicated attention. 
+
+To begin, django-docutils just got leaner downstream, beginning with removal of
+non-essential dependencies and experimental code.
+
+#### Remove `favicon`, `references` and `rst_post` (#374)
+
+_Resolves #371_
+
+These are ORM based parts and too specialized for a docutils package for django.
+
+This also includes references to ads, e.g. `inject_ads`, `add_keywords`, and
+`BASED_ADS` (fixes #372).
+
+If you want to use these, please file an issue on the tracker.
+
+### Remove old references to `based` prefixes to `django_docutils` (#374)
+
+_Fixes #373_
+
+- Settings: `BASED` -> `DJANGO_DOCUTILS`, e.g. `BASED_LIB` ->
+  `DJANGO_DOCUTILS_LIB`.
+
+### Remove dependency on `tqdm` and `tldextract` (#374)
+
+_Fixes #363_
+
+These packages aren't required by the core reStructuredText functionality.
+
 ## django-docutils 0.11.0 (2023-09-10)
 
 ### Internal improvements
