@@ -21,6 +21,7 @@ def leanpub_role(name, rawtext, text, lineno, inliner, options=None, content=Non
         content = []
     if options is None:
         options = {}
+
     def url_handler(target):
         if ":" in target:
             project, path = target.split(":")

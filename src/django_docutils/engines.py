@@ -1,5 +1,3 @@
-
-
 from django.conf import settings
 from django.template.backends.base import BaseEngine
 from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy

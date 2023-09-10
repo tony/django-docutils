@@ -18,6 +18,7 @@ def email_role(name, rawtext, text, lineno, inliner, options=None, content=None)
         content = []
     if options is None:
         options = {}
+
     def url_handler(target):
         return f"mailto:{target}"
 
