@@ -4,6 +4,8 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.13.1 (2023-09-10)
+
 ### Internal improvements
 
 - ci: Check `black` formatting (#377)
