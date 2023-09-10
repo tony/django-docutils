@@ -6,7 +6,7 @@
     :license: BSD, see LICENSE for details.
 """
 import logging
-import os
+import pathlib
 import re
 import zlib
 
@@ -22,9 +22,7 @@ if False:
     if PY3:
         unicode = str
 
-    Inventory = Dict[
-        unicode, Dict[unicode, Tuple[unicode, unicode, unicode, unicode]]
-    ]
+    Inventory = Dict[unicode, Dict[unicode, Tuple[unicode, unicode, unicode, unicode]]]
 
 BUFSIZE = 16 * 1024
 logger = logging.getLogger(__name__)
@@ -137,9 +135,7 @@ class InventoryFile:
         version = stream.readline().rstrip()[11:]
         line = stream.readline()
         if "zlib" not in line:
-            raise ValueError(
-                "invalid inventory header (not compressed): %s" % line
-            )
+            raise ValueError("invalid inventory header (not compressed): %s" % line)
 
         for line in stream.read_compressed_lines():
             # be careful to handle names with embedded spaces correctly
@@ -169,7 +165,7 @@ class InventoryFile:
             # type: (unicode) -> unicode
             return re.sub("\\s+", " ", string)
 
-        with open(os.path.join(filename), "wb") as f:
+        with pathlib.Path(filename).open("wb") as f:
             # header
             f.write(
                 (
