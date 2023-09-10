@@ -2,7 +2,13 @@ import pytest
 import responses
 
 from django_docutils.exc import BasedException
-from django_docutils.favicon.scrape import _request_favicon, get_favicon
+from django_docutils.favicon.scrape import (
+    FaviconNotImageError,
+    FaviconURLConnectionError,
+    FaviconURLRetrievalFailed,
+    _request_favicon,
+    get_favicon,
+)
 
 
 @responses.activate
@@ -15,12 +21,20 @@ def test__request_favicon_rejects_wrong_type():
     with pytest.raises(BasedException, match=r"Not an image"):
         _request_favicon(url)
 
+    with pytest.raises(FaviconNotImageError, match=r"Not an image"):
+        _request_favicon(url)
+
 
 @responses.activate
 def test_get_favicon_url_connection():
     url = "https://aklsdfjaweof.com"
 
-    with pytest.raises(BasedException, match=r"The website .* isn\'t connecting."):
+    with pytest.raises(
+        FaviconURLConnectionError, match=r"The website .* isn't connecting."
+    ):
+        get_favicon(url)
+
+    with pytest.raises(BasedException, match=r"The website .* isn't connecting."):
         get_favicon(url)
 
 
@@ -114,6 +128,11 @@ def test_get_favicon_raises_exception_all_strategies_fail():
 
     # page response
     responses.add(responses.GET, url, body="blah", status=200, content_type="text/html")
+
+    with pytest.raises(
+        FaviconURLRetrievalFailed, match=r"Could not retrieve favicon for .*"
+    ):
+        assert get_favicon(url)
 
     with pytest.raises(BasedException, match=r"Could not retrieve favicon for .*"):
         assert get_favicon(url)
