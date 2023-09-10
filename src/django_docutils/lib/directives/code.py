@@ -75,7 +75,7 @@ class CodeBlock(Directive):
     required_arguments = 1
     optional_arguments = 0
     final_argument_whitespace = True
-    option_spec = {key: directives.flag for key in VARIANTS}
+    option_spec: t.ClassVar = {key: directives.flag for key in VARIANTS}
     has_content = True
 
     def run(self):
