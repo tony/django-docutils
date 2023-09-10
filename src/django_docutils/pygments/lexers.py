@@ -1,3 +1,4 @@
+# ruff: noqa: RUF012
 """
     Based on custom lexers for GitHub.com
 
