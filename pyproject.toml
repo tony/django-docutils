@@ -46,7 +46,6 @@ Django = ">=3.2"
 docutils = "*"
 pygments = "<3"
 django-extensions = "*"
-django-randomslugfield = "*"
 django-slugify-processor = "*"
 pytz = "^2023.3"
 
