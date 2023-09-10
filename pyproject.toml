@@ -45,7 +45,6 @@ python = "^3.8"
 Django = ">=3.2"
 docutils = "*"
 pygments = "<3"
-django-extensions = "*"
 pytz = "*"
 
 [tool.poetry.group.dev.dependencies]
