@@ -29,10 +29,10 @@ def get_reference_model():
         return django_apps.get_model(
             settings.BASED_REFERENCE_MODEL, require_ready=False
         )
-    except ValueError:
-        raise BasedReferenceModelValueError()
-    except LookupError:
-        raise BasedReferenceModelLookupError(settings.BASED_REFERENCE_MODEL)
+    except ValueError as e:
+        raise BasedReferenceModelValueError() from e
+    except LookupError as e:
+        raise BasedReferenceModelLookupError(settings.BASED_REFERENCE_MODEL) from e
 
 
 class ReferenceBase(models.Model):
