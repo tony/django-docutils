@@ -3,19 +3,19 @@ import inspect
 from django.utils.module_loading import import_string
 from docutils.parsers.rst import roles
 
-from ..settings import BASED_LIB_RST
+from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 
-def register_based_roles():
+def register_django_docutils_roles():
     """Register all roles, exists to avoid race conditions / pulling in deps.
 
-    This makes based a lot leaner by making roles explicit and "opt-in".
+    This makes django-docutils a lot leaner by making roles explicit and "opt-in".
 
     Why? Not all django projects want need intersphinx cross-referencing
     or amazon links (which requires bitly and an amazon product api package).
     Let's use a TEMPLATES-style django config::
 
-    BASED_LIB_RST = {
+    DJANGO_DOCUTILS_LIB_RST = {
         'roles': {  #: directive-name: Directive class (import string)
             'local': {  #: roles.register_local_role
                 # below: same as
@@ -55,15 +55,15 @@ def register_based_roles():
         }
     }
     """
-    if not BASED_LIB_RST:
+    if not DJANGO_DOCUTILS_LIB_RST:
         return
 
-    if "roles" not in BASED_LIB_RST:
+    if "roles" not in DJANGO_DOCUTILS_LIB_RST:
         return
 
-    based_roles = BASED_LIB_RST["roles"]
+    django_docutils_roles = DJANGO_DOCUTILS_LIB_RST["roles"]
 
-    local_roles = based_roles.get("local", None)
+    local_roles = django_docutils_roles.get("local", None)
 
     if local_roles:
         register_role_mapping(local_roles)

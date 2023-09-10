@@ -3,13 +3,13 @@ from django.utils.safestring import mark_safe
 from docutils import io, nodes, readers
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 
-from .directives import register_based_directives
-from .roles import register_based_roles
-from .settings import BASED_LIB_RST, INJECT_FONT_AWESOME
+from .directives import register_django_docutils_directives
+from .roles import register_django_docutils_roles
+from .settings import DJANGO_DOCUTILS_LIB_RST, INJECT_FONT_AWESOME
 from .transforms.toc import Contents
-from .writers import BasedWriter
+from .writers import DjangoDocutilsWriter
 
-docutils_settings = BASED_LIB_RST.get("docutils", {})
+docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
 
 def publish_parts_from_doctree(
@@ -42,7 +42,7 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None):
     if not writer:
-        writer = BasedWriter()
+        writer = DjangoDocutilsWriter()
     # Create a new document tree with just the table of contents
     # ==========================================================
 
@@ -106,8 +106,8 @@ def publish_doctree(source, settings_overrides=docutils_settings):
     :rtype: :class:`docutils.nodes.document`
     :returns: document/doctree for reStructuredText content
     """
-    register_based_directives()
-    register_based_roles()
+    register_django_docutils_directives()
+    register_django_docutils_roles()
 
     return docutils_publish_doctree(
         source=force_bytes(source), settings_overrides=settings_overrides
@@ -145,7 +145,7 @@ def publish_html_from_doctree(
 
     if pages is None:
         pages = []
-    writer = BasedWriter()
+    writer = DjangoDocutilsWriter()
 
     if INJECT_FONT_AWESOME:
         from django_docutils.lib.transforms.font_awesome import InjectFontAwesome

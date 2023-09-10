@@ -10,9 +10,9 @@ In the case of directory-style projects, the manifest.json.
 These optional pipeline functions can be configured to to create, read,
 update, and delete metadata from RST projects.
 
-To set metadata processors, use BASED_LIB_RST['metadata_processors']::
+To set metadata processors, use DJANGO_DOCUTILS_LIB_RST['metadata_processors']::
 
-    BASED_LIB_RST = {
+    DJANGO_DOCUTILS_LIB_RST = {
         'metadata_processors': [
             'django_docutils.lib.metadata.processors.process_datetime'
         ],
@@ -31,7 +31,7 @@ See *processors.py* for more examples.
 """
 from django.utils.module_loading import import_string
 
-from ..settings import BASED_LIB_RST
+from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def process_metadata(metadata):
@@ -44,11 +44,11 @@ def process_metadata(metadata):
     :rtype: dict
     """
 
-    if not BASED_LIB_RST:
+    if not DJANGO_DOCUTILS_LIB_RST:
         return metadata
 
-    if "metadata_processors" in BASED_LIB_RST:
-        for processor_str in BASED_LIB_RST["metadata_processors"]:
+    if "metadata_processors" in DJANGO_DOCUTILS_LIB_RST:
+        for processor_str in DJANGO_DOCUTILS_LIB_RST["metadata_processors"]:
             processor_fn = import_string(processor_str)
             metadata = processor_fn(metadata)
 

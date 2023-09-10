@@ -55,5 +55,5 @@ templatetags/index
 ### Exceptions
 
 ```{eval-rst}
-.. autoexception:: django_docutils.exc.BasedException
+.. autoexception:: django_docutils.exc.DjangoDocutilsException
 ```

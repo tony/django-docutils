@@ -54,7 +54,7 @@ class RSTMixin:
     def get_base_template(self):
         """TODO: move this out of RSTMixin, it is AMP related, not RST"""
         if self.request.GET.get("is_amp", False):
-            return "based/base-amp.html"
+            return "django_docutils/base-amp.html"
         else:
             return "base.html"
 

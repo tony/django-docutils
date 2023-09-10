@@ -1,2 +1,2 @@
-class BasedException(Exception):
+class DjangoDocutilsException(Exception):
     pass

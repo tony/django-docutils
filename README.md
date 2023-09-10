@@ -68,7 +68,7 @@ class HomeView(DocutilsView):
 # Settings
 
 ```python
-BASED_LIB_RST = {  # Optional, automatically maps roles, directives and transformers
+DJANGO_DOCUTILS_LIB_RST = {  # Optional, automatically maps roles, directives and transformers
     'docutils': {
         'raw_enabled': True,
         'strip_comments': True,
@@ -100,7 +100,7 @@ BASED_LIB_RST = {  # Optional, automatically maps roles, directives and transfor
     },
 }
 
-BASED_LIB_TEXT = {  # Optional
+DJANGO_DOCUTILS_LIB_TEXT = {  # Optional
     'uncapitalized_word_filters': ['project.my_module.my_capitalization_fn']
 }
 ```

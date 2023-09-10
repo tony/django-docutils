@@ -20,7 +20,7 @@ def pytest_configure():
                 "APP_DIRS": True,
             },
         ],
-        BASED_LIB_RST={
+        DJANGO_DOCUTILS_LIB_RST={
             "metadata_processors": [
                 "django_docutils.lib.metadata.processors.process_datetime",
                 "django_docutils.lib.metadata.processors.process_anonymous_user",

@@ -6,7 +6,7 @@ from django_docutils.lib.metadata.extract import (
     extract_subtitle,
     extract_title,
 )
-from django_docutils.lib.settings import BASED_LIB_RST
+from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def test_extract_title():
@@ -56,7 +56,7 @@ some content
 
 
 def test_extract_metadata(tmp_path):
-    docutils_settings = BASED_LIB_RST.get("docutils", {})
+    docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
     content = """
 ===========
 Content ok!

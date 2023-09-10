@@ -3,10 +3,10 @@ from django.utils.module_loading import import_string
 from docutils import nodes
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
-from .settings import BASED_LIB_RST
+from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
-class BasedHTMLTranslator(HTMLTranslator):
+class DjangoDocutilsHTMLTranslator(HTMLTranslator):
     def __init__(self, document):
         HTMLTranslator.__init__(self, document)
 
@@ -163,11 +163,11 @@ class BasedHTMLTranslator(HTMLTranslator):
         self.body.append("</em>")
 
 
-class BasedWriter(Writer):
+class DjangoDocutilsWriter(Writer):
 
-    """Based's hand-crafted docutils' writer:
+    """DjangoDocutils's hand-crafted docutils' writer:
 
-    >>> BASED_LIB_RST = {
+    >>> DJANGO_DOCUTILS_LIB_RST = {
     ...    'transforms': [  #: docutils.transforms.Transform class (import string)
     ...        'django_docutils.lib.transforms.xref.XRefTransform'
     ...    ]
@@ -179,16 +179,16 @@ class BasedWriter(Writer):
         # I'd like to put this into the class attribute, but I think
         # somewhere up the Writer/Translator hierarchy are 'old' python
         # classes. (e.g. Python =< 2.1 classes)
-        self.translator_class = BasedHTMLTranslator
+        self.translator_class = DjangoDocutilsHTMLTranslator
 
     def get_transforms(self):
         transforms = Writer.get_transforms(self)
 
-        if not BASED_LIB_RST:
+        if not DJANGO_DOCUTILS_LIB_RST:
             return transforms
 
-        if "transforms" in BASED_LIB_RST:
-            for transforms_cls_str in BASED_LIB_RST["transforms"]:
+        if "transforms" in DJANGO_DOCUTILS_LIB_RST:
+            for transforms_cls_str in DJANGO_DOCUTILS_LIB_RST["transforms"]:
                 transforms += [import_string(transforms_cls_str)]
 
         return transforms
