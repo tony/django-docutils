@@ -22,7 +22,9 @@ def restructuredtext(value):
     import warnings
 
     warnings.warn(
-        "The restructuredtext filter has been deprecated", category=DeprecationWarning
+        "The restructuredtext filter has been deprecated",
+        category=DeprecationWarning,
+        stacklevel=2,
     )
     try:
         from docutils.core import publish_parts
