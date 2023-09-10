@@ -56,6 +56,16 @@ class DocutilsResponse(TemplateResponse):
         return content
 
 
+class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        return super().__init__(
+            "DocutilsView requires either a definition of 'rst_name' "
+            "or an implementation of 'get_rst_names()'",
+            *args,
+            **kwargs
+        )
+
+
 class DocutilsView(TemplateView):
     response_class = DocutilsResponse
     rst_name = None
@@ -76,9 +86,6 @@ class DocutilsView(TemplateView):
         Follows after get_template_names, but for scanning for rst content.
         """
         if self.rst_name is None:
-            raise ImproperlyConfigured(
-                "DocutilsView requires either a definition of "
-                "'rst_name' or an implementation of 'get_rst_names()'"
-            )
+            raise DocutilsViewRstNameImproperlyConfigured()
         else:
             return [self.rst_name]
