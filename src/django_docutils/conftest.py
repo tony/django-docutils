@@ -67,7 +67,6 @@ def pytest_configure():
             "django.contrib.sessions",
             "django.contrib.sites",
             "django.contrib.staticfiles",
-            "django_extensions",
         ),
         PASSWORD_HASHERS=("django.contrib.auth.hashers.MD5PasswordHasher",),
         ANONYMOUS_USER_NAME="AnonymousCoward",

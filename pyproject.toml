@@ -45,13 +45,7 @@ python = "^3.8"
 Django = ">=3.2"
 docutils = "*"
 pygments = "<3"
-django-extensions = "*"
-django-randomslugfield = "*"
-django-slugify-processor = "*"
-django-dirtyfields = ">1.3.0"
-lxml = "*"
-bitly-api-py3 = "*"
-pytz = "^2023.3"
+pytz = { version = "*", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 ### Docs ###
@@ -70,13 +64,9 @@ myst_parser = ">=0.18.1"
 ### Testing ###
 pytest = "*"
 pytest-rerunfailures = "*"
-pytest-mock = "*"
 pytest-watcher = "*"
-factory-boy = "*"
-pytest-factoryboy = "*"
 pytest-django = "*"
 dj-inmemorystorage = "*"
-responses = "*"
 
 ### Coverage ###
 codecov = "*"
@@ -90,9 +80,6 @@ mypy = "*"
 django-stubs = "*"
 types-docutils = "*"
 types-Pygments = "*"
-types-requests = "*"
-types-six = "*"
-lxml-stubs = "*"
 
 [tool.poetry.extras]
 # Development stuff
@@ -109,16 +96,15 @@ docs = [
   "furo",
   "gp-libs",
 ]
+pytz = [
+  "pytz"
+]
 test = [
   "pytest",
   "pytest-rerunfailures",
-  "pytest-mock",
   "pytest-watcher",
-  "factory-boy",
-  "pytest-factoryboy",
   "pytest-django",
   "dj-inmemorystorage",
-  "responses",
 ]
 coverage = ["codecov", "coverage", "pytest-cov"]
 lint = [
@@ -127,10 +113,6 @@ lint = [
   "django-stubs",
   "types-docutils",
   "types-pygments",
-  "types-six",
-  "types-requests",
-  "types-tqdm",
-  "lxml-stubs",
 ]
 
 [tool.mypy]
@@ -145,14 +127,7 @@ django_settings_module = "tests.settings"
 
 [[tool.mypy.overrides]]
 module = [
-  "amazon.*",
-  "bitly_api.*",
-  "factory.*",
   "inmemorystorage.*",
-  "randomslugfield.*",
-  "dirtyfields.*",
-  "django_extensions.*",
-  "django_slugify_processor.*",
   "django_docutils.*",
 ]
 ignore_missing_imports = true

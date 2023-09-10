@@ -4,12 +4,43 @@
 
 - _Add your latest changes from PRs here_
 
+### Breaking changes: Debloating, Part 2
+
+#### Remove unused requirements (#376)
+
+- Remove dependencies on (now unused via #373):
+
+  - `django_slug_processor`
+  - `django-randomslugfield`
+  - `django-dirtyfields`
+  - `django-extensions`
+  - `django-dirtyfields`
+  - `bitly-api-py3`
+  - `lxml`
+
+- Remove dev dependencies (now unused via #373):
+
+  - `types-tqdm`
+  - `types-six`
+  - `types-requests`
+  - `factory-boy`
+  - `pytest-factory-boy`
+  - `pytest-mock`
+
+- Make `pytz` optional dependency
+
+#### Remove `:amzn:` (amazon) role (#376)
+
+This required `bitly-api-py3`, a dependency not related to core functionality.
+It also distracted away from the project's goals: Just having solid docutils
+rendering for django.
+
 ## django-docutils 0.12.0 (2023-09-10)
 
-### Breaking changes
+### Breaking changes: Debloating, Part 1
 
 django-docutils is a hastily-extracted hunk of specialized django code - and only now is getting
-dedicated attention. 
+dedicated attention.
 
 To begin, django-docutils just got leaner downstream, beginning with removal of
 non-essential dependencies and experimental code.
