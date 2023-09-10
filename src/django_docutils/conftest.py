@@ -1,8 +1,26 @@
+import contextlib
+
+import django
+
+
 def pytest_configure():
     from django.conf import settings
 
+    settings_kwargs = {}
+
+    if django.VERSION <= (4, 2):
+        settings_kwargs["USE_L10N"] = True
+
+    if django.VERSION <= (4, 1):
+        settings_kwargs["DEFAULT_FILE_STORAGE"] = "inmemorystorage.InMemoryStorage"
+    else:
+        settings_kwargs["STORAGES"] = {
+            "default": {
+                "BACKEND": "inmemorystorage.InMemoryStorage",
+            }
+        }
+
     settings.configure(
-        DEFAULT_FILE_STORAGE="inmemorystorage.InMemoryStorage",
         DEBUG_PROPAGATE_EXCEPTIONS=True,
         DATABASES={
             "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}
@@ -10,7 +28,6 @@ def pytest_configure():
         SITE_ID=1,
         SECRET_KEY="not very secret in tests",
         USE_I18N=True,
-        USE_L10N=True,
         USE_TZ=True,
         STATIC_URL="/static/",
         ROOT_URLCONF="tests.urls",
@@ -70,11 +87,8 @@ def pytest_configure():
         ),
         PASSWORD_HASHERS=("django.contrib.auth.hashers.MD5PasswordHasher",),
         ANONYMOUS_USER_NAME="AnonymousCoward",
+        **settings_kwargs,
     )
 
-    try:
-        import django
-
+    with contextlib.suppress(AttributeError):
         django.setup()
-    except AttributeError:
-        pass
