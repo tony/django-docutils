@@ -4,6 +4,15 @@
 
 - _Add your latest changes from PRs here_
 
+### Internal improvements
+
+- ci: Check `black` formatting (#377)
+- Update Poetry 1.5.1 -> 1.6.1 (#377)
+
+### Tests
+
+- Fix deprecation warnings in Django 4.1+ (#377)
+
 ## django-docutils 0.13.0 (2023-09-10)
 
 ### Breaking changes: Debloating, Part 2
