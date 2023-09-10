@@ -83,6 +83,7 @@ There are rules in which data takes precedence / cascades:
 
 """
 import contextlib
+import pathlib
 
 from django.utils.encoding import force_bytes
 
@@ -131,6 +132,7 @@ def publish_post(source=None, source_path=None, defaults=None, overrides=None):
     if defaults is None:
         defaults = {}
     pages = []  # all posts contain one or more pages inside
+    sources = []
 
     if source is not None:
         if isinstance(source, str):
@@ -139,9 +141,13 @@ def publish_post(source=None, source_path=None, defaults=None, overrides=None):
             sources = source
     elif source_path:
         if isinstance(source_path, str):
-            sources = [open(source_path).read()]
+            with pathlib.Path(source_path).open() as sfile:
+                sources = [sfile.read()]
         elif isinstance(source_path, list):
-            sources = [open(spath).read() for spath in source_path]
+            sources = []
+            for spath in source_path:
+                with pathlib.Path(spath).open() as sfile:
+                    sources.append(sfile.read())
 
     for source in sources:
         page_data = publish_page(source=source, defaults=defaults, overrides=overrides)
@@ -175,7 +181,8 @@ def publish_page(source=None, source_path=None, defaults=None, overrides=None):
     if defaults is None:
         defaults = {}
     if source_path:
-        source = open(source_path).read()
+        with pathlib.Path(source_path).open() as s:
+            source = s.read()
 
     doctree = publish_doctree(
         source=force_bytes(source), settings_overrides=docutils_settings
