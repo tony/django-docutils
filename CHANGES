@@ -4,6 +4,12 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.13.2 (2023-09-10)
+
+### Bug fixes
+
+- `RSTMixin`: Fix `.content` missing params
+
 ## django-docutils 0.13.1 (2023-09-10)
 
 ### Internal improvements
