@@ -4,6 +4,7 @@ import typing as t
 from django.http import HttpRequest
 from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
+from docutils import nodes
 
 from django_docutils._internal.types import StrPath
 from django_docutils.lib.publisher import (
@@ -41,19 +42,28 @@ class RSTMixin:
     request: HttpRequest
 
     @cached_property
-    def raw_content(self):
+    def raw_content(self) -> t.Optional[str]:
         raise NotImplementedError
 
     @cached_property
-    def doctree(self):
+    def doctree(self) -> nodes.document | None:
+        if self.raw_content is None:
+            return None
+
         return publish_doctree(self.raw_content)
 
     @cached_property
-    def sidebar(self, **kwargs):
+    def sidebar(self, **kwargs: object) -> str | None:
+        if self.doctree is None:
+            return None
+
         return publish_toc_from_doctree(self.doctree)
 
     @cached_property
-    def content(self):
+    def content(self) -> str | None:
+        if self.doctree is None:
+            return None
+
         return publish_html_from_doctree(
             self.doctree, **getattr(self, "rst_settings", {})
         )
