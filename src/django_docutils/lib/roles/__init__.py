@@ -7,7 +7,7 @@ from docutils.parsers.rst import roles
 from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 
-def register_django_docutils_roles():
+def register_django_docutils_roles() -> None:
     """Register all roles, exists to avoid race conditions / pulling in deps.
 
     This makes django-docutils a lot leaner by making roles explicit and "opt-in".
