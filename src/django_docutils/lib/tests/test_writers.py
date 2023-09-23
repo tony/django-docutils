@@ -7,7 +7,7 @@ from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 from django_docutils.lib.writers import DjangoDocutilsWriter
 
 
-def test_HTMLWriter_hides_docinfo():
+def test_HTMLWriter_hides_docinfo() -> None:
     docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
     content = """
