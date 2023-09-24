@@ -14,8 +14,8 @@ class DocutilsResponse(TemplateResponse):
     def __init__(
         self,
         request: HttpRequest,
-        template: str,
-        rst: str,
+        template: list[str],
+        rst: list[str],
         context: t.Optional[t.Dict[str, t.Any]] = None,
         content_type: t.Optional[str] = None,
         status: t.Optional[int] = None,
