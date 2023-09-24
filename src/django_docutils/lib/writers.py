@@ -9,6 +9,13 @@ from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
+class ParentNodeClassTuple(t.NamedTuple):
+    parent_node_type: t.Type[t.Union[nodes.Node, nodes.Body]]
+    args: list[str]
+    kwargs: t.Dict[str, str]
+    close_tag: t.Optional[str]
+
+
 class DjangoDocutilsHTMLTranslator(HTMLTranslator):
     def __init__(self, document: nodes.document):
         HTMLTranslator.__init__(self, document)
@@ -92,22 +99,23 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             node["refid"] = node.parent["ids"][0]
 
         # specific cases we don't use h{1-6} tags for
-        parent_node_classes: list[
-            t.Tuple[
-                t.Type[t.Union[nodes.Node, nodes.Body]],
-                list[str],
-                t.Dict[str, str],
-                t.Optional[str],
-            ]
-        ] = [
-            (nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None),
-            (nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None),
-            (nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None),
-            (nodes.table, ["caption", ""], {}, "</caption>"),
+        parent_node_classes: list[ParentNodeClassTuple] = [
+            ParentNodeClassTuple(
+                nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None
+            ),
+            ParentNodeClassTuple(
+                nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None
+            ),
+            ParentNodeClassTuple(
+                nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None
+            ),
+            ParentNodeClassTuple(nodes.table, ["caption", ""], {}, "</caption>"),
         ]
 
         # if node is wrapped in a certain type and processed, toggle this
         is_processed = False
+
+        assert parent_node_classes is not None
 
         for parent_node_type, args, kwargs, close_tag in parent_node_classes:
             if isinstance(node.parent, parent_node_type):
