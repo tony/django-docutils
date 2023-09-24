@@ -30,7 +30,10 @@ class ReStructuredTextNode(Node):
 
         content = self.content.resolve(context)
 
-        return publish_html_from_source(content, *args, **kwargs)
+        html = publish_html_from_source(content, *args, **kwargs)
+        if html is None:
+            return ""
+        return html
 
 
 class MalformedArgumentsToUrlTag(TemplateSyntaxError):
