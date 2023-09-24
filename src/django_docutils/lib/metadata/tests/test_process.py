@@ -7,7 +7,7 @@ from django_docutils.lib.metadata.extract import extract_metadata
 from django_docutils.lib.metadata.process import process_metadata
 
 
-def test_process_metadata_file():
+def test_process_metadata_file() -> None:
     source = """
 ===========
 Content ok!
@@ -43,7 +43,7 @@ some content
     }
 
 
-def test_process_metadata_daytime_timezone():
+def test_process_metadata_daytime_timezone() -> None:
     """Verify time of day and timezone (optional) work with dates."""
 
     source = """
@@ -73,7 +73,7 @@ some content
 
     created = analyzed_metadata["created"]
 
-    assert isinstance(created, datetime.date)
+    assert isinstance(created, datetime.datetime)
     assert created.year == 2017
     assert created.month == 7
     assert created.day == 30
