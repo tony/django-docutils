@@ -15,7 +15,6 @@ class Docutils(BaseEngine):
         params = params.copy()
         self.options = params.pop("OPTIONS").copy()
         self.options.setdefault("debug", settings.DEBUG)
-        self.options.setdefault("file_charset", settings.FILE_CHARSET)
         super().__init__(params)
         self.engine = Engine(self.dirs, self.app_dirs, **self.options)
 
@@ -25,7 +24,7 @@ class Docutils(BaseEngine):
     def get_template(self, template_name):
         for template_file in self.iter_template_filenames(template_name):
             try:
-                with open(template_file, encoding=settings.FILE_CHARSET) as fp:
+                with open(template_file, encoding="utf-8") as fp:
                     template_code = fp.read()
             except OSError:
                 continue
