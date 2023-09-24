@@ -5,7 +5,7 @@ from django.utils.html import strip_tags
 from docutils import nodes
 
 
-def extract_title(document):
+def extract_title(document: nodes.document) -> t.Optional[str]:
     """Return the title of the document.
 
     :param document:
@@ -43,14 +43,14 @@ def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
     return output
 
 
-def extract_subtitle(document):
+def extract_subtitle(document: nodes.document) -> t.Optional[str]:
     """Return the subtitle of the document."""
     for node in document.traverse(nodes.PreBibliographic):
         if isinstance(node, nodes.subtitle):
             return node.astext()
 
 
-def extract_abstract(doctree, length=100):
+def extract_abstract(doctree: nodes.document, length: int = 100) -> str:
     """Pull first n words from a docutils document.
 
     We use this to create snippets for Twitter Cards, FB, etc.
