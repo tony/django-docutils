@@ -7,6 +7,9 @@ from django.template.loader import select_template
 from django.template.response import TemplateResponse
 from django.views.generic.base import TemplateView
 
+if t.TYPE_CHECKING:
+    from typing_extensions import TypedDict, Unpack
+
 
 class DocutilsResponse(TemplateResponse):
     template_name = "base.html"
@@ -47,7 +50,7 @@ class DocutilsResponse(TemplateResponse):
         )
 
         template = self.resolve_template(self.template_name)
-        content = template.render(context, self._request)
+        content = template.render(context)
         return content
 
 
@@ -66,7 +69,13 @@ class DocutilsView(TemplateView):
     rst_name = None
 
     def render_to_response(
-        self, context: t.Dict[str, t.Any], **response_kwargs: object
+        self,
+        context: t.Optional[t.Dict[str, t.Any]] = None,
+        content_type: t.Optional[str] = None,
+        status: t.Optional[int] = None,
+        charset: t.Optional[str] = None,
+        using: t.Optional[str] = None,
+        **response_kwargs: object
     ) -> HttpResponse:
         """Override to pay in rst content."""
         return self.response_class(
@@ -74,8 +83,9 @@ class DocutilsView(TemplateView):
             template=self.get_template_names(),
             rst=self.get_rst_names(),
             context=context,
-            using=self.template_engine,
-            **response_kwargs
+            content_type=content_type,
+            status=status,
+            using=using or self.template_engine,
         )
 
     def get_rst_names(self) -> list[str]:
