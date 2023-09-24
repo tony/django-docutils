@@ -1,4 +1,8 @@
+import typing as t
+
 from django.core.exceptions import ImproperlyConfigured
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.template.loader import select_template
 from django.template.response import TemplateResponse
 from django.views.generic.base import TemplateView
@@ -9,14 +13,14 @@ class DocutilsResponse(TemplateResponse):
 
     def __init__(
         self,
-        request,
-        template,
-        rst,
-        context=None,
-        content_type=None,
-        status=None,
-        charset=None,
-        using=None,
+        request: HttpRequest,
+        template: str,
+        rst: str,
+        context: t.Optional[t.Dict[str, t.Any]] = None,
+        content_type: t.Optional[str] = None,
+        status: t.Optional[int] = None,
+        charset: t.Optional[str] = None,
+        using: t.Optional[str] = None,
     ):
         self.rst_name = rst
         super().__init__(
@@ -24,7 +28,7 @@ class DocutilsResponse(TemplateResponse):
         )
 
     @property
-    def rendered_content(self):
+    def rendered_content(self) -> str:
         """Return the freshly rendered content for the template and context
         described by the TemplateResponse.
 
@@ -33,7 +37,7 @@ class DocutilsResponse(TemplateResponse):
         content explicitly using the value of this property.
         """
 
-        context = self.resolve_context(self.context_data)
+        context: t.Dict[str, t.Any] = self.resolve_context(self.context_data) or {}
 
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
@@ -61,7 +65,9 @@ class DocutilsView(TemplateView):
     response_class = DocutilsResponse
     rst_name = None
 
-    def render_to_response(self, context, **response_kwargs):
+    def render_to_response(
+        self, context: t.Dict[str, t.Any], **response_kwargs: object
+    ) -> HttpResponse:
         """Override to pay in rst content."""
         return self.response_class(
             request=self.request,
@@ -72,7 +78,7 @@ class DocutilsView(TemplateView):
             **response_kwargs
         )
 
-    def get_rst_names(self):
+    def get_rst_names(self) -> list[str]:
         """
         Follows after get_template_names, but for scanning for rst content.
         """
