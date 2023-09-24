@@ -40,16 +40,18 @@ def publish_parts_from_doctree(
     )
     if not writer and writer_name:
         pub.set_writer(writer_name)
-    pub.process_programmatic_settings(settings_spec, settings_overrides, config_section)
+    pub.process_programmatic_settings(
+        settings_spec, settings_overrides, config_section  # type:ignore
+    )
     pub.set_destination(None, destination_path)
     pub.publish(enable_exit_status=enable_exit_status)
-    return pub.writer.parts
+    return pub.writer.parts  # type:ignore
 
 
 def publish_toc_from_doctree(
     doctree: nodes.document,
     writer: Writer | None = None,
-) -> str:
+) -> t.Optional[str]:
     if not writer:
         writer = DjangoDocutilsWriter()
     # Create a new document tree with just the table of contents
@@ -57,13 +59,13 @@ def publish_toc_from_doctree(
 
     # document tree template:
     toc_tree = nodes.document(
-        "", "", source="toc-generator", classes=["fixed-toc-menu menu"]
+        "", "", source="toc-generator", classes=["fixed-toc-menu menu"]  # type:ignore
     )
     toc_tree += nodes.paragraph("", "Contents", classes=["menu-label"])
     # Set up a Contents instance:
     # The Contents transform requires a "pending" startnode and
     # generation options startnode
-    pending = nodes.pending(Contents, rawsource="")
+    pending = nodes.pending(Contents, rawsource="")  # type:ignore
 
     contents_transform = Contents(doctree, pending)
 
@@ -71,7 +73,7 @@ def publish_toc_from_doctree(
     # so users can copy anchor from headers
     contents_transform.backlinks = "entry"
 
-    toc_contents = contents_transform.build_contents(doctree)
+    toc_contents = contents_transform.build_contents(doctree)  # type:ignore
 
     if not toc_contents:  # ToC is empty
         return None
@@ -116,7 +118,7 @@ if t.TYPE_CHECKING:
 
 def publish_html_from_source(
     source: str, **kwargs: "Unpack[PublishHtmlDocTreeKwargs]"
-) -> str:
+) -> str | None:
     """Return HTML from reStructuredText source string."""
 
     doctree = publish_doctree(source)
@@ -127,7 +129,7 @@ def publish_html_from_doctree(
     doctree: nodes.document,
     show_title: bool = True,
     toc_only: bool = False,
-) -> str:
+) -> str | None:
     """Return HTML from reStructuredText document (doctree).
 
     :param value: Contents from template being placed into node
