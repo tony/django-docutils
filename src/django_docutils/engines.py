@@ -6,9 +6,14 @@ from django.template.backends.base import BaseEngine
 from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
 from django.template.exceptions import TemplateDoesNotExist
+from django.utils.safestring import mark_safe
 from docutils import core
 
 from .directives import register_pygments_directive
+
+if t.TYPE_CHECKING:
+    from django.template.base import Context
+    from django.utils.safestring import SafeString
 
 
 class Docutils(BaseEngine):
@@ -44,9 +49,9 @@ class DocutilsTemplate:
 
     def render(
         self,
-        context: t.Optional[t.Dict[str, t.Any]] = None,
+        context: t.Union["Context", t.Dict[str, t.Any], None] = None,
         request: t.Optional[HttpRequest] = None,
-    ) -> str:
+    ) -> "SafeString":
         context = self.options
         if request is not None:
             context["request"] = request
@@ -54,7 +59,7 @@ class DocutilsTemplate:
             context["csrf_token"] = csrf_token_lazy(request)
         context = {"source": self.source, "writer_name": "html"}
 
-        return t.cast(str, core.publish_parts(**context)["html_body"])
+        return mark_safe(t.cast(str, core.publish_parts(**context)["html_body"]))
 
 
 register_pygments_directive()
