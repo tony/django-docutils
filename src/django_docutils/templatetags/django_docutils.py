@@ -42,4 +42,7 @@ def restructuredtext(value: str) -> str:
             writer_name="html5_polyglot",
             settings_overrides=docutils_settings,
         )
+
+        assert isinstance(parts["fragment"], str)
+
         return mark_safe(force_str(parts["fragment"]))
