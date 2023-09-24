@@ -4,6 +4,15 @@
 
 - _Add your latest changes from PRs here_
 
+### Bug fixes
+
+- Remove unused page number params (#379):
+
+  - `publish_toc_from_doctree()`
+  - `publish_html_from_doctree()`
+
+  The related code was removed as part of #376
+
 ## django-docutils 0.13.2 (2023-09-10)
 
 ### Bug fixes
