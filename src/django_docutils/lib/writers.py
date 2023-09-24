@@ -17,16 +17,16 @@ class ParentNodeClassTuple(t.NamedTuple):
 
 
 class DjangoDocutilsHTMLTranslator(HTMLTranslator):
-    def __init__(self, document: nodes.document):
+    def __init__(self, document: nodes.document) -> None:
         HTMLTranslator.__init__(self, document)
 
-    def visit_pending_xref(self, node: nodes.Element):
+    def visit_pending_xref(self, node: nodes.Element) -> None:
         pass
 
-    def depart_pending_xref(self, node: nodes.Element):
+    def depart_pending_xref(self, node: nodes.Element) -> None:
         pass
 
-    def visit_table(self, node: nodes.Element):
+    def visit_table(self, node: nodes.Element) -> None:
         node["classes"].extend(["table"])
         HTMLTranslator.visit_table(self, node)
 
@@ -89,7 +89,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         - s/with-subtitle/subtitle for bulma css
 
         """
-        close_tag = "</p>\n"
+        close_tag: t.Optional[str] = "</p>\n"
 
         # add backlinks to refid (toc header backlinks)
         # This assures headers link to themselves, so users can copy a link
@@ -115,13 +115,15 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         # if node is wrapped in a certain type and processed, toggle this
         is_processed = False
 
-        assert parent_node_classes is not None
-
-        for parent_node_type, args, kwargs, close_tag in parent_node_classes:
-            if isinstance(node.parent, parent_node_type):
-                self.body.append(self.starttag(node, *args, **kwargs))
+        for parent_node_class in parent_node_classes:
+            if isinstance(node.parent, parent_node_class.parent_node_type):
+                self.body.append(
+                    self.starttag(
+                        node, *parent_node_class.args, **parent_node_class.kwargs
+                    )
+                )
                 if close_tag:
-                    close_tag = close_tag
+                    close_tag = parent_node_class.close_tag
                 is_processed = True
 
         # if one of the specific nodes already appended tag, don't re-run
