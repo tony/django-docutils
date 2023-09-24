@@ -1,3 +1,5 @@
+import typing as t
+
 from django.template.defaultfilters import truncatewords
 from django.utils.html import strip_tags
 from docutils import nodes
@@ -14,7 +16,7 @@ def extract_title(document):
             return node.astext()
 
 
-def extract_metadata(document):
+def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
     """Return the dict containing document metadata.
 
     :param document:
