@@ -49,8 +49,6 @@ def publish_parts_from_doctree(
 def publish_toc_from_doctree(
     doctree: nodes.document,
     writer: Writer | None = None,
-    pages: int | None = None,
-    current_page: int | None = None,
 ) -> str:
     if not writer:
         writer = DjangoDocutilsWriter()
@@ -114,8 +112,6 @@ if t.TYPE_CHECKING:
     class PublishHtmlDocTreeKwargs(TypedDict):
         show_title: NotRequired[bool]
         toc_only: NotRequired[bool]
-        pages: NotRequired[t.Optional[int]]
-        current_page: NotRequired[t.Optional[int]]
 
 
 def publish_html_from_source(
