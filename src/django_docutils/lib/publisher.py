@@ -40,7 +40,7 @@ def publish_parts_from_doctree(
     return pub.writer.parts
 
 
-def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None):
+def publish_toc_from_doctree(doctree, writer=None):
     if not writer:
         writer = DjangoDocutilsWriter()
     # Create a new document tree with just the table of contents
@@ -70,26 +70,7 @@ def publish_toc_from_doctree(doctree, writer=None, pages=None, current_page=None
     # run the contents builder and append the result to the template:
     toc_topic = nodes.topic(classes=["contents", "toc"])
 
-    # if multi-page post, add page contents and inject into current page
-    if pages and len(pages) > 1 and current_page:
-        page_entries = []
-        for page in pages:
-            reference = nodes.reference(
-                page.get_absolute_url(), page.subtitle, refuri=page.get_absolute_url()
-            )
-            item = nodes.list_item("", reference)
-            if page == current_page:
-                # make sure current page link is active
-                reference["classes"] = ["is-active"]
-
-                # append toc to the active page
-                toc_contents["classes"].append("is-active")
-                item += toc_contents
-            # add the rest of te page entries
-            page_entries.append(item)
-        toc_topic += nodes.bullet_list("", *page_entries, classes=["menu-list"])
-    else:
-        toc_topic += toc_contents
+    toc_topic += toc_contents
     toc_tree += toc_topic
     toc = publish_parts_from_doctree(toc_tree, writer=writer)
     return mark_safe(force_str(toc["html_body"]))
@@ -125,8 +106,6 @@ def publish_html_from_doctree(
     doctree,
     show_title=True,
     toc_only=False,
-    pages=None,
-    current_page=None,
 ):
     """Return HTML from reStructuredText document (doctree).
 
@@ -136,15 +115,7 @@ def publish_html_from_doctree(
     :type show_title: bool
     :param toc_only: special flag: return show TOC, used for sidebars
     :type toc_only: bool
-    :param pages: optional list of pages, if multi-page post
-    :type pages: :class:`~django:django.db.models.query.QuerySet`
-    :param current_page: current page (only applicable if pages)
-    :type current_page: :class:`django:django.db.models.Model`
-
     """
-
-    if pages is None:
-        pages = []
     writer = DjangoDocutilsWriter()
 
     if INJECT_FONT_AWESOME:
@@ -155,9 +126,7 @@ def publish_html_from_doctree(
     doctree.transformer.apply_transforms()
 
     if toc_only:  # special flag to only return toc, used for sidebars
-        return publish_toc_from_doctree(
-            doctree, writer=writer, pages=pages, current_page=current_page
-        )
+        return publish_toc_from_doctree(doctree, writer=writer)
 
     parts = publish_parts_from_doctree(
         doctree, writer=writer, settings_overrides=docutils_settings
