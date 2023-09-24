@@ -1,3 +1,4 @@
+import typing as t
 import inspect
 import typing as t
 
@@ -70,7 +71,7 @@ def register_django_docutils_roles() -> None:
         register_role_mapping(local_roles)
 
 
-def register_role_mapping(role_mapping):
+def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
     """Register a dict mapping of roles
 
     An item consists of a role name, import string to a callable, and an
