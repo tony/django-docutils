@@ -92,7 +92,14 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             node["refid"] = node.parent["ids"][0]
 
         # specific cases we don't use h{1-6} tags for
-        parent_node_classes = [
+        parent_node_classes: list[
+            t.Tuple[
+                t.Type[t.Union[nodes.Node, nodes.Body]],
+                list[str],
+                t.Dict[str, str],
+                t.Optional[str],
+            ]
+        ] = [
             (nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None),
             (nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None),
             (nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None),
@@ -124,7 +131,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         self.context.append(close_tag)
 
     def _visit_section_title(
-        self, node: nodes.title, close_tag: t.Optional[str]
+        self, node: nodes.Element, close_tag: t.Optional[str]
     ) -> str:
         """Our special sauce for section titles.
 
