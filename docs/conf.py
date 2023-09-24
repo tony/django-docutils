@@ -1,9 +1,12 @@
 # flake8: noqa: E501
 import inspect
+import os
 import pathlib
 import sys
 import typing as t
 from os.path import relpath
+
+import django
 
 import django_docutils
 
@@ -15,8 +18,12 @@ cwd = pathlib.Path(__file__).parent
 project_root = cwd.parent
 src_root = project_root / "src"
 
+sys.path.insert(0, str(project_root))
 sys.path.insert(0, str(src_root))
 sys.path.insert(0, str(cwd / "_ext"))
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "tests.settings"
+django.setup()
 
 # package data
 about: t.Dict[str, str] = {}

@@ -4,6 +4,10 @@
 
 - _Add your latest changes from PRs here_
 
+### Documentation
+
+- Fix Sphinx docs, settings warning (#380)
+
 ## django-docutils 0.13.3 (2023-09-24)
 
 ### Bug fixes
