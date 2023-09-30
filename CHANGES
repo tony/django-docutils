@@ -4,6 +4,12 @@
 
 - _Add your latest changes from PRs here_
 
+### What's new
+
+  Now [`mypy --strict`] compliant (#378)
+
+  [`mypy --strict`]: https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-strict
+
 ## django-docutils 0.13.5 (2023-09-30)
 
 ### Bug fixes

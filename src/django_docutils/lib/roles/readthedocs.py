@@ -1,7 +1,20 @@
+import typing as t
+
+from docutils.parsers.rst.states import Inliner
+
 from .common import generic_url_role
+from .types import GenericUrlRoleFn
 
 
-def readthedocs_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+def readthedocs_role(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: t.Optional[t.Dict[str, t.Any]] = None,
+    content: t.Optional[str] = None,
+) -> GenericUrlRoleFn:
     """Role for linking to readthedocs.org page.
 
     :rtd:`django-pipeline` ->
@@ -20,13 +33,10 @@ def readthedocs_role(name, rawtext, text, lineno, inliner, options=None, content
        link: https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/
        text: about virtalenvs
     """
-
-    if content is None:
-        content = []
     if options is None:
         options = {}
 
-    def url_handler(target):
+    def url_handler(target: str) -> str:
         if ":" in target:
             project, path = target.split(":")
             return f"https://{project}.readthedocs.io/en/latest/{path}"

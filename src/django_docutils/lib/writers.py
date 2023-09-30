@@ -1,26 +1,36 @@
+import typing as t
+
 from django.conf import settings
 from django.utils.module_loading import import_string
 from docutils import nodes
+from docutils.transforms import Transform
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
 from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
+class ParentNodeClassTuple(t.NamedTuple):
+    parent_node_type: t.Type[t.Union[nodes.Node, nodes.Body]]
+    args: list[str]
+    kwargs: t.Dict[str, str]
+    close_tag: t.Optional[str]
+
+
 class DjangoDocutilsHTMLTranslator(HTMLTranslator):
-    def __init__(self, document):
+    def __init__(self, document: nodes.document) -> None:
         HTMLTranslator.__init__(self, document)
 
-    def visit_pending_xref(self, node):
+    def visit_pending_xref(self, node: nodes.Element) -> None:
         pass
 
-    def depart_pending_xref(self, node):
+    def depart_pending_xref(self, node: nodes.Element) -> None:
         pass
 
-    def visit_table(self, node):
+    def visit_table(self, node: nodes.Element) -> None:
         node["classes"].extend(["table"])
         HTMLTranslator.visit_table(self, node)
 
-    def visit_reference(self, node):
+    def visit_reference(self, node: nodes.Element) -> None:
         """
         Changes:
 
@@ -68,7 +78,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             pass
         self.body.append(self.starttag(node, "a", "", **atts))
 
-    def visit_title(self, node):
+    def visit_title(self, node: nodes.Element) -> None:
         """Changes:
 
         - add backlinks for Contents refid headers
@@ -79,7 +89,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         - s/with-subtitle/subtitle for bulma css
 
         """
-        close_tag = "</p>\n"
+        close_tag: t.Optional[str] = "</p>\n"
 
         # add backlinks to refid (toc header backlinks)
         # This assures headers link to themselves, so users can copy a link
@@ -89,21 +99,31 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             node["refid"] = node.parent["ids"][0]
 
         # specific cases we don't use h{1-6} tags for
-        parent_node_classes = [
-            (nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None),
-            (nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None),
-            (nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None),
-            (nodes.table, ["caption", ""], {}, "</caption>"),
+        parent_node_classes: list[ParentNodeClassTuple] = [
+            ParentNodeClassTuple(
+                nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None
+            ),
+            ParentNodeClassTuple(
+                nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None
+            ),
+            ParentNodeClassTuple(
+                nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None
+            ),
+            ParentNodeClassTuple(nodes.table, ["caption", ""], {}, "</caption>"),
         ]
 
         # if node is wrapped in a certain type and processed, toggle this
         is_processed = False
 
-        for parent_node_type, args, kwargs, close_tag in parent_node_classes:
-            if isinstance(node.parent, parent_node_type):
-                self.body.append(self.starttag(node, *args, **kwargs))
+        for parent_node_class in parent_node_classes:
+            if isinstance(node.parent, parent_node_class.parent_node_type):
+                self.body.append(
+                    self.starttag(
+                        node, *parent_node_class.args, **parent_node_class.kwargs
+                    )
+                )
                 if close_tag:
-                    close_tag = close_tag
+                    close_tag = parent_node_class.close_tag
                 is_processed = True
 
         # if one of the specific nodes already appended tag, don't re-run
@@ -120,7 +140,9 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
 
         self.context.append(close_tag)
 
-    def _visit_section_title(self, node, close_tag):
+    def _visit_section_title(
+        self, node: nodes.Element, close_tag: t.Optional[str]
+    ) -> str:
         """Our special sauce for section titles.
 
         We broke this off to reduce complexity.
@@ -133,33 +155,32 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         :returns: close_tag
         """
         h_level = self.section_level + self.initial_header_level - 1
-        atts = {}
+        atts: t.Dict[str, str] = {}
         if len(node.parent) >= 2 and isinstance(node.parent[1], nodes.subtitle):
             atts["CLASS"] = "subtitle"
 
         self.body.append(self.starttag(node, "h%s" % h_level, "", **atts))
-        atts = {}
+        attrs: t.Dict[str, str] = {}
         if node.hasattr("refid"):
-            atts["class"] = "toc-backref"
-            atts["href"] = "#" + node["refid"]
-        if atts:
-            self.body.append(self.starttag({}, "a", "", **atts))
-            close_tag = "</a></h%s>\n" % (h_level)
+            attrs["class"] = "toc-backref"
+            attrs["href"] = "#" + node["refid"]
+        if attrs:
+            self.body.append(self.starttag({}, "a", "", **attrs))  # type:ignore
+            close_tag = f"</a></h{h_level}>\n"
         else:
-            close_tag = "</h%s>\n" % (h_level)
+            close_tag = f"</h{h_level}>\n"
         return close_tag
 
-    def visit_docinfo(self, node):
-        # type: (nodes.Node) -> None
+    def visit_docinfo(self, node: nodes.Element) -> None:
         raise nodes.SkipNode
 
-    def visit_icon(self, node):
+    def visit_icon(self, node: nodes.decoration) -> None:
         atts = {}
         if "style" in node:
             atts["style"] = node["style"]
         self.body.append(self.starttag(node, "em", "", **atts))
 
-    def depart_icon(self, node):
+    def depart_icon(self, node: nodes.decoration) -> None:
         self.body.append("</em>")
 
 
@@ -174,14 +195,14 @@ class DjangoDocutilsWriter(Writer):
     ... }
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         Writer.__init__(self)
         # I'd like to put this into the class attribute, but I think
         # somewhere up the Writer/Translator hierarchy are 'old' python
         # classes. (e.g. Python =< 2.1 classes)
         self.translator_class = DjangoDocutilsHTMLTranslator
 
-    def get_transforms(self):
+    def get_transforms(self) -> list[t.Type[Transform]]:
         transforms = Writer.get_transforms(self)
 
         if not DJANGO_DOCUTILS_LIB_RST:

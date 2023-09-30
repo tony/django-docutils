@@ -1,14 +1,17 @@
 import pathlib
+import typing as t
 
+from django.http import HttpRequest
 from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
+from docutils import nodes
 
-from django_docutils.lib.publisher import (
+from .._internal.types import StrPath
+from .publisher import (
     publish_doctree,
     publish_html_from_doctree,
     publish_toc_from_doctree,
 )
-
 from .text import smart_title
 
 
@@ -16,7 +19,7 @@ class TitleMixin(ContextMixin):
     title = None
     subtitle = None
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
         context = super().get_context_data(**kwargs)
         if self.title:
             context["title"] = smart_title(self.title)
@@ -29,31 +32,42 @@ class TemplateTitleView(TemplateView, TitleMixin):
     title = None
     subtitle = None
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
         context = super().get_context_data(**kwargs)
         return context
 
 
 class RSTMixin:
+    request: HttpRequest
+
     @cached_property
-    def raw_content(self):
+    def raw_content(self) -> t.Optional[str]:
         raise NotImplementedError
 
     @cached_property
-    def doctree(self):
+    def doctree(self) -> nodes.document | None:
+        if self.raw_content is None:
+            return None
+
         return publish_doctree(self.raw_content)
 
     @cached_property
-    def sidebar(self, **kwargs):
+    def sidebar(self, **kwargs: object) -> str | None:
+        if self.doctree is None:
+            return None
+
         return publish_toc_from_doctree(self.doctree)
 
     @cached_property
-    def content(self):
+    def content(self) -> str | None:
+        if self.doctree is None:
+            return None
+
         return publish_html_from_doctree(
             self.doctree, **getattr(self, "rst_settings", {})
         )
 
-    def get_base_template(self):
+    def get_base_template(self) -> str:
         """TODO: move this out of RSTMixin, it is AMP related, not RST"""
         if self.request.GET.get("is_amp", False):
             return "django_docutils/base-amp.html"
@@ -82,27 +96,33 @@ class RSTRawView(TemplateTitleView):
     """
 
     template_name = "rst/raw.html"
-    file_path = None
+    file_path: t.Optional[StrPath] = None
     title = None
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
         context = super().get_context_data(**kwargs)
-        with pathlib.Path(self.file_path).open() as content:
-            context["content"] = content.read()
+
+        if self.file_path is not None:
+            with pathlib.Path(self.file_path).open() as content:
+                context["content"] = content.read()
+
         return context
 
 
 class RSTView(RSTRawView, RSTMixin):
     template_name = "rst/base.html"
-    file_path = None
+    file_path: t.Optional[StrPath] = None
     title = None
 
     @cached_property
-    def raw_content(self):
-        with pathlib.Path(self.file_path).open() as raw_content:
-            return raw_content
+    def raw_content(self) -> t.Optional[str]:
+        if self.file_path is None:
+            return None
 
-    def get_context_data(self, **kwargs):
+        with pathlib.Path(self.file_path).open() as raw_content:
+            return raw_content.read()
+
+    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
         context = super().get_context_data(**kwargs)
         context["content"] = self.content
         context["sidebar"] = self.sidebar

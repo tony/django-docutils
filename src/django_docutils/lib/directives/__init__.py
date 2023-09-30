@@ -4,7 +4,7 @@ from docutils.parsers.rst import directives
 from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 
-def register_django_docutils_directives():
+def register_django_docutils_directives() -> None:
     """Register all directives, exists to avoid race conditions.
 
     Sometimes stuff like publish_parts can be ran from command line functions

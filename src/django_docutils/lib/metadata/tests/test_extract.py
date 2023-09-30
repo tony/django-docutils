@@ -1,15 +1,17 @@
+import pathlib
+
 from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
 
-from django_docutils.lib.metadata.extract import (
+from ...settings import DJANGO_DOCUTILS_LIB_RST
+from ..extract import (
     extract_metadata,
     extract_subtitle,
     extract_title,
 )
-from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
 
-def test_extract_title():
+def test_extract_title() -> None:
     content = """
 ===========
 Hello world
@@ -31,7 +33,7 @@ some content
     assert extract_title(doctree) == "Hello world"
 
 
-def test_extract_subtitle():
+def test_extract_subtitle() -> None:
     content = """
 ===========
 Hello world
@@ -55,7 +57,7 @@ some content
     assert extract_subtitle(doctree) == "moo"
 
 
-def test_extract_metadata(tmp_path):
+def test_extract_metadata(tmp_path: pathlib.Path) -> None:
     docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
     content = """
 ===========

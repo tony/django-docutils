@@ -1,5 +1,6 @@
 from django import template
-from django.template.base import Node, kwarg_re
+from django.template.base import FilterExpression, Node, Parser, Token, kwarg_re
+from django.template.context import Context
 from django.template.exceptions import TemplateSyntaxError
 
 from ..publisher import publish_html_from_source
@@ -11,19 +12,28 @@ class ReStructuredTextNode(Node):
 
     """Implement the actions of the rst tag."""
 
-    def __init__(self, content, args, kwargs, asvar):
+    def __init__(
+        self,
+        content: FilterExpression,
+        args: list[FilterExpression],
+        kwargs: dict[str, FilterExpression],
+        asvar: str | None,
+    ) -> None:
         self.content = content
         self.args = args
         self.kwargs = kwargs
         self.asvar = asvar
 
-    def render(self, context):
+    def render(self, context: Context) -> str:
         args = [arg.resolve(context) for arg in self.args]
         kwargs = {k: v.resolve(context) for k, v in self.kwargs.items()}
 
         content = self.content.resolve(context)
 
-        return publish_html_from_source(content, *args, **kwargs)
+        html = publish_html_from_source(content, *args, **kwargs)
+        if html is None:
+            return ""
+        return html
 
 
 class MalformedArgumentsToUrlTag(TemplateSyntaxError):
@@ -31,7 +41,7 @@ class MalformedArgumentsToUrlTag(TemplateSyntaxError):
         return super().__init__("Malformed arguments to url tag", *args, **kwargs)
 
 
-def restructuredtext(parser, token):
+def restructuredtext(parser: Parser, token: Token) -> ReStructuredTextNode:
     """Parse raw reStructuredText into HTML. Supports keyword arguments!
 
     Usage::

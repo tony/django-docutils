@@ -13,6 +13,11 @@ readme = "README.md"
 packages = [
   { include = "*", from = "src" },
 ]
+include = [
+  { path = "tests", format = "sdist" },
+  { path = "type_stubs", format = "sdist" },
+]
+
 classifiers = [
   'Development Status :: 2 - Pre-Alpha',
   'Framework :: Django',
@@ -78,8 +83,8 @@ black = "*"
 ruff = "*"
 mypy = "*"
 django-stubs = "*"
-types-docutils = "*"
 types-Pygments = "*"
+docutils-stubs = "*"
 
 [tool.poetry.extras]
 # Development stuff
@@ -111,16 +116,20 @@ lint = [
   "ruff",
   "mypy",
   "django-stubs",
-  "types-docutils",
   "types-Pygments",
+  "docutils-stubs",
 ]
 
 [tool.mypy]
+strict = true
 plugins = ["mypy_django_plugin.main"]
 files = [
   "src/",
   "tests/",
 ]
+mypy_path = "./type_stubs"
+explicit_package_bases = true
+enable_incomplete_feature = ["Unpack"]
 
 [tool.django-stubs]
 django_settings_module = "tests.settings"

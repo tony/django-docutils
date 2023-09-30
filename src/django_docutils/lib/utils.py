@@ -9,20 +9,15 @@ import typing as t
 
 from docutils import nodes
 
-if t.TYPE_CHECKING:
-    from typing import Any, Tuple, Type  # NOQA
-
-    from docutils import nodes  # NOQA
-
 # \x00 means the "<" was backslash-escaped (from sphinx)
 explicit_title_re = re.compile(r"^(.+?)\s*(?<!\x00)<(.*?)>$", re.DOTALL)
 
-ws_re: "re.Pattern" = re.compile(r"\s+")
+ws_re: "re.Pattern[str]" = re.compile(r"\s+")
 
 
 def split_explicit_title(text: str) -> t.Tuple[bool, str, str]:
     """Split role content into title and target, if given (from sphinx)."""
-    match = explicit_title_re.match(text)  # type: ignore
+    match = explicit_title_re.match(text)
     if match:
         return True, match.group(1), match.group(2)
     return False, text, text
@@ -87,12 +82,11 @@ def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None
     :yields: upper level titles of document
     :rtype: :class:`docutils.nodes.Node`
     """
-    for node in document.findall():
-        if isinstance(node, nodes.section):  # traverse root-level sections
-            yield node
+    for node in document.findall(nodes.section):
+        yield from node
 
 
-def append_html_to_node(node: nodes.Element, ad_code, str) -> None:
+def append_html_to_node(node: nodes.Element, ad_code: str) -> None:
     """Inject HTML in this node
 
     :param node: node of the section to find last paragraph of

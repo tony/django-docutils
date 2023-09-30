@@ -1,7 +1,7 @@
-from django_docutils.lib.utils import chop_after_docinfo, chop_after_title
+from ..utils import chop_after_docinfo, chop_after_title
 
 
-def test_chop_after_title():
+def test_chop_after_title() -> None:
     content = """=============================================
 Learn JavaScript for free: The best resources
 =============================================
@@ -23,7 +23,7 @@ some content""".strip()
     assert result == expected
 
 
-def test_chop_after_docinfo():
+def test_chop_after_docinfo() -> None:
     before = """
 ===========
 Content ok!

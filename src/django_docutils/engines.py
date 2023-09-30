@@ -1,27 +1,36 @@
+import typing as t
+
 from django.conf import settings
+from django.http.request import HttpRequest
 from django.template.backends.base import BaseEngine
 from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
 from django.template.exceptions import TemplateDoesNotExist
+from django.utils.safestring import mark_safe
 from docutils import core
 
 from .directives import register_pygments_directive
+
+if t.TYPE_CHECKING:
+    from django.template.backends.base import _EngineTemplate
+    from django.template.base import Context
+    from django.utils.safestring import SafeString
 
 
 class Docutils(BaseEngine):
     app_dirname = "templates"
 
-    def __init__(self, params):
+    def __init__(self, params: t.Dict[str, t.Any]) -> None:
         params = params.copy()
         self.options = params.pop("OPTIONS").copy()
         self.options.setdefault("debug", settings.DEBUG)
         super().__init__(params)
         self.engine = Engine(self.dirs, self.app_dirs, **self.options)
 
-    def from_string(self, template_code):
+    def from_string(self, template_code: str) -> "DocutilsTemplate":
         return DocutilsTemplate(template_code, self.options)
 
-    def get_template(self, template_name):
+    def get_template(self, template_name: str) -> "_EngineTemplate":
         for template_file in self.iter_template_filenames(template_name):
             try:
                 with open(template_file, encoding="utf-8") as fp:
@@ -35,11 +44,15 @@ class Docutils(BaseEngine):
 
 
 class DocutilsTemplate:
-    def __init__(self, source, options):
+    def __init__(self, source: str, options: t.Dict[str, t.Any]) -> None:
         self.source = source
         self.options = options
 
-    def render(self, context=None, request=None):
+    def render(
+        self,
+        context: t.Union["Context", t.Dict[str, t.Any], None] = None,
+        request: t.Optional[HttpRequest] = None,
+    ) -> "SafeString":
         context = self.options
         if request is not None:
             context["request"] = request
@@ -47,7 +60,7 @@ class DocutilsTemplate:
             context["csrf_token"] = csrf_token_lazy(request)
         context = {"source": self.source, "writer_name": "html"}
 
-        return core.publish_parts(**context)["html_body"]
+        return mark_safe(t.cast(str, core.publish_parts(**context)["html_body"]))
 
 
 register_pygments_directive()

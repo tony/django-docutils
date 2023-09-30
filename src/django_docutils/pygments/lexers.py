@@ -5,6 +5,7 @@
     :copyright: Copyright 2012 by GitHub, Inc
     :license: BSD, see LICENSE for details.
 """
+import typing as t
 
 from pygments.lexer import (
     DelegatingLexer,
@@ -28,6 +29,9 @@ from pygments.token import (
 )
 
 __all__ = ["Dasm16Lexer", "PuppetLexer", "AugeasLexer", "SlashLexer"]
+
+if t.TYPE_CHECKING:
+    from pygments.lexer import _PseudoMatch
 
 
 class Dasm16Lexer(RegexLexer):
@@ -108,9 +112,11 @@ class Dasm16Lexer(RegexLexer):
     single_char = r"'\\?" + char + "'"
     string = r'"(\\"|[^"])*"'
 
-    def guess_identifier(lexer, match):
+    def guess_identifier(
+        self, match: "_PseudoMatch"
+    ) -> t.Generator[t.Tuple[int, t.Any, t.Any], None, None]:
         ident = match.group(0)
-        klass = Name.Variable if ident.upper() in lexer.REGISTERS else Name.Label
+        klass = Name.Variable if ident.upper() in self.REGISTERS else Name.Label
         yield match.start(), klass, ident
 
     tokens = {
@@ -449,10 +455,12 @@ class SlashLanguageLexer(ExtendedRegexLexer):
     _nkw = r"(?=[^a-zA-Z_0-9])"
 
     @staticmethod
-    def move_state(new_state):
+    def move_state(new_state: t.Any) -> t.Tuple[str, t.Any]:
         return ("#pop", new_state)
 
-    def right_angle_bracket(lexer, match, ctx):
+    def right_angle_bracket(
+        self, match: t.Any, ctx: t.Any
+    ) -> t.Generator[t.Tuple[int, t.Any, str], None, None]:
         if len(ctx.stack) > 1 and ctx.stack[-2] == "string":
             ctx.stack.pop()
         yield match.start(), String.Interpol, "}"
@@ -623,7 +631,7 @@ class SlashLexer(DelegatingLexer):
     aliases = ["slash"]
     filenames = ["*.sl"]
 
-    def __init__(self, **options):
+    def __init__(self, **options: t.Any) -> None:
         from pygments.lexers.web import HtmlLexer
 
         super().__init__(HtmlLexer, SlashLanguageLexer, **options)
