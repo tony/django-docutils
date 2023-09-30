@@ -7,7 +7,6 @@
 
 amazon
 common
-develtech
 email
 file
 github

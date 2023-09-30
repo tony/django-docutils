@@ -95,11 +95,11 @@ def publish_doctree(source, settings_overrides=docutils_settings):
     )
 
 
-def publish_html_from_source(source, *args, **kwargs):
+def publish_html_from_source(source, **kwargs):
     """Return HTML from reStructuredText source string."""
 
     doctree = publish_doctree(source)
-    return publish_html_from_doctree(doctree, *args, **kwargs)
+    return publish_html_from_doctree(doctree, **kwargs)
 
 
 def publish_html_from_doctree(
