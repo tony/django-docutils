@@ -12,7 +12,10 @@ class Lexer:
     priority: int
     ulr: str
 
-    def __init__(self, options: dict[str, object] | None = {}) -> None: ...
+    def __init__(
+        self,
+        options: dict[str, object] | None = {},  # noqa: B006
+    ) -> None: ...
 
 class RegexLexer(Lexer): ...
 
