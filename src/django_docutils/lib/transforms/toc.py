@@ -1,4 +1,5 @@
 import sys
+import typing as t
 
 from docutils import nodes
 from docutils.transforms import parts
@@ -13,15 +14,31 @@ class Contents(parts.Contents):
     - Removed extra nodes.paragraph wrapping of list_item's
     """
 
-    def build_contents(self, node, level=0):
+    startnode: t.Optional[nodes.Node]
+
+    def build_contents(
+        self, node: nodes.Node, level: int = 0
+    ) -> t.Union[nodes.bullet_list, list[t.Any]]:
+        assert isinstance(node, nodes.Element)
         level += 1
-        sections = [sect for sect in node if isinstance(sect, nodes.section)]
-        entries = []
-        depth = self.startnode.details.get("depth", sys.maxsize)
+        sections: list[nodes.section] = [
+            sect for sect in node.children if isinstance(sect, nodes.section)
+        ]
+        assert self.startnode is not None
+        entries: list[nodes.Node] = []
+
+        depth = (
+            self.startnode.details.get("depth", sys.maxsize)
+            if hasattr(self.startnode, "details")
+            else sys.maxsize
+        )
+        auto = False
 
         for section in sections:
             title = section[0]
-            auto = title.get("auto")  # May be set by SectNum.
+            auto = (
+                title.get("auto") if hasattr(title, "get") else False
+            )  # May be set by SectNum.
             entrytext = self.copy_and_filter(title)
             reference = nodes.reference(
                 "",
@@ -34,6 +51,7 @@ class Contents(parts.Contents):
             if (
                 self.backlinks in ("entry", "top")
                 and title.next_node(nodes.reference) is None
+                and isinstance(title, (nodes.Element, nodes.TextElement))
             ):
                 if self.backlinks == "entry":
                     title["refid"] = ref_id
