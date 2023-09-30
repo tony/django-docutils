@@ -21,7 +21,6 @@ views
 
 
 lib/index
-pygments/index
 templatetags/index
 ```
 
