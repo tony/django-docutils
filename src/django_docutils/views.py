@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 from django.views.generic.base import TemplateView
 
 if t.TYPE_CHECKING:
-    from typing_extensions import TypedDict, Unpack
+    pass
 
 
 class DocutilsResponse(TemplateResponse):
