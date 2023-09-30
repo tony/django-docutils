@@ -1,4 +1,5 @@
 import datetime
+import typing as t
 
 from django.conf import settings
 
@@ -11,7 +12,7 @@ except ImportError:
     pass
 
 
-def process_datetime(metadata):
+def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
     """Optionally supports localizing times via pytz."""
     timezone_formats = [  # timezone formats to try, most detailed to least
         "%Y-%m-%d %I:%M%p",
@@ -36,7 +37,7 @@ def process_datetime(metadata):
     return metadata
 
 
-def process_anonymous_user(metadata):
+def process_anonymous_user(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
     """Corrects name of author "anonymous" to django's anonymous username"""
 
     if metadata.get("author", None) == "anonymous" and hasattr(
