@@ -6,9 +6,15 @@
 
 ### What's new
 
-  Now [`mypy --strict`] compliant (#378)
+- Now [`mypy --strict`] compliant (#378)
 
   [`mypy --strict`]: https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-strict
+
+### Breaking changes
+
+- Remove `django_docutils.pygments` (#385)
+
+  Pygments lexers are unrelated to the package.
 
 ## django-docutils 0.13.5 (2023-09-30)
 
