@@ -437,6 +437,20 @@ files = [
 ]
 
 [[package]]
+name = "docutils-stubs"
+version = "0.0.22"
+description = "PEP 561 type stubs for docutils"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "docutils-stubs-0.0.22.tar.gz", hash = "sha256:1736d9650cfc20cff8c72582806c33a5c642694e2df9e430717e7da7e73efbdf"},
+    {file = "docutils_stubs-0.0.22-py3-none-any.whl", hash = "sha256:157807309de24e8c96af9a13afe207410f1fc6e5aab5d974fd6b9191f04de327"},
+]
+
+[package.dependencies]
+docutils = ">=0.14"
+
+[[package]]
 name = "exceptiongroup"
 version = "1.1.3"
 description = "Backport of PEP 654 (exception groups)"
@@ -1544,4 +1558,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "93ce17c66b5d7b87327501b579d2de8f1034b0f49780cc49dae2bec79dc88fb3"
+content-hash = "0cc2e11c1f87eacc600f0ae43968fe3be1bc3cc68fdb85d07d916db0d352beb8"

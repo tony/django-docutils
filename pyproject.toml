@@ -79,6 +79,7 @@ ruff = "*"
 mypy = "*"
 django-stubs = "*"
 types-Pygments = "*"
+docutils-stubs = "*"
 
 [tool.poetry.extras]
 # Development stuff
@@ -111,6 +112,7 @@ lint = [
   "mypy",
   "django-stubs",
   "types-Pygments",
+  "docutils-stubs",
 ]
 
 [tool.mypy]
