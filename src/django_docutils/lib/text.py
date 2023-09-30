@@ -7,7 +7,7 @@ _word_re = re.compile(r"\w+", re.UNICODE)
 _word_beginning_split_re = re.compile(r"([\s\(\{\[\<]+)", re.UNICODE)
 
 
-def is_uncapitalized_word(value):
+def is_uncapitalized_word(value: str) -> bool:
     """Return True if term/word segment is special uncap term (e.g. "django-")
 
     :param value: string value from template
@@ -37,7 +37,7 @@ def is_uncapitalized_word(value):
     try:
         config = settings.DJANGO_DOCUTILS_LIB_TEXT
     except AttributeError:
-        return
+        return False
 
     if "uncapitalized_word_filters" in config:
         for filter_fn_str in config["uncapitalized_word_filters"]:
@@ -47,13 +47,13 @@ def is_uncapitalized_word(value):
     return False
 
 
-def smart_capfirst(value):
+def smart_capfirst(value: str) -> str:
     """Capitalize the first character of the value."""
 
     return value[0].upper() + value[1:]
 
 
-def smart_title(value):
+def smart_title(value: str) -> str:
     """Convert a string into titlecase, except for special cases.
 
     Django can still be capitalized, but it must already be like that.
