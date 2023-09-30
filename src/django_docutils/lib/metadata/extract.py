@@ -11,9 +11,10 @@ def extract_title(document: nodes.document) -> t.Optional[str]:
     :param document:
     :type document: :class:`docutils.nodes.document`
     """
-    for node in document.traverse(nodes.PreBibliographic):
+    for node in document.traverse(nodes.PreBibliographic):  # type:ignore
         if isinstance(node, nodes.title):
             return node.astext()
+    return None
 
 
 def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
@@ -30,13 +31,26 @@ def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
     output = {}
     for docinfo in document.traverse(nodes.docinfo):
         for element in docinfo.children:
+            if not isinstance(element, nodes.Text) and not isinstance(
+                element, nodes.Element
+            ):
+                continue
+
             if element.tagname == "field":  # custom fields (e.g. summary)
                 name_elem, body_elem = element.children
+                assert isinstance(name_elem, (nodes.Text, nodes.Element))
+                assert isinstance(body_elem, (nodes.Text, nodes.Element))
                 name = name_elem.astext()
                 value = body_elem.astext()
-            else:  # standard fields (e.g. address)
+            elif isinstance(
+                element, (nodes.Text, nodes.TextElement)
+            ):  # standard fields (e.g. address)
                 name = element.tagname
                 value = element.astext()
+            else:
+                raise NotImplementedError(
+                    f"No support for {element} of type {type(element)}"
+                )
             name = name.lower()
 
             output[name] = value
@@ -45,9 +59,10 @@ def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
 
 def extract_subtitle(document: nodes.document) -> t.Optional[str]:
     """Return the subtitle of the document."""
-    for node in document.traverse(nodes.PreBibliographic):
+    for node in document.traverse(nodes.PreBibliographic):  # type:ignore
         if isinstance(node, nodes.subtitle):
             return node.astext()
+    return None
 
 
 def extract_abstract(doctree: nodes.document, length: int = 100) -> str:
