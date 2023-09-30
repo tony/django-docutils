@@ -7,9 +7,6 @@ from django.template.loader import select_template
 from django.template.response import TemplateResponse
 from django.views.generic.base import TemplateView
 
-if t.TYPE_CHECKING:
-    pass
-
 
 class DocutilsResponse(TemplateResponse):
     template_name = "base.html"
