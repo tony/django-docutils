@@ -5,15 +5,7 @@ from docutils import nodes, utils
 from ..utils import split_explicit_title
 
 if t.TYPE_CHECKING:
-    from typing_extensions import Protocol
-
-    class UrlHandlerFn(Protocol):
-        def __call__(self, target: str) -> str:
-            ...
-
-    class RemoteUrlHandlerFn(Protocol):
-        def __call__(self, target: str) -> t.Tuple[str, str]:
-            ...
+    from .types import RemoteUrlHandlerFn, UrlHandlerFn
 
 
 def generic_url_role(
