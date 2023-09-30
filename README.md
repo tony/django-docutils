@@ -1,6 +1,6 @@
 # django-docutils &middot; [![Python Package](https://img.shields.io/pypi/v/django-docutils.svg)](https://pypi.org/project/django-docutils/) [![License](https://img.shields.io/github/license/tony/django-docutils.svg)](https://github.com/tony/django-docutils/blob/master/LICENSE)
 
-django-docutils, docutils (reStructuredText) support for Django
+django-docutils, docutils (reStructuredText) support for Django.
 
 ## Quickstart
 
