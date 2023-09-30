@@ -6,13 +6,12 @@ from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
 from docutils import nodes
 
-from django_docutils._internal.types import StrPath
-from django_docutils.lib.publisher import (
+from .._internal.types import StrPath
+from .publisher import (
     publish_doctree,
     publish_html_from_doctree,
     publish_toc_from_doctree,
 )
-
 from .text import smart_title
 
 
