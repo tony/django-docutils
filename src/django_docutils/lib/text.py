@@ -50,9 +50,6 @@ def is_uncapitalized_word(value):
 def smart_capfirst(value):
     """Capitalize the first character of the value."""
 
-    if is_uncapitalized_word(value):
-        return value
-
     return value[0].upper() + value[1:]
 
 
