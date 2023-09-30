@@ -1,7 +1,20 @@
+import typing as t
+
+from docutils.parsers.rst.states import Inliner
+
 from .common import generic_url_role
+from .types import GenericUrlRoleFn
 
 
-def github_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+def github_role(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: t.Optional[t.Dict[str, t.Any]] = None,
+    content: t.Optional[str] = None,
+) -> GenericUrlRoleFn:
     """Role for linking to GitHub repos and issues.
 
     :gh:`vim-airline` ->
@@ -25,13 +38,10 @@ def github_role(name, rawtext, text, lineno, inliner, options=None, content=None
        link: https://github.com/vim-airline/vim-airline/issues/134
        text: this example issue
     """
-
-    if content is None:
-        content = []
     if options is None:
         options = {}
 
-    def url_handler(target):
+    def url_handler(target: str) -> str:
         if "#" in target:
             user_n_repo, issue = target.split("#")
             if issue.isnumeric():
