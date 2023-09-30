@@ -30,7 +30,7 @@ def is_uncapitalized_word(value):
 
         DJANGO_DOCUTILS_LIB_TEXT = {
             'uncapitalized_word_filters': [
-                'develtech.path.to.handle_uncapped_word'
+                'project.path.to.handle_uncapped_word'
             ]
         }
     """

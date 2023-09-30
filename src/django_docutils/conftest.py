@@ -68,7 +68,6 @@ def pytest_configure():
                     "email": "django_docutils.lib.roles.email.email_role",
                     "hn": "django_docutils.lib.roles.hackernews.hackernews_role",
                     "wikipedia": "django_docutils.lib.roles.wikipedia.wikipedia_role",
-                    "site_url": "django_docutils.lib.roles.develtech.site_url_role",
                 }
             },
         },
