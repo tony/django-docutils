@@ -1,4 +1,5 @@
 import re
+import typing as t
 
 from docutils import nodes
 from docutils.transforms import Transform
@@ -6,9 +7,17 @@ from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 from pygments.token import Token
 
+if t.TYPE_CHECKING:
+    from collections.abc import Iterator
 
-class InlineHtmlFormatter(HtmlFormatter):
-    def format_unencoded(self, tokensource, outfile):
+    from pygments.token import _TokenType
+
+    TokenStream = Iterator[tuple[_TokenType, str]]
+    TokenGenerator = Iterator[tuple[t.Union[str, int], str]]
+
+
+class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
+    def format_unencoded(self, tokensource: "TokenStream", outfile: t.Any) -> None:
         """
 
         First problem (filter trailing newline):
@@ -29,7 +38,7 @@ class InlineHtmlFormatter(HtmlFormatter):
 
         """
 
-        def filter_trailing_newline(source):
+        def filter_trailing_newline(source: "TokenStream") -> "TokenStream":
             tokens = list(source)
 
             # filter out the trailing newline token
@@ -42,17 +51,19 @@ class InlineHtmlFormatter(HtmlFormatter):
 
         return super().format_unencoded(source, outfile)
 
-    def _wrap_div(self, inner):
-        style = []
+    def _wrap_div(
+        self, inner: "TokenStream"
+    ) -> t.Union["TokenGenerator", "TokenStream"]:
+        styles = []
         if (
             self.noclasses
             and not self.nobackground
             and self.style.background_color is not None
         ):
-            style.append(f"background: {self.style.background_color}")
+            styles.append(f"background: {self.style.background_color}")
         if self.cssstyles:
-            style.append(self.cssstyles)
-        style = "; ".join(style)
+            styles.append(self.cssstyles)
+        style = "; ".join(styles)
 
         yield 0, (
             "<span"
@@ -63,7 +74,7 @@ class InlineHtmlFormatter(HtmlFormatter):
         yield from inner
         yield 0, "</span>\n"
 
-    def _wrap_pre(self, inner):
+    def _wrap_pre(self, inner: "TokenStream") -> "TokenStream":
         yield from inner
 
 
@@ -80,7 +91,7 @@ class CodeTransform(Transform):
 
     default_priority = 120
 
-    def apply(self):
+    def apply(self, **kwargs: t.Any) -> None:
         paragraph_nodes = self.document.traverse(nodes.literal)
 
         for node in paragraph_nodes:
@@ -91,7 +102,11 @@ class CodeTransform(Transform):
             newlexer = None
 
             if text.startswith("$ "):
-                from django_docutils.lib.directives.code import BashSessionLexer
+                from pygments.lexers.shell import BashSessionLexer
+
+                from django_docutils.lib.directives.code import patch_bash_session_lexer
+
+                patch_bash_session_lexer()
 
                 newlexer = BashSessionLexer()
             elif text.startswith("{%") or text.startswith("{{"):
