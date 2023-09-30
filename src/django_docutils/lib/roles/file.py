@@ -1,9 +1,19 @@
 import os
+import typing as t
 
 from docutils import nodes, utils
+from docutils.parsers.rst.states import Inliner
 
 
-def file_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+def file_role(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: t.Optional[t.Dict[str, t.Any]] = None,
+    content: t.Optional[str] = None,
+) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
     """Role for files.
 
     :file:`./path/to/moo` ->
@@ -11,10 +21,7 @@ def file_role(name, rawtext, text, lineno, inliner, options=None, content=None):
 
     :file:`./path/to/moo/` ->
        text: ./path/to/moo/ (italicized + directory icon)
-
     """
-    if content is None:
-        content = []
     if options is None:
         options = {}
     name = name.lower()
@@ -44,15 +51,20 @@ def file_role(name, rawtext, text, lineno, inliner, options=None, content=None):
 
 
 # TODO: Let font-awesome classes be configured via settings
-def manifest_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+def manifest_role(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: t.Optional[t.Dict[str, t.Any]] = None,
+    content: t.Optional[str] = None,
+) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
     """Role for manifests (package.json, file outputs)
 
     :manifest:`package.json` ->
        text: package.json (italicized + file icon)
-
     """
-    if content is None:
-        content = []
     if options is None:
         options = {}
     name = name.lower()
@@ -70,15 +82,20 @@ def manifest_role(name, rawtext, text, lineno, inliner, options=None, content=No
     return [sn], []
 
 
-def exe_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+def exe_role(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: t.Optional[t.Dict[str, t.Any]] = None,
+    content: t.Optional[str] = None,
+) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
     """Role for executables.
 
     :exe:`./path/to/webpack` ->
        text: ./path/to/webpack (italicized + file icon)
-
     """
-    if content is None:
-        content = []
     if options is None:
         options = {}
     name = name.lower()
