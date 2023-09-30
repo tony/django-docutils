@@ -4,7 +4,7 @@ import typing as t
 from docutils import nodes, utils
 from docutils.transforms import Transform
 
-from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
+from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 url_patterns: t.Dict[str, str] = DJANGO_DOCUTILS_LIB_RST.get("font_awesome", {}).get(
     "url_patterns", {}

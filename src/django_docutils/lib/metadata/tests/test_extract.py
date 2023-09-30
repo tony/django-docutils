@@ -3,12 +3,12 @@ import pathlib
 from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
 
-from django_docutils.lib.metadata.extract import (
+from ...settings import DJANGO_DOCUTILS_LIB_RST
+from ..extract import (
     extract_metadata,
     extract_subtitle,
     extract_title,
 )
-from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def test_extract_title() -> None:

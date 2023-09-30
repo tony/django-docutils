@@ -2,9 +2,9 @@ from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
 from docutils.writers.html5_polyglot import Writer
 
-from django_docutils.lib.publisher import publish_parts_from_doctree
-from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
-from django_docutils.lib.writers import DjangoDocutilsWriter
+from ..publisher import publish_parts_from_doctree
+from ..settings import DJANGO_DOCUTILS_LIB_RST
+from ..writers import DjangoDocutilsWriter
 
 
 def test_HTMLWriter_hides_docinfo() -> None:

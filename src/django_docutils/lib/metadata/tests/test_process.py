@@ -3,8 +3,8 @@ import datetime
 from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
 
-from django_docutils.lib.metadata.extract import extract_metadata
-from django_docutils.lib.metadata.process import process_metadata
+from ..extract import extract_metadata
+from ..process import process_metadata
 
 
 def test_process_metadata_file() -> None:
