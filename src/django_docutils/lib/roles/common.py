@@ -1,9 +1,27 @@
+import typing as t
+
 from docutils import nodes, utils
 
 from ..utils import split_explicit_title
 
+if t.TYPE_CHECKING:
+    from typing_extensions import Protocol
 
-def generic_url_role(name, text, url_handler_fn, innernodeclass=nodes.Text):
+    class UrlHandlerFn(Protocol):
+        def __call__(self, target: str) -> str:
+            ...
+
+    class RemoteUrlHandlerFn(Protocol):
+        def __call__(self, target: str) -> t.Tuple[str, str]:
+            ...
+
+
+def generic_url_role(
+    name: str,
+    text: str,
+    url_handler_fn: "UrlHandlerFn",
+    innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
+) -> t.Tuple[t.List[nodes.reference], t.List[t.Any]]:
     """This cleans up a lot of code we had to repeat over and over.
 
     This generic role also handles explicit titles (:role:`yata yata <target>`)
@@ -62,7 +80,12 @@ def generic_url_role(name, text, url_handler_fn, innernodeclass=nodes.Text):
     return [rn], []
 
 
-def generic_remote_url_role(name, text, url_handler_fn, innernodeclass=nodes.Text):
+def generic_remote_url_role(
+    name: str,
+    text: str,
+    url_handler_fn: "RemoteUrlHandlerFn",
+    innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
+) -> t.Tuple[t.List[nodes.reference], t.List[t.Any]]:
     """This is a generic_url_role that can return a url AND a title remotely
 
     The url_handler_fn returns a title and a url
