@@ -15,7 +15,6 @@ packages = [
 ]
 include = [
   { path = "tests", format = "sdist" },
-  { path = "type_stubs", format = "sdist" },
 ]
 
 classifiers = [
@@ -127,8 +126,6 @@ files = [
   "src/",
   "tests/",
 ]
-mypy_path = "./type_stubs"
-explicit_package_bases = true
 enable_incomplete_feature = ["Unpack"]
 
 [tool.django-stubs]
