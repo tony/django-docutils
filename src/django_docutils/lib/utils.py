@@ -92,7 +92,7 @@ def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None
             yield node
 
 
-def append_html_to_node(node: nodes.Element, ad_code, str) -> None:
+def append_html_to_node(node: nodes.Element, ad_code: str) -> None:
     """Inject HTML in this node
 
     :param node: node of the section to find last paragraph of
