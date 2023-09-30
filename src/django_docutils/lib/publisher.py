@@ -73,7 +73,7 @@ def publish_toc_from_doctree(
     # so users can copy anchor from headers
     contents_transform.backlinks = "entry"
 
-    toc_contents = contents_transform.build_contents(doctree)  # type:ignore
+    toc_contents = contents_transform.build_contents(doctree)
 
     if not toc_contents:  # ToC is empty
         return None
