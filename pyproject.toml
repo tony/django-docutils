@@ -112,7 +112,7 @@ lint = [
   "mypy",
   "django-stubs",
   "types-docutils",
-  "types-pygments",
+  "types-Pygments",
 ]
 
 [tool.mypy]
