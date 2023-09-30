@@ -1,12 +1,13 @@
 import contextlib
+import typing as t
 
 import django
 
 
-def pytest_configure():
+def pytest_configure() -> None:
     from django.conf import settings
 
-    settings_kwargs = {}
+    settings_kwargs: t.Dict[str, t.Any] = {}
 
     if django.VERSION <= (4, 2):
         settings_kwargs["USE_L10N"] = True
