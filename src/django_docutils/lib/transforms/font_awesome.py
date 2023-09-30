@@ -6,7 +6,9 @@ from docutils.transforms import Transform
 
 from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
-url_patterns = DJANGO_DOCUTILS_LIB_RST.get("font_awesome", {}).get("url_patterns", {})
+url_patterns: t.Dict[str, str] = DJANGO_DOCUTILS_LIB_RST.get("font_awesome", {}).get(
+    "url_patterns", {}
+)
 permissible_nodes = [nodes.Text]
 
 
@@ -24,7 +26,7 @@ def inject_font_awesome_to_ref_node(
     fa_classes = fa_classes_from_url(url=url)
     if fa_classes != "" and len(target) > 0:
         fa_tag = f'<em class="{fa_classes}"></em>'
-        title = utils.unescape(target[0])
+        title = utils.unescape(str(target[0]))
         rn = nodes.reference("", "", internal=True, refuri=url)
         rn += nodes.raw("", fa_tag, format="html")
         rn += target[0].__class__(title, title)  # type:ignore
@@ -35,7 +37,7 @@ def inject_font_awesome_to_ref_node(
 class InjectFontAwesome(Transform):
     default_priority = 680
 
-    def apply(self) -> None:
+    def apply(self, **kwargs: t.Any) -> None:
         for target in self.document.traverse(nodes.reference):
             if target.hasattr("refuri") and any(
                 isinstance(target[0], node_type) for node_type in permissible_nodes
