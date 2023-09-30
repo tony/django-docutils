@@ -35,7 +35,7 @@ def inject_font_awesome_to_ref_node(
 class InjectFontAwesome(Transform):
     default_priority = 680
 
-    def apply(self):
+    def apply(self) -> None:
         for target in self.document.traverse(nodes.reference):
             if target.hasattr("refuri") and any(
                 isinstance(target[0], node_type) for node_type in permissible_nodes
