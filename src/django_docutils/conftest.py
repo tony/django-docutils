@@ -38,6 +38,7 @@ def pytest_configure() -> None:
                 "APP_DIRS": True,
             },
         ],
+        DJANGO_DOCUTILS_ANONYMOUS_USER_NAME="AnonymousCoward",
         DJANGO_DOCUTILS_LIB_RST={
             "metadata_processors": [
                 "django_docutils.lib.metadata.processors.process_datetime",
@@ -86,7 +87,6 @@ def pytest_configure() -> None:
             "django.contrib.staticfiles",
         ),
         PASSWORD_HASHERS=("django.contrib.auth.hashers.MD5PasswordHasher",),
-        ANONYMOUS_USER_NAME="AnonymousCoward",
         **settings_kwargs,
     )
 
