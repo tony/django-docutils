@@ -12,6 +12,7 @@ from docutils import core
 from .directives import register_pygments_directive
 
 if t.TYPE_CHECKING:
+    from django.template.backends.base import _EngineTemplate
     from django.template.base import Context
     from django.utils.safestring import SafeString
 
@@ -29,7 +30,7 @@ class Docutils(BaseEngine):
     def from_string(self, template_code: str) -> "DocutilsTemplate":
         return DocutilsTemplate(template_code, self.options)
 
-    def get_template(self, template_name: str) -> "DocutilsTemplate":
+    def get_template(self, template_name: str) -> "_EngineTemplate":
         for template_file in self.iter_template_filenames(template_name):
             try:
                 with open(template_file, encoding="utf-8") as fp:
