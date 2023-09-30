@@ -66,8 +66,12 @@ INLINESTYLES = False
 DEFAULT = HtmlFormatter(cssclass="highlight code-block", noclasses=INLINESTYLES)
 
 #: Add name -> formatter pairs for every variant you want to use
-VARIANTS: t.Dict[str, t.Type["Formatter"]] = {
+VARIANTS: t.Dict[str, "Formatter[str]"] = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
+}
+
+DEFAULT_OPTION_SPEC: t.Dict[str, t.Callable[[str], t.Any]] = {
+    key: directives.flag for key in VARIANTS
 }
 
 
@@ -78,7 +82,7 @@ class CodeBlock(Directive):
     required_arguments = 1
     optional_arguments = 0
     final_argument_whitespace = True
-    option_spec: t.ClassVar = {key: directives.flag for key in VARIANTS}
+    option_spec = DEFAULT_OPTION_SPEC
     has_content = True
 
     def run(self) -> list[nodes.Node]:
