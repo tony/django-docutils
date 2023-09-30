@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-docutils"
-version = "0.13.5"
+version = "0.14.0"
 description = "Documentation Utilities (Docutils, reStructuredText) for django."
 
 license = "MIT"
@@ -32,6 +32,7 @@ classifiers = [
   'Programming Language :: Python :: 3.9',
   'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
+  'Programming Language :: Python :: 3.12',
 ]
 keywords = ["django", "docutils", "reStructuredText", "rst", "reST"]
 
