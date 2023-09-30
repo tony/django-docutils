@@ -4,6 +4,13 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.13.5 (2023-09-30)
+
+### Bug fixes
+
+- Remove `develtech` role (#382)
+- lib/publisher: Remove unused positional args (#382)
+
 ## django-docutils 0.13.4 (2023-09-24)
 
 ### Compatibility
