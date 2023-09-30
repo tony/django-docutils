@@ -1,7 +1,20 @@
+import typing as t
+
+from docutils.parsers.rst.states import Inliner
+
 from .common import generic_url_role
+from .types import GenericUrlRoleFn
 
 
-def leanpub_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+def leanpub_role(
+    name: str,
+    rawtext: str,
+    text: str,
+    lineno: int,
+    inliner: Inliner,
+    options: t.Optional[t.Dict[str, t.Any]] = None,
+    content: t.Optional[str] = None,
+) -> GenericUrlRoleFn:
     """Role for linking to leanpub page.
 
     :leanpub:`the-tao-of-tmux` ->
@@ -16,13 +29,10 @@ def leanpub_role(name, rawtext, text, lineno, inliner, options=None, content=Non
        link: https://leanpub.com/the-tao-of-tmux/read
        text: The Tao of tmux
     """
-
-    if content is None:
-        content = []
     if options is None:
         options = {}
 
-    def url_handler(target):
+    def url_handler(target: str) -> str:
         if ":" in target:
             project, path = target.split(":")
             return f"https://leanpub.com/{project}/{path}"
