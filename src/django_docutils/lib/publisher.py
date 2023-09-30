@@ -2,8 +2,9 @@ import typing as t
 
 from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
-from docutils import io, nodes, readers
+from docutils import io, nodes
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
+from docutils.readers.doctree import Reader
 from docutils.writers.html5_polyglot import Writer
 
 from .directives import register_django_docutils_directives
@@ -29,7 +30,7 @@ def publish_parts_from_doctree(
     config_section: str | None = None,
     enable_exit_status: bool = False,
 ) -> t.Dict[str, str]:
-    reader = readers.doctree.Reader(parser_name="null")
+    reader = Reader(parser_name="null")
     pub = Publisher(
         reader,
         None,
