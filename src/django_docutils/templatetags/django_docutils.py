@@ -15,7 +15,7 @@ def restructuredtext(value: str) -> str:
     warnings.warn(
         "The restructuredtext filter has been deprecated",
         category=DeprecationWarning,
-        stacklevel=2,
+        stacklevel=3,
     )
 
     return mark_safe(
