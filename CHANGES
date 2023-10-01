@@ -12,6 +12,17 @@
   - Now powered the same `docutils` code as the template tag
   - django-docutils settings will now apply to the filter
 
+### Tweaks
+
+- `restructuredtext` filter:
+  - Fix `stacklevel` in warning (#389)
+  - register filter via decorator (#389)
+- `DocutilsView`: Improve `rst_name` typing (#389)
+
+### Fixes
+
+- `restructuredtext` template tag: Fix language in error message (#389)
+
 ### Packaging
 
 - Move pytest configuration to `pyproject.toml` (#387)
