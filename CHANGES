@@ -4,6 +4,13 @@
 
 - _Add your latest changes from PRs here_
 
+### Breaking changes
+
+- Rename `restructuredtext` -> `rst` (#390)
+
+  - `{% filter restructuredtext %}` -> `{% endfilter %}`
+  - `{% restructuredtext %}` -> `{% rst %}`
+
 ### What's new
 
 - `ReStructuredTextNode` learned to accept plain strings (#388)
