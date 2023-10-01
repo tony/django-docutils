@@ -46,6 +46,7 @@ class MalformedArgumentsToUrlTag(TemplateSyntaxError):
         return super().__init__("Malformed arguments to url tag", *args, **kwargs)
 
 
+@register.tag
 def restructuredtext(parser: Parser, token: Token) -> ReStructuredTextNode:
     """Parse raw reStructuredText into HTML. Supports keyword arguments!
 
@@ -65,7 +66,7 @@ def restructuredtext(parser: Parser, token: Token) -> ReStructuredTextNode:
     bits = token.split_contents()
     if len(bits) < 2:
         raise TemplateSyntaxError(
-            "'%s' takes at least one argument, a URL pattern name." % bits[0]
+            "'%s' takes at least one argument, a content param." % bits[0]
         )
     content = parser.compile_filter(bits[1])
     args = []
@@ -88,6 +89,3 @@ def restructuredtext(parser: Parser, token: Token) -> ReStructuredTextNode:
             else:
                 args.append(parser.compile_filter(value))
     return ReStructuredTextNode(content, args, kwargs, asvar)
-
-
-register.tag("restructuredtext", restructuredtext)
