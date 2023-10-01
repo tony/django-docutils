@@ -63,7 +63,7 @@ class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
 
 class DocutilsView(TemplateView):
     response_class = DocutilsResponse
-    rst_name = None
+    rst_name: t.Optional[str] = None
 
     def render_to_response(
         self,
