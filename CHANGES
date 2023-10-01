@@ -10,6 +10,7 @@
 
   - `{% filter restructuredtext %}` -> `{% endfilter %}`
   - `{% restructuredtext %}` -> `{% rst %}`
+
 - Move template tag from `lib/templatetags/rst` ->
   `templatetags/django_docutils` (#391)
 
@@ -45,6 +46,16 @@
 ### Fixes
 
 - `restructuredtext` template tag: Fix language in error message (#389)
+
+### Development
+
+- Test suite (#386):
+  - Template tag
+  - Template filter
+  - Django template engine
+- Project settings (test settings module): Add type annotations for `django-stubs` + `mypy` (#368)
+
+  Note: This only applies to internal typings
 
 ### Packaging
 
