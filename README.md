@@ -15,7 +15,8 @@ $ pip install django-docutils
 If you want to use the template filter, add it to your `INSTALLED_APPS` in your settings file:
 
 ```python
-INSTALLED_APPS = [ # ... your default apps,
+INSTALLED_APPS = [
+    # ... your default apps,
     'django_docutils'
 ]
 ```
@@ -46,13 +47,15 @@ If you want to use reStructuredText as a django template engine, `INSTALLED_APPS
 instead you add this to your `TEMPLATES` variable in your settings:
 
 ```python
-TEMPLATES = [ # .. your default engines
-{
-    'NAME': 'docutils',
-    'BACKEND': 'django_docutils.engines.Docutils',
-    'DIRS': [],
-    'APP_DIRS': True,
-}]
+TEMPLATES = [  
+    # ... Other engines
+    {
+        "NAME": "docutils",
+        "BACKEND": "django_docutils.engines.Docutils",
+        "DIRS": [],
+        "APP_DIRS": True,
+    }
+]
 ```
 
 Now django will be able to scan for .rst files and process them. In your view:
@@ -68,38 +71,40 @@ class HomeView(DocutilsView):
 # Settings
 
 ```python
-DJANGO_DOCUTILS_LIB_RST = {  # Optional, automatically maps roles, directives and transformers
-    'docutils': {
-        'raw_enabled': True,
-        'strip_comments': True,
-        'initial_header_level': 2,
+# Optional, automatically maps roles, directives and transformers
+DJANGO_DOCUTILS_LIB_RST = {
+    "docutils": {
+        "raw_enabled": True,
+        "strip_comments": True,
+        "initial_header_level": 2,
     },
-    'roles': {
-        'local': {
-            'gh': 'django_docutils.lib.roles.github.github_role',
-            'twitter': 'django_docutils.lib.roles.twitter.twitter_role',
-            'email': 'django_docutils.lib.roles.email.email_role',
+    "roles": {
+        "local": {
+            "gh": "django_docutils.lib.roles.github.github_role",
+            "twitter": "django_docutils.lib.roles.twitter.twitter_role",
+            "email": "django_docutils.lib.roles.email.email_role",
         }
     },
-    'font_awesome': {  # Transformer to inject <em class="<class>"></em>
-        'url_patterns': {
-            r'.*github.com.*': 'fab fa-github',
-            r'.*twitter.com.*': 'fab fa-twitter',
-            r'.*news.ycombinator.com*': 'fab fa-hacker-news',
-            r'.*leanpub.com.*': 'fab fa-leanpub',
-            r'.*python.org.*': 'fab fa-python',
-            r'.*pypi.org.*': 'fab fa-python',
-            r'.*djangoproject.com.*': 'fab fa-python',
-            r'.*wikipedia.org.*': 'fab fa-wikipedia',
-            r'((rtfd|readthedocs).)*$': 'fab fa-books',
-            r'^mailto:.*': 'fas fa-envelope',
-            r'((?!mywebsite.com|localhost).)*$': 'fas fa-external-link',
+    "font_awesome": {  # Transformer to inject <em class="<class>"></em>
+        "url_patterns": {
+            r".*github.com.*": "fab fa-github",
+            r".*twitter.com.*": "fab fa-twitter",
+            r".*news.ycombinator.com*": "fab fa-hacker-news",
+            r".*leanpub.com.*": "fab fa-leanpub",
+            r".*python.org.*": "fab fa-python",
+            r".*pypi.org.*": "fab fa-python",
+            r".*djangoproject.com.*": "fab fa-python",
+            r".*wikipedia.org.*": "fab fa-wikipedia",
+            r"((rtfd|readthedocs).)*$": "fab fa-books",
+            r"^mailto:.*": "fas fa-envelope",
+            r"((?!mywebsite.com|localhost).)*$": "fas fa-external-link",
         }
     },
 }
 
-DJANGO_DOCUTILS_LIB_TEXT = {  # Optional
-    'uncapitalized_word_filters': ['project.my_module.my_capitalization_fn']
+# Optional
+DJANGO_DOCUTILS_LIB_TEXT = {
+    "uncapitalized_word_filters": ["project.my_module.my_capitalization_fn"]
 }
 ```
 
