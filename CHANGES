@@ -21,6 +21,7 @@
 - `rst` template tags can now accept blocks (#392):
 
   ```django
+  {% load django_docutils %}
   {% rst %}
   Hello world
   ===========
