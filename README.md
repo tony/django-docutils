@@ -25,7 +25,7 @@ Then in your template:
 
 ```django
 {% load django_docutils %}
-{% filter restructuredtext %}
+{% filter rst %}
 # hey
 # how's it going
 A. hows

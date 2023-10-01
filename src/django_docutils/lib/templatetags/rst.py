@@ -47,16 +47,16 @@ class MalformedArgumentsToUrlTag(TemplateSyntaxError):
 
 
 @register.tag
-def restructuredtext(parser: Parser, token: Token) -> ReStructuredTextNode:
+def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
     """Parse raw reStructuredText into HTML. Supports keyword arguments!
 
     Usage::
 
-        {% restructuredtext content %}
+        {% rst content %}
 
-        {% restructuredtext content toc_only=True %}
+        {% rst content toc_only=True %}
 
-        {% restructuredtext content show_title=False %}
+        {% rst content show_title=False %}
 
     Why does toc_only=true needed (why do you need to call twice just to get
     a ToC)? Because of how docutils parses.
