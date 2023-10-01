@@ -10,9 +10,7 @@ Install django-docutils:
 $ pip install django-docutils
 ```
 
-## Template filter
-
-If you want to use the template filter, add it to your `INSTALLED_APPS` in your settings file:
+Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
 
 ```python
 INSTALLED_APPS = [
@@ -21,7 +19,29 @@ INSTALLED_APPS = [
 ]
 ```
 
-Then in your template:
+## Template tag
+
+In your template:
+
+```django
+{% django_docutils %}
+{% rst %}
+# hey
+# how's it going
+A. hows
+B. it
+
+C. going
+D. today
+
+**hi**
+*hi*
+{% endrst %}
+```
+
+## Template filter
+
+In your template:
 
 ```django
 {% load django_docutils %}
@@ -47,7 +67,7 @@ If you want to use reStructuredText as a django template engine, `INSTALLED_APPS
 instead you add this to your `TEMPLATES` variable in your settings:
 
 ```python
-TEMPLATES = [  
+TEMPLATES = [
     # ... Other engines
     {
         "NAME": "docutils",
