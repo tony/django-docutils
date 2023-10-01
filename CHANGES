@@ -10,6 +10,8 @@
 
   - `{% filter restructuredtext %}` -> `{% endfilter %}`
   - `{% restructuredtext %}` -> `{% rst %}`
+- Move template tag from `lib/templatetags/rst` ->
+  `templatetags/django_docutils` (#391)
 
 ### What's new
 
