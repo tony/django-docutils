@@ -24,7 +24,7 @@ INSTALLED_APPS = [
 In your template:
 
 ```django
-{% django_docutils %}
+{% load django_docutils %}
 {% rst %}
 # hey
 # how's it going
