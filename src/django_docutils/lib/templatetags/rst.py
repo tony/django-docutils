@@ -1,3 +1,5 @@
+import typing as t
+
 from django import template
 from django.template.base import FilterExpression, Node, Parser, Token, kwarg_re
 from django.template.context import Context
@@ -14,7 +16,7 @@ class ReStructuredTextNode(Node):
 
     def __init__(
         self,
-        content: FilterExpression,
+        content: t.Union[FilterExpression, str],
         args: list[FilterExpression],
         kwargs: dict[str, FilterExpression],
         asvar: str | None,
@@ -28,7 +30,10 @@ class ReStructuredTextNode(Node):
         args = [arg.resolve(context) for arg in self.args]
         kwargs = {k: v.resolve(context) for k, v in self.kwargs.items()}
 
-        content = self.content.resolve(context)
+        if isinstance(self.content, FilterExpression):
+            content = self.content.resolve(context)
+        else:
+            content = self.content
 
         html = publish_html_from_source(content, *args, **kwargs)
         if html is None:
