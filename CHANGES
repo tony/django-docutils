@@ -4,6 +4,22 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.14.1 (2023-10-01)
+
+_Maintenance only, no bug fixes or features_
+
+### Packaging
+
+- Add `Typing :: Typed` to trove classifiers
+
+### Documentation
+
+- API docs: Remove pygments
+- `restructuredtext` filter: Add credit
+
+  Note: The filter has already been deprecated since 0.4.0 and will soon be replaced
+  by #386.
+
 ## django-docutils 0.14.0 (2023-09-30)
 
 ### What's new
