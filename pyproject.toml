@@ -167,6 +167,19 @@ combine-as-imports = true
 "*/__init__.py" = ["F401"]
 "src/**/*.py" = ["PTH"]
 
+[tool.pytest.ini_options]
+addopts = "--tb=short --no-header --showlocals --doctest-modules"
+doctest_optionflags = "ELLIPSIS NORMALIZE_WHITESPACE"
+testpaths = [
+  "src/django_docutils",
+  "tests",
+  "docs",
+]
+filterwarnings = [
+  "ignore::PendingDeprecationWarning",
+  "ignore:The frontend.Option(Parser)? class.*:DeprecationWarning::",
+]
+
 [build-system]
 requires = ["poetry_core>=1.0.0", "poetry>=1.1.12"]
 build-backend = "poetry.core.masonry.api"

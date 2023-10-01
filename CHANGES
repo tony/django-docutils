@@ -4,6 +4,10 @@
 
 - _Add your latest changes from PRs here_
 
+### Packaging
+
+- Move pytest configuration to `pyproject.toml` (#387)
+
 ## django-docutils 0.14.1 (2023-10-01)
 
 _Maintenance only, no bug fixes or features_
