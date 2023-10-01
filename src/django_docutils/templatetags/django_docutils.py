@@ -5,7 +5,7 @@ from django.template.base import FilterExpression, Node, Parser, Token, kwarg_re
 from django.template.context import Context
 from django.template.exceptions import TemplateSyntaxError
 from django.utils.encoding import force_str
-from django.utils.safestring import mark_safe
+from django.utils.safestring import SafeString, mark_safe
 
 from ..lib.publisher import publish_html_from_source
 
@@ -63,21 +63,45 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
 
         {% rst content show_title=False %}
 
+        {% rst %}
+        **Hello world**
+        {% endrst %}
+
+        {% rst toc_only=True %}
+        Welcome to my site!
+        ===================
+
+        My header
+        ---------
+
+        Some text
+
+        Additional information
+        ----------------------
+
+        Thank you
+        {% endrst %}
+
     Why does toc_only=true needed (why do you need to call twice just to get
     a ToC)? Because of how docutils parses.
 
     Passing content/params right into publish_html_from_source.
     """
     bits = token.split_contents()
-    if len(bits) < 2:
-        raise TemplateSyntaxError(
-            "'%s' takes at least one argument, a content param." % bits[0]
-        )
-    content = parser.compile_filter(bits[1])
     args = []
     kwargs = {}
     asvar = None
-    bits = bits[2:]
+
+    content: t.Optional[t.Union[FilterExpression, SafeString]] = None
+
+    if len(bits) >= 2 and bits[1] == "content":
+        content = parser.compile_filter(bits[1])
+        bits = bits[2:]  # Chop off "rst content"
+    else:
+        nodelist = parser.parse(("endrst",))
+        parser.delete_first_token()
+        content = nodelist.render(Context())
+        bits = bits[1:]  # Chop off "rst"
     if len(bits) >= 2 and bits[-2] == "as":
         asvar = bits[-1]
         bits = bits[:-2]
@@ -93,6 +117,13 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
                 kwargs[name] = parser.compile_filter(value)
             else:
                 args.append(parser.compile_filter(value))
+
+    # TODO: Raise if no end tag found
+    # if len(bits) < 2:
+    #     raise TemplateSyntaxError(
+    #         "'%s' takes at least one argument, a content param." % bits[0]
+    #     )
+
     return ReStructuredTextNode(content, args, kwargs, asvar)
 
 
