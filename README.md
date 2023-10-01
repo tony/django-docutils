@@ -1,6 +1,6 @@
 # django-docutils &middot; [![Python Package](https://img.shields.io/pypi/v/django-docutils.svg)](https://pypi.org/project/django-docutils/) [![License](https://img.shields.io/github/license/tony/django-docutils.svg)](https://github.com/tony/django-docutils/blob/master/LICENSE)
 
-django-docutils, docutils (reStructuredText) support for Django.
+docutils (a.k.a. reStructuredText / rst / reST) support for Django.
 
 ## Quickstart
 
@@ -41,7 +41,7 @@ D. today
 
 ## Template engine (class-based view)
 
-You can also use a class-based view to render restructuredtext.
+You can also use a class-based view to render reStructuredText (reST).
 
 If you want to use reStructuredText as a django template engine, `INSTALLED_APPS` _isn't_ required,
 instead you add this to your `TEMPLATES` variable in your settings:
