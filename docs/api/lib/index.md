@@ -10,7 +10,6 @@ metadata/index
 publisher
 roles/index
 settings
-templatetags/index
 text
 transforms/index
 utils
