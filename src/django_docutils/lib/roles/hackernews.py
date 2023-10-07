@@ -4,7 +4,7 @@ from urllib.parse import quote
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def hackernews_role(
@@ -15,12 +15,12 @@ def hackernews_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to hackernews articles.
 
     Returns
     -------
-    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
     Examples
     --------

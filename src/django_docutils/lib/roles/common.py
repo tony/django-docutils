@@ -5,7 +5,7 @@ from docutils import nodes, utils
 from ..utils import split_explicit_title
 
 if t.TYPE_CHECKING:
-    from .types import GenericUrlRoleFn, RemoteUrlHandlerFn, UrlHandlerFn
+    from .types import RemoteUrlHandlerFn, RoleFnReturnValue, UrlHandlerFn
 
 
 def generic_url_role(
@@ -13,7 +13,7 @@ def generic_url_role(
     text: str,
     url_handler_fn: "UrlHandlerFn",
     innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
-) -> "GenericUrlRoleFn":
+) -> "RoleFnReturnValue":
     """This cleans up a lot of code we had to repeat over and over.
 
     This generic role also handles explicit titles (``:role:`yata yata <target>```)
@@ -33,7 +33,7 @@ def generic_url_role(
 
     Returns
     -------
-    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
     Examples
     --------
@@ -100,7 +100,7 @@ def generic_remote_url_role(
 
     Returns
     -------
-    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
     Examples
     --------

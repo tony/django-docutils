@@ -18,7 +18,7 @@ class RemoteUrlHandlerFn(Protocol):
         ...
 
 
-GenericUrlRoleFn = t.Tuple[t.List[nodes.reference], t.List[t.Any]]
+RoleFnReturnValue = t.Tuple[t.List[nodes.reference], t.List[t.Any]]
 """Role function return value.
 
 See also

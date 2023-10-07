@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def leanpub_role(
@@ -14,12 +14,12 @@ def leanpub_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to leanpub page.
 
     Returns
     -------
-    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
     Examples
     --------
