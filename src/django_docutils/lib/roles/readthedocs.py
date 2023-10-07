@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def readthedocs_role(
@@ -14,24 +14,39 @@ def readthedocs_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to readthedocs.org page.
 
-    :rtd:`django-pipeline` ->
-       link: https://django-pipeline.readthedocs.io/
-       text: django-pipeline
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
-    :rtd:`a rtd site <django-pipeline>` ->
-       link: https://django-pipeline.readthedocs.io/
-       text: a rtd site
+    Examples
+    --------
 
-    :rtd:`python-guide:dev/virtualenvs` ->
-       link: https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/
-       text: python-guide:dev/virtualenvs
+    `django-pipeline <https://django-pipeline.readthedocs.io/>`_:
 
-    :rtd:`about virtualenvs <python-guide:dev/virtualenvs>` ->
-       link: https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/
-       text: about virtalenvs
+    .. code-block:: rst
+
+       :rtd:`django-pipeline`
+
+    `a rtd site <https://django-pipeline.readthedocs.io/>`_:
+
+    .. code-block:: rst
+
+       :rtd:`a rtd site <django-pipeline>`
+
+    `python-guide:dev/virtualenvs <https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/>`_:
+
+    .. code-block:: rst
+
+       :rtd:`python-guide:dev/virtualenvs`
+
+    `about virtualenvs <https://python-guide.readthedocs.io/en/latest/dev/virtualenvs/>`_:
+
+    .. code-block:: rst
+
+       :rtd:`about virtualenvs <python-guide:dev/virtualenvs>`
     """
     if options is None:
         options = {}

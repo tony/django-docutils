@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def twitter_role(
@@ -14,16 +14,27 @@ def twitter_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to twitter articles.
 
-    :twitter:`@username` ->
-       link: https://twitter.com/username
-       text: @username
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
-    :twitter:`follow me on twitter <@username>` ->
-       link: https://twitter.com/username
-       text: follow on me on twitter
+    Examples
+    --------
+
+    `@username <https://twitter.com/username>`_:
+
+    .. code-block:: rst
+
+       :twitter:`@username`
+
+    `follow me on twitter <https://twitter.com/username>`_:
+
+    .. code-block:: rst
+
+       :twitter:`follow me on twitter <@username>`
     """
     if options is None:
         options = {}

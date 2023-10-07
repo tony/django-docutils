@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def url_role(
@@ -14,20 +14,38 @@ def url_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to url articles.
 
-    :url:`https://google.com` ->
-       link: https://google.com
-       text: https://google.com
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
-    :url:`Google <https://google.com>` ->
-        link: https://google.com
-        text: Google
+    Examples
+    --------
 
-    :url:`*Google* <https://google.com>` ->
-        link: https://google.com
-        text (html): <em>Google</em>
+    https://google.com:
+
+    .. code-block:: rst
+
+      :url:`https://google.com`
+
+
+    `Google <https://google.com>`_:
+
+    .. code-block:: rst
+
+      :url:`Google <https://google.com>`
+
+    |google|_:
+
+    .. |google| replace:: *Google*
+
+    .. _google: https://google.com
+
+    .. code-block:: rst
+
+       :url:`*Google* <https://google.com>`
     """
     if options is None:
         options = {}

@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def pypi_role(
@@ -14,17 +14,27 @@ def pypi_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
-    """Role for linking to pypi page.
+) -> RoleFnReturnValue:
+    """Role for linking to PyPI (Python Package Index) page.
 
-    :pypi:`libsass` ->
-       link: https://pypi.python.org/pypi/libsass
-       text: libsass
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
+    Examples
+    --------
 
-    :pypi:`a pypi package <libsass>` ->
-       link: https://pypi.python.org/pypi/libsass
-       text: a pypi package
+    `libsass <https://pypi.python.org/pypi/libsass>`_:
+
+    .. code-block:: rst
+
+       :pypi:`libsass`
+
+    `a pypi package <https://pypi.python.org/pypi/libsass>`_:
+
+    .. code-block:: rst
+
+       :pypi:`a pypi package <libsass>`
     """
     if options is None:
         options = {}

@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def github_role(
@@ -14,12 +14,12 @@ def github_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to GitHub repos and issues.
 
     Returns
     -------
-    GenericUrlRoleFn
+    RoleFnReturnValue
 
     Examples
     --------
@@ -42,7 +42,7 @@ def github_role(
 
        :gh:`vim-airline/vim-airline`
 
-    `vim-airline/vim-airline <https://github.com/vim-airline/vim-airline/issues/125>`_:
+    `vim-airline/vim-airline#125 <https://github.com/vim-airline/vim-airline/issues/125>`_:
 
     .. code-block:: rst
 

@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def leanpub_role(
@@ -14,20 +14,33 @@ def leanpub_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to leanpub page.
 
-    :leanpub:`the-tao-of-tmux` ->
-       link: https://leanpub.com/the-tao-of-tmux
-       text: the-tao-of-tmux
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
-    :leanpub:`my book <the-tao-of-tmux>` ->
-       link: https://leanpub.com/the-tao-of-tmux
-       text: my book
+    Examples
+    --------
 
-    :leanpub:`The Tao of tmux <the-tao-of-tmux:read>` ->
-       link: https://leanpub.com/the-tao-of-tmux/read
-       text: The Tao of tmux
+    `the-tao-of-tmux <https://leanpub.com/the-tao-of-tmux>`_:
+
+    .. code-block:: rst
+
+       :leanpub:`the-tao-of-tmux`
+
+    `my book <https://leanpub.com/the-tao-of-tmux>`_:
+
+    .. code-block:: rst
+
+       :leanpub:`my book <the-tao-of-tmux>`
+
+    `The Tao of tmux <https://leanpub.com/the-tao-of-tmux/read>`_:
+
+    .. code-block:: rst
+
+       :leanpub:`The Tao of tmux <the-tao-of-tmux:read>`
     """
     if options is None:
         options = {}

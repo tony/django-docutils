@@ -3,7 +3,7 @@ import typing as t
 from docutils.parsers.rst.states import Inliner
 
 from .common import generic_url_role
-from .types import GenericUrlRoleFn
+from .types import RoleFnReturnValue
 
 
 def email_role(
@@ -14,16 +14,27 @@ def email_role(
     inliner: Inliner,
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> GenericUrlRoleFn:
+) -> RoleFnReturnValue:
     """Role for linking to email articles.
 
-    :email:`me@localhost` ->
-       link: mailto:me@localhost
-       text: me@localhost
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
 
-    :email:`E-mail me <me@localhost>` ->
-       link: mailto:me@localhost
-       text: E-mail me
+    Examples
+    --------
+
+    `me@localhost <mailto:me@localhost>`_:
+
+    .. code-block:: rst
+
+       :email:`me@localhost`
+
+    `Email me <mailto:me@localhost>`_:
+
+    .. code-block:: rst
+
+       :email:`me@localhost`
     """
     if options is None:
         options = {}

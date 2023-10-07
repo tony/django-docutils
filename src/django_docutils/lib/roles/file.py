@@ -16,11 +16,19 @@ def file_role(
 ) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
     """Role for files.
 
-    :file:`./path/to/moo` ->
-       text: ./path/to/moo (italicized + file icon)
+    Examples
+    --------
+    *📄 ./path/to/moo*:
 
-    :file:`./path/to/moo/` ->
-       text: ./path/to/moo/ (italicized + directory icon)
+    .. code-block:: rst
+
+       :file:`./path/to/moo`
+
+    *📁 ./path/to/moo/*:
+
+    .. code-block:: rst
+
+       :file:`./path/to/moo/`
     """
     if options is None:
         options = {}
@@ -62,8 +70,14 @@ def manifest_role(
 ) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
     """Role for manifests (package.json, file outputs)
 
-    :manifest:`package.json` ->
-       text: package.json (italicized + file icon)
+    Examples
+    --------
+    *📄 package.json*:
+
+    .. code-block:: rst
+
+       :manifest:`package.json`
+
     """
     if options is None:
         options = {}
@@ -93,8 +107,13 @@ def exe_role(
 ) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
     """Role for executables.
 
-    :exe:`./path/to/webpack` ->
-       text: ./path/to/webpack (italicized + file icon)
+    Examples
+    --------
+    *📄 ./path/to/webpack*:
+
+    .. code-block:: rst
+
+       :exe:`./path/to/webpack`
     """
     if options is None:
         options = {}

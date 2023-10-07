@@ -2,10 +2,20 @@
 
 # `lib.roles`
 
+## Core
+
 ```{toctree}
 :maxdepth: 1
 
 common
+types
+```
+
+## Custom roles
+
+```{toctree}
+:maxdepth: 1
+
 email
 file
 github
