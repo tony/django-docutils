@@ -17,13 +17,24 @@ def email_role(
 ) -> GenericUrlRoleFn:
     """Role for linking to email articles.
 
-    :email:`me@localhost` ->
-       link: mailto:me@localhost
-       text: me@localhost
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
 
-    :email:`E-mail me <me@localhost>` ->
-       link: mailto:me@localhost
-       text: E-mail me
+    Examples
+    --------
+
+    `me@localhost <mailto:me@localhost>`_:
+
+    .. code-block:: rst
+
+       :email:`me@localhost`
+
+    `Email me <mailto:me@localhost>`_:
+
+    .. code-block:: rst
+
+       :email:`me@localhost`
     """
     if options is None:
         options = {}
