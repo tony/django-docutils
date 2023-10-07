@@ -17,17 +17,30 @@ def leanpub_role(
 ) -> GenericUrlRoleFn:
     """Role for linking to leanpub page.
 
-    :leanpub:`the-tao-of-tmux` ->
-       link: https://leanpub.com/the-tao-of-tmux
-       text: the-tao-of-tmux
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
 
-    :leanpub:`my book <the-tao-of-tmux>` ->
-       link: https://leanpub.com/the-tao-of-tmux
-       text: my book
+    Examples
+    --------
 
-    :leanpub:`The Tao of tmux <the-tao-of-tmux:read>` ->
-       link: https://leanpub.com/the-tao-of-tmux/read
-       text: The Tao of tmux
+    `the-tao-of-tmux <https://leanpub.com/the-tao-of-tmux>`_:
+
+    .. code-block:: rst
+
+       :leanpub:`the-tao-of-tmux`
+
+    `my book <https://leanpub.com/the-tao-of-tmux>`_:
+
+    .. code-block:: rst
+
+       :leanpub:`my book <the-tao-of-tmux>`
+
+    `The Tao of tmux <https://leanpub.com/the-tao-of-tmux/read>`_:
+
+    .. code-block:: rst
+
+       :leanpub:`The Tao of tmux <the-tao-of-tmux:read>`
     """
     if options is None:
         options = {}
