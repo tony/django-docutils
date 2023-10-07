@@ -81,8 +81,9 @@ class RSTRawView(TemplateTitleView):
 
     Requires template tags to process it.
 
-    .. code-block:: html
+    .. code-block:: django
 
+       {% load django_docutils %}
        {% block content %}
          <div id="content_wrapper" class="content docutils-html fixed-toc-content">
            {% restructuredtext content show_title=False %}
