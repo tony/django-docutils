@@ -4,6 +4,14 @@
 
 - _Add your latest changes from PRs here_
 
+### Development
+
+- Add typings for settings (#395)
+
+### Documentation
+
+- Add intersphinx API documentation for Django (#395)
+
 ## django-docutils 0.16.0 (2023-10-07)
 
 ### Breaking changes
