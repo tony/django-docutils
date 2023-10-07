@@ -5,7 +5,7 @@ from docutils import nodes, utils
 from ..utils import split_explicit_title
 
 if t.TYPE_CHECKING:
-    from .types import RemoteUrlHandlerFn, UrlHandlerFn
+    from .types import GenericUrlRoleFn, RemoteUrlHandlerFn, UrlHandlerFn
 
 
 def generic_url_role(
@@ -13,27 +13,30 @@ def generic_url_role(
     text: str,
     url_handler_fn: "UrlHandlerFn",
     innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
-) -> t.Tuple[t.List[nodes.reference], t.List[t.Any]]:
+) -> "GenericUrlRoleFn":
     """This cleans up a lot of code we had to repeat over and over.
 
-    This generic role also handles explicit titles (:role:`yata yata <target>`)
+    This generic role also handles explicit titles (``:role:`yata yata <target>```)
 
     This breaks convention a feels a bit jenky at first. It uses a callback
     because figuring out the url is the only magic that happens, but its
     sandwiched in the middle.
 
-    :param name: name of the role, e.g. 'github'
-    :type name: string
-    :param text: text inside of the role, e.g:
-        - 'airline-mode/airline-mode'
-        - 'this repo <airline-mode/airline-mode>'
-    :type text: string
-    :param url_handler_fn: a function that accepts the target param, example:
-    :returntype url_handler_fn: string
-    :returns: tuple ([node], [])
-    :returntype: tuple
+    Parameters
+    ----------
+    name : name of the role, e.g. 'github'
+    text : text inside of the role, e.g:
+      - 'airline-mode/airline-mode'
+      - 'this repo <airline-mode/airline-mode>'
+    url_handler_fn : :data:`django_docutils.lib.roles.types.UrlHandlerFn`
+      a function that accepts the target param
 
-    Simple example, let's create a role::
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
+
+    Examples
+    --------
 
     .. code-block:: python
 
@@ -78,39 +81,43 @@ def generic_remote_url_role(
     url_handler_fn: "RemoteUrlHandlerFn",
     innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
 ) -> t.Tuple[t.List[nodes.reference], t.List[t.Any]]:
-    """This is a generic_url_role that can return a url AND a title remotely
+    """Same as generic_url_role, but can return url and title via external data source.
 
-    The url_handler_fn returns a title and a url
+    The ``url_handler_fn`` returns a title and a url.
 
     In cases like Amazon API, database lookups, and other stuff, information
     may be looked up by key, and we may get a fresh title to fill in if nothing
     else explicit is mentioned.
 
-    :param name: name of the role, e.g. 'github'
-    :type name: string
-    :param text: text inside of the role, e.g:
-        - 'airline-mode/airline-mode'
-        - 'this repo <airline-mode/airline-mode>'
-    :type text: string
-    :param url_handler_fn: a function that accepts the target param, example:
-    :returntype url_handler_fn: (string, string)
-    :returns: tuple ([node], [])
-    :returntype: tuple
+    Parameters
+    ----------
+    name : name of the role, e.g. 'github'
+    text : text inside of the role, e.g:
+      - 'airline-mode/airline-mode'
+      - 'this repo <airline-mode/airline-mode>'
+    url_handler_fn : :data:`django_docutils.lib.roles.types.RemoteUrlHandlerFn`
+       a function that accepts the target param, example:
 
-    Simple example, let's create a role::
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
+
+    Examples
+    --------
+    Simple example, let's create a role:
 
     .. code-block:: python
 
-        def amzn_role(
-            name, rawtext, text, lineno, inliner, options={}, content=[]
-        ):
-            def url_handler(target):
-                query = amzn.lookup(ItemId=target)
-                return query.title, query.offer_url
+       def amzn_role(
+           name, rawtext, text, lineno, inliner, options={}, content=[]
+       ):
+           def url_handler(target):
+               query = amzn.lookup(ItemId=target)
+               return query.title, query.offer_url
 
-            return generic_remote_url_role(name, text, url_handler)
+           return generic_remote_url_role(name, text, url_handler)
 
-        roles.register_local_role('amzn', amzn_role)
+       roles.register_local_role('amzn', amzn_role)
     """
     name = name.lower()
     has_explicit_title, title, target = split_explicit_title(text)
