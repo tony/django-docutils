@@ -18,24 +18,19 @@ if t.TYPE_CHECKING:
 
 class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
     def format_unencoded(self, tokensource: "TokenStream", outfile: t.Any) -> None:
-        """
+        """Trim inline element of space and newlines.
 
-        First problem (filter trailing newline):
+        First problem (filter trailing newline): Final token generated returns
+        ``(Token.Other, '\n')`` which results in a blank space
+        ``<span class="x"></span>``.
 
-        There is an issue where the final token generated returns a
-        (Token.Other, '\n') which results in a blank space
-        <span class="x"></span>
+        This would be unnoticeable for a code block, but as this is inline, it looks
+        strange. Let's filter out any trailing newlines from token source, then fallback
+        to the normal process by passing it back into parent class method.
 
-        This would otherwise be unnoticeable if it was a code block,
-        but since we're inline, it looks strange. Let's filter out
-        any trailing newlines from token source, then fallback to
-        the normal process by passing it back into parent class method.
-
-        Now, AFTER this method, you're not out of the woods yet:
-        _format_lines will still add a \n (which renders as a space again
-        in the browser). For that, pass lineseparator='' into the
-        InlineHtmlFormatter class to suppress that.
-
+        *After* this method ``_format_lines`` still adds a ``\n`` (which renders as a
+        space again in the browser). To suppress that pass ``lineseparator=''`` to the
+        ``InlineHtmlFormatter`` class.
         """
 
         def filter_trailing_newline(source: "TokenStream") -> "TokenStream":
