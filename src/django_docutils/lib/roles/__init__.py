@@ -14,53 +14,58 @@ def register_django_docutils_roles() -> None:
 
     Why? Not all django projects want need intersphinx cross-referencing
     or amazon links (which requires bitly and an amazon product api package).
-    Let's use a TEMPLATES-style django config::
+    Let's use a TEMPLATES-style django config:
 
-    DJANGO_DOCUTILS_LIB_RST = {
-        'roles': {  #: directive-name: Directive class (import string)
-            'local': {  #: roles.register_local_role
-                # below: same as
-                # roles.register_local_role('gh', github_role)
-                'gh': 'django_docutils.lib.roles.github.git_role',
-                'pypi': 'django_docutils.lib.roles.pypi.pypi_role',
-            },
-            'canonical': {  #: roles.register_canonical_role
-                # below: same as:
-                # roles.register_canonical_role('class', PyXRefRole())
-                'class': 'django_docutils.lib.roles.xref.PyXRefRole',
+    >>> DJANGO_DOCUTILS_LIB_RST = {
+    ...     #: directive-name: Directive class (import string)
+    ...     'roles': {
+    ...         'local': {  #: roles.register_local_role
+    ...             # below: same as
+    ...             # roles.register_local_role('gh', github_role)
+    ...             'gh': 'django_docutils.lib.roles.github.git_role',
+    ...             'pypi': 'django_docutils.lib.roles.pypi.pypi_role',
+    ...         },
+    ...         'canonical': {  #: roles.register_canonical_role
+    ...             # below: same as:
+    ...             # roles.register_canonical_role('class', PyXRefRole())
+    ...             'class': 'django_docutils.lib.roles.xref.PyXRefRole',
+    ...             # below: same as
+    ...             # roles.register_canonical_role(
+    ...             #     'ref',
+    ...             #     XRefRole(
+    ...             #         lowercase=True, innernodeclass=nodes.inline,
+    ...             #         warn_dangling=True
+    ...             #     )
+    ...             # )
+    ...             # See nodes.inline will be resolved
+    ...             'ref': (
+    ...                 'django_docutils.lib.roles.xref.XRefRole',
+    ...                 {
+    ...                     'lowercase': True,
+    ...                     'innernodeclass': 'docutils.nodes.inline',
+    ...                     'warn_dangling': True
+    ...                 }
+    ...             ),
+    ...             'meth': (
+    ...                 'django_docutils.lib.roles.xref.PyXRefRole',
+    ...                 {
+    ...                     'fix_parens': True,
+    ...                 },
+    ...             ),
+    ...         },
+    ...     },
+    ... }
+    ...
 
-                # below: same as
-                # roles.register_canonical_role(
-                #     'ref',
-                #     XRefRole(
-                #         lowercase=True, innernodeclass=nodes.inline,
-                #         warn_dangling=True
-                #     )
-                # )
-                # See nodes.inline will be resolved
-                'ref': (
-                    'django_docutils.lib.roles.xref.XRefRole',
-                    {
-                        'lowercase': True,
-                        'innernodeclass': 'docutils.nodes.inline',
-                        'warn_dangling': True
-                    }
-                ),
-                'meth': (
-                    'django_docutils.lib.roles.xref.PyXRefRole',
-                    {
-                        'fix_parens': True
-                    }
-                ),
-            }
-        }
-    }
+    Returns
+    -------
+    None
     """
     if not DJANGO_DOCUTILS_LIB_RST:
-        return
+        return None
 
     if "roles" not in DJANGO_DOCUTILS_LIB_RST:
-        return
+        return None
 
     django_docutils_roles = DJANGO_DOCUTILS_LIB_RST["roles"]
 
@@ -68,6 +73,8 @@ def register_django_docutils_roles() -> None:
 
     if local_roles:
         register_role_mapping(local_roles)
+
+    return None
 
 
 def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
