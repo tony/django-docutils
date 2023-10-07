@@ -5,7 +5,6 @@
 ```{toctree}
 :maxdepth: 1
 
-amazon
 common
 email
 file
