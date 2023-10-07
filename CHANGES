@@ -4,6 +4,16 @@
 
 - _Add your latest changes from PRs here_
 
+### Breaking changes
+
+- Rename `GenericUrlRoleFn` -> `RoleFnReturnValue` (#394)
+
+### Documentation
+
+- Add role typings to docs (#394)
+- Roles: Split `common` and `types` to separate ToC section (#394)
+- Improve documentation for roles (#394)
+
 ## django-docutils 0.15.0 (2023-10-01)
 
 ### Breaking changes
