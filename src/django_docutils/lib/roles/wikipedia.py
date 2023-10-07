@@ -18,14 +18,24 @@ def wikipedia_role(
 ) -> GenericUrlRoleFn:
     """Role for linking to Wikipedia articles.
 
-    :wikipedia:`Don't repeat yourself` ->
-       link: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
-       text: Don't repeat yourself
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
 
+    Examples
+    --------
 
-    :wikipedia:`this wikipedia article <vim-airline>` ->
-       link: https://github.com/vim-airline
-       text: this wikipedia article
+    `Don't repeat yourself <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`_:
+
+    .. code-block:: rst
+
+       :wikipedia:`Don't repeat yourself`
+
+    `this wikipedia article <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`_:
+
+    .. code-block:: rst
+
+       :wikipedia:`this wikipedia article <Don't repeat yourself>`
     """
     if options is None:
         options = {}
