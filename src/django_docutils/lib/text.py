@@ -11,28 +11,32 @@ def is_uncapitalized_word(value: str) -> bool:
     """Return True if term/word segment is special uncap term (e.g. "django-")
 
     :param value: string value from template
-    :type value: string
+    :type value: str
 
     Functions can be declared via DJANGO_DOCUTILS_TEXT in django settings via string
     imports. The filters accept one argument (the word). If you don't want the
     word/pattern capitalized, return True. Anything else capitalizes as normal.
 
-    How to create filters::
+    How to create filters:
 
-        def handle_uncapped_word(value):
-            if value.startswith('django-'):
-                return True
-            if 'vs' in value:
-                return True
-            return False
+    .. code-block:: python
 
-    In your settings::
+       def handle_uncapped_word(value: str) -> bool:
+           if value.startswith('django-'):
+               return True
+           if 'vs' in value:
+               return True
+           return False
 
-        DJANGO_DOCUTILS_LIB_TEXT = {
-            'uncapitalized_word_filters': [
-                'project.path.to.handle_uncapped_word'
-            ]
-        }
+    In your settings:
+
+    .. code-block:: python
+
+       DJANGO_DOCUTILS_LIB_TEXT = {
+           'uncapitalized_word_filters': [
+               'project.path.to.handle_uncapped_word'
+           ]
+       }
     """
     try:
         config = settings.DJANGO_DOCUTILS_LIB_TEXT
