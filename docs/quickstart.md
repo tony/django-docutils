@@ -40,10 +40,15 @@ via trunk (can break easily):
 
 [pip]: https://pip.pypa.io/en/stable/
 
-## Usage
+## Settings
+
+Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
 
 ```python
-import django_docutils
+INSTALLED_APPS = [
+    # ... your default apps,
+    'django_docutils'
+]
 ```
 
 See {ref}`Home page <index>`.
