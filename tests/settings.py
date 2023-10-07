@@ -2,6 +2,9 @@ import typing as t
 
 import django
 
+if t.TYPE_CHECKING:
+    from django_docutils.lib.types import DjangoDocutilsLibRSTSettings
+
 if django.VERSION <= (4, 2):
     USE_L10N = True
 
@@ -24,16 +27,7 @@ TEMPLATES = [
     },
 ]
 DJANGO_DOCUTILS_ANONYMOUS_USER_NAME = "AnonymousCoward"
-DJANGO_DOCUTILS_LIB_RST: t.Dict[
-    str,
-    t.Union[
-        t.List[str],
-        t.Dict[
-            str,
-            t.Any,
-        ],
-    ],
-] = {
+DJANGO_DOCUTILS_LIB_RST: "DjangoDocutilsLibRSTSettings" = {
     "metadata_processors": [
         "django_docutils.lib.metadata.processors.process_datetime",
         "django_docutils.lib.metadata.processors.process_anonymous_user",
