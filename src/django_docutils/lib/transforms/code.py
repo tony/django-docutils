@@ -18,7 +18,7 @@ if t.TYPE_CHECKING:
 
 class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
     def format_unencoded(self, tokensource: "TokenStream", outfile: t.Any) -> None:
-        """Trim inline element of space and newlines.
+        r"""Trim inline element of space and newlines.
 
         First problem (filter trailing newline): Final token generated returns
         ``(Token.Other, '\n')`` which results in a blank space
