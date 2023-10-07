@@ -17,17 +17,35 @@ def url_role(
 ) -> GenericUrlRoleFn:
     """Role for linking to url articles.
 
-    :url:`https://google.com` ->
-       link: https://google.com
-       text: https://google.com
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
 
-    :url:`Google <https://google.com>` ->
-        link: https://google.com
-        text: Google
+    Examples
+    --------
 
-    :url:`*Google* <https://google.com>` ->
-        link: https://google.com
-        text (html): <em>Google</em>
+    https://google.com:
+
+    .. code-block:: rst
+
+      :url:`https://google.com`
+
+
+    `Google <https://google.com>`_:
+
+    .. code-block:: rst
+
+      :url:`Google <https://google.com>`
+
+    |google|_:
+
+    .. |google| replace:: *Google*
+
+    .. _google: https://google.com
+
+    .. code-block:: rst
+
+       :url:`*Google* <https://google.com>`
     """
     if options is None:
         options = {}
