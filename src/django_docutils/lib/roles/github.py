@@ -42,7 +42,7 @@ def github_role(
 
        :gh:`vim-airline/vim-airline`
 
-    `vim-airline/vim-airline <https://github.com/vim-airline/vim-airline/issues/125>`_:
+    `vim-airline/vim-airline#125 <https://github.com/vim-airline/vim-airline/issues/125>`_:
 
     .. code-block:: rst
 
