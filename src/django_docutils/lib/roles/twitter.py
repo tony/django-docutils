@@ -17,13 +17,24 @@ def twitter_role(
 ) -> GenericUrlRoleFn:
     """Role for linking to twitter articles.
 
-    :twitter:`@username` ->
-       link: https://twitter.com/username
-       text: @username
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
 
-    :twitter:`follow me on twitter <@username>` ->
-       link: https://twitter.com/username
-       text: follow on me on twitter
+    Examples
+    --------
+
+    `@username <https://twitter.com/username>`_:
+
+    .. code-block:: rst
+
+       :twitter:`@username`
+
+    `follow me on twitter <https://twitter.com/username>`_:
+
+    .. code-block:: rst
+
+       :twitter:`follow me on twitter <@username>`
     """
     if options is None:
         options = {}
