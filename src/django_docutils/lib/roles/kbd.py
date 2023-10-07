@@ -13,6 +13,17 @@ def kbd_role(
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
 ) -> t.Tuple[t.List[nodes.raw], t.List[t.Any]]:
+    """Role for ``<kbd>``, the keyboard input element.
+
+    Examples
+    --------
+
+    :kbd:`ctrl-t`
+
+    .. code-block:: rst
+
+       :kbd:`ctrl-t`
+    """
     html = ""
     keys = text.split(",")
 
