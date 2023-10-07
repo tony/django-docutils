@@ -15,16 +15,26 @@ def pypi_role(
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
 ) -> GenericUrlRoleFn:
-    """Role for linking to pypi page.
+    """Role for linking to PyPI (Python Package Index) page.
 
-    :pypi:`libsass` ->
-       link: https://pypi.python.org/pypi/libsass
-       text: libsass
+    Returns
+    -------
+    :data:`django_docutils.lib.roles.types.GenericUrlRoleFn`
 
+    Examples
+    --------
 
-    :pypi:`a pypi package <libsass>` ->
-       link: https://pypi.python.org/pypi/libsass
-       text: a pypi package
+    `libsass <https://pypi.python.org/pypi/libsass>`_:
+
+    .. code-block:: rst
+
+       :pypi:`libsass`
+
+    `a pypi package <https://pypi.python.org/pypi/libsass>`_:
+
+    .. code-block:: rst
+
+       :pypi:`a pypi package <libsass>`
     """
     if options is None:
         options = {}
