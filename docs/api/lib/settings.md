@@ -1,9 +1,9 @@
-(api_lib_writers)=
+(api_lib_settings)=
 
-# `lib.writers`
+# `lib.settings`
 
 ```{eval-rst}
-.. automodule:: django_docutils.lib.writers
+.. automodule:: django_docutils.lib.settings
    :members:
    :private-members:
    :show-inheritance:
