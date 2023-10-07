@@ -3,6 +3,25 @@ import typing as t
 import pytest
 from django.template import Context, Template
 
+DEFAULT_EXPECTED_CONTENT = r"""
+<ol class="upperalpha simple">
+<li><p>hows</p></li>
+<li><p>it</p></li>
+<li><p>going</p></li>
+<li><p>today</p></li>
+</ol>
+<p><strong>hi</strong>
+<em>hi</em></p>
+""".strip()
+DEFAULT_EXPECTED = rf"""
+<main id="hey">
+<h1 class="title is-1">hey</h1>
+<p class="subtitle" id="hi">hi</p>
+{DEFAULT_EXPECTED_CONTENT}
+</main>
+
+"""
+
 
 def test_filter(settings: t.Any) -> None:
     template = Template(
@@ -26,24 +45,7 @@ D. today
 """
     )
     with pytest.warns(DeprecationWarning) as record:
-        assert (
-            template.render(Context({}))
-            == r"""
-<main id="hey">
-<h1 class="title is-1">hey</h1>
-<p class="subtitle" id="hi">hi</p>
-<ol class="upperalpha simple">
-<li><p>hows</p></li>
-<li><p>it</p></li>
-<li><p>going</p></li>
-<li><p>today</p></li>
-</ol>
-<p><strong>hi</strong>
-<em>hi</em></p>
-</main>
-
-"""
-        )
+        assert template.render(Context({})) == DEFAULT_EXPECTED
         message = record[0].message
         assert isinstance(message, Warning)
         assert message.args[0] == "The rst filter has been deprecated"
@@ -73,24 +75,7 @@ D. today
 """
     )
 
-    assert (
-        template.render(Context({"content": content}))
-        == """
-<main id="hey">
-<h1 class="title is-1">hey</h1>
-<p class="subtitle" id="hi">hi</p>
-<ol class="upperalpha simple">
-<li><p>hows</p></li>
-<li><p>it</p></li>
-<li><p>going</p></li>
-<li><p>today</p></li>
-</ol>
-<p><strong>hi</strong>
-<em>hi</em></p>
-</main>
-
-"""
-    )
+    assert template.render(Context({"content": content})) == DEFAULT_EXPECTED
 
 
 def test_templatetag_show_title(settings: t.Any) -> None:
@@ -114,22 +99,12 @@ D. today
     template = Template(
         """{% load django_docutils %}
 {% rst content show_title=False %}
-"""
+""".strip()
     )
 
     assert (
         template.render(Context({"content": content}))
-        == """
-<ol class="upperalpha simple">
-<li><p>hows</p></li>
-<li><p>it</p></li>
-<li><p>going</p></li>
-<li><p>today</p></li>
-</ol>
-<p><strong>hi</strong>
-<em>hi</em></p>
-
-"""
+        == "\n" + DEFAULT_EXPECTED_CONTENT + "\n"
     )
 
 
@@ -164,7 +139,7 @@ D. today
     template = Template(
         """{% load django_docutils %}
 {% rst content toc_only=True %}
-"""
+""".strip()
     )
 
     assert (
@@ -187,7 +162,6 @@ D. today
 </ul>
 </nav>
 </main>
-
 """  # noqa: E501
     )
 
@@ -221,7 +195,7 @@ D. today
 **hi**
 *hi*
 {% endrst %}
-"""
+""".strip()
     )
 
     assert (
@@ -244,7 +218,6 @@ D. today
 </ul>
 </nav>
 </main>
-
 """  # noqa: E501
     )
 
@@ -266,24 +239,9 @@ C. going
 D. today
 
 **hi**
-*hi2*
-{% endrst %}"""
-    )
-
-    assert (
-        template.render(Context({}))
-        == r"""
-<main id="hey">
-<h1 class="title is-1">hey</h1>
-<p class="subtitle" id="hi">hi</p>
-<ol class="upperalpha simple">
-<li><p>hows</p></li>
-<li><p>it</p></li>
-<li><p>going</p></li>
-<li><p>today</p></li>
-</ol>
-<p><strong>hi</strong>
-<em>hi2</em></p>
-</main>
+*hi*
+{% endrst %}
 """
     )
+
+    assert template.render(Context({})) == DEFAULT_EXPECTED
