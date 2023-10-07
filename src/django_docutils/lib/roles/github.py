@@ -17,26 +17,42 @@ def github_role(
 ) -> GenericUrlRoleFn:
     """Role for linking to GitHub repos and issues.
 
-    :gh:`vim-airline` ->
-       link: https://github.com/vim-airline
-       text: vim-airline
+    Returns
+    -------
+    GenericUrlRoleFn
 
+    Examples
+    --------
 
-    :gh:`vim-airline's org <vim-airline>` ->
-       link: https://github.com/vim-airline
-       text: vim-airline's org
+    `vim-airline <https://github.com/vim-airline>`_:
 
-    :gh:`vim-airline/vim-airline` ->
-       link: https://github.com/vim-airline/vim-airline
-       text: vim-airline/vim-airline
+    .. code-block:: rst
 
-    :gh:`vim-airline/vim-airline#134` ->
-       link: https://github.com/vim-airline/vim-airline/issues/134
-       text: vim-airline/vim-airline#134
+       :gh:`vim-airline`
 
-    :gh:`this example issue <vim-airline/vim-airline#134>` ->
-       link: https://github.com/vim-airline/vim-airline/issues/134
-       text: this example issue
+    `vim-airline's org <https://github.com/vim-airline>`_:
+
+    .. code-block:: rst
+
+       :gh:`vim-airline's org <vim-airline>`
+
+    `vim-airline/vim-airline <https://github.com/vim-airline/vim-airline>`_:
+
+    .. code-block:: rst
+
+       :gh:`vim-airline/vim-airline`
+
+    `vim-airline/vim-airline <https://github.com/vim-airline/vim-airline/issues/125>`_:
+
+    .. code-block:: rst
+
+      :gh:`vim-airline/vim-airline#125`
+
+    `this example issue <https://github.com/vim-airline/vim-airline/issues/125>`_:
+
+    .. code-block:: rst
+
+      :gh:`this example issue <vim-airline/vim-airline#125>`
     """
     if options is None:
         options = {}
