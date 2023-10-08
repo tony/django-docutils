@@ -38,12 +38,10 @@ class HomeView(DocutilsView):
     rst_name = 'home.rst'
 ```
 
-:::{seealso}
+:::{admonition} Explore the API
 
 - {class}`~django_docutils.views.DocutilsView`, {class}`~django_docutils.views.DocutilsResponse`
 - {class}`~django_docutils.lib.views.RSTMixin`,
   {class}`~django_docutils.lib.views.RSTRawView`, {class}`~django_docutils.lib.views.RSTView`
 
 :::
-
-
