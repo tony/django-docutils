@@ -12,6 +12,7 @@ quickstart
 template_tag
 template_filter
 class_based_view
+faq
 ```
 
 ```{toctree}
