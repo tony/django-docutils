@@ -2,31 +2,33 @@
 The Pygments reStructuredText directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This fragment is a `Docutils <ttps://docutils.sf.net/>`_ 0.5 directive
-that renders source code (to HTML only, currently) via Pygments.
+This fragment is a `Docutils <https://docutils.sourceforge.io/>`_ 0.5 directive that 
+renders source code (to HTML only, currently) via Pygments.
 
 To use it, adjust the options below and copy the code into a module
 that you import on initialization.  The code then automatically
 registers a ``sourcecode`` directive that you can use instead of
-normal code blocks like this::
+normal code blocks like this:
+
+.. code-block:: rst
 
     .. sourcecode:: python
 
        My code goes here.
 
 If you want to have different code styles, e.g. one with line numbers
-and one without, add formatters with their names in the VARIANTS dict
-below.  You can invoke them instead of the DEFAULT one by using a
-directive option::
+and one without, add formatters with their names in the ``VARIANTS`` dict
+below.  You can invoke them instead of the ``DEFAULT`` one by using a
+directive option:
 
-    .. sourcecode:: python
+.. code-block:: rst
 
-       :linenos:
+   .. sourcecode:: python
+      :linenos:
 
-       My code goes here.
+      My code goes here.
 
-Look at the `directive documentation
-<http://docutils.sourceforge.net/docs/howto/rst-directives.html>`_
+Look at the `directive documentation <https://docutils.sourceforge.io/docs/ref/rst/directives.html>`_
 to get all the gory details.
 
 :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
@@ -61,6 +63,7 @@ def patch_bash_session_lexer() -> None:
 
 #: Set to True if you want inline CSS styles instead of classes
 INLINESTYLES = False
+
 
 #: The default formatter
 DEFAULT = HtmlFormatter(cssclass="highlight code-block", noclasses=INLINESTYLES)
@@ -98,3 +101,24 @@ class CodeBlock(Directive):
         formatter = self.options and VARIANTS[next(iter(self.options))] or DEFAULT
         parsed = highlight("\n".join(self.content), lexer, formatter)
         return [nodes.raw("", parsed, format="html")]
+
+
+def register_pygments_directive(directive: str = "code-block") -> None:
+    """Register pygments directive.
+
+    Parameters
+    ----------
+    directive : str
+        directive name to register pygments to.
+
+    Examples
+    --------
+    If you wish to use (override) code-block (default), that means:
+
+    .. code-block:: rst
+
+        .. code-block::
+
+            // will be highlighted by pygments
+    """
+    directives.register_directive(directive, CodeBlock)

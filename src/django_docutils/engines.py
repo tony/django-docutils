@@ -9,7 +9,7 @@ from django.template.exceptions import TemplateDoesNotExist
 from django.utils.safestring import mark_safe
 from docutils import core
 
-from .directives import register_pygments_directive
+from django_docutils.lib.directives.code import register_pygments_directive
 
 if t.TYPE_CHECKING:
     from django.template.backends.base import _EngineTemplate
