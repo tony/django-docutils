@@ -13,11 +13,10 @@
 ```{toctree}
 :maxdepth: 1
 
-engines
 exc
 views
-
 lib/index
+template
 templatetags/index
 ```
 

@@ -19,7 +19,7 @@ TEMPLATES = [
     # ... Other engines
     {
         "NAME": "docutils",
-        "BACKEND": "django_docutils.engines.Docutils",
+        "BACKEND": "django_docutils.template.DocutilsTemplates",
         "DIRS": [],
         "APP_DIRS": True,
     }
@@ -85,5 +85,6 @@ Output:
 - {class}`~django_docutils.views.DocutilsView`, {class}`~django_docutils.views.DocutilsResponse`
 - {class}`~django_docutils.lib.views.RSTMixin`,
   {class}`~django_docutils.lib.views.RSTRawView`, {class}`~django_docutils.lib.views.RSTView`
+- {class}`~django_docutils.template.DocutilsTemplates`, {class}`~django_docutils.template.DocutilsTemplate`
 
 :::

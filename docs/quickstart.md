@@ -40,7 +40,7 @@ via trunk (can break easily):
 
 [pip]: https://pip.pypa.io/en/stable/
 
-## Settings
+## Add the django app
 
 Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
 
@@ -51,4 +51,12 @@ INSTALLED_APPS = [
 ]
 ```
 
-See {ref}`Home page <index>`.
+## Next steps
+
+Integate docutils to your django site:
+
+1. {ref}`template_tag`
+2. {ref}`template_filter`
+3. {ref}`class_based_view`
+
+:::
