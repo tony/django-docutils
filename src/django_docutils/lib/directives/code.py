@@ -1,4 +1,5 @@
-"""
+"""Pygments docutils directive.
+
 The Pygments reStructuredText directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
 
@@ -49,9 +50,9 @@ if t.TYPE_CHECKING:
 
 
 def patch_bash_session_lexer() -> None:
+    """Monkey patch Bash Session lexer to gobble up initial space after prompt."""
     from pygments.lexers.shell import BashSessionLexer
 
-    #: Monkey patch Bash Session lexer to gobble up initial space after prompt
     BashSessionLexer._ps1rgx = re.compile(
         r"^((?:(?:\[.*?\])|(?:\(\S+\))?(?:| |sh\S*?|\w+\S+[@:]\S+(?:\s+\S+)"
         r"?|\[\S+[@:][^\n]+\].+))\s*[$#%] )(.*\n?)"
@@ -88,6 +89,7 @@ class CodeBlock(Directive):
     has_content = True
 
     def run(self) -> list[nodes.Node]:
+        """Directive run method for CodeBlock."""
         self.assert_has_content()
         try:
             lexer_name = self.arguments[0]
