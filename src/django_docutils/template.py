@@ -18,7 +18,7 @@ if t.TYPE_CHECKING:
     from django.utils.safestring import SafeString
 
 
-class Docutils(BaseEngine):
+class DocutilsTemplates(BaseEngine):
     """Docutils engine for Django."""
 
     app_dirname: str = "templates"

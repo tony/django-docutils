@@ -71,7 +71,7 @@ TEMPLATES = [
     # ... Other engines
     {
         "NAME": "docutils",
-        "BACKEND": "django_docutils.engines.Docutils",
+        "BACKEND": "django_docutils.template.DocutilsTemplates",
         "DIRS": [],
         "APP_DIRS": True,
     }

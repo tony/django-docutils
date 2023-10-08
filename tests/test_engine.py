@@ -18,7 +18,7 @@ def test_engine(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -
     settings.TEMPLATES.append(
         {
             "NAME": "docutils",
-            "BACKEND": "django_docutils.engines.Docutils",
+            "BACKEND": "django_docutils.template.DocutilsTemplates",
             "DIRS": [str(template_dir)],
             "APP_DIRS": True,
         }
