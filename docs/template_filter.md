@@ -25,3 +25,9 @@ D. today
 *hi*
 {% endfilter %}
 ```
+
+:::{admonition} Explore the API
+
+- {func}`~django_docutils.templatetags.django_docutils.rst_filter`
+
+:::
