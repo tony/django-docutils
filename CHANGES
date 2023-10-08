@@ -9,6 +9,10 @@
 - Remove references to font awesome (#397, #399)
 
   These are unused and leftovers from an earlier codebase.
+- Removed unused visitor from `HTMLTranslator` (#400)
+- Removed models.py file (#400)
+- TemplateTags: Fixes `MalformedArgumentsToUrlTag` ->
+  `MalformedArgumentsToRSTTag` (#400)
 
 ### Development
 
