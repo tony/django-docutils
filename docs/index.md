@@ -11,7 +11,7 @@
 quickstart
 template_tag
 template_filter
-django_view
+class_based_view
 ```
 
 ```{toctree}

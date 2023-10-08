@@ -1,13 +1,12 @@
-(django_view)=
+(class_based_view)=
 
-# Django view
+# Class-based view
 
-Template engine (class-based view)
+## Setup
 
 :::{seealso}
 
-{ref}`Quickstart <quickstart>`.
-
+{ref}`Quickstart <quickstart>`
 :::
 
 You can also use a class-based view to render reStructuredText (reST).
@@ -27,6 +26,8 @@ TEMPLATES = [
 ]
 ```
 
+## Introduction to views
+
 Now django will be able to scan for .rst files and process them. In your view:
 
 ```python
@@ -36,3 +37,13 @@ class HomeView(DocutilsView):
     template_name = 'base.html'
     rst_name = 'home.rst'
 ```
+
+:::{seealso}
+
+- {class}`~django_docutils.views.DocutilsView`, {class}`~django_docutils.views.DocutilsResponse`
+- {class}`~django_docutils.lib.views.RSTMixin`,
+  {class}`~django_docutils.lib.views.RSTRawView`, {class}`~django_docutils.lib.views.RSTView`
+
+:::
+
+
