@@ -4,7 +4,7 @@
 
 :::{seealso}
 
-{ref}`Quickstart <quickstart>`.
+{ref}`Quickstart <quickstart>`
 
 :::
 
