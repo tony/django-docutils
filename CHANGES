@@ -4,6 +4,10 @@
 
 - _Add your latest changes from PRs here_
 
+### Bug fix
+
+- Remove duplicate ``CodeBlock`` directive from `directives.py` (#401)
+
 ## django-docutils 0.17.0 (2023-10-08)
 
 ### Breaking changes
