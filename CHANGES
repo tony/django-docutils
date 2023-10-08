@@ -4,6 +4,12 @@
 
 - _Add your latest changes from PRs here_
 
+### Breaking changes
+
+- Remove references to font awesome (#397, #399)
+
+  These are unused and leftovers from an earlier codebase.
+
 ### Development
 
 - Add typings for settings (#395)
