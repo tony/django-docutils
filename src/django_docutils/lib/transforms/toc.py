@@ -6,12 +6,11 @@ from docutils.transforms import parts
 
 
 class Contents(parts.Contents):
-
     """
     Changes:
     - remove unused autonum
     - PEP8
-    - Removed extra nodes.paragraph wrapping of list_item's
+    - Removed extra nodes.paragraph wrapping of list_item's.
     """
 
     startnode: t.Optional[nodes.Node]

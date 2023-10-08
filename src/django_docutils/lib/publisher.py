@@ -91,7 +91,7 @@ def publish_toc_from_doctree(
 def publish_doctree(
     source: str | bytes, settings_overrides: t.Any = docutils_settings
 ) -> nodes.document:
-    """Split off ability to get doctree (a.k.a. document)
+    """Split off ability to get doctree (a.k.a. document).
 
     It's valuable to be able to run transforms to alter and most importantly,
     extract data like post abstracts.
@@ -121,7 +121,6 @@ def publish_html_from_source(
     source: str, **kwargs: "Unpack[PublishHtmlDocTreeKwargs]"
 ) -> str | None:
     """Return HTML from reStructuredText source string."""
-
     doctree = publish_doctree(source)
     return publish_html_from_doctree(doctree, **kwargs)
 

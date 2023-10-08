@@ -36,7 +36,6 @@ class DocutilsResponse(TemplateResponse):
         response content, you must either call render(), or set the
         content explicitly using the value of this property.
         """
-
         context: t.Dict[str, t.Any] = self.resolve_context(self.context_data) or {}
 
         # we should be able to use the engine to .Render this
@@ -86,9 +85,7 @@ class DocutilsView(TemplateView):
         )
 
     def get_rst_names(self) -> list[str]:
-        """
-        Follows after get_template_names, but for scanning for rst content.
-        """
+        """Follows after get_template_names, but for scanning for rst content."""
         if self.rst_name is None:
             raise DocutilsViewRstNameImproperlyConfigured()
         else:

@@ -23,7 +23,6 @@ def leanpub_role(
 
     Examples
     --------
-
     `the-tao-of-tmux <https://leanpub.com/the-tao-of-tmux>`_:
 
     .. code-block:: rst

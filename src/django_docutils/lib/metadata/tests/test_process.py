@@ -45,7 +45,6 @@ some content
 
 def test_process_metadata_daytime_timezone() -> None:
     """Verify time of day and timezone (optional) work with dates."""
-
     source = """
 ===========
 Content ok!

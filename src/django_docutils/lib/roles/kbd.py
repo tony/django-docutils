@@ -17,7 +17,6 @@ def kbd_role(
 
     Examples
     --------
-
     :kbd:`ctrl-t`
 
     .. code-block:: rst

@@ -24,7 +24,6 @@ def hackernews_role(
 
     Examples
     --------
-
     `15610489 <https://news.ycombinator.com/item?id=15610489>`_:
 
     .. code-block:: rst

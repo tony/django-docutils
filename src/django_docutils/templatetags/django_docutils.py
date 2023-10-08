@@ -13,7 +13,6 @@ register = template.Library()
 
 
 class ReStructuredTextNode(Node):
-
     """Implement the actions of the rst tag."""
 
     def __init__(
@@ -53,7 +52,7 @@ class MalformedArgumentsToRSTTag(TemplateSyntaxError):
 
 @register.tag
 def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
-    """Parse raw reStructuredText into HTML. Supports keyword arguments!
+    """Parse raw reStructuredText into HTML. Supports keyword arguments!.
 
     Usage::
 

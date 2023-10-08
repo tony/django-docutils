@@ -37,7 +37,6 @@ def generic_url_role(
 
     Examples
     --------
-
     .. code-block:: python
 
         def github_role(

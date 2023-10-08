@@ -45,7 +45,6 @@ def process_metadata(metadata: t.Dict[str, str]) -> t.Dict[str, str]:
     :type metadata: dict
     :rtype: dict
     """
-
     if not DJANGO_DOCUTILS_LIB_RST:
         return metadata
 

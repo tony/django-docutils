@@ -23,7 +23,6 @@ def url_role(
 
     Examples
     --------
-
     https://google.com:
 
     .. code-block:: rst

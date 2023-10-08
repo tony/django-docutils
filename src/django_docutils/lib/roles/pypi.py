@@ -23,7 +23,6 @@ def pypi_role(
 
     Examples
     --------
-
     `libsass <https://pypi.python.org/pypi/libsass>`_:
 
     .. code-block:: rst

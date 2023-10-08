@@ -23,7 +23,6 @@ def email_role(
 
     Examples
     --------
-
     `me@localhost <mailto:me@localhost>`_:
 
     .. code-block:: rst

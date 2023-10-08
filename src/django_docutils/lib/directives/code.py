@@ -1,6 +1,6 @@
 """
 The Pygments reStructuredText directive
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
 
 This fragment is a `Docutils <https://docutils.sourceforge.io/>`_ 0.5 directive that 
 renders source code (to HTML only, currently) via Pygments.
@@ -79,7 +79,6 @@ DEFAULT_OPTION_SPEC: t.Dict[str, t.Callable[[str], t.Any]] = {
 
 
 class CodeBlock(Directive):
-
     """Source code syntax highlighting."""
 
     required_arguments = 1

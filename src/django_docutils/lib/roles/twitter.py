@@ -23,7 +23,6 @@ def twitter_role(
 
     Examples
     --------
-
     `@username <https://twitter.com/username>`_:
 
     .. code-block:: rst

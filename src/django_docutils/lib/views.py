@@ -68,7 +68,7 @@ class RSTMixin:
         )
 
     def get_base_template(self) -> str:
-        """TODO: move this out of RSTMixin, it is AMP related, not RST"""
+        """TODO: move this out of RSTMixin, it is AMP related, not RST."""
         if self.request.GET.get("is_amp", False):
             return "django_docutils/base-amp.html"
         else:
@@ -76,7 +76,6 @@ class RSTMixin:
 
 
 class RSTRawView(TemplateTitleView):
-
     """Send pure reStructuredText to template.
 
     Requires template tags to process it.

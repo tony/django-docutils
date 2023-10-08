@@ -78,7 +78,7 @@ def register_django_docutils_roles() -> None:
 
 
 def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
-    """Register a dict mapping of roles
+    """Register a dict mapping of roles.
 
     An item consists of a role name, import string to a callable, and an
     optional mapping of keyword args for special roles that are classes
@@ -92,7 +92,6 @@ def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
     :rtype: void
     :returns: Nothing
     """
-
     for role_name, role_cb_str in role_mapping.items():
         role_cb_kwargs = {}
 

@@ -23,7 +23,6 @@ def readthedocs_role(
 
     Examples
     --------
-
     `django-pipeline <https://django-pipeline.readthedocs.io/>`_:
 
     .. code-block:: rst

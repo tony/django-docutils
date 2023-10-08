@@ -179,7 +179,6 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
 
 
 class DjangoDocutilsWriter(Writer):
-
     """DjangoDocutils's hand-crafted docutils' writer:
 
     >>> DJANGO_DOCUTILS_LIB_RST = {

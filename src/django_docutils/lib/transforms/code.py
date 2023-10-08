@@ -81,7 +81,6 @@ formatter = InlineHtmlFormatter(
 
 
 class CodeTransform(Transform):
-
     """Run over unparsed literals and try to guess language + highlight."""
 
     default_priority = 120

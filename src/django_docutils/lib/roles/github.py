@@ -23,7 +23,6 @@ def github_role(
 
     Examples
     --------
-
     `vim-airline <https://github.com/vim-airline>`_:
 
     .. code-block:: rst
