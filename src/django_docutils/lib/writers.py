@@ -20,12 +20,6 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
     def __init__(self, document: nodes.document) -> None:
         HTMLTranslator.__init__(self, document)
 
-    def visit_pending_xref(self, node: nodes.Element) -> None:
-        pass
-
-    def depart_pending_xref(self, node: nodes.Element) -> None:
-        pass
-
     def visit_table(self, node: nodes.Element) -> None:
         node["classes"].extend(["table"])
         HTMLTranslator.visit_table(self, node)
