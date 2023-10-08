@@ -1,2 +1,3 @@
 "usage.rst" "quickstart.md"
 "api.md" "api/index.md"
+"django_view.rst" "class_based_view.md"
