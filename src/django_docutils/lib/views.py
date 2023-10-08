@@ -1,3 +1,4 @@
+"""Django view machinery for rendering docutils content as HTML."""
 import pathlib
 import typing as t
 
@@ -38,19 +39,23 @@ class TemplateTitleView(TemplateView, TitleMixin):
     subtitle = None
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
-        context = super().get_context_data(**kwargs)
-        return context
+        """Return context data."""
+        return super().get_context_data(**kwargs)
 
 
 class RSTMixin:
+    """Django Class-based view mixin for reStructuredText."""
+
     request: HttpRequest
 
     @cached_property
     def raw_content(self) -> t.Optional[str]:
+        """Raw reStructuredText content."""
         raise NotImplementedError
 
     @cached_property
     def doctree(self) -> nodes.document | None:
+        """Return docutils doctree of RST content (pre-HTML)."""
         if self.raw_content is None:
             return None
 
@@ -58,6 +63,7 @@ class RSTMixin:
 
     @cached_property
     def sidebar(self, **kwargs: object) -> str | None:
+        """Return table of contents sidebar of RST content as HTML."""
         if self.doctree is None:
             return None
 
@@ -65,7 +71,7 @@ class RSTMixin:
 
     @cached_property
     def content(self) -> str | None:
-        """Return doctree content."""
+        """Return reStructuredText content as HTML."""
         if self.doctree is None:
             return None
 
@@ -106,6 +112,7 @@ class RSTRawView(TemplateTitleView):
     title = None
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+        """Merge content to context data."""
         context = super().get_context_data(**kwargs)
 
         if self.file_path is not None:
@@ -116,12 +123,15 @@ class RSTRawView(TemplateTitleView):
 
 
 class RSTView(RSTRawView, RSTMixin):
+    """RestructuredText Django View."""
+
     template_name = "rst/base.html"
     file_path: t.Optional[StrPath] = None
     title = None
 
     @cached_property
     def raw_content(self) -> t.Optional[str]:
+        """Raw reStructuredText data."""
         if self.file_path is None:
             return None
 
@@ -129,6 +139,7 @@ class RSTView(RSTRawView, RSTMixin):
             return raw_content.read()
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+        """Merge content and sidebar to context data."""
         context = super().get_context_data(**kwargs)
         context["content"] = self.content
         context["sidebar"] = self.sidebar
