@@ -16,10 +16,13 @@ from .text import smart_title
 
 
 class TitleMixin(ContextMixin):
+    """ContextMixin that capitalizes title and subtitle."""
+
     title = None
     subtitle = None
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+        """:func:`django_docutils.lib.text.smart_title()` on title and subtitle."""
         context = super().get_context_data(**kwargs)
         if self.title:
             context["title"] = smart_title(self.title)
@@ -29,6 +32,8 @@ class TitleMixin(ContextMixin):
 
 
 class TemplateTitleView(TemplateView, TitleMixin):
+    """Combination of Template and Title mixin."""
+
     title = None
     subtitle = None
 
@@ -60,6 +65,7 @@ class RSTMixin:
 
     @cached_property
     def content(self) -> str | None:
+        """Return doctree content."""
         if self.doctree is None:
             return None
 
