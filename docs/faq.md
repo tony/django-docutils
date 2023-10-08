@@ -30,7 +30,7 @@ This package simply offers template extensions to use docutils in django views.
 
 1. {ref}`class_based_view`
 2. {ref}`template_tag`
-2. {ref}`template_filter`
+3. {ref}`template_filter`
 
 ### Can I copy code from this project to my own?
 
