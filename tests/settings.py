@@ -1,3 +1,4 @@
+"""django-docutils test settings module for django."""
 import typing as t
 
 import django

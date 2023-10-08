@@ -1,3 +1,4 @@
+"""Tests for DocutilsView template view."""
 import pathlib
 import typing as t
 
@@ -8,6 +9,7 @@ if t.TYPE_CHECKING:
 
 
 def test_engine(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> None:
+    """Assert DocutilsView renders HTML from reStructuredText."""
     request = rf.get("/")
     template_dir = tmp_path / "templates"
     if not template_dir.exists():
