@@ -6,7 +6,6 @@
 :maxdepth: 1
 
 code
-font_awesome
 toc
 ```
 

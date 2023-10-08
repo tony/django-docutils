@@ -105,21 +105,6 @@ DJANGO_DOCUTILS_LIB_RST = {
             "email": "django_docutils.lib.roles.email.email_role",
         }
     },
-    "font_awesome": {  # Transformer to inject <em class="<class>"></em>
-        "url_patterns": {
-            r".*github.com.*": "fab fa-github",
-            r".*twitter.com.*": "fab fa-twitter",
-            r".*news.ycombinator.com*": "fab fa-hacker-news",
-            r".*leanpub.com.*": "fab fa-leanpub",
-            r".*python.org.*": "fab fa-python",
-            r".*pypi.org.*": "fab fa-python",
-            r".*djangoproject.com.*": "fab fa-python",
-            r".*wikipedia.org.*": "fab fa-wikipedia",
-            r"((rtfd|readthedocs).)*$": "fab fa-books",
-            r"^mailto:.*": "fas fa-envelope",
-            r"((?!mywebsite.com|localhost).)*$": "fas fa-external-link",
-        }
-    },
 }
 
 # Optional
