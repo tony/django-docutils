@@ -1,3 +1,4 @@
+"""PyPI (Python Package Index) role for docutils."""
 import typing as t
 
 from docutils.parsers.rst.states import Inliner
@@ -23,7 +24,6 @@ def pypi_role(
 
     Examples
     --------
-
     `libsass <https://pypi.python.org/pypi/libsass>`_:
 
     .. code-block:: rst

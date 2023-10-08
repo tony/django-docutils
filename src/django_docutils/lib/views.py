@@ -1,3 +1,4 @@
+"""Django view machinery for rendering docutils content as HTML."""
 import pathlib
 import typing as t
 
@@ -16,10 +17,13 @@ from .text import smart_title
 
 
 class TitleMixin(ContextMixin):
+    """ContextMixin that capitalizes title and subtitle."""
+
     title = None
     subtitle = None
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+        """:func:`django_docutils.lib.text.smart_title()` on title and subtitle."""
         context = super().get_context_data(**kwargs)
         if self.title:
             context["title"] = smart_title(self.title)
@@ -29,23 +33,29 @@ class TitleMixin(ContextMixin):
 
 
 class TemplateTitleView(TemplateView, TitleMixin):
+    """Combination of Template and Title mixin."""
+
     title = None
     subtitle = None
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
-        context = super().get_context_data(**kwargs)
-        return context
+        """Return context data."""
+        return super().get_context_data(**kwargs)
 
 
 class RSTMixin:
+    """Django Class-based view mixin for reStructuredText."""
+
     request: HttpRequest
 
     @cached_property
     def raw_content(self) -> t.Optional[str]:
+        """Raw reStructuredText content."""
         raise NotImplementedError
 
     @cached_property
     def doctree(self) -> nodes.document | None:
+        """Return docutils doctree of RST content (pre-HTML)."""
         if self.raw_content is None:
             return None
 
@@ -53,6 +63,7 @@ class RSTMixin:
 
     @cached_property
     def sidebar(self, **kwargs: object) -> str | None:
+        """Return table of contents sidebar of RST content as HTML."""
         if self.doctree is None:
             return None
 
@@ -60,6 +71,7 @@ class RSTMixin:
 
     @cached_property
     def content(self) -> str | None:
+        """Return reStructuredText content as HTML."""
         if self.doctree is None:
             return None
 
@@ -68,7 +80,7 @@ class RSTMixin:
         )
 
     def get_base_template(self) -> str:
-        """TODO: move this out of RSTMixin, it is AMP related, not RST"""
+        """TODO: move this out of RSTMixin, it is AMP related, not RST."""
         if self.request.GET.get("is_amp", False):
             return "django_docutils/base-amp.html"
         else:
@@ -76,7 +88,6 @@ class RSTMixin:
 
 
 class RSTRawView(TemplateTitleView):
-
     """Send pure reStructuredText to template.
 
     Requires template tags to process it.
@@ -101,6 +112,7 @@ class RSTRawView(TemplateTitleView):
     title = None
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+        """Merge content to context data."""
         context = super().get_context_data(**kwargs)
 
         if self.file_path is not None:
@@ -111,12 +123,15 @@ class RSTRawView(TemplateTitleView):
 
 
 class RSTView(RSTRawView, RSTMixin):
+    """RestructuredText Django View."""
+
     template_name = "rst/base.html"
     file_path: t.Optional[StrPath] = None
     title = None
 
     @cached_property
     def raw_content(self) -> t.Optional[str]:
+        """Raw reStructuredText data."""
         if self.file_path is None:
             return None
 
@@ -124,6 +139,7 @@ class RSTView(RSTRawView, RSTMixin):
             return raw_content.read()
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+        """Merge content and sidebar to context data."""
         context = super().get_context_data(**kwargs)
         context["content"] = self.content
         context["sidebar"] = self.sidebar

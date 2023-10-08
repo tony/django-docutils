@@ -1,3 +1,4 @@
+"""Leanpub role for Docutils."""
 import typing as t
 
 from docutils.parsers.rst.states import Inliner
@@ -23,7 +24,6 @@ def leanpub_role(
 
     Examples
     --------
-
     `the-tao-of-tmux <https://leanpub.com/the-tao-of-tmux>`_:
 
     .. code-block:: rst

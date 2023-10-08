@@ -75,7 +75,7 @@ def chop_after_heading_smartly(source: str) -> str:
 
 
 def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None, None]:
-    """Yield top level section nodes
+    """Yield top level section nodes.
 
     :param document: docutils document
     :type document: :class:`docutils.nodes.document`
@@ -87,7 +87,7 @@ def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None
 
 
 def append_html_to_node(node: nodes.Element, ad_code: str) -> None:
-    """Inject HTML in this node
+    """Inject HTML in this node.
 
     :param node: node of the section to find last paragraph of
     :type node: :class:`docutils.nodes.node`

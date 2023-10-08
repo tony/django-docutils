@@ -1,3 +1,4 @@
+"""Django template tag and filter for docutils (rendering reStructuredText as HTML)."""
 import typing as t
 
 from django import template
@@ -13,7 +14,6 @@ register = template.Library()
 
 
 class ReStructuredTextNode(Node):
-
     """Implement the actions of the rst tag."""
 
     def __init__(
@@ -29,6 +29,7 @@ class ReStructuredTextNode(Node):
         self.asvar = asvar
 
     def render(self, context: t.Optional[Context] = None) -> str:
+        """Render Node as string."""
         if context is None:
             context = Context()
 
@@ -47,25 +48,41 @@ class ReStructuredTextNode(Node):
 
 
 class MalformedArgumentsToRSTTag(TemplateSyntaxError):
+    """Invalid arguments to rst django template tag."""
+
     def __init__(self, *args: object, **kwargs: object) -> None:
         return super().__init__("Malformed arguments to url tag", *args, **kwargs)
 
 
 @register.tag
 def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
-    """Parse raw reStructuredText into HTML. Supports keyword arguments!
+    """Django template tag to render reStructuredText as HTML.
 
-    Usage::
+    Supports arguments, see below.
+
+    Examples
+    --------
+    .. code-block:: django
 
         {% rst content %}
 
+    .. code-block:: django
+
         {% rst content toc_only=True %}
 
+    .. code-block:: django
+
         {% rst content show_title=False %}
+
+    .. code-block:: django
 
         {% rst %}
         **Hello world**
         {% endrst %}
+
+    Render table of contents:
+
+    .. code-block:: django
 
         {% rst toc_only=True %}
         Welcome to my site!
@@ -81,11 +98,6 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
 
         Thank you
         {% endrst %}
-
-    Why does toc_only=true needed (why do you need to call twice just to get
-    a ToC)? Because of how docutils parses.
-
-    Passing content/params right into publish_html_from_source.
     """
     bits = token.split_contents()
     args = []
@@ -129,6 +141,7 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
 
 @register.filter(name="rst", is_safe=True)
 def rst_filter(value: str) -> str:
+    """Django template filter to render reStructuredText (rst) as HTML."""
     import warnings
 
     warnings.warn(

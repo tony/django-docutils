@@ -1,3 +1,4 @@
+"""Docutils writers for Django Docutils, designed for cleaner output."""
 import typing as t
 
 from django.conf import settings
@@ -10,6 +11,8 @@ from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
 class ParentNodeClassTuple(t.NamedTuple):
+    """Typing for parent node accepting custom arguments."""
+
     parent_node_type: t.Type[t.Union[nodes.Node, nodes.Body]]
     args: list[str]
     kwargs: t.Dict[str, str]
@@ -17,21 +20,25 @@ class ParentNodeClassTuple(t.NamedTuple):
 
 
 class DjangoDocutilsHTMLTranslator(HTMLTranslator):
+    """Django Docutils touchups to docutil's HTML renderer."""
+
     def __init__(self, document: nodes.document) -> None:
         HTMLTranslator.__init__(self, document)
 
     def visit_table(self, node: nodes.Element) -> None:
+        """Open table."""
         node["classes"].extend(["table"])
         HTMLTranslator.visit_table(self, node)
 
     def visit_reference(self, node: nodes.Element) -> None:
-        """
+        """Open reference.
+
         Changes:
 
-        - monkeypatch bugfix https://sourceforge.net/p/docutils/bugs/322/
-        - add target _blank to offsite urls
-        - add class offsite for offsite urls
-        - add class insite for insite urls (note, internal is already used
+        - Monkeypatch bugfix https://sourceforge.net/p/docutils/bugs/322/
+        - Add target _blank to offsite urls
+        - Add class offsite for offsite urls
+        - Add class insite for insite urls (note, internal is already used
           for reference links in the *same* document)
         """
         atts = {"class": "reference"}
@@ -73,10 +80,13 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         self.body.append(self.starttag(node, "a", "", **atts))
 
     def visit_title(self, node: nodes.Element) -> None:
-        """Changes:
+        """Visit docutils title.
 
-        - add backlinks for Contents refid headers
-          since they are baked inside the Section (parent) of the anchor
+        Changes:
+
+        - Add backlinks for Contents refid headers
+
+          They're baked inside the Section (parent) of the anchor
           since we're using an ad-hoc contents transformation process
           that builds toc separately from the main content (see templatetags)
 
@@ -139,7 +149,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
     ) -> str:
         """Our special sauce for section titles.
 
-        We broke this off to reduce complexity.
+        Extracted from :meth:`.visit_title` to reduce complexity.
 
         :param node: title node being visited
         :type node: :class:`docutils.nodes.title`
@@ -166,21 +176,25 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         return close_tag
 
     def visit_docinfo(self, node: nodes.Element) -> None:
+        """Skip docinfo."""
         raise nodes.SkipNode
 
     def visit_icon(self, node: nodes.decoration) -> None:
+        """Open <em> tag."""
         atts = {}
         if "style" in node:
             atts["style"] = node["style"]
         self.body.append(self.starttag(node, "em", "", **atts))
 
     def depart_icon(self, node: nodes.decoration) -> None:
+        """Close <em> tag."""
         self.body.append("</em>")
 
 
 class DjangoDocutilsWriter(Writer):
+    """DjangoDocutils's hand-crafted docutils' writer.
 
-    """DjangoDocutils's hand-crafted docutils' writer:
+    Example:
 
     >>> DJANGO_DOCUTILS_LIB_RST = {
     ...    'transforms': [  #: docutils.transforms.Transform class (import string)
@@ -197,6 +211,10 @@ class DjangoDocutilsWriter(Writer):
         self.translator_class = DjangoDocutilsHTMLTranslator
 
     def get_transforms(self) -> list[t.Type[Transform]]:
+        """Return transformed required by DjangoDocutilsWriter.
+
+        Adheres to DJANGO_DOCUTILS_LIB_RST settings.
+        """
         transforms = Writer.get_transforms(self)
 
         if not DJANGO_DOCUTILS_LIB_RST:

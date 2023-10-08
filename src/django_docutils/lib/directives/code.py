@@ -1,6 +1,7 @@
-"""
+"""Pygments docutils directive.
+
 The Pygments reStructuredText directive
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
 
 This fragment is a `Docutils <https://docutils.sourceforge.io/>`_ 0.5 directive that 
 renders source code (to HTML only, currently) via Pygments.
@@ -49,9 +50,9 @@ if t.TYPE_CHECKING:
 
 
 def patch_bash_session_lexer() -> None:
+    """Monkey patch Bash Session lexer to gobble up initial space after prompt."""
     from pygments.lexers.shell import BashSessionLexer
 
-    #: Monkey patch Bash Session lexer to gobble up initial space after prompt
     BashSessionLexer._ps1rgx = re.compile(
         r"^((?:(?:\[.*?\])|(?:\(\S+\))?(?:| |sh\S*?|\w+\S+[@:]\S+(?:\s+\S+)"
         r"?|\[\S+[@:][^\n]+\].+))\s*[$#%] )(.*\n?)"
@@ -79,7 +80,6 @@ DEFAULT_OPTION_SPEC: t.Dict[str, t.Callable[[str], t.Any]] = {
 
 
 class CodeBlock(Directive):
-
     """Source code syntax highlighting."""
 
     required_arguments = 1
@@ -89,6 +89,7 @@ class CodeBlock(Directive):
     has_content = True
 
     def run(self) -> list[nodes.Node]:
+        """Directive run method for CodeBlock."""
         self.assert_has_content()
         try:
             lexer_name = self.arguments[0]

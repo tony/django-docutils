@@ -1,3 +1,4 @@
+"""Metadata package for Django Docutils."""
 __title__ = "django-docutils"
 __package_name__ = "django_docutils"
 __description__ = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."

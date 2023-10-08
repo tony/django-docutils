@@ -1,3 +1,4 @@
+"""Code related formatter and transformers."""
 import re
 import typing as t
 
@@ -17,20 +18,22 @@ if t.TYPE_CHECKING:
 
 
 class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
+    """HTMLFormatter for inline codeblocks."""
+
     def format_unencoded(self, tokensource: "TokenStream", outfile: t.Any) -> None:
         r"""Trim inline element of space and newlines.
 
-        First problem (filter trailing newline): Final token generated returns
-        ``(Token.Other, '\n')`` which results in a blank space
-        ``<span class="x"></span>``.
+        1. Trailing newline: Final token generated returns ``(Token.Other, '\n')``
+           results in a blank space ``<span class="x"></span>``.
 
-        This would be unnoticeable for a code block, but as this is inline, it looks
-        strange. Let's filter out any trailing newlines from token source, then fallback
-        to the normal process by passing it back into parent class method.
+           This would be unnoticeable for a code block, but as this is inline, it looks
+           strange. Let's filter out any trailing newlines from token source, then
+           fallback to the normal process by passing it back into parent class method.
+        2. Trailing space:
 
-        *After* this method ``_format_lines`` still adds a ``\n`` (which renders as a
-        space again in the browser). To suppress that pass ``lineseparator=''`` to the
-        ``InlineHtmlFormatter`` class.
+           *After* this method ``_format_lines`` still adds a ``\n`` (which renders as a
+           space again in the browser). To suppress that pass ``lineseparator=''`` to
+           the ``InlineHtmlFormatter`` class.
         """
 
         def filter_trailing_newline(source: "TokenStream") -> "TokenStream":
@@ -81,12 +84,12 @@ formatter = InlineHtmlFormatter(
 
 
 class CodeTransform(Transform):
-
     """Run over unparsed literals and try to guess language + highlight."""
 
     default_priority = 120
 
     def apply(self, **kwargs: t.Any) -> None:
+        """Apply CodeTransform."""
         paragraph_nodes = self.document.traverse(nodes.literal)
 
         for node in paragraph_nodes:

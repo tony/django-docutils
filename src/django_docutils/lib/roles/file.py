@@ -1,3 +1,4 @@
+"""File role for Docutils."""
 import os
 import typing as t
 
@@ -67,7 +68,7 @@ def manifest_role(
     options: t.Optional[t.Dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
 ) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
-    """Role for manifests (package.json, file outputs)
+    """Role for manifests (package.json, file outputs).
 
     Examples
     --------

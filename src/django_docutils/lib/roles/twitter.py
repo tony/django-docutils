@@ -1,3 +1,4 @@
+"""Twitter role for docutils."""
 import typing as t
 
 from docutils.parsers.rst.states import Inliner
@@ -23,7 +24,6 @@ def twitter_role(
 
     Examples
     --------
-
     `@username <https://twitter.com/username>`_:
 
     .. code-block:: rst

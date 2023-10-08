@@ -1,3 +1,4 @@
+"""Settings objects and type-mapping for Django Docutils library package."""
 import typing as t
 
 from django.conf import settings

@@ -1,3 +1,4 @@
+"""ReadTheDocs role for Docutils."""
 import typing as t
 
 from docutils.parsers.rst.states import Inliner
@@ -23,7 +24,6 @@ def readthedocs_role(
 
     Examples
     --------
-
     `django-pipeline <https://django-pipeline.readthedocs.io/>`_:
 
     .. code-block:: rst

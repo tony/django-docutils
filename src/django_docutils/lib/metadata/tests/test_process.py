@@ -1,3 +1,4 @@
+"""Test docutils metadata (docinfo) processing in Django Docutils."""
 import datetime
 
 from django.utils.encoding import force_bytes
@@ -8,6 +9,7 @@ from ..process import process_metadata
 
 
 def test_process_metadata_file() -> None:
+    """Assert metadata extracted from reStructuredText docinfo."""
     source = """
 ===========
 Content ok!
@@ -45,7 +47,6 @@ some content
 
 def test_process_metadata_daytime_timezone() -> None:
     """Verify time of day and timezone (optional) work with dates."""
-
     source = """
 ===========
 Content ok!

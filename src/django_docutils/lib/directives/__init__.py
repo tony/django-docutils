@@ -1,3 +1,4 @@
+"""Register Douctils directives for Django Docutils."""
 from django.utils.module_loading import import_string
 from docutils.parsers.rst import directives
 

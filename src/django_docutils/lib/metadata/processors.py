@@ -1,3 +1,4 @@
+"""Metadata processing for Django Docutils."""
 import datetime
 import typing as t
 
@@ -38,8 +39,7 @@ def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
 
 
 def process_anonymous_user(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
-    """Corrects name of author "anonymous" to django's anonymous username"""
-
+    """Corrects name of author "anonymous" to django's anonymous username."""
     if metadata.get("author", None) == "anonymous" and hasattr(
         settings, "DJANGO_DOCUTIL_ANONYMOUS_USER_NAME"
     ):

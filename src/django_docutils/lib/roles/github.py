@@ -1,3 +1,4 @@
+"""GitHub role for Docutils."""
 import typing as t
 
 from docutils.parsers.rst.states import Inliner
@@ -23,7 +24,6 @@ def github_role(
 
     Examples
     --------
-
     `vim-airline <https://github.com/vim-airline>`_:
 
     .. code-block:: rst

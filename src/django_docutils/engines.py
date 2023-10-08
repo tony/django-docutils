@@ -1,3 +1,4 @@
+"""Django template engine for Docutils."""
 import typing as t
 
 from django.conf import settings
@@ -18,7 +19,9 @@ if t.TYPE_CHECKING:
 
 
 class Docutils(BaseEngine):
-    app_dirname = "templates"
+    """Docutils engine for Django."""
+
+    app_dirname: str = "templates"
 
     def __init__(self, params: t.Dict[str, t.Any]) -> None:
         params = params.copy()
@@ -28,9 +31,11 @@ class Docutils(BaseEngine):
         self.engine = Engine(self.dirs, self.app_dirs, **self.options)
 
     def from_string(self, template_code: str) -> "DocutilsTemplate":
+        """Return DocutilsTemplate from string."""
         return DocutilsTemplate(template_code, self.options)
 
     def get_template(self, template_name: str) -> "_EngineTemplate":
+        """Return template from template_name."""
         for template_file in self.iter_template_filenames(template_name):
             try:
                 with open(template_file, encoding="utf-8") as fp:
@@ -44,6 +49,8 @@ class Docutils(BaseEngine):
 
 
 class DocutilsTemplate:
+    """Docutils template object for Django. Used by Docutils template engine."""
+
     def __init__(self, source: str, options: t.Dict[str, t.Any]) -> None:
         self.source = source
         self.options = options
@@ -53,6 +60,7 @@ class DocutilsTemplate:
         context: t.Union["Context", t.Dict[str, t.Any], None] = None,
         request: t.Optional[HttpRequest] = None,
     ) -> "SafeString":
+        """Render DocutilsTemplate to string."""
         context = self.options
         if request is not None:
             context["request"] = request

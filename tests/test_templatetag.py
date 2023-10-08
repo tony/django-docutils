@@ -1,3 +1,4 @@
+"""Tests for rst template filter and tags."""
 import typing as t
 
 import pytest
@@ -69,6 +70,7 @@ DEFAULT_EXPECTED = rf"""
 
 
 def test_filter(settings: t.Any) -> None:
+    """Assert rst filter via block renders HTML."""
     template = Template(
         r"""{% load django_docutils %}
 {% filter rst %}
@@ -86,6 +88,7 @@ def test_filter(settings: t.Any) -> None:
 
 
 def test_templatetag(settings: t.Any) -> None:
+    """Asserts rst block via variable renders HTML content."""
     template = Template(
         """{% load django_docutils %}
 {% rst content %}
@@ -96,6 +99,7 @@ def test_templatetag(settings: t.Any) -> None:
 
 
 def test_templatetag_show_title(settings: t.Any) -> None:
+    """Asserts rst template via variable that preserves title."""
     template = Template(
         """{% load django_docutils %}
 {% rst content show_title=False %}
@@ -109,6 +113,7 @@ def test_templatetag_show_title(settings: t.Any) -> None:
 
 
 def test_templatetag_toc_only(settings: t.Any) -> None:
+    """Asserts rst template via variable w/ toc_only=True renders table of contents."""
     template = Template(
         """{% load django_docutils %}
 {% rst content toc_only=True %}
@@ -140,6 +145,7 @@ def test_templatetag_toc_only(settings: t.Any) -> None:
 
 
 def test_templatetag_toc_only_block(settings: t.Any) -> None:
+    """Asserts rst template via block w/ toc_only=True renders table of contents."""
     template = Template(
         """{% load django_docutils %}
 {% rst toc_only=True %}
@@ -175,6 +181,7 @@ def test_templatetag_toc_only_block(settings: t.Any) -> None:
 
 
 def test_templatetag_block(settings: t.Any) -> None:
+    """Asserts rst template block render HTML content."""
     template = Template(
         """{% load django_docutils %}
 {% rst %}

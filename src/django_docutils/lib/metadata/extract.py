@@ -1,3 +1,4 @@
+"""Title, Subtitle, and Metadata extraction of reStructuredText."""
 import typing as t
 
 from django.template.defaultfilters import truncatewords

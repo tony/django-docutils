@@ -1,3 +1,4 @@
+"""HN (HackerNews) role for Docutils."""
 import typing as t
 from urllib.parse import quote
 
@@ -24,7 +25,6 @@ def hackernews_role(
 
     Examples
     --------
-
     `15610489 <https://news.ycombinator.com/item?id=15610489>`_:
 
     .. code-block:: rst

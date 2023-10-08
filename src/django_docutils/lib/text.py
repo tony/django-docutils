@@ -1,3 +1,4 @@
+"""Text related utilities for Django Docutils."""
 import re
 
 from django.conf import settings
@@ -8,7 +9,7 @@ _word_beginning_split_re = re.compile(r"([\s\(\{\[\<]+)", re.UNICODE)
 
 
 def is_uncapitalized_word(value: str) -> bool:
-    """Return True if term/word segment is special uncap term (e.g. "django-")
+    """Return True if term/word segment is special uncap term (e.g. "django-").
 
     :param value: string value from template
     :type value: str
@@ -53,7 +54,6 @@ def is_uncapitalized_word(value: str) -> bool:
 
 def smart_capfirst(value: str) -> str:
     """Capitalize the first character of the value."""
-
     return value[0].upper() + value[1:]
 
 
@@ -62,7 +62,6 @@ def smart_title(value: str) -> str:
 
     Django can still be capitalized, but it must already be like that.
     """
-
     return "".join(
         [smart_capfirst(item) for item in _word_beginning_split_re.split(value) if item]
     )
