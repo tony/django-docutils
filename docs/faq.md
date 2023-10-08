@@ -28,9 +28,9 @@ This package simply offers template extensions to use docutils in django views.
 
 3 ways to render reStructuredText via docutils in [Django]:
 
-1. {ref}`class_based_view`
-2. {ref}`template_tag`
-3. {ref}`template_filter`
+1. {ref}`template_tag`
+2. {ref}`template_filter`
+3. {ref}`class_based_view`
 
 ### Can I copy code from this project to my own?
 
