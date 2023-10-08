@@ -46,7 +46,7 @@ class ReStructuredTextNode(Node):
         return html
 
 
-class MalformedArgumentsToUrlTag(TemplateSyntaxError):
+class MalformedArgumentsToRSTTag(TemplateSyntaxError):
     def __init__(self, *args: object, **kwargs: object) -> None:
         return super().__init__("Malformed arguments to url tag", *args, **kwargs)
 
@@ -110,7 +110,7 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
         for bit in bits:
             match = kwarg_re.match(bit)
             if not match:
-                raise MalformedArgumentsToUrlTag()
+                raise MalformedArgumentsToRSTTag()
 
             name, value = match.groups()
             if name:
