@@ -1,3 +1,4 @@
+"""Django docutils table of contents helpers."""
 import sys
 import typing as t
 
@@ -6,9 +7,10 @@ from docutils.transforms import parts
 
 
 class Contents(parts.Contents):
-    """
+    """Helpers for rendering docutils table of contents from document tree.
+
     Changes:
-    - remove unused autonum
+    - Remove unused autonum
     - PEP8
     - Removed extra nodes.paragraph wrapping of list_item's.
     """
@@ -18,6 +20,7 @@ class Contents(parts.Contents):
     def build_contents(
         self, node: nodes.Node, level: int = 0
     ) -> t.Union[nodes.bullet_list, list[t.Any]]:
+        """Build nested bullet list from doctree content."""
         assert isinstance(node, nodes.Element)
         level += 1
         sections: list[nodes.section] = [
