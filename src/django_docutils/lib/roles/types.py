@@ -1,3 +1,4 @@
+"""Typings for Django Docutils roles for Docutils."""
 import typing as t
 
 from docutils import nodes
@@ -5,16 +6,18 @@ from typing_extensions import Protocol
 
 
 class UrlHandlerFn(Protocol):
-    """Role function that directly maps to a URL."""
+    """Protocol for role handler callback maps directly to a URL patern."""
 
     def __call__(self, target: str) -> str:
+        """Role function that directly maps to a URL."""
         ...
 
 
 class RemoteUrlHandlerFn(Protocol):
-    """Role function that can query an external source for its title."""
+    """Protocol for role handler callback that retrieve from external data sources."""
 
     def __call__(self, target: str) -> t.Tuple[str, str]:
+        """Role function that can query an external source for its title."""
         ...
 
 

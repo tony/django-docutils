@@ -1,3 +1,4 @@
+"""<kbd> (Keyboard Input Element) role for Docutils."""
 import typing as t
 
 from docutils import nodes

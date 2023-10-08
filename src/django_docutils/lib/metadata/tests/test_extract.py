@@ -1,3 +1,4 @@
+"""Test metadata and title extraction from reStructuredText."""
 import pathlib
 
 from django.utils.encoding import force_bytes
@@ -12,6 +13,7 @@ from ..extract import (
 
 
 def test_extract_title() -> None:
+    """Assert title extraction from reStructuredText."""
     content = """
 ===========
 Hello world
@@ -34,6 +36,7 @@ some content
 
 
 def test_extract_subtitle() -> None:
+    """Assert subtitle extraction from reStructuredText."""
     content = """
 ===========
 Hello world
@@ -58,6 +61,7 @@ some content
 
 
 def test_extract_metadata(tmp_path: pathlib.Path) -> None:
+    """Assert metadata extraction from reStructuredText."""
     docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
     content = """
 ===========

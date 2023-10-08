@@ -1,3 +1,4 @@
+"""Email role for docutils."""
 import typing as t
 
 from docutils.parsers.rst.states import Inliner

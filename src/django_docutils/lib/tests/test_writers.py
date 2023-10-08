@@ -1,3 +1,4 @@
+"""Tests for Django Docutils Writers."""
 from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
 from docutils.writers.html5_polyglot import Writer
@@ -8,6 +9,7 @@ from ..writers import DjangoDocutilsWriter
 
 
 def test_HTMLWriter_hides_docinfo() -> None:
+    """Assert HTMLWriter hides docinfo."""
     docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
     content = """

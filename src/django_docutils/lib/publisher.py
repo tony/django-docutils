@@ -1,3 +1,4 @@
+"""Docutils Publisher fors for Django Docutils."""
 import typing as t
 
 from django.utils.encoding import force_bytes, force_str
@@ -30,6 +31,7 @@ def publish_parts_from_doctree(
     config_section: str | None = None,
     enable_exit_status: bool = False,
 ) -> t.Dict[str, str]:
+    """Render docutils doctree into docutils parts."""
     reader = Reader(parser_name="null")
     pub = Publisher(
         reader,
@@ -53,6 +55,7 @@ def publish_toc_from_doctree(
     doctree: nodes.document,
     writer: Writer | None = None,
 ) -> t.Optional[str]:
+    """Publish table of contents from docutils doctree."""
     if not writer:
         writer = DjangoDocutilsWriter()
     # Create a new document tree with just the table of contents
@@ -113,6 +116,8 @@ if t.TYPE_CHECKING:
     from typing_extensions import NotRequired, TypedDict, Unpack
 
     class PublishHtmlDocTreeKwargs(TypedDict):
+        """Keyword arguments accepted by publish_html_from_source."""
+
         show_title: NotRequired[bool]
         toc_only: NotRequired[bool]
 

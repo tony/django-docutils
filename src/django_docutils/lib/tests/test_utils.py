@@ -1,7 +1,9 @@
+"""Tests for Django Docutil utilities."""
 from ..utils import chop_after_docinfo, chop_after_title
 
 
 def test_chop_after_title() -> None:
+    """Assert reStructuredText content chopped after title."""
     content = """=============================================
 Learn JavaScript for free: The best resources
 =============================================
@@ -24,6 +26,7 @@ some content""".strip()
 
 
 def test_chop_after_docinfo() -> None:
+    """Assert reStructuredText content chopped after docinfo."""
     before = """
 ===========
 Content ok!

@@ -1,3 +1,4 @@
+"""Wikipedia role for Docutils."""
 import typing as t
 from urllib.parse import quote
 

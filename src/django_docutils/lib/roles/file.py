@@ -1,3 +1,4 @@
+"""File role for Docutils."""
 import os
 import typing as t
 

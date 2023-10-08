@@ -1,3 +1,4 @@
+"""Text related utilities for Django Docutils."""
 import re
 
 from django.conf import settings
