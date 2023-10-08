@@ -10,10 +10,6 @@ DJANGO_DOCUTILS_LIB_RST = t.cast(
 )
 """Settings for reStructuredText"""
 
-INJECT_FONT_AWESOME: bool = (
-    DJANGO_DOCUTILS_LIB_RST.get("font_awesome", {}).get("url_patterns") is not None
-)
-
 DJANGO_DOCUTILS_LIB_TEXT = t.cast(
     "DjangoDocutilsLibTextSettings",
     getattr(settings, "DJANGO_DOCUTILS_LIB_TEXT", {"uncapitalized_word_filters": []}),

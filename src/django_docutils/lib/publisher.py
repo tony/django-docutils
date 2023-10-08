@@ -9,7 +9,7 @@ from docutils.writers.html5_polyglot import Writer
 
 from .directives import register_django_docutils_directives
 from .roles import register_django_docutils_roles
-from .settings import DJANGO_DOCUTILS_LIB_RST, INJECT_FONT_AWESOME
+from .settings import DJANGO_DOCUTILS_LIB_RST
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
 
@@ -141,11 +141,6 @@ def publish_html_from_doctree(
     :type toc_only: bool
     """
     writer = DjangoDocutilsWriter()
-
-    if INJECT_FONT_AWESOME:
-        from django_docutils.lib.transforms.font_awesome import InjectFontAwesome
-
-        doctree.transformer.add_transform(InjectFontAwesome)
 
     doctree.transformer.apply_transforms()
 

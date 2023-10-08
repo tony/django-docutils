@@ -58,7 +58,6 @@ def file_role(
     return [sn], []
 
 
-# TODO: Let font-awesome classes be configured via settings
 def manifest_role(
     name: str,
     rawtext: str,
