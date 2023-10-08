@@ -38,6 +38,48 @@ class HomeView(DocutilsView):
     rst_name = 'home.rst'
 ```
 
+*yourapp/templates/home.rst*:
+
+````restructuredtext
+hey
+---
+
+hi
+##
+
+A. hows
+B. it
+
+C. going
+D. today
+
+**hi**
+*hi*
+````
+
+*yourapp/templates/base.html*:
+
+```django
+{{content}}
+```
+
+Output:
+
+```html
+<div class="document" id="hey">
+<h1 class="title">hey</h1>
+<h2 class="subtitle" id="hi">hi</h2>
+<ol class="upperalpha simple">
+<li>hows</li>
+<li>it</li>
+<li>going</li>
+<li>today</li>
+</ol>
+<p><strong>hi</strong>
+<em>hi</em></p>
+</div>
+```
+
 :::{admonition} Explore the API
 
 - {class}`~django_docutils.views.DocutilsView`, {class}`~django_docutils.views.DocutilsResponse`

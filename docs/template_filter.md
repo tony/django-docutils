@@ -39,6 +39,23 @@ D. today
 {% endfilter %}
 ```
 
+Output:
+
+```html
+<main id="hey">
+<h1 class="title is-1">hey</h1>
+<p class="subtitle" id="hi">hi</p>
+<ol class="upperalpha simple">
+<li><p>hows</p></li>
+<li><p>it</p></li>
+<li><p>going</p></li>
+<li><p>today</p></li>
+</ol>
+<p><strong>hi</strong>
+<em>hi</em></p>
+</main>
+```
+
 :::{admonition} Explore the API
 
 - {func}`~django_docutils.templatetags.django_docutils.rst_filter`
