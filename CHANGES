@@ -8,6 +8,14 @@
 
 - Remove duplicate ``CodeBlock`` directive from `directives.py` (#401)
 
+### Development
+
+- ci: Add pydocstyle rule to ruff (#396)
+
+### Documentation
+
+- Add docstrings to functions, methods, classes, and packages (#396)
+
 ## django-docutils 0.17.0 (2023-10-08)
 
 ### Breaking changes
