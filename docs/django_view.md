@@ -1,6 +1,6 @@
 (django_view)=
 
-## Django view
+# Django view
 
 Template engine (class-based view)
 
