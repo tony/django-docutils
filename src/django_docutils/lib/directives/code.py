@@ -113,7 +113,9 @@ def register_pygments_directive(directive: str = "code-block") -> None:
 
     Examples
     --------
-    If you wish to use (override) code-block (default), that means::
+    If you wish to use (override) code-block (default), that means:
+
+    .. code-block:: rst
 
         .. code-block::
 
