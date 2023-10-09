@@ -8,7 +8,7 @@ if t.TYPE_CHECKING:
     from django.test import RequestFactory
 
 
-def test_engine(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> None:
+def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> None:
     """Assert DocutilsView renders HTML from reStructuredText."""
     request = rf.get("/")
     template_dir = tmp_path / "templates"
