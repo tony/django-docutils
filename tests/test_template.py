@@ -4,6 +4,8 @@ import typing as t
 
 from django_docutils.views import DocutilsView
 
+from .constants import DEFAULT_RST
+
 if t.TYPE_CHECKING:
     from django.test import RequestFactory
 
@@ -28,22 +30,7 @@ def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> 
 
     home_rst = template_dir / "home.rst"
     home_rst.write_text(
-        """
-hey
----
-
-hi
-##
-
-A. hows
-B. it
-
-C. going
-D. today
-
-**hi**
-*hi*
-""",
+        DEFAULT_RST,
         encoding="utf-8",
     )
 
