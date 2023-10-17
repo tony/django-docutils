@@ -8,7 +8,7 @@
 
 ### Breaking changes
 
-- Rename `django.engines` to `django.template` (#402)
+- Rename `django_docutils.engines` to `django_docutils.template` (#402)
 - Template engine: Rename `Docutils` to `DjangoTemplates` (#402)
 
 ## django-docutils 0.18.0 (2023-10-08)
