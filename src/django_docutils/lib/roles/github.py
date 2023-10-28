@@ -42,13 +42,13 @@ def github_role(
 
        :gh:`vim-airline/vim-airline`
 
-    `vim-airline/vim-airline#125 <https://github.com/vim-airline/vim-airline/issues/125>`_:
+    `vim-airline/vim-airline#125 <https://github.com/vim-airline/vim-airline/issue/125>`_:
 
     .. code-block:: rst
 
       :gh:`vim-airline/vim-airline#125`
 
-    `this example issue <https://github.com/vim-airline/vim-airline/issues/125>`_:
+    `this example issue <https://github.com/vim-airline/vim-airline/issue/125>`_:
 
     .. code-block:: rst
 
@@ -61,7 +61,7 @@ def github_role(
         if "#" in target:
             user_n_repo, issue = target.split("#")
             if issue.isnumeric():
-                return f"https://github.com/{user_n_repo}/issues/{issue}"
+                return f"https://github.com/{user_n_repo}/issue/{issue}"
 
         return f"https://github.com/{target}"
 
