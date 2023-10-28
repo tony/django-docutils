@@ -22,7 +22,7 @@ def test_filter(settings: t.Any) -> None:
 """.replace("{{DEFAULT_RST}}", DEFAULT_RST)
     )
     with pytest.warns(DeprecationWarning) as record:
-        assert template.render(Context({})) == DEFAULT_EXPECTED
+        assert template.render(Context()) == DEFAULT_EXPECTED
         message = record[0].message
         assert isinstance(message, Warning)
         assert message.args[0] == "The rst filter has been deprecated"
@@ -96,7 +96,7 @@ def test_templatetag_toc_only_block(settings: t.Any) -> None:
     )
 
     assert (
-        template.render(Context({}))
+        template.render(Context())
         == """
 <main class="fixed-toc-menu menu">
 <p class="menu-label">Contents</p>
@@ -129,4 +129,4 @@ def test_templatetag_block(settings: t.Any) -> None:
 """.replace("{{DEFAULT_RST}}", DEFAULT_RST)
     )
 
-    assert template.render(Context({})) == DEFAULT_EXPECTED
+    assert template.render(Context()) == DEFAULT_EXPECTED
