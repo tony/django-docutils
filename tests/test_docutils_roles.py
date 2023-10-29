@@ -53,6 +53,19 @@ def test_register_role_mapping() -> None:
     """Assertions for register_role_mapping()."""
     register_role_mapping({})
 
+    register_role_mapping(
+        {
+            "gh": (
+                "django_docutils.lib.roles.github.github_role",
+                {
+                    "lowercase": True,
+                    "innernodeclass": "docutils.nodes.inline",
+                    "warn_dangling": True,
+                },
+            ),
+        }
+    )
+
 
 GH_ROLE_TESTS: list[RoleContentFixture] = [
     RoleContentFixture(
