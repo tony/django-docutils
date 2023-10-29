@@ -5,6 +5,11 @@ import typing as t
 import pytest
 from django.template import Context, Template
 
+from django_docutils.lib.roles import (
+    register_django_docutils_roles,
+    register_role_mapping,
+)
+
 MAIN_TPL = """
 <main>
 {content}
@@ -37,6 +42,16 @@ class RoleContentFixture(t.NamedTuple):
     # Assertions
     rst_content: str
     expected_html: str
+
+
+def test_register_django_docutils_roles() -> None:
+    """Assertions for register_django_docutils_roles()."""
+    register_django_docutils_roles()
+
+
+def test_register_role_mapping() -> None:
+    """Assertions for register_role_mapping()."""
+    register_role_mapping({})
 
 
 GH_ROLE_TESTS: list[RoleContentFixture] = [
