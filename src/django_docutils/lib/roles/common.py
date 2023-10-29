@@ -69,7 +69,7 @@ def generic_url_role(
 
     url = url_handler_fn(target)
 
-    sn = innernodeclass(title, title)
+    sn = innernodeclass(title)
     rn = nodes.reference("", "", internal=True, refuri=url, classes=[name])
     rn += sn
     return [rn], []
