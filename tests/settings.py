@@ -1,4 +1,5 @@
 """django-docutils test settings module for django."""
+import pathlib
 import typing as t
 
 import django
@@ -25,6 +26,13 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "APP_DIRS": True,
+        "DIRS": [pathlib.Path(__file__).parent / "templates"],
+    },
+    {
+        "NAME": "docutils",
+        "BACKEND": "django_docutils.template.DocutilsTemplates",
+        "APP_DIRS": True,
+        "DIRS": [pathlib.Path(__file__).parent / "rst_content"],
     },
 ]
 DJANGO_DOCUTILS_ANONYMOUS_USER_NAME = "AnonymousCoward"
