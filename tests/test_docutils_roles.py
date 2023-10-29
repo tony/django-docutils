@@ -4,6 +4,8 @@ import typing as t
 
 import pytest
 from django.template import Context, Template
+from docutils import nodes
+from docutils.parsers.rst.states import Inliner
 
 from django_docutils.lib.roles import (
     register_django_docutils_roles,
@@ -49,6 +51,58 @@ def test_register_django_docutils_roles() -> None:
     register_django_docutils_roles()
 
 
+class SphinxLikeRole:
+    """A base class copied from SphinxRole for testing class-based roles.
+
+    This class provides helper methods for Sphinx-like roles.
+
+    .. note:: The subclasses of this class might not work with docutils.
+              This class is strongly coupled with Sphinx.
+    """
+
+    name: str  #: The role name actually used in the document.
+    rawtext: str  #: A string containing the entire interpreted text input.
+    text: str  #: The interpreted text content.
+    lineno: int  #: The line number where the interpreted text begins.
+    inliner: Inliner  #: The ``docutils.parsers.rst.states.Inliner`` object.
+    #: A dictionary of directive options for customisation
+    #: (from the "role" directive).
+    options: dict[str, t.Any]
+    #: A list of strings, the directive content for customisation
+    #: (from the "role" directive).
+    content: t.Sequence[str]
+
+    def __call__(
+        self,
+        name: str,
+        rawtext: str,
+        text: str,
+        lineno: int,
+        inliner: Inliner,
+        options: dict[str, t.Any] | None = None,
+        content: t.Sequence[str] = (),
+    ) -> tuple[list[nodes.Node], list[t.Any]]:
+        """Return example class-based role."""
+        self.rawtext = rawtext
+        self.text = text
+        self.lineno = lineno
+        self.inliner = inliner
+        self.options = options if options is not None else {}
+        self.content = content
+
+        # guess role type
+        if name:
+            self.name = name.lower()
+        return self.run()
+
+    def run(self) -> tuple[list[nodes.Node], list[t.Any]]:
+        """Run docutils role."""
+        raise NotImplementedError
+
+
+MySphinxLikeRole = SphinxLikeRole()
+
+
 def test_register_role_mapping() -> None:
     """Assertions for register_role_mapping()."""
     register_role_mapping({})
@@ -57,6 +111,19 @@ def test_register_role_mapping() -> None:
         {
             "gh": (
                 "django_docutils.lib.roles.github.github_role",
+                {
+                    "lowercase": True,
+                    "innernodeclass": "docutils.nodes.inline",
+                    "warn_dangling": True,
+                },
+            ),
+        }
+    )
+
+    register_role_mapping(
+        {
+            "ex": (
+                "tests.test_docutils_roles.MySphinxLikeRole",
                 {
                     "lowercase": True,
                     "innernodeclass": "docutils.nodes.inline",
