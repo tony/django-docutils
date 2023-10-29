@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Tests for docutils roles."""
 import typing as t
 
@@ -42,27 +43,27 @@ GH_ROLE_TESTS: list[RoleContentFixture] = [
     RoleContentFixture(
         test_id="gh-role-org",
         rst_content=":gh:`org`\n",
-        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org" target="_blank">org</a></p>',  # noqa: E501
+        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org" target="_blank">org</a></p>',
     ),
     RoleContentFixture(
         test_id="gh-role-org",
         rst_content=":gh:`org/repo`\n",
-        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org/repo" target="_blank">org/repo</a></p>',  # noqa: E501
+        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org/repo" target="_blank">org/repo</a></p>',
     ),
     RoleContentFixture(
         test_id="gh-role-org",
         rst_content=":gh:`My repo <org/repo>`\n",
-        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org/repo" target="_blank">My repo</a></p>',  # noqa: E501
+        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org/repo" target="_blank">My repo</a></p>',
     ),
     RoleContentFixture(
         test_id="gh-role-org",
         rst_content=":gh:`org/repo#125`\n",
-        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org/repo/issue/125" target="_blank">org/repo#125</a></p>',  # noqa: E501
+        expected_html='<p><a class="gh reference external offsite" href="https://github.com/org/repo/issue/125" target="_blank">org/repo#125</a></p>',
     ),
     RoleContentFixture(
         test_id="gh-role-org",
         rst_content="My repo :gh:`(#125) <org/repo#125>`\n",
-        expected_html='<p>My repo <a class="gh reference external offsite" href="https://github.com/org/repo/issue/125" target="_blank">(#125)</a></p>',  # noqa: E501
+        expected_html='<p>My repo <a class="gh reference external offsite" href="https://github.com/org/repo/issue/125" target="_blank">(#125)</a></p>',
     ),
 ]
 
