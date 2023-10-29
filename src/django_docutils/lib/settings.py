@@ -15,3 +15,5 @@ DJANGO_DOCUTILS_LIB_TEXT = t.cast(
     "DjangoDocutilsLibTextSettings",
     getattr(settings, "DJANGO_DOCUTILS_LIB_TEXT", {"uncapitalized_word_filters": []}),
 )
+
+DJANGO_DOCUTILS_ANONYMOUS_USER_NAME: str | None = "AnonymousCoward"
