@@ -46,8 +46,22 @@ class RoleContentFixture(t.NamedTuple):
     expected_html: str
 
 
-def test_register_django_docutils_roles() -> None:
+def test_register_django_docutils_roles(monkeypatch: pytest.MonkeyPatch) -> None:
     """Assertions for register_django_docutils_roles()."""
+    from django_docutils.lib import roles as roles_package
+
+    assert roles_package.DJANGO_DOCUTILS_LIB_RST, (  # type:ignore[attr-defined]
+        "Sanity-check, something truthy should be set." ""
+    )
+    register_django_docutils_roles()
+
+    monkeypatch.setattr(roles_package, "DJANGO_DOCUTILS_LIB_RST", {})
+    register_django_docutils_roles()
+
+    monkeypatch.setattr(roles_package, "DJANGO_DOCUTILS_LIB_RST", {"other": None})
+    register_django_docutils_roles()
+
+    monkeypatch.setattr(roles_package, "DJANGO_DOCUTILS_LIB_RST", {"roles": {}})
     register_django_docutils_roles()
 
 
