@@ -97,7 +97,7 @@ class CodeTransform(Transform):
 
             newnode = None
             newtext = None
-            newlexer = None
+            newlexer: t.Any = None
 
             if text.startswith("$ "):
                 from pygments.lexers.shell import BashSessionLexer
@@ -114,7 +114,7 @@ class CodeTransform(Transform):
             elif re.match(r"^:\w+:", text):  # match :rolename: beginning
                 from pygments.lexers.markup import RstLexer
 
-                newlexer = RstLexer()
+                newlexer = RstLexer()  # type:ignore
             else:
                 from pygments.lexers import guess_lexer
                 from pygments.lexers.mime import MIMELexer
