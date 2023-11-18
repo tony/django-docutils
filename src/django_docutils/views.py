@@ -55,7 +55,7 @@ class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
             "DocutilsView requires either a definition of 'rst_name' or an "
             "implementation of 'get_rst_names()'",
             *args,
-            **kwargs
+            **kwargs,
         )
 
 
@@ -72,7 +72,7 @@ class DocutilsView(TemplateView):
         status: t.Optional[int] = None,
         charset: t.Optional[str] = None,
         using: t.Optional[str] = None,
-        **response_kwargs: object
+        **response_kwargs: object,
     ) -> HttpResponse:
         """Override to pay in rst content."""
         return self.response_class(
