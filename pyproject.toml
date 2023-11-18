@@ -53,11 +53,11 @@ docutils = "*"
 pygments = "<3"
 pytz = { version = "*", optional = true }
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.docs.dependencies]
 ### Docs ###
 sphinx = "*"
 furo = "*"
-gp-libs = "*"
+gp-libs = "*" # Used in docs and tests
 sphinx-autobuild = "*"
 sphinx-autodoc-typehints = "*"
 sphinx-click = "*"
@@ -67,18 +67,22 @@ sphinx-copybutton = "*"
 sphinxext-rediraffe = "*"
 myst_parser = ">=0.18.1"
 
+[tool.poetry.group.test.dependencies]
 ### Testing ###
 pytest = "*"
 pytest-rerunfailures = "*"
 pytest-watcher = "*"
 pytest-django = "*"
 dj-inmemorystorage = "*"
+gp-libs = "*" # Used in docs and tests
 
+[tool.poetry.group.coverage.dependencies]
 ### Coverage ###
 codecov = "*"
 coverage = "*"
 pytest-cov = "*"
 
+[tool.poetry.group.lint.dependencies]
 ### Lint ###
 ruff = "*"
 mypy = "*"
@@ -87,37 +91,8 @@ types-Pygments = "*"
 docutils-stubs = "*"
 
 [tool.poetry.extras]
-# Development stuff
-docs = [
-  "sphinx",
-  "sphinx-click",
-  "sphinx-autodoc-typehints",
-  "sphinx-autobuild",
-  "sphinxext-rediraffe",
-  "sphinx-copybutton",
-  "sphinxext-opengraph",
-  "sphinx-inline-tabs",
-  "myst_parser",
-  "furo",
-  "gp-libs",
-]
 pytz = [
   "pytz",
-]
-test = [
-  "pytest",
-  "pytest-rerunfailures",
-  "pytest-watcher",
-  "pytest-django",
-  "dj-inmemorystorage",
-]
-coverage = ["codecov", "coverage", "pytest-cov"]
-lint = [
-  "ruff",
-  "mypy",
-  "django-stubs",
-  "types-Pygments",
-  "docutils-stubs",
 ]
 
 [tool.mypy]
