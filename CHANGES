@@ -4,6 +4,8 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.20.1 (2023-11-18)
+
 ### Development
 
 - Packaging (poetry): Fix development dependencies
