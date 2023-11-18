@@ -44,7 +44,9 @@ def publish_parts_from_doctree(
     if not writer and writer_name:
         pub.set_writer(writer_name)
     pub.process_programmatic_settings(
-        settings_spec, settings_overrides, config_section  # type:ignore
+        settings_spec,  # type:ignore
+        settings_overrides,
+        config_section,  # type:ignore
     )
     pub.set_destination(None, destination_path)
     pub.publish(enable_exit_status=enable_exit_status)
@@ -63,7 +65,10 @@ def publish_toc_from_doctree(
 
     # document tree template:
     toc_tree = nodes.document(
-        "", "", source="toc-generator", classes=["fixed-toc-menu menu"]  # type:ignore
+        "",  # type:ignore
+        "",  # type:ignore
+        source="toc-generator",
+        classes=["fixed-toc-menu menu"],
     )
     toc_tree += nodes.paragraph("", "Contents", classes=["menu-label"])
     # Set up a Contents instance:
