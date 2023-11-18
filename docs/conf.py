@@ -23,7 +23,7 @@ sys.path.insert(0, str(project_root))
 sys.path.insert(0, str(src_root))
 sys.path.insert(0, str(cwd / "_ext"))
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "tests.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "django_docutils.lib.settings"
 django.setup()
 
 # package data

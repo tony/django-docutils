@@ -130,7 +130,7 @@ files = [
 enable_incomplete_feature = []
 
 [tool.django-stubs]
-django_settings_module = "tests.settings"
+django_settings_module = "django_docutils.lib.settings"
 
 [[tool.mypy.overrides]]
 module = [
@@ -187,6 +187,25 @@ filterwarnings = [
 # pytest-django
 django_find_project = false
 DJANGO_SETTINGS_MODULE = 'tests.settings'
+
+[tool.coverage.run]
+omit = [
+  "docs/conf.py",
+]
+
+[tool.coverage.report]
+exclude_also = [
+  "def __repr__",
+  "if self.debug:",
+  "if settings.DEBUG",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "class .*\\bProtocol\\):",
+  "@(abc\\.)?abstractmethod",
+]
 
 [build-system]
 requires = ["poetry_core>=1.0.0", "poetry>=1.1.12"]

@@ -56,5 +56,6 @@ def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> 
 <p><strong>hi</strong>
 <em>hi</em></p>
 </div>
+
 """
     )
