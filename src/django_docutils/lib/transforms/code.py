@@ -63,11 +63,14 @@ class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
             styles.append(self.cssstyles)
         style = "; ".join(styles)
 
-        yield 0, (
-            "<span"
-            + (self.cssclass and ' class="%s"' % self.cssclass)
-            + (style and (' style="%s"' % style))
-            + ">"
+        yield (
+            0,
+            (
+                "<span"
+                + (self.cssclass and ' class="%s"' % self.cssclass)
+                + (style and (' style="%s"' % style))
+                + ">"
+            ),
         )
         yield from inner
         yield 0, "</span>\n"
