@@ -4,6 +4,10 @@
 
 - _Add your latest changes from PRs here_
 
+### CI
+
+- Move CodeQL from advanced configuration file to GitHub's default
+
 ## django-docutils 0.20.1 (2023-11-18)
 
 ### Development
