@@ -4,9 +4,16 @@
 
 - _Add your latest changes from PRs here_
 
+### Packaging
+
+- pyproject.toml: Add django 5.0 (#407)
+- pyproject.toml: Remove django 4.0 and 4.1 from pyproject (#407)
+
 ### CI
 
 - Move CodeQL from advanced configuration file to GitHub's default
+- ci(tests): Remove django 4.0 and 4.1 from testgrid (#407)
+- ci(tests): Add django 5.0 to testgrid (#407)
 
 ## django-docutils 0.20.1 (2023-11-18)
 
