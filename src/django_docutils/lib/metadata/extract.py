@@ -9,8 +9,15 @@ from docutils import nodes
 def extract_title(document: nodes.document) -> t.Optional[str]:
     """Return the title of the document.
 
-    :param document:
-    :type document: :class:`docutils.nodes.document`
+    Parameters
+    ----------
+    document : :class:`docutils.nodes.document`
+        Document to return title for.
+
+    Returns
+    -------
+    str or None
+        Title of document or None if not found.
     """
     for node in document.traverse(nodes.PreBibliographic):  # type:ignore
         if isinstance(node, nodes.title):
@@ -21,11 +28,18 @@ def extract_title(document: nodes.document) -> t.Optional[str]:
 def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
     """Return the dict containing document metadata.
 
-    :param document:
-    :type document: :class:`docutils.nodes.document`
-    :returns: docinfo data from document
-    :rtype: dict
+    Parameters
+    ----------
+    document : :class:`docutils.nodes.document`
+        Document extract metadata from.
 
+    Returns
+    -------
+    dict
+        docinfo data from document
+
+    See Also
+    --------
     From: https://github.com/adieu/mezzanine-cli @ mezzanine_cli/parser.py
     License: BSD (https://github.com/adieu/mezzanine-cli/blob/master/setup.py)
     """
@@ -71,13 +85,17 @@ def extract_abstract(doctree: nodes.document, length: int = 100) -> str:
 
     We use this to create snippets for Twitter Cards, FB, etc.
 
-    :param doctree: docutils document to extract from
-    :type doctree: :class:`docutils.nodes.document`
-    :param length: word count to cut content off at
-    :type length: int
-    :rtype: string
-    :returns: truncated content, html tags removed
+    Parameters
+    ----------
+    doctree : :class:`docutils.nodes.document`
+        Document to extract abstract from.
+    length : int
+        Word count to cut content off at.
 
+    Returns
+    -------
+    str
+        truncated content, html tags removed
     """
     paragraph_nodes = doctree.traverse(nodes.paragraph)
     text = ""
