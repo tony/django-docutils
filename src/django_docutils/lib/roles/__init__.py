@@ -88,10 +88,10 @@ def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
     The term inside 'cb' is short for callback/callable. Since the string can
     be any callable object: a function or class.
 
-    :param role_mapping:
-    :type role_mapping: dict
-    :rtype: void
-    :returns: Nothing
+    Parameters
+    ----------
+    role_mapping : dict
+        Mapping of docutils roles to register
     """
     for role_name, role_cb_str in role_mapping.items():
         role_cb_kwargs = {}
