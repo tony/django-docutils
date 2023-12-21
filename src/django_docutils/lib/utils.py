@@ -26,10 +26,15 @@ def split_explicit_title(text: str) -> t.Tuple[bool, str, str]:
 def chop_after_docinfo(source: str) -> str:
     """Return the source of a document after DocInfo metadata.
 
-    :param source: Source of RST document
-    :type source: string
-    :returns: All source content after docinfo
-    :rtype: string
+    Parameters
+    ----------
+    source : str
+        Source of RST document
+
+    Returns
+    -------
+    str
+        All source content after docinfo
     """
     # find the last docinfo element
     index = re.findall(r":[\w_]+: [\w \-_\,]+\n", source)[-1]
@@ -40,12 +45,17 @@ def chop_after_docinfo(source: str) -> str:
 
 
 def chop_after_title(source: str) -> str:
-    """Return the source of a document after DocInfo metadata.
+    """Return the source of a document after document title.
 
-    :param source: Source of RST document
-    :type source: string
-    :returns: All source content after docinfo
-    :rtype: string
+    Parameters
+    ----------
+    source : str
+        Source of RST document
+
+    Returns
+    -------
+    str
+        All source content after title
     """
     # find the last docinfo element
     index = re.findall(r"[=-]{3,}\n.*\n[-=]{3,}", source, re.MULTILINE)[-1]
@@ -63,10 +73,15 @@ def chop_after_heading_smartly(source: str) -> str:
     metadata inside a JSON file instead of docinfo, so
     :func:`chop_after_docinfo` wouldn't work.
 
-    :param source: Source of RST document
-    :type source: string
-    :returns: All source content after docinfo or title
-    :rtype: string
+    Parameters
+    ----------
+    source : str
+        Source of RST document
+
+    Returns
+    -------
+    str
+        All source content after docinfo or title
     """
     try:
         return chop_after_docinfo(source)
@@ -77,10 +92,15 @@ def chop_after_heading_smartly(source: str) -> str:
 def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None, None]:
     """Yield top level section nodes.
 
-    :param document: docutils document
-    :type document: :class:`docutils.nodes.document`
-    :yields: upper level titles of document
-    :rtype: :class:`docutils.nodes.Node`
+    Parameters
+    ----------
+    document : :class:`docutils.nodes.document`
+        Docutils document
+
+    Yields
+    ------
+    :class:`docutils.nodes.Node`
+        Upper level titles of document
     """
     for node in document.findall(nodes.section):
         yield from node
@@ -89,10 +109,12 @@ def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None
 def append_html_to_node(node: nodes.Element, ad_code: str) -> None:
     """Inject HTML in this node.
 
-    :param node: node of the section to find last paragraph of
-    :type node: :class:`docutils.nodes.node`
-    :param ad_code: html to inject inside ad
-    :type ad_code: string
+    Parameters
+    ----------
+    node : :class:`docutils.nodes.node`
+        node of the section to find last paragraph of
+    ad_code : str
+        html to inject inside ad
     """
     html = '<div class="has-text-centered">'
     html += ad_code
