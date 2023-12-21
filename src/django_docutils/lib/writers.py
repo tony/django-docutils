@@ -151,12 +151,17 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
 
         Extracted from :meth:`.visit_title` to reduce complexity.
 
-        :param node: title node being visited
-        :type node: :class:`docutils.nodes.title`
-        :param close_tag: close tag (passed in from visit_title)
-        :type: close_tag str
-        :rtype: str
-        :returns: close_tag
+        Parameters
+        ----------
+        node : :class:`docutils.nodes.title`
+            Title node being visited
+        close_tag : str
+            Close tag (passed in from visit_title)
+
+        Returns
+        -------
+        str
+            Close tag for section title node.
         """
         h_level = self.section_level + self.initial_header_level - 1
         atts: t.Dict[str, str] = {}
