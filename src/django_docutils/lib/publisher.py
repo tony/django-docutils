@@ -104,10 +104,17 @@ def publish_doctree(
     It's valuable to be able to run transforms to alter and most importantly,
     extract data like post abstracts.
 
-    :param source: RST content
-    :type source: content
-    :rtype: :class:`docutils.nodes.document`
-    :returns: document/doctree for reStructuredText content
+    Parameters
+    ----------
+    source : str or bytes
+        RST content
+    settings_overrides : dict
+        Settings overrides for docutils
+
+    Returns
+    -------
+    docutils.nodes.document
+        document/doctree for reStructuredText content
     """
     register_django_docutils_directives()
     register_django_docutils_roles()
@@ -142,12 +149,19 @@ def publish_html_from_doctree(
 ) -> str | None:
     """Return HTML from reStructuredText document (doctree).
 
-    :param value: Contents from template being placed into node
-    :type value: string
-    :param show_title: show top level ittle
-    :type show_title: bool
-    :param toc_only: special flag: return show TOC, used for sidebars
-    :type toc_only: bool
+    Parameters
+    ----------
+    value : str
+        Contents from template being placed into node
+    show_title : bool
+        Show top level title
+    toc_only : bool
+        Special flag: return show TOC, used for sidebars
+
+    Returns
+    -------
+    str or None
+        HTML from reStructuredText document (doctree)
     """
     writer = DjangoDocutilsWriter()
 
