@@ -11,8 +11,15 @@ _word_beginning_split_re = re.compile(r"([\s\(\{\[\<]+)", re.UNICODE)
 def is_uncapitalized_word(value: str) -> bool:
     """Return True if term/word segment is special uncap term (e.g. "django-").
 
-    :param value: string value from template
-    :type value: str
+    Parameters
+    ----------
+    value : str
+        string value from template
+
+    Returns
+    -------
+    bool
+        True if term or word is uncapitalized.
 
     Functions can be declared via DJANGO_DOCUTILS_TEXT in django settings via string
     imports. The filters accept one argument (the word). If you don't want the
