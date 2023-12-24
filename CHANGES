@@ -10,6 +10,14 @@
   - `register_django_docutils_roles()` from `django_docutils.lib.roles` to `django_docutils.lib.roles.registry`
   - `register_django_docutils_directives()` from `django_docutils.lib.directives` to `django_docutils.lib.directives.registry`
 
+### Improvements
+
+- Settings: Register docutils roles and directives when django settings updates (#408)
+
+### Tests
+
+- Add tests for custom roles and directives (#408)
+
 ## django-docutils 0.21.0 (2023-12-09)
 
 _Maintenance release only, no bug fixes or new features_
