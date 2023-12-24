@@ -21,7 +21,12 @@ DJANGO_DOCUTILS_ANONYMOUS_USER_NAME: str | None = "AnonymousCoward"
 
 
 def reload_settings(
-    signal: t.Any, sender: t.Any, setting: str, value: t.Any, enter: bool
+    signal: t.Any,
+    sender: t.Any,
+    setting: str,
+    value: t.Any,
+    enter: bool,
+    **kwargs: t.Any,
 ) -> None:
     """Ran when settings updated."""
     if setting == "DJANGO_DOCUTILS_LIB_RST" and isinstance(value, dict):
