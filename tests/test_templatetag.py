@@ -130,3 +130,48 @@ def test_templatetag_block(settings: t.Any) -> None:
     )
 
     assert template.render(Context()) == DEFAULT_EXPECTED
+
+
+def test_templatetag_roles(settings: t.Any) -> None:
+    """Template tag utilizes custom roles, detects new ones on setting update."""
+    settings.DJANGO_DOCUTILS_LIB_RST = {
+        "roles": {"local": {}},
+    }
+
+    template = Template(
+        """{% load django_docutils %}
+{% rst %}
+:custom_role:`myorg/myrepo`
+{% endrst %}
+"""
+    )
+
+    assert template.render(Context()) == (
+        """
+<main>
+<p><a href="#system-message-1"><span class="problematic" id="problematic-1">:custom_role:`myorg/myrepo`</span></a></p>
+<aside class="system-message" id="system-message-1">
+<p class="system-message-title">System Message: ERROR/3 (<span class="docutils literal">&lt;string&gt;</span>, line 2); <em><a href="#problematic-1">backlink</a></em></p>
+<p>Unknown interpreted text role &quot;custom_role&quot;.</p>
+</aside>
+</main>
+
+"""  # noqa: E501
+    )
+
+    settings.DJANGO_DOCUTILS_LIB_RST = {
+        "roles": {
+            "local": {
+                "custom_role": "django_docutils.lib.roles.github.github_role",
+            }
+        },
+    }
+
+    assert template.render(Context()) == (
+        """
+<main>
+<p><a class="custom_role reference external offsite" href="https://github.com/myorg/myrepo" target="_blank">myorg/myrepo</a></p>
+</main>
+
+"""  # noqa: E501
+    )
