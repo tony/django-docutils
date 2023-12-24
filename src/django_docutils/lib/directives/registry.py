@@ -6,11 +6,11 @@ from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def register_django_docutils_directives() -> None:
-    """Register docutils directives.
+    """Register docutils directives for a django application.
 
     Examples
     --------
-    Let's use a TEMPLATES-style django config:
+    In your site's :ref:`Django settings module<django:django-settings-module>`:
 
     >>> DJANGO_DOCUTILS_LIB_RST = {
     ...    'directives': {  #: directive-name: Directive class (import string)

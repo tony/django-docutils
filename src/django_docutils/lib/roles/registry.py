@@ -9,13 +9,11 @@ from ..settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def register_django_docutils_roles() -> None:
-    """Register all roles, exists to avoid race conditions / pulling in deps.
+    """Register docutils roles for a django application.
 
-    This makes django-docutils a lot leaner by making roles explicit and "opt-in".
-
-    Why? Not all django projects want need intersphinx cross-referencing
-    or amazon links (which requires bitly and an amazon product api package).
-    Let's use a TEMPLATES-style django config:
+    Examples
+    --------
+    In your site's :ref:`Django settings module<django:django-settings-module>`:
 
     >>> DJANGO_DOCUTILS_LIB_RST = {
     ...     #: directive-name: Directive class (import string)
