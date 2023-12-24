@@ -14,7 +14,7 @@ def register_django_docutils_directives() -> None:
 
     >>> DJANGO_DOCUTILS_LIB_RST = {
     ...    'directives': {  #: directive-name: Directive class (import string)
-    ...        'code-block': 'django_docutils.lib.directives.pygments.CodeBlock'
+    ...        'code-block': 'django_docutils.lib.directives.code.CodeBlock'
     ...    }
     ... }
     """
