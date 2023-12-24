@@ -4,6 +4,13 @@
 
 - _Add your latest changes from PRs here_
 
+## django-docutils 0.22.1 (2023-12-24)
+
+### Fixes
+
+- Fix `reload_settings` setting signal: Missing keyword arguments in params (#413,
+  fixes #412)
+
 ## django-docutils 0.22.0 (2023-12-24)
 
 ### Breaking changes
