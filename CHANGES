@@ -4,6 +4,12 @@
 
 - _Add your latest changes from PRs here_
 
+### Breaking changes
+
+- Moved functions: Move docutils role and directive registration from package root to dedicated module (#409):
+  - `register_django_docutils_roles()` from `django_docutils.lib.roles` to `django_docutils.lib.roles.registry`
+  - `register_django_docutils_directives()` from `django_docutils.lib.directives` to `django_docutils.lib.directives.registry`
+
 ## django-docutils 0.21.0 (2023-12-09)
 
 _Maintenance release only, no bug fixes or new features_
