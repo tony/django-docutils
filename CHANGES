@@ -1,8 +1,10 @@
 # Changelog
 
-## django-docutils 0.22.0 (unreleased)
+## django-docutils 0.23.0 (unreleased)
 
 - _Add your latest changes from PRs here_
+
+## django-docutils 0.22.0 (2023-12-24)
 
 ### Breaking changes
 
