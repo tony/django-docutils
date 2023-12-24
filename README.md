@@ -105,6 +105,9 @@ DJANGO_DOCUTILS_LIB_RST = {
             "email": "django_docutils.lib.roles.email.email_role",
         }
     },
+    "directives": {
+        "code-block": "django_docutils.lib.directives.code.CodeBlock",
+    }
 }
 
 # Optional
