@@ -6,6 +6,7 @@
 :maxdepth: 1
 
 code
+registry
 ```
 
 ```{eval-rst}

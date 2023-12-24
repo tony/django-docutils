@@ -8,8 +8,8 @@ from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 from docutils.readers.doctree import Reader
 from docutils.writers.html5_polyglot import Writer
 
-from .directives import register_django_docutils_directives
-from .roles import register_django_docutils_roles
+from .directives.registry import register_django_docutils_directives
+from .roles.registry import register_django_docutils_roles
 from .settings import DJANGO_DOCUTILS_LIB_RST
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
