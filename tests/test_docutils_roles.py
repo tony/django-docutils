@@ -7,7 +7,7 @@ from django.template import Context, Template
 from docutils import nodes
 from docutils.parsers.rst.states import Inliner
 
-from django_docutils.lib.roles import (
+from django_docutils.lib.roles.registry import (
     register_django_docutils_roles,
     register_role_mapping,
 )
@@ -48,20 +48,20 @@ class RoleContentFixture(t.NamedTuple):
 
 def test_register_django_docutils_roles(monkeypatch: pytest.MonkeyPatch) -> None:
     """Assertions for register_django_docutils_roles()."""
-    from django_docutils.lib import roles as roles_package
+    from django_docutils.lib.roles import registry as roles_registry_pkg
 
-    assert roles_package.DJANGO_DOCUTILS_LIB_RST, (  # type:ignore[attr-defined]
+    assert roles_registry_pkg.DJANGO_DOCUTILS_LIB_RST, (  # type:ignore[attr-defined]
         "Sanity-check, something truthy should be set." ""
     )
     register_django_docutils_roles()
 
-    monkeypatch.setattr(roles_package, "DJANGO_DOCUTILS_LIB_RST", {})
+    monkeypatch.setattr(roles_registry_pkg, "DJANGO_DOCUTILS_LIB_RST", {})
     register_django_docutils_roles()
 
-    monkeypatch.setattr(roles_package, "DJANGO_DOCUTILS_LIB_RST", {"other": None})
+    monkeypatch.setattr(roles_registry_pkg, "DJANGO_DOCUTILS_LIB_RST", {"other": None})
     register_django_docutils_roles()
 
-    monkeypatch.setattr(roles_package, "DJANGO_DOCUTILS_LIB_RST", {"roles": {}})
+    monkeypatch.setattr(roles_registry_pkg, "DJANGO_DOCUTILS_LIB_RST", {"roles": {}})
     register_django_docutils_roles()
 
 
