@@ -175,3 +175,49 @@ def test_templatetag_roles(settings: t.Any) -> None:
 
 """  # noqa: E501
     )
+
+
+def test_templatetag_directive(settings: t.Any) -> None:
+    """Template tag utilizes custom directives, detects new ones on setting update."""
+    settings.DJANGO_DOCUTILS_LIB_RST = {
+        "directives": {},
+    }
+
+    template = Template(
+        """{% load django_docutils %}
+{% rst %}
+.. moo-block:: python
+
+   import this
+{% endrst %}
+"""
+    )
+
+    assert template.render(Context()) == (
+        """
+<main>
+<aside class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<span class="docutils literal">&lt;string&gt;</span>, line 2)</p>
+<p>Unknown directive type &quot;moo-block&quot;.</p>
+<pre class="literal-block">.. moo-block:: python
+
+   import this</pre>
+</aside>
+</main>
+
+"""  # noqa: E501
+    )
+
+    settings.DJANGO_DOCUTILS_LIB_RST = {
+        "directives": {"moo-block": "django_docutils.lib.directives.code.CodeBlock"},
+    }
+
+    assert template.render(Context()) == (
+        """
+<main>
+<div class="highlight code-block"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
+</pre></div>
+</main>
+
+"""  # noqa: E501
+    )
