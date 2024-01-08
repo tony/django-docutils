@@ -34,7 +34,7 @@ def email_role(
 
     .. code-block:: rst
 
-       :email:`me@localhost`
+       :email:`Email me <me@localhost>`
     """
     if options is None:
         options = {}
