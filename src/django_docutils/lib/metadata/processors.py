@@ -40,7 +40,7 @@ def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
 
 def process_anonymous_user(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
     """Corrects name of author "anonymous" to django's anonymous username."""
-    if metadata.get("author", None) == "anonymous" and hasattr(
+    if metadata.get("author") == "anonymous" and hasattr(
         settings, "DJANGO_DOCUTIL_ANONYMOUS_USER_NAME"
     ):
         metadata["author"] = settings.DJANGO_DOCUTILS_ANONYMOUS_USER_NAME
