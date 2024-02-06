@@ -47,7 +47,7 @@ def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
     for docinfo in document.traverse(nodes.docinfo):
         for element in docinfo.children:
             if not isinstance(element, nodes.Text) and not isinstance(
-                element, nodes.Element
+                element, nodes.Element,
             ):
                 continue
 
@@ -58,13 +58,13 @@ def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
                 name = name_elem.astext()
                 value = body_elem.astext()
             elif isinstance(
-                element, (nodes.Text, nodes.TextElement)
+                element, (nodes.Text, nodes.TextElement),
             ):  # standard fields (e.g. address)
                 name = element.tagname
                 value = element.astext()
             else:
                 raise NotImplementedError(
-                    f"No support for {element} of type {type(element)}"
+                    f"No support for {element} of type {type(element)}",
                 )
             name = name.lower()
 

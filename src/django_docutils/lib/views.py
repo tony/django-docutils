@@ -76,7 +76,7 @@ class RSTMixin:
             return None
 
         return publish_html_from_doctree(
-            self.doctree, **getattr(self, "rst_settings", {})
+            self.doctree, **getattr(self, "rst_settings", {}),
         )
 
     def get_base_template(self) -> str:

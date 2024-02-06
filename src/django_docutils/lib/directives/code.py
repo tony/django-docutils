@@ -55,7 +55,7 @@ def patch_bash_session_lexer() -> None:
 
     BashSessionLexer._ps1rgx = re.compile(
         r"^((?:(?:\[.*?\])|(?:\(\S+\))?(?:| |sh\S*?|\w+\S+[@:]\S+(?:\s+\S+)"
-        r"?|\[\S+[@:][^\n]+\].+))\s*[$#%] )(.*\n?)"
+        r"?|\[\S+[@:][^\n]+\].+))\s*[$#%] )(.*\n?)",
     )
 
 

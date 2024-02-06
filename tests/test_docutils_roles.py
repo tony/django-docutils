@@ -29,7 +29,7 @@ def render_rst_block(contents: str, context: t.Any = None) -> str:
 {% rst %}
 {{DEFAULT_RST}}
 {% endrst %}
-""".replace("{{DEFAULT_RST}}", contents)
+""".replace("{{DEFAULT_RST}}", contents),
     )
 
     return template.render(Context(context))
@@ -133,7 +133,7 @@ def test_register_role_mapping() -> None:
                     "warn_dangling": True,
                 },
             ),
-        }
+        },
     )
 
     register_role_mapping(
@@ -146,13 +146,13 @@ def test_register_role_mapping() -> None:
                     "warn_dangling": True,
                 },
             ),
-        }
+        },
     )
 
     register_role_mapping(
         {
             "ex": "tests.test_docutils_roles.MySphinxLikeRole",
-        }
+        },
     )
 
 

@@ -74,7 +74,7 @@ Content
 -------
 
 hi
-    """.strip()
+    """.strip(),
         )
         == """
 Content

@@ -46,7 +46,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         if "refuri" in node:
             atts["href"] = node["refuri"]
             if self.settings.cloak_email_addresses and atts["href"].startswith(
-                "mailto:"
+                "mailto:",
             ):
                 atts["href"] = self.cloak_mailto(atts["href"])
                 self.in_mailto = True
@@ -105,13 +105,13 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         # specific cases we don't use h{1-6} tags for
         parent_node_classes: list[ParentNodeClassTuple] = [
             ParentNodeClassTuple(
-                nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None
+                nodes.topic, ["p", ""], {"CLASS": "topic-title first"}, None,
             ),
             ParentNodeClassTuple(
-                nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None
+                nodes.sidebar, ["p", ""], {"CLASS": "sidebar-title"}, None,
             ),
             ParentNodeClassTuple(
-                nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None
+                nodes.Admonition, ["p", ""], {"CLASS": "admonition-title"}, None,
             ),
             ParentNodeClassTuple(nodes.table, ["caption", ""], {}, "</caption>"),
         ]
@@ -123,8 +123,8 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             if isinstance(node.parent, parent_node_class.parent_node_type):
                 self.body.append(
                     self.starttag(
-                        node, *parent_node_class.args, **parent_node_class.kwargs
-                    )
+                        node, *parent_node_class.args, **parent_node_class.kwargs,
+                    ),
                 )
                 if close_tag:
                     close_tag = parent_node_class.close_tag
@@ -145,7 +145,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         self.context.append(close_tag)
 
     def _visit_section_title(
-        self, node: nodes.Element, close_tag: t.Optional[str]
+        self, node: nodes.Element, close_tag: t.Optional[str],
     ) -> str:
         """Our special sauce for section titles.
 

@@ -29,18 +29,18 @@ some content
 """.strip()
 
     doctree = publish_doctree(
-        source=force_bytes(content), settings_overrides=docutils_settings
+        source=force_bytes(content), settings_overrides=docutils_settings,
     )
 
     # Test that normal writer will show docinfo in HTML
     parts = publish_parts_from_doctree(
-        doctree, writer=Writer(), settings_overrides=docutils_settings
+        doctree, writer=Writer(), settings_overrides=docutils_settings,
     )
     assert "key1" in parts["html_body"]
 
     # Our writer should *not* output docinto
     parts = publish_parts_from_doctree(
-        doctree, writer=DjangoDocutilsWriter(), settings_overrides=docutils_settings
+        doctree, writer=DjangoDocutilsWriter(), settings_overrides=docutils_settings,
     )
 
     assert "key1" not in parts["html_body"]
