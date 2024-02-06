@@ -65,8 +65,9 @@ def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
                 name = element.tagname
                 value = element.astext()
             else:
+                msg = f"No support for {element} of type {type(element)}"
                 raise NotImplementedError(
-                    f"No support for {element} of type {type(element)}",
+                    msg,
                 )
             name = name.lower()
 
