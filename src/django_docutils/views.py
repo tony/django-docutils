@@ -27,7 +27,13 @@ class DocutilsResponse(TemplateResponse):
     ):
         self.rst_name = rst
         super().__init__(
-            request, template, context, content_type, status, charset, using,
+            request,
+            template,
+            context,
+            content_type,
+            status,
+            charset,
+            using,
         )
 
     @property

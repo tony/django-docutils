@@ -18,7 +18,9 @@ class Contents(parts.Contents):
     startnode: t.Optional[nodes.Node]
 
     def build_contents(
-        self, node: nodes.Node, level: int = 0,
+        self,
+        node: nodes.Node,
+        level: int = 0,
     ) -> t.Union[nodes.bullet_list, list[t.Any]]:
         """Build nested bullet list from doctree content."""
         assert isinstance(node, nodes.Element)
