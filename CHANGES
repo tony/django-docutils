@@ -14,18 +14,18 @@ _Maintenance release only, no bug fixes or new features_
 
   - Add flake8-commas (COM)
 
-	- https://docs.astral.sh/ruff/rules/#flake8-commas-com
-	- https://pypi.org/project/flake8-commas/
+    - https://docs.astral.sh/ruff/rules/#flake8-commas-com
+    - https://pypi.org/project/flake8-commas/
 
   - Add flake8-builtins (A)
 
-	- https://docs.astral.sh/ruff/rules/#flake8-builtins-a
-	- https://pypi.org/project/flake8-builtins/
+    - https://docs.astral.sh/ruff/rules/#flake8-builtins-a
+    - https://pypi.org/project/flake8-builtins/
 
   - Add flake8-errmsg (EM)
 
-	- https://docs.astral.sh/ruff/rules/#flake8-errmsg-em
-	- https://pypi.org/project/flake8-errmsg/
+    - https://docs.astral.sh/ruff/rules/#flake8-errmsg-em
+    - https://pypi.org/project/flake8-errmsg/
 
 ## django-docutils 0.22.1 (2023-12-24)
 
