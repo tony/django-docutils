@@ -27,7 +27,13 @@ class DocutilsResponse(TemplateResponse):
     ):
         self.rst_name = rst
         super().__init__(
-            request, template, context, content_type, status, charset, using
+            request,
+            template,
+            context,
+            content_type,
+            status,
+            charset,
+            using,
         )
 
     @property
@@ -39,7 +45,7 @@ class DocutilsResponse(TemplateResponse):
         from django.utils.safestring import mark_safe
 
         context["content"] = mark_safe(
-            select_template(self.rst_name, using="docutils").render()
+            select_template(self.rst_name, using="docutils").render(),
         )
 
         template = self.resolve_template(self.template_name)

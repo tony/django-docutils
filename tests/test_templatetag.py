@@ -19,7 +19,7 @@ def test_filter(settings: t.Any) -> None:
 {% filter rst %}
 {{DEFAULT_RST}}
 {% endfilter %}
-""".replace("{{DEFAULT_RST}}", DEFAULT_RST)
+""".replace("{{DEFAULT_RST}}", DEFAULT_RST),
     )
     with pytest.warns(DeprecationWarning) as record:
         assert template.render(Context()) == DEFAULT_EXPECTED
@@ -33,7 +33,7 @@ def test_templatetag(settings: t.Any) -> None:
     template = Template(
         """{% load django_docutils %}
 {% rst content %}
-"""
+""",
     )
 
     assert template.render(Context({"content": DEFAULT_RST})) == DEFAULT_EXPECTED
@@ -44,7 +44,7 @@ def test_templatetag_show_title(settings: t.Any) -> None:
     template = Template(
         """{% load django_docutils %}
 {% rst content show_title=False %}
-""".strip()
+""".strip(),
     )
 
     assert (
@@ -58,7 +58,7 @@ def test_templatetag_toc_only(settings: t.Any) -> None:
     template = Template(
         """{% load django_docutils %}
 {% rst content toc_only=True %}
-""".strip()
+""".strip(),
     )
 
     assert (
@@ -92,7 +92,7 @@ def test_templatetag_toc_only_block(settings: t.Any) -> None:
 {% rst toc_only=True %}
 {{DEFAULT_RST_WITH_SECTIONS}}
 {% endrst %}
-""".replace("{{DEFAULT_RST_WITH_SECTIONS}}", DEFAULT_RST_WITH_SECTIONS).strip()
+""".replace("{{DEFAULT_RST_WITH_SECTIONS}}", DEFAULT_RST_WITH_SECTIONS).strip(),
     )
 
     assert (
@@ -126,7 +126,7 @@ def test_templatetag_block(settings: t.Any) -> None:
 {% rst %}
 {{DEFAULT_RST}}
 {% endrst %}
-""".replace("{{DEFAULT_RST}}", DEFAULT_RST)
+""".replace("{{DEFAULT_RST}}", DEFAULT_RST),
     )
 
     assert template.render(Context()) == DEFAULT_EXPECTED
@@ -143,7 +143,7 @@ def test_templatetag_roles(settings: t.Any) -> None:
 {% rst %}
 :custom_role:`myorg/myrepo`
 {% endrst %}
-"""
+""",
     )
 
     assert template.render(Context()) == (
@@ -163,7 +163,7 @@ def test_templatetag_roles(settings: t.Any) -> None:
         "roles": {
             "local": {
                 "custom_role": "django_docutils.lib.roles.github.github_role",
-            }
+            },
         },
     }
 
@@ -190,7 +190,7 @@ def test_templatetag_directive(settings: t.Any) -> None:
 
    import this
 {% endrst %}
-"""
+""",
     )
 
     assert template.render(Context()) == (

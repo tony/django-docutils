@@ -16,7 +16,7 @@ else:
     STORAGES = {
         "default": {
             "BACKEND": "inmemorystorage.InMemoryStorage",
-        }
+        },
     }
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
@@ -50,7 +50,7 @@ DJANGO_DOCUTILS_LIB_RST: "DjangoDocutilsLibRSTSettings" = {
         "initial_header_level": 2,
     },
     "directives": {  #: directive-name: Directive class (import string)
-        "code-block": "django_docutils.lib.directives.code.CodeBlock"
+        "code-block": "django_docutils.lib.directives.code.CodeBlock",
     },
     "roles": {
         "local": {
@@ -67,10 +67,10 @@ DJANGO_DOCUTILS_LIB_RST: "DjangoDocutilsLibRSTSettings" = {
             "email": "django_docutils.lib.roles.email.email_role",
             "hn": "django_docutils.lib.roles.hackernews.hackernews_role",
             "wikipedia": "django_docutils.lib.roles.wikipedia.wikipedia_role",
-        }
+        },
     },
 }
 DJANGO_DOCUTILS_LIB_TEXT: t.Dict[str, t.List[str]] = {  # Optional
-    "uncapitalized_word_filters": ["project.my_module.my_capitalization_fn"]
+    "uncapitalized_word_filters": ["project.my_module.my_capitalization_fn"],
 }
 INSTALLED_APPS = ("django_docutils",)

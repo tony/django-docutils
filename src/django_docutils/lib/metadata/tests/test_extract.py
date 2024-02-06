@@ -82,7 +82,8 @@ some content
 """.strip()
 
     doctree = publish_doctree(
-        source=force_bytes(content), settings_overrides=docutils_settings
+        source=force_bytes(content),
+        settings_overrides=docutils_settings,
     )
 
     assert extract_metadata(doctree) == {

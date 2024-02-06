@@ -119,10 +119,11 @@ def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
             #     }
             # ),
             if "innernodeclass" in role_cb_kwargs and isinstance(
-                role_cb_kwargs["innernodeclass"], str
+                role_cb_kwargs["innernodeclass"],
+                str,
             ):
                 role_cb_kwargs["innernodeclass"] = import_string(
-                    role_cb_kwargs["innernodeclass"]
+                    role_cb_kwargs["innernodeclass"],
                 )
 
         # Docutils roles accept a function or callable class as a callback

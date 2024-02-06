@@ -25,7 +25,8 @@ def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
             for _format in timezone_formats:
                 try:
                     metadata[time_key] = datetime.datetime.strptime(
-                        metadata[time_key], _format
+                        metadata[time_key],
+                        _format,
                     )
                     break
                 except ValueError:
@@ -33,7 +34,8 @@ def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
 
             if HAS_PYTZ:
                 metadata[time_key] = pytz.timezone(settings.TIME_ZONE).localize(
-                    metadata[time_key], is_dst=None
+                    metadata[time_key],
+                    is_dst=None,
                 )
     return metadata
 
@@ -41,7 +43,8 @@ def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
 def process_anonymous_user(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
     """Corrects name of author "anonymous" to django's anonymous username."""
     if metadata.get("author") == "anonymous" and hasattr(
-        settings, "DJANGO_DOCUTIL_ANONYMOUS_USER_NAME"
+        settings,
+        "DJANGO_DOCUTIL_ANONYMOUS_USER_NAME",
     ):
         metadata["author"] = settings.DJANGO_DOCUTILS_ANONYMOUS_USER_NAME
 

@@ -23,7 +23,7 @@ def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> 
             "BACKEND": "django_docutils.template.DocutilsTemplates",
             "DIRS": [str(template_dir)],
             "APP_DIRS": True,
-        }
+        },
     )
     base_html = template_dir / "base.html"
     base_html.write_text("{{content}}", encoding="utf-8")

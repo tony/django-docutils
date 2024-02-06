@@ -97,7 +97,8 @@ def publish_toc_from_doctree(
 
 
 def publish_doctree(
-    source: str | bytes, settings_overrides: t.Any = docutils_settings
+    source: str | bytes,
+    settings_overrides: t.Any = docutils_settings,
 ) -> nodes.document:
     """Split off ability to get doctree (a.k.a. document).
 
@@ -120,7 +121,8 @@ def publish_doctree(
     register_django_docutils_roles()
 
     return docutils_publish_doctree(
-        source=force_bytes(source), settings_overrides=settings_overrides
+        source=force_bytes(source),
+        settings_overrides=settings_overrides,
     )
 
 
@@ -135,7 +137,8 @@ if t.TYPE_CHECKING:
 
 
 def publish_html_from_source(
-    source: str, **kwargs: "Unpack[PublishHtmlDocTreeKwargs]"
+    source: str,
+    **kwargs: "Unpack[PublishHtmlDocTreeKwargs]",
 ) -> str | None:
     """Return HTML from reStructuredText source string."""
     doctree = publish_doctree(source)
@@ -171,7 +174,9 @@ def publish_html_from_doctree(
         return publish_toc_from_doctree(doctree, writer=writer)
 
     parts = publish_parts_from_doctree(
-        doctree, writer=writer, settings_overrides=docutils_settings
+        doctree,
+        writer=writer,
+        settings_overrides=docutils_settings,
     )
 
     if show_title:

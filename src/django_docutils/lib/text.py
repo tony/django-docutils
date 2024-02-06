@@ -70,5 +70,9 @@ def smart_title(value: str) -> str:
     Django can still be capitalized, but it must already be like that.
     """
     return "".join(
-        [smart_capfirst(item) for item in _word_beginning_split_re.split(value) if item]
+        [
+            smart_capfirst(item)
+            for item in _word_beginning_split_re.split(value)
+            if item
+        ],
     )

@@ -50,7 +50,8 @@ class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
         return super().format_unencoded(source, outfile)
 
     def _wrap_div(
-        self, inner: "TokenStream"
+        self,
+        inner: "TokenStream",
     ) -> t.Union["TokenGenerator", "TokenStream"]:
         styles = []
         if (
