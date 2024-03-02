@@ -1,4 +1,5 @@
 """Test metadata and title extraction from reStructuredText."""
+
 import pathlib
 
 from django.utils.encoding import force_bytes

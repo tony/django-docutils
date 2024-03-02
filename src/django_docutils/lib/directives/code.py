@@ -3,7 +3,7 @@
 The Pygments reStructuredText directive
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
 
-This fragment is a `Docutils <https://docutils.sourceforge.io/>`_ 0.5 directive that 
+This fragment is a `Docutils <https://docutils.sourceforge.io/>`_ 0.5 directive that
 renders source code (to HTML only, currently) via Pygments.
 
 To use it, adjust the options below and copy the code into a module
@@ -35,6 +35,7 @@ to get all the gory details.
 :copyright: Copyright 2006-2015 by the Pygments team, see AUTHORS.
 :license: BSD, see LICENSE for details.
 """
+
 import re
 import typing as t
 

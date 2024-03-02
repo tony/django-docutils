@@ -1,4 +1,5 @@
 """Django template tag and filter for docutils (rendering reStructuredText as HTML)."""
+
 import typing as t
 
 from django import template

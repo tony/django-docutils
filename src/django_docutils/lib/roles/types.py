@@ -1,4 +1,5 @@
 """Typings for Django Docutils roles for Docutils."""
+
 import typing as t
 
 from docutils import nodes

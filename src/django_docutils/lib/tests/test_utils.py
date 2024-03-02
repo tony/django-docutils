@@ -1,4 +1,5 @@
 """Tests for Django Docutil utilities."""
+
 from ..utils import chop_after_docinfo, chop_after_title
 
 

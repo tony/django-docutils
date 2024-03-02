@@ -1,4 +1,5 @@
 """Tests for DocutilsView template view."""
+
 import pathlib
 import typing as t
 

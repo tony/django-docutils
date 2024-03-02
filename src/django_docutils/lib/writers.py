@@ -1,4 +1,5 @@
 """Docutils writers for Django Docutils, designed for cleaner output."""
+
 import typing as t
 
 from django.conf import settings

@@ -1,4 +1,5 @@
 """Sphinx configuration for Django Docutils."""
+
 # flake8: noqa: E501
 import inspect
 import os

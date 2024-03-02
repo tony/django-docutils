@@ -1,4 +1,5 @@
 """Core parts for Django Docutils roles."""
+
 import typing as t
 
 from docutils import nodes, utils

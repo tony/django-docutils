@@ -1,4 +1,5 @@
 """Django-docutils class-based view for django (and its' parts)."""
+
 import typing as t
 
 from django.core.exceptions import ImproperlyConfigured

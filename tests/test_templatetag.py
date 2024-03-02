@@ -1,4 +1,5 @@
 """Tests for rst template filter and tags."""
+
 import typing as t
 
 import pytest
