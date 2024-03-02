@@ -1,4 +1,5 @@
 """django-docutils test settings module for django."""
+
 import pathlib
 import typing as t
 

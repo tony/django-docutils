@@ -1,4 +1,5 @@
 """Django template engine for Docutils."""
+
 import typing as t
 
 from django.conf import settings

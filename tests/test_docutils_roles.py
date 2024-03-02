@@ -1,5 +1,6 @@
 # ruff: noqa: E501
 """Tests for docutils roles."""
+
 import typing as t
 
 import pytest

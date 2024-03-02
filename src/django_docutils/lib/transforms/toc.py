@@ -1,4 +1,5 @@
 """Django docutils table of contents helpers."""
+
 import sys
 import typing as t
 

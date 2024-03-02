@@ -1,4 +1,5 @@
 """Register docutils roles for django-docutils."""
+
 import inspect
 import typing as t
 

@@ -1,4 +1,5 @@
 """Metadata processing for Django Docutils."""
+
 import datetime
 import typing as t
 

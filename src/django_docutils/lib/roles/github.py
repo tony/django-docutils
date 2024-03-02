@@ -1,4 +1,5 @@
 """GitHub role for Docutils."""
+
 import typing as t
 
 from docutils.parsers.rst.states import Inliner

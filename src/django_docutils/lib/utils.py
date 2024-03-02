@@ -4,6 +4,7 @@ Some stuff is ported from sphinx:
 
 - explicit_title_re, ws_re, set_role_source_info, split_explicit_title
 """
+
 import re
 import typing as t
 

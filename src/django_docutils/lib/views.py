@@ -1,4 +1,5 @@
 """Django view machinery for rendering docutils content as HTML."""
+
 import pathlib
 import typing as t
 

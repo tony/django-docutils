@@ -1,4 +1,5 @@
 """Typings for Django Docutils settings for django."""
+
 import typing as t
 
 from typing_extensions import NotRequired, TypedDict
