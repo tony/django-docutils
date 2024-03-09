@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-docutils"
-version = "0.23.0"
+version = "0.24.0"
 description = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."
 
 license = "MIT"
