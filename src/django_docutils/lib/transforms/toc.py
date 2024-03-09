@@ -22,15 +22,15 @@ class Contents(parts.Contents):
         self,
         node: nodes.Node,
         level: int = 0,
-    ) -> t.Union[nodes.bullet_list, list[t.Any]]:
+    ) -> t.Union[nodes.bullet_list, t.List[t.Any]]:
         """Build nested bullet list from doctree content."""
         assert isinstance(node, nodes.Element)
         level += 1
-        sections: list[nodes.section] = [
+        sections: t.List[nodes.section] = [
             sect for sect in node.children if isinstance(sect, nodes.section)
         ]
         assert self.startnode is not None
-        entries: list[nodes.Node] = []
+        entries: t.List[nodes.Node] = []
 
         depth = (
             self.startnode.details.get("depth", sys.maxsize)

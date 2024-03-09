@@ -14,7 +14,7 @@ def generic_url_role(
     name: str,
     text: str,
     url_handler_fn: "UrlHandlerFn",
-    innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
+    innernodeclass: t.Type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
 ) -> "RoleFnReturnValue":
     """Docutils Role for Django Docutils.
 
@@ -80,7 +80,7 @@ def generic_remote_url_role(
     name: str,
     text: str,
     url_handler_fn: "RemoteUrlHandlerFn",
-    innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
+    innernodeclass: t.Type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
 ) -> t.Tuple[t.List[nodes.reference], t.List[t.Any]]:
     """Docutils Role that can call an external data source for title and URL.
 

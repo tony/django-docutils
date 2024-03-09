@@ -23,13 +23,13 @@ docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
 def publish_parts_from_doctree(
     document: nodes.document,
-    destination_path: str | None = None,
-    writer: Writer | None = None,
+    destination_path: t.Optional[str] = None,
+    writer: t.Optional[Writer] = None,
     writer_name: str = "pseudoxml",
-    settings: t.Any | None = None,
-    settings_spec: "SettingsSpec | None" = None,
-    settings_overrides: t.Any | None = None,
-    config_section: str | None = None,
+    settings: t.Optional[t.Any] = None,
+    settings_spec: "t.Optional[SettingsSpec]" = None,
+    settings_overrides: t.Optional[t.Any] = None,
+    config_section: t.Optional[str] = None,
     enable_exit_status: bool = False,
 ) -> t.Dict[str, str]:
     """Render docutils doctree into docutils parts."""
@@ -56,7 +56,7 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(
     doctree: nodes.document,
-    writer: Writer | None = None,
+    writer: t.Optional[Writer] = None,
 ) -> t.Optional[str]:
     """Publish table of contents from docutils doctree."""
     if not writer:
@@ -98,7 +98,7 @@ def publish_toc_from_doctree(
 
 
 def publish_doctree(
-    source: str | bytes,
+    source: t.Union[str, bytes],
     settings_overrides: t.Any = docutils_settings,
 ) -> nodes.document:
     """Split off ability to get doctree (a.k.a. document).
@@ -140,7 +140,7 @@ if t.TYPE_CHECKING:
 def publish_html_from_source(
     source: str,
     **kwargs: "Unpack[PublishHtmlDocTreeKwargs]",
-) -> str | None:
+) -> t.Optional[str]:
     """Return HTML from reStructuredText source string."""
     doctree = publish_doctree(source)
     return publish_html_from_doctree(doctree, **kwargs)
@@ -150,7 +150,7 @@ def publish_html_from_doctree(
     doctree: nodes.document,
     show_title: bool = True,
     toc_only: bool = False,
-) -> str | None:
+) -> t.Optional[str]:
     """Return HTML from reStructuredText document (doctree).
 
     Parameters

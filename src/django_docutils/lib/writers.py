@@ -15,7 +15,7 @@ class ParentNodeClassTuple(t.NamedTuple):
     """Typing for parent node accepting custom arguments."""
 
     parent_node_type: t.Type[t.Union[nodes.Node, nodes.Body]]
-    args: list[str]
+    args: t.List[str]
     kwargs: t.Dict[str, str]
     close_tag: t.Optional[str]
 
@@ -104,7 +104,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             node["refid"] = node.parent["ids"][0]
 
         # specific cases we don't use h{1-6} tags for
-        parent_node_classes: list[ParentNodeClassTuple] = [
+        parent_node_classes: t.List[ParentNodeClassTuple] = [
             ParentNodeClassTuple(
                 nodes.topic,
                 ["p", ""],
@@ -229,7 +229,7 @@ class DjangoDocutilsWriter(Writer):
         # classes. (e.g. Python =< 2.1 classes)
         self.translator_class = DjangoDocutilsHTMLTranslator
 
-    def get_transforms(self) -> list[t.Type[Transform]]:
+    def get_transforms(self) -> t.List[t.Type[Transform]]:
         """Return transformed required by DjangoDocutilsWriter.
 
         Adheres to DJANGO_DOCUTILS_LIB_RST settings.

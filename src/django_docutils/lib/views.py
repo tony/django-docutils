@@ -55,7 +55,7 @@ class RSTMixin:
         raise NotImplementedError
 
     @cached_property
-    def doctree(self) -> nodes.document | None:
+    def doctree(self) -> t.Optional[nodes.document]:
         """Return docutils doctree of RST content (pre-HTML)."""
         if self.raw_content is None:
             return None
@@ -63,7 +63,7 @@ class RSTMixin:
         return publish_doctree(self.raw_content)
 
     @cached_property
-    def sidebar(self, **kwargs: object) -> str | None:
+    def sidebar(self, **kwargs: object) -> t.Optional[str]:
         """Return table of contents sidebar of RST content as HTML."""
         if self.doctree is None:
             return None
@@ -71,7 +71,7 @@ class RSTMixin:
         return publish_toc_from_doctree(self.doctree)
 
     @cached_property
-    def content(self) -> str | None:
+    def content(self) -> t.Optional[str]:
         """Return reStructuredText content as HTML."""
         if self.doctree is None:
             return None
