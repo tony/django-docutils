@@ -20,9 +20,9 @@ class ReStructuredTextNode(Node):
     def __init__(
         self,
         content: t.Union[FilterExpression, str],
-        args: t.Optional[list[FilterExpression]] = None,
-        kwargs: t.Optional[dict[str, FilterExpression]] = None,
-        asvar: str | None = None,
+        args: t.Optional[t.List[FilterExpression]] = None,
+        kwargs: t.Optional[t.Dict[str, FilterExpression]] = None,
+        asvar: t.Optional[str] = None,
     ) -> None:
         self.content = content
         self.args = args if args is not None else []

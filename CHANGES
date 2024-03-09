@@ -4,6 +4,10 @@
 
 - _Add your latest changes from PRs here_
 
+### Bug fixes
+
+- Re-implement support Python 3.8 (#417)
+
 ## django-docutils 0.23.0 (2024-02-06)
 
 _Maintenance release only, no bug fixes or new features_

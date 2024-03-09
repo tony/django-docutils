@@ -82,7 +82,7 @@ class SphinxLikeRole:
     inliner: Inliner  #: The ``docutils.parsers.rst.states.Inliner`` object.
     #: A dictionary of directive options for customisation
     #: (from the "role" directive).
-    options: dict[str, t.Any]
+    options: t.Dict[str, t.Any]
     #: A list of strings, the directive content for customisation
     #: (from the "role" directive).
     content: t.Sequence[str]
@@ -94,9 +94,9 @@ class SphinxLikeRole:
         text: str,
         lineno: int,
         inliner: Inliner,
-        options: dict[str, t.Any] | None = None,
+        options: t.Optional[t.Dict[str, t.Any]] = None,
         content: t.Sequence[str] = (),
-    ) -> tuple[list[nodes.Node], list[t.Any]]:
+    ) -> t.Tuple[t.List[nodes.Node], t.List[t.Any]]:
         """Return example class-based role."""
         self.rawtext = rawtext
         self.text = text
@@ -110,7 +110,7 @@ class SphinxLikeRole:
             self.name = name.lower()
         return self.run()
 
-    def run(self) -> tuple[list[nodes.Node], list[t.Any]]:
+    def run(self) -> t.Tuple[t.List[nodes.Node], t.List[t.Any]]:
         """Run docutils role."""
         raise NotImplementedError
 
@@ -157,7 +157,7 @@ def test_register_role_mapping() -> None:
     )
 
 
-GH_ROLE_TESTS: list[RoleContentFixture] = [
+GH_ROLE_TESTS: t.List[RoleContentFixture] = [
     RoleContentFixture(
         test_id="gh-role-org",
         rst_content=":gh:`org`\n",

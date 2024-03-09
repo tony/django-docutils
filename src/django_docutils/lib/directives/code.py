@@ -89,7 +89,7 @@ class CodeBlock(Directive):
     option_spec = DEFAULT_OPTION_SPEC
     has_content = True
 
-    def run(self) -> list[nodes.Node]:
+    def run(self) -> t.List[nodes.Node]:
         """Directive run method for CodeBlock."""
         self.assert_has_content()
         try:

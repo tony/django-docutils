@@ -18,8 +18,8 @@ class DocutilsResponse(TemplateResponse):
     def __init__(
         self,
         request: HttpRequest,
-        template: list[str],
-        rst: list[str],
+        template: t.List[str],
+        rst: t.List[str],
         context: t.Optional[t.Dict[str, t.Any]] = None,
         content_type: t.Optional[str] = None,
         status: t.Optional[int] = None,
@@ -92,7 +92,7 @@ class DocutilsView(TemplateView):
             using=using or self.template_engine,
         )
 
-    def get_rst_names(self) -> list[str]:
+    def get_rst_names(self) -> t.List[str]:
         """Follows after get_template_names, but for scanning for rst content."""
         if self.rst_name is None:
             raise DocutilsViewRstNameImproperlyConfigured()

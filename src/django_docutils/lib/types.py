@@ -22,8 +22,8 @@ class DjangoDocutilsLibRSTDocutilsSettings(TypedDict):
 class DjangoDocutilsLibRSTSettings(TypedDict):
     """Core settings object for ``DJANGO_DOCUTILS_LIB_RST``."""
 
-    metadata_processors: NotRequired[list[str]]
-    transforms: NotRequired[list[str]]
+    metadata_processors: NotRequired[t.List[str]]
+    transforms: NotRequired[t.List[str]]
     docutils: NotRequired[DjangoDocutilsLibRSTDocutilsSettings]
     directives: NotRequired[t.Dict[str, str]]
     roles: NotRequired[DjangoDocutilsLibRSTRolesSettings]
@@ -32,4 +32,4 @@ class DjangoDocutilsLibRSTSettings(TypedDict):
 class DjangoDocutilsLibTextSettings(TypedDict):
     """Core settings object for ``DJANGO_DOCUTILS_TEXT_RST``."""
 
-    uncapitalized_word_filters: list[str]
+    uncapitalized_word_filters: t.List[str]
