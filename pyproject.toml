@@ -88,6 +88,7 @@ mypy = "*"
 django-stubs = "*"
 types-Pygments = "*"
 docutils-stubs = "*"
+types-docutils = "0.20.0.20240302"
 
 [tool.poetry.extras]
 pytz = [

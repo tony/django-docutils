@@ -1491,4 +1491,4 @@ pytz = ["pytz"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "493fcefd76e1a30a587c7e48041c71ca50a51359da8579543c67cfd32e8e83f7"
+content-hash = "85bcecb1de772f4263b2183429d0f0d1422484ee5c9869d187a8bee97c86e874"
