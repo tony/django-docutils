@@ -130,7 +130,7 @@ def generic_remote_url_role(
     if not has_explicit_title:
         title = utils.unescape(remote_title)
 
-    sn = innernodeclass(title, title)
+    sn = innernodeclass(title)
     rn = nodes.reference("", "", internal=True, refuri=url, classes=[name])
     rn += sn
     return [rn], []
