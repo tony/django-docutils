@@ -54,6 +54,7 @@ def extract_metadata(document: nodes.document) -> dict[str, str]:
                 continue
 
             if element.tagname == "field":  # custom fields (e.g. summary)
+                assert len(element.children) == 2
                 name_elem, body_elem = element.children
                 assert isinstance(name_elem, (nodes.Text, nodes.Element))
                 assert isinstance(body_elem, (nodes.Text, nodes.Element))
