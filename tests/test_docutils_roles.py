@@ -52,7 +52,7 @@ def test_register_django_docutils_roles(monkeypatch: pytest.MonkeyPatch) -> None
     from django_docutils.lib.roles import registry as roles_registry_pkg
 
     assert roles_registry_pkg.DJANGO_DOCUTILS_LIB_RST, (  # type:ignore[attr-defined]
-        "Sanity-check, something truthy should be set." ""
+        "Sanity-check, something truthy should be set."
     )
     register_django_docutils_roles()
 

@@ -32,7 +32,7 @@ From `Docutils: How to: RST Roles
 <https://docutils.sourceforge.io/docs/howto/rst-roles.html>`_:
 
     Role functions return a tuple of two values:
-    
+
     - A list of nodes which will be inserted into the document tree at the point where
       the interpreted role was encountered (can be an empty list).
     - A list of system messages, which will be inserted into the document tree

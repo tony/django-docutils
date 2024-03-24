@@ -6,7 +6,7 @@ import typing as t
 from django.utils.module_loading import import_string
 from docutils.parsers.rst import roles
 
-from ..settings import DJANGO_DOCUTILS_LIB_RST
+from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def register_django_docutils_roles() -> None:
@@ -62,10 +62,10 @@ def register_django_docutils_roles() -> None:
     None
     """
     if not DJANGO_DOCUTILS_LIB_RST:
-        return None
+        return
 
     if "roles" not in DJANGO_DOCUTILS_LIB_RST:
-        return None
+        return
 
     django_docutils_roles = DJANGO_DOCUTILS_LIB_RST["roles"]
 
@@ -74,7 +74,7 @@ def register_django_docutils_roles() -> None:
     if local_roles:
         register_role_mapping(local_roles)
 
-    return None
+    return
 
 
 def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:

@@ -4,8 +4,6 @@
 class DjangoDocutilsException(Exception):
     """Base exception for Django Docutils package."""
 
-    pass
-
 
 class DocutilsNotInstalled(DjangoDocutilsException):
     """Docutils is not installed."""

@@ -112,7 +112,7 @@ class CodeTransform(Transform):
                 patch_bash_session_lexer()
 
                 newlexer = BashSessionLexer()
-            elif text.startswith("{%") or text.startswith("{{"):
+            elif text.startswith(("{%", "{{")):
                 from pygments.lexers.templates import DjangoLexer
 
                 newlexer = DjangoLexer()

@@ -45,8 +45,7 @@ class DocutilsTemplates(BaseEngine):
                 continue
 
             return DocutilsTemplate(template_code, self.options)
-        else:
-            raise TemplateDoesNotExist(template_name)
+        raise TemplateDoesNotExist(template_name)
 
 
 class DocutilsTemplate:
