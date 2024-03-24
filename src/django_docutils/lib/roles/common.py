@@ -4,7 +4,7 @@ import typing as t
 
 from docutils import nodes, utils
 
-from ..utils import split_explicit_title
+from django_docutils.lib.utils import split_explicit_title
 
 if t.TYPE_CHECKING:
     from .types import RemoteUrlHandlerFn, RoleFnReturnValue, UrlHandlerFn
@@ -58,15 +58,14 @@ def generic_url_role(
 
     if not has_explicit_title:
         title = utils.unescape(title)
-    else:
-        if title[:2] == "**" and title[-2:] == "**":
-            innernodeclass = nodes.strong
-            title = title.strip("**")  # noqa: B005
-            # In Python 3.9+
-            # title = title.removeprefix("**").removesuffix("**")
-        elif title[0] == "*" and title[-1] == "*":
-            innernodeclass = nodes.emphasis
-            title = title.strip("*")
+    elif title[:2] == "**" and title[-2:] == "**":
+        innernodeclass = nodes.strong
+        title = title.strip("**")  # noqa: B005
+        # In Python 3.9+
+        # title = title.removeprefix("**").removesuffix("**")
+    elif title[0] == "*" and title[-1] == "*":
+        innernodeclass = nodes.emphasis
+        title = title.strip("*")
 
     url = url_handler_fn(target)
 

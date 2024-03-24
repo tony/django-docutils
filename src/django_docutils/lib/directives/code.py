@@ -75,9 +75,9 @@ VARIANTS: t.Dict[str, "Formatter[str]"] = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
-DEFAULT_OPTION_SPEC: t.Dict[str, t.Callable[[str], t.Any]] = {
-    key: directives.flag for key in VARIANTS
-}
+DEFAULT_OPTION_SPEC: t.Dict[str, t.Callable[[str], t.Any]] = dict.fromkeys(
+    VARIANTS, directives.flag
+)
 
 
 class CodeBlock(Directive):
@@ -100,7 +100,7 @@ class CodeBlock(Directive):
             # no lexer found - use the text one instead of an exception
             lexer = TextLexer()
         # take an arbitrary option if more than one is given
-        formatter = self.options and VARIANTS[next(iter(self.options))] or DEFAULT
+        formatter = (self.options and VARIANTS[next(iter(self.options))]) or DEFAULT
         parsed = highlight("\n".join(self.content), lexer, formatter)
         return [nodes.raw("", parsed, format="html")]
 

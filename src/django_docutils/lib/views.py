@@ -8,7 +8,8 @@ from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
 from docutils import nodes
 
-from .._internal.types import StrPath
+from django_docutils._internal.types import StrPath
+
 from .publisher import (
     publish_doctree,
     publish_html_from_doctree,
@@ -85,8 +86,7 @@ class RSTMixin:
         """TODO: move this out of RSTMixin, it is AMP related, not RST."""
         if self.request.GET.get("is_amp", False):
             return "django_docutils/base-amp.html"
-        else:
-            return "base.html"
+        return "base.html"
 
 
 class RSTRawView(TemplateTitleView):

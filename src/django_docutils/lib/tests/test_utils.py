@@ -1,6 +1,6 @@
 """Tests for Django Docutil utilities."""
 
-from ..utils import chop_after_docinfo, chop_after_title
+from django_docutils.lib.utils import chop_after_docinfo, chop_after_title
 
 
 def test_chop_after_title() -> None:
