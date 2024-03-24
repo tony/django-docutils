@@ -54,7 +54,7 @@ class Contents(parts.Contents):
             ref_id = self.document.set_id(reference)
             item = nodes.list_item("", reference)
             if (
-                self.backlinks in ("entry", "top")
+                self.backlinks in {"entry", "top"}
                 and title.next_node(nodes.reference) is None
                 and isinstance(title, (nodes.Element, nodes.TextElement))
             ):
@@ -72,5 +72,4 @@ class Contents(parts.Contents):
             if auto:
                 contents["classes"].append("auto-toc")
             return contents
-        else:
-            return []
+        return []

@@ -25,7 +25,7 @@ class DocutilsResponse(TemplateResponse):
         status: t.Optional[int] = None,
         charset: t.Optional[str] = None,
         using: t.Optional[str] = None,
-    ):
+    ) -> None:
         self.rst_name = rst
         super().__init__(
             request,
@@ -50,8 +50,7 @@ class DocutilsResponse(TemplateResponse):
         )
 
         template = self.resolve_template(self.template_name)
-        content = template.render(context)
-        return content
+        return template.render(context)
 
 
 class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
@@ -95,6 +94,5 @@ class DocutilsView(TemplateView):
     def get_rst_names(self) -> t.List[str]:
         """Follows after get_template_names, but for scanning for rst content."""
         if self.rst_name is None:
-            raise DocutilsViewRstNameImproperlyConfigured()
-        else:
-            return [self.rst_name]
+            raise DocutilsViewRstNameImproperlyConfigured
+        return [self.rst_name]

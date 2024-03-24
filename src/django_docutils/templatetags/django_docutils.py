@@ -9,7 +9,7 @@ from django.template.exceptions import TemplateSyntaxError
 from django.utils.encoding import force_str
 from django.utils.safestring import SafeString, mark_safe
 
-from ..lib.publisher import publish_html_from_source
+from django_docutils.lib.publisher import publish_html_from_source
 
 register = template.Library()
 
@@ -123,7 +123,7 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
         for bit in bits:
             match = kwarg_re.match(bit)
             if not match:
-                raise MalformedArgumentsToRSTTag()
+                raise MalformedArgumentsToRSTTag
 
             name, value = match.groups()
             if name:

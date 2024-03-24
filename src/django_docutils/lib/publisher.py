@@ -182,5 +182,4 @@ def publish_html_from_doctree(
 
     if show_title:
         return mark_safe(force_str(parts["html_body"]))
-    else:
-        return mark_safe(force_str(parts["fragment"]))
+    return mark_safe(force_str(parts["fragment"]))

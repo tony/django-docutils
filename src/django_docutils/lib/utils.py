@@ -125,5 +125,3 @@ def append_html_to_node(node: nodes.Element, ad_code: str) -> None:
 
     node.append(html_node)
     node.replace_self(node)
-
-    return None

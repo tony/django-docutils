@@ -34,7 +34,7 @@ import typing as t
 
 from django.utils.module_loading import import_string
 
-from ..settings import DJANGO_DOCUTILS_LIB_RST
+from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
 
 def process_metadata(metadata: t.Dict[str, str]) -> t.Dict[str, str]:
