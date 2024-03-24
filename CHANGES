@@ -4,12 +4,6 @@
 
 - _Add your latest changes from PRs here_
 
-## django-docutils 0.24.0 (2024-03-09)
-
-### Bug fixes
-
-- Re-implement support Python 3.8 (#417)
-
 ### Development
 
 - Aggressive automated lint fixes via `ruff` (#419)
@@ -28,6 +22,12 @@
       --exec 'poetry run ruff check --select ALL . --fix --unsafe-fixes --preview --show-fixes; poetry run ruff format .; git add src tests; git commit --amend --no-edit' \
       origin/master
   ```
+
+## django-docutils 0.24.0 (2024-03-09)
+
+### Bug fixes
+
+- Re-implement support Python 3.8 (#417)
 
 ## django-docutils 0.23.0 (2024-02-06)
 
