@@ -76,7 +76,8 @@ VARIANTS: t.Dict[str, "Formatter[str]"] = {
 }
 
 DEFAULT_OPTION_SPEC: t.Dict[str, t.Callable[[str], t.Any]] = dict.fromkeys(
-    VARIANTS, directives.flag
+    VARIANTS,
+    directives.flag,
 )
 
 

@@ -69,8 +69,8 @@ class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
             0,
             (
                 "<span"
-                + (self.cssclass and ' class="%s"' % self.cssclass)
-                + (style and (' style="%s"' % style))
+                + (self.cssclass and f' class="{self.cssclass}"')
+                + (style and (f' style="{style}"'))
                 + ">"
             ),
         )
