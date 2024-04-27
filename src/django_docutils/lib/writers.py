@@ -182,7 +182,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         if len(node.parent) >= 2 and isinstance(node.parent[1], nodes.subtitle):
             atts["CLASS"] = "subtitle"
 
-        self.body.append(self.starttag(node, "h%s" % h_level, "", **atts))
+        self.body.append(self.starttag(node, f"h{h_level}", "", **atts))
         attrs: t.Dict[str, str] = {}
         if node.hasattr("refid"):
             attrs["class"] = "toc-backref"
