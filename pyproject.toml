@@ -90,6 +90,7 @@ django-stubs = "*"
 types-Pygments = "*"
 docutils-stubs = "*"
 types-docutils = "*"
+types-pytz = "*"
 
 [tool.poetry.extras]
 pytz = [
