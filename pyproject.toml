@@ -20,7 +20,6 @@ include = [
 classifiers = [
   'Development Status :: 2 - Pre-Alpha',
   'Framework :: Django',
-  'Framework :: Django :: 3.2',
   'Framework :: Django :: 4.2',
   'Framework :: Django :: 5.0',
   'Intended Audience :: Developers',
@@ -47,7 +46,7 @@ Changes = "https://github.com/tony/django-docutils/blob/master/CHANGES"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Django = ">=3.2"
+Django = ">=4.2"
 docutils = "*"
 pygments = "<3"
 pytz = { version = "*", optional = true }

@@ -119,7 +119,7 @@ DJANGO_DOCUTILS_LIB_TEXT = {
 ## More information
 
 - Python 3.8+
-- Django 3.2+
+- Django 4.2+
 
 [![Docs](https://github.com/tony/django-docutils/workflows/docs/badge.svg)](https://github.com/tony/django-docutils/actions?query=workflow%3A%22Docs%22)
 [![Build Status](https://github.com/tony/django-docutils/workflows/tests/badge.svg)](https://github.com/tony/django-docutils/actions?query=workflow%3A%22tests%22)
