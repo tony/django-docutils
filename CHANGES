@@ -10,9 +10,9 @@
 
 ### Development
 
-- poetry: 1.8.1 -> 1.8.2
+- poetry: 1.8.1 -> 1.8.3
 
-  See also: https://github.com/python-poetry/poetry/blob/1.8.2/CHANGELOG.md
+  See also: https://github.com/python-poetry/poetry/blob/1.8.3/CHANGELOG.md
 - Code quality: Use f-strings in more places (#422)
 
   via [ruff 0.4.2](https://github.com/astral-sh/ruff/blob/v0.4.2/CHANGELOG.md).
