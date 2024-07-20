@@ -1,8 +1,16 @@
 # Changelog
 
-## django-docutils 0.26.0 (unreleased)
+## django-docutils 0.27.0 (unreleased)
 
 - _Add your latest changes from PRs here_
+
+## django-docutils 0.26.0 (2024-07-20)
+
+### Breaking changes
+
+- 0.26.x is the final branch supporting Django 3.2.
+
+  0.27+ drops support for Django 3.2.
 
 ### Documentation
 
