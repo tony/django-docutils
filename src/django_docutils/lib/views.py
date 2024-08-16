@@ -118,7 +118,7 @@ class RSTRawView(TemplateTitleView):
         context = super().get_context_data(**kwargs)
 
         if self.file_path is not None:
-            with pathlib.Path(self.file_path).open() as content:
+            with pathlib.Path(self.file_path).open(encoding="utf-8") as content:
                 context["content"] = content.read()
 
         return context
@@ -137,7 +137,7 @@ class RSTView(RSTRawView, RSTMixin):
         if self.file_path is None:
             return None
 
-        with pathlib.Path(self.file_path).open() as raw_content:
+        with pathlib.Path(self.file_path).open(encoding="utf-8") as raw_content:
             return raw_content.read()
 
     def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
