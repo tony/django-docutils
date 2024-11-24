@@ -17,6 +17,11 @@
 ### Development
 
 - Support for Django 5.1 in CI, trove classifiers (#429)
+- Project and package management: poetry to uv (#435)
+
+  [uv] is the new package and project manager for the project, replacing Poetry.
+
+[uv]: https://github.com/astral-sh/uv
 
 ## django-docutils 0.26.0 (2024-07-20)
 

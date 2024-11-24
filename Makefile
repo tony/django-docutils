@@ -12,10 +12,10 @@ entr_warn:
 	@echo "----------------------------------------------------------"
 
 test:
-	poetry run py.test $(test)
+	uv run py.test $(test)
 
 start:
-	$(MAKE) test; poetry run ptw .
+	$(MAKE) test; uv run ptw .
 
 watch_test:
 	if command -v entr > /dev/null; then ${PY_FILES} | entr -c $(MAKE) test; else $(MAKE) test entr_warn; fi
@@ -30,7 +30,7 @@ design_docs:
 	$(MAKE) -C docs design
 
 ruff_format:
-	poetry run ruff format .
+	uv run ruff format .
 
 ruff:
 	ruff check .
@@ -39,7 +39,7 @@ watch_ruff:
 	if command -v entr > /dev/null; then ${PY_FILES} | entr -c $(MAKE) ruff; else $(MAKE) ruff entr_warn; fi
 
 mypy:
-	poetry run mypy `${PY_FILES}`
+	uv run mypy `${PY_FILES}`
 
 watch_mypy:
 	if command -v entr > /dev/null; then ${PY_FILES} | entr -c $(MAKE) mypy; else $(MAKE) mypy entr_warn; fi
