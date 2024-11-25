@@ -1,22 +1,13 @@
-[tool.poetry]
+[project]
 name = "django-docutils"
 version = "0.26.0"
 description = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."
-
-license = "MIT"
-
+requires-python = ">=3.8,<4.0"
 authors = [
-  "Tony Narlock <tony@git-pull.com>",
+  {name = "Tony Narlock", email = "tony@git-pull.com"}
 ]
-
+license = { text = "MIT" }
 readme = "README.md"
-packages = [
-  { include = "*", from = "src" },
-]
-include = [
-  { path = "tests", format = "sdist" },
-]
-
 classifiers = [
   'Development Status :: 2 - Pre-Alpha',
   'Framework :: Django',
@@ -36,67 +27,110 @@ classifiers = [
   "Typing :: Typed",
 ]
 keywords = ["django", "docutils", "reStructuredText", "rst", "reST"]
-
 homepage = "https://django-docutils.git-pull.com"
+packages = [
+  { include = "*", from = "src" },
+]
+include = [
+  { path = "tests", format = "sdist" },
+]
+dependencies = [
+  "django>=4.2",
+  "docutils",
+  "pygments<3"
+]
 
-[tool.poetry.urls]
+[tool.project]
 "Bug Tracker" = "https://github.com/tony/django-docutils/issues"
 Documentation = "https://django-docutils.git-pull.com"
 Repository = "https://github.com/tony/django-docutils"
 Changes = "https://github.com/tony/django-docutils/blob/master/CHANGES"
 "Q & A" = "https://github.com/tony/django-docutils/discussions"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-Django = ">=4.2"
-docutils = "*"
-pygments = "<3"
-pytz = { version = "*", optional = true }
-
-[tool.poetry.group.docs.dependencies]
-### Docs ###
-sphinx = "*"
-furo = "*"
-gp-libs = "*" # Used in docs and tests
-sphinx-autobuild = "*"
-sphinx-autodoc-typehints = "*"
-sphinx-click = "*"
-sphinx-inline-tabs = "*"
-sphinxext-opengraph = "<0.8" # https://github.com/wpilibsuite/sphinxext-opengraph/issues/100
-sphinx-copybutton = "*"
-sphinxext-rediraffe = "*"
-myst_parser = ">=0.18.1"
-linkify-it-py = "*"
-
-[tool.poetry.group.test.dependencies]
-### Testing ###
-pytest = "*"
-pytest-rerunfailures = "*"
-pytest-watcher = "*"
-pytest-django = "*"
-dj-inmemorystorage = "*"
-gp-libs = "*" # Used in docs and tests
-
-[tool.poetry.group.coverage.dependencies]
-### Coverage ###
-codecov = "*"
-coverage = "*"
-pytest-cov = "*"
-
-[tool.poetry.group.lint.dependencies]
-### Lint ###
-ruff = "*"
-mypy = "*"
-django-stubs = "*"
-types-Pygments = "*"
-docutils-stubs = "*"
-types-docutils = "*"
-types-pytz = "*"
-
-[tool.poetry.extras]
+[project.optional-dependencies]
 pytz = [
-  "pytz",
+  "pytz"
 ]
+
+[tool.uv]
+dev-dependencies = [
+  # Docs
+  "sphinx",
+  "furo",
+  "gp-libs",
+  "sphinx-autobuild",
+  "sphinx-autodoc-typehints",
+  "sphinx-inline-tabs",
+  "sphinxext-opengraph",
+  "sphinx-copybutton",
+  "sphinxext-rediraffe",
+  "sphinx-click",
+  "myst-parser",
+  "linkify-it-py",
+  # Testing
+  "gp-libs",
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-mock",
+  "pytest-watcher",
+  "pytest-django",
+  "dj-inmemorystorage",
+  # Coverage
+  "codecov",
+  "coverage",
+  "pytest-cov",
+  # Lint
+  "ruff",
+  "mypy",
+  "django-stubs",
+  "docutils-stubs",
+  "types-docutils",
+  "types-Pygments",
+  "types-pytz",
+]
+
+[dependency-groups]
+docs = [
+  "sphinx",
+  "furo",
+  "gp-libs",
+  "sphinx-autobuild",
+  "sphinx-autodoc-typehints",
+  "sphinx-inline-tabs",
+  "sphinxext-opengraph",
+  "sphinx-copybutton",
+  "sphinxext-rediraffe",
+  "sphinx-click",
+  "myst-parser",
+  "linkify-it-py",
+]
+testing = [
+  "gp-libs",
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-mock",
+  "pytest-watcher",
+  "pytest-django",
+  "dj-inmemorystorage"
+]
+coverage =[
+  "codecov",
+  "coverage",
+  "pytest-cov",
+]
+lint = [
+  "ruff",
+  "mypy",
+  "django-stubs",
+  "docutils-stubs",
+  "types-docutils",
+  "types-Pygments",
+  "types-pytz",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.mypy]
 strict = true
@@ -116,6 +150,29 @@ module = [
   "django_docutils.*",
 ]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["django_docutils.lib.publisher"]
+disable_error_code = [
+    "unused-ignore",   # Unused "type: ignore" comment
+    "arg-type",        # Argument type incompatibility
+    "union-attr",      # Attribute access on union types
+    "redundant-cast",  # Redundant cast
+    "var-annotated",   # Need type annotation for "reader"
+    "no-any-return"    # Returning Any from function declared to return "document"
+]
+
+[[tool.mypy.overrides]]
+module = ["django_docutils.lib.roles.common"]
+disable_error_code = [
+    "call-arg"  # Too many arguments for "Text"
+]
+
+[[tool.mypy.overrides]]
+module = ["django_docutils.lib.metadata.extract"]
+disable_error_code = [
+    "misc"  # Need more than 0 values to unpack (2 expected)
+]
 
 [tool.ruff]
 target-version = "py38"
@@ -192,7 +249,3 @@ exclude_also = [
   "class .*\\bProtocol\\):",
   "@(abc\\.)?abstractmethod",
 ]
-
-[build-system]
-requires = ["poetry_core>=1.0.0", "poetry>=1.1.12"]
-build-backend = "poetry.core.masonry.api"
