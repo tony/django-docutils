@@ -13,9 +13,9 @@ def file_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[t.Dict[str, t.Any]] = None,
+    options: t.Optional[dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
+) -> tuple[list[nodes.emphasis], list[t.Any]]:
     """Role for files.
 
     Examples
@@ -66,9 +66,9 @@ def manifest_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[t.Dict[str, t.Any]] = None,
+    options: t.Optional[dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
+) -> tuple[list[nodes.emphasis], list[t.Any]]:
     """Role for manifests (package.json, file outputs).
 
     Examples
@@ -103,9 +103,9 @@ def exe_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[t.Dict[str, t.Any]] = None,
+    options: t.Optional[dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> t.Tuple[t.List[nodes.emphasis], t.List[t.Any]]:
+) -> tuple[list[nodes.emphasis], list[t.Any]]:
     """Role for executables.
 
     Examples

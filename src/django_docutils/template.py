@@ -24,7 +24,7 @@ class DocutilsTemplates(BaseEngine):
 
     app_dirname: str = "templates"
 
-    def __init__(self, params: t.Dict[str, t.Any]) -> None:
+    def __init__(self, params: dict[str, t.Any]) -> None:
         params = params.copy()
         self.options = params.pop("OPTIONS").copy()
         self.options.setdefault("debug", settings.DEBUG)
@@ -51,13 +51,13 @@ class DocutilsTemplates(BaseEngine):
 class DocutilsTemplate:
     """Docutils template object for Django. Used by Docutils template engine."""
 
-    def __init__(self, source: str, options: t.Dict[str, t.Any]) -> None:
+    def __init__(self, source: str, options: dict[str, t.Any]) -> None:
         self.source = source
         self.options = options
 
     def render(
         self,
-        context: t.Union["Context", t.Dict[str, t.Any], None] = None,
+        context: t.Union["Context", dict[str, t.Any], None] = None,
         request: t.Optional[HttpRequest] = None,
     ) -> "SafeString":
         """Render DocutilsTemplate to string."""
@@ -68,7 +68,7 @@ class DocutilsTemplate:
             context["csrf_token"] = csrf_token_lazy(request)
         context = {"source": self.source, "writer_name": "html"}
 
-        return mark_safe(t.cast(str, core.publish_parts(**context)["html_body"]))
+        return mark_safe(t.cast("str", core.publish_parts(**context)["html_body"]))
 
 
 register_pygments_directive()

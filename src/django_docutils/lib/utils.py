@@ -16,7 +16,7 @@ explicit_title_re = re.compile(r"^(.+?)\s*(?<!\x00)<(.*?)>$", re.DOTALL)
 ws_re: "re.Pattern[str]" = re.compile(r"\s+")
 
 
-def split_explicit_title(text: str) -> t.Tuple[bool, str, str]:
+def split_explicit_title(text: str) -> tuple[bool, str, str]:
     """Split role content into title and target, if given (from sphinx)."""
     match = explicit_title_re.match(text)
     if match:

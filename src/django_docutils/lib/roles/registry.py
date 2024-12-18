@@ -77,7 +77,7 @@ def register_django_docutils_roles() -> None:
     return
 
 
-def register_role_mapping(role_mapping: t.Dict[str, t.Any]) -> None:
+def register_role_mapping(role_mapping: dict[str, t.Any]) -> None:
     """Register a dict mapping of roles.
 
     An item consists of a role name, import string to a callable, and an

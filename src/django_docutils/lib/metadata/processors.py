@@ -14,7 +14,7 @@ except ImportError:
     pass
 
 
-def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
+def process_datetime(metadata: dict[str, t.Any]) -> dict[str, t.Any]:
     """Optionally supports localizing times via pytz."""
     timezone_formats = [  # timezone formats to try, most detailed to least
         "%Y-%m-%d %I:%M%p",
@@ -41,7 +41,7 @@ def process_datetime(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
     return metadata
 
 
-def process_anonymous_user(metadata: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:
+def process_anonymous_user(metadata: dict[str, t.Any]) -> dict[str, t.Any]:
     """Corrects name of author "anonymous" to django's anonymous username."""
     if metadata.get("author") == "anonymous" and hasattr(
         settings,
