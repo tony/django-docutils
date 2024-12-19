@@ -84,7 +84,7 @@ dev-dependencies = [
   "mypy",
   "django-stubs",
   "docutils-stubs",
-  "types-docutils",
+  "types-docutils==0.21.0.20241005",  # breaks typings
   "types-Pygments",
   "types-pytz",
 ]
