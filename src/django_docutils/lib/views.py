@@ -24,7 +24,7 @@ class TitleMixin(ContextMixin):
     title = None
     subtitle = None
 
-    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+    def get_context_data(self, **kwargs: object) -> dict[str, t.Any]:
         """:func:`django_docutils.lib.text.smart_title()` on title and subtitle."""
         context = super().get_context_data(**kwargs)
         if self.title:
@@ -40,7 +40,7 @@ class TemplateTitleView(TemplateView, TitleMixin):
     title = None
     subtitle = None
 
-    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+    def get_context_data(self, **kwargs: object) -> dict[str, t.Any]:
         """Return context data."""
         return super().get_context_data(**kwargs)
 
@@ -113,7 +113,7 @@ class RSTRawView(TemplateTitleView):
     file_path: t.Optional[StrPath] = None
     title = None
 
-    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+    def get_context_data(self, **kwargs: object) -> dict[str, t.Any]:
         """Merge content to context data."""
         context = super().get_context_data(**kwargs)
 
@@ -140,7 +140,7 @@ class RSTView(RSTRawView, RSTMixin):
         with pathlib.Path(self.file_path).open(encoding="utf-8") as raw_content:
             return raw_content.read()
 
-    def get_context_data(self, **kwargs: object) -> t.Dict[str, t.Any]:
+    def get_context_data(self, **kwargs: object) -> dict[str, t.Any]:
         """Merge content and sidebar to context data."""
         context = super().get_context_data(**kwargs)
         context["content"] = self.content

@@ -71,7 +71,7 @@ DJANGO_DOCUTILS_LIB_RST: "DjangoDocutilsLibRSTSettings" = {
         },
     },
 }
-DJANGO_DOCUTILS_LIB_TEXT: t.Dict[str, t.List[str]] = {  # Optional
+DJANGO_DOCUTILS_LIB_TEXT: dict[str, list[str]] = {  # Optional
     "uncapitalized_word_filters": ["project.my_module.my_capitalization_fn"],
 }
 INSTALLED_APPS = ("django_docutils",)

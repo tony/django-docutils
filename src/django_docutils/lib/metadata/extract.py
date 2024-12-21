@@ -26,7 +26,7 @@ def extract_title(document: nodes.document) -> t.Optional[str]:
     return None
 
 
-def extract_metadata(document: nodes.document) -> t.Dict[str, str]:
+def extract_metadata(document: nodes.document) -> dict[str, str]:
     """Return the dict containing document metadata.
 
     Parameters

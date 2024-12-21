@@ -134,6 +134,7 @@ build-backend = "hatchling.build"
 [tool.mypy]
 strict = true
 plugins = ["mypy_django_plugin.main"]
+python_version = "3.9"
 files = [
   "src/",
   "tests/",
@@ -174,7 +175,7 @@ disable_error_code = [
 ]
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.lint]
 select = [

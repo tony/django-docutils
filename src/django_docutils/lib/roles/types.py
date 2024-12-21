@@ -17,12 +17,12 @@ class UrlHandlerFn(Protocol):
 class RemoteUrlHandlerFn(Protocol):
     """Protocol for role handler callback that retrieve from external data sources."""
 
-    def __call__(self, target: str) -> t.Tuple[str, str]:
+    def __call__(self, target: str) -> tuple[str, str]:
         """Role function that can query an external source for its title."""
         ...
 
 
-RoleFnReturnValue = t.Tuple[t.List[nodes.reference], t.List[t.Any]]
+RoleFnReturnValue = tuple[list[nodes.reference], list[t.Any]]
 """Role function return value.
 
 See also

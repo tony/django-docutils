@@ -12,9 +12,9 @@ def kbd_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[t.Dict[str, t.Any]] = None,
+    options: t.Optional[dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
-) -> t.Tuple[t.List[nodes.raw], t.List[t.Any]]:
+) -> tuple[list[nodes.raw], list[t.Any]]:
     """Role for ``<kbd>``, the keyboard input element.
 
     Examples

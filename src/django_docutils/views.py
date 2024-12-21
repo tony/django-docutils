@@ -18,9 +18,9 @@ class DocutilsResponse(TemplateResponse):
     def __init__(
         self,
         request: HttpRequest,
-        template: t.List[str],
-        rst: t.List[str],
-        context: t.Optional[t.Dict[str, t.Any]] = None,
+        template: list[str],
+        rst: list[str],
+        context: t.Optional[dict[str, t.Any]] = None,
         content_type: t.Optional[str] = None,
         status: t.Optional[int] = None,
         charset: t.Optional[str] = None,
@@ -40,7 +40,7 @@ class DocutilsResponse(TemplateResponse):
     @property
     def rendered_content(self) -> str:
         """Return freshly rendered content via docutils engine."""
-        context: t.Dict[str, t.Any] = self.resolve_context(self.context_data) or {}
+        context: dict[str, t.Any] = self.resolve_context(self.context_data) or {}
 
         # we should be able to use the engine to .Render this
         from django.utils.safestring import mark_safe
@@ -73,7 +73,7 @@ class DocutilsView(TemplateView):
 
     def render_to_response(
         self,
-        context: t.Optional[t.Dict[str, t.Any]] = None,
+        context: t.Optional[dict[str, t.Any]] = None,
         content_type: t.Optional[str] = None,
         status: t.Optional[int] = None,
         charset: t.Optional[str] = None,
@@ -91,7 +91,7 @@ class DocutilsView(TemplateView):
             using=using or self.template_engine,
         )
 
-    def get_rst_names(self) -> t.List[str]:
+    def get_rst_names(self) -> list[str]:
         """Follows after get_template_names, but for scanning for rst content."""
         if self.rst_name is None:
             raise DocutilsViewRstNameImproperlyConfigured

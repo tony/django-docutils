@@ -15,7 +15,7 @@ def wikipedia_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[t.Dict[str, t.Any]] = None,
+    options: t.Optional[dict[str, t.Any]] = None,
     content: t.Optional[str] = None,
 ) -> RoleFnReturnValue:
     """Role for linking to Wikipedia articles.

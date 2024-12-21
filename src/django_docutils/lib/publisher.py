@@ -31,7 +31,7 @@ def publish_parts_from_doctree(
     settings_overrides: t.Optional[t.Any] = None,
     config_section: t.Optional[str] = None,
     enable_exit_status: bool = False,
-) -> t.Dict[str, str]:
+) -> dict[str, str]:
     """Render docutils doctree into docutils parts."""
     reader = Reader(parser_name="null")
     pub = Publisher(

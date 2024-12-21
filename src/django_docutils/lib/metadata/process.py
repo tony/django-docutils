@@ -30,14 +30,12 @@ same dictionary::
 See *processors.py* for more examples.
 """
 
-import typing as t
-
 from django.utils.module_loading import import_string
 
 from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
 
-def process_metadata(metadata: t.Dict[str, str]) -> t.Dict[str, str]:
+def process_metadata(metadata: dict[str, str]) -> dict[str, str]:
     """Return objects from RST metadata pulled from document source.
 
     This will turn things like string dates into time-zone'd dateutil objects.

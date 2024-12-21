@@ -14,9 +14,9 @@ from .settings import DJANGO_DOCUTILS_LIB_RST
 class ParentNodeClassTuple(t.NamedTuple):
     """Typing for parent node accepting custom arguments."""
 
-    parent_node_type: t.Type[t.Union[nodes.Node, nodes.Body]]
-    args: t.List[str]
-    kwargs: t.Dict[str, str]
+    parent_node_type: type[t.Union[nodes.Node, nodes.Body]]
+    args: list[str]
+    kwargs: dict[str, str]
     close_tag: t.Optional[str]
 
 
@@ -104,7 +104,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             node["refid"] = node.parent["ids"][0]
 
         # specific cases we don't use h{1-6} tags for
-        parent_node_classes: t.List[ParentNodeClassTuple] = [
+        parent_node_classes: list[ParentNodeClassTuple] = [
             ParentNodeClassTuple(
                 nodes.topic,
                 ["p", ""],
@@ -178,12 +178,12 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             Close tag for section title node.
         """
         h_level = self.section_level + self.initial_header_level - 1
-        atts: t.Dict[str, str] = {}
+        atts: dict[str, str] = {}
         if len(node.parent) >= 2 and isinstance(node.parent[1], nodes.subtitle):
             atts["CLASS"] = "subtitle"
 
         self.body.append(self.starttag(node, f"h{h_level}", "", **atts))
-        attrs: t.Dict[str, str] = {}
+        attrs: dict[str, str] = {}
         if node.hasattr("refid"):
             attrs["class"] = "toc-backref"
             attrs["href"] = "#" + node["refid"]
@@ -229,7 +229,7 @@ class DjangoDocutilsWriter(Writer):
         # classes. (e.g. Python =< 2.1 classes)
         self.translator_class = DjangoDocutilsHTMLTranslator
 
-    def get_transforms(self) -> t.List[t.Type[Transform]]:
+    def get_transforms(self) -> list[type[Transform]]:
         """Return transformed required by DjangoDocutilsWriter.
 
         Adheres to DJANGO_DOCUTILS_LIB_RST settings.
