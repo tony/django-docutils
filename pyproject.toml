@@ -1,6 +1,6 @@
 [project]
 name = "django-docutils"
-version = "0.27.0"
+version = "0.28.0"
 description = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."
 requires-python = ">=3.9,<4.0"
 authors = [
