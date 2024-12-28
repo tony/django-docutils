@@ -68,7 +68,10 @@ class DocutilsTemplate:
             context["csrf_token"] = csrf_token_lazy(request)
         context = {"source": self.source, "writer_name": "html"}
 
-        return mark_safe(t.cast("str", core.publish_parts(**context)["html_body"]))
+        parts = core.publish_parts(**context)["html_body"]
+        assert isinstance(parts, str)
+
+        return mark_safe(parts)
 
 
 register_pygments_directive()

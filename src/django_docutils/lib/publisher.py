@@ -33,7 +33,7 @@ def publish_parts_from_doctree(
     enable_exit_status: bool = False,
 ) -> dict[str, str]:
     """Render docutils doctree into docutils parts."""
-    reader = Reader(parser_name="null")
+    reader = Reader(parser_name="null")  # type:ignore
     pub = Publisher(
         reader,
         None,
@@ -45,9 +45,9 @@ def publish_parts_from_doctree(
     if not writer and writer_name:
         pub.set_writer(writer_name)
     pub.process_programmatic_settings(
-        settings_spec,  # type:ignore
+        settings_spec,
         settings_overrides,
-        config_section,  # type:ignore
+        config_section,
     )
     pub.set_destination(None, destination_path)
     pub.publish(enable_exit_status=enable_exit_status)
@@ -121,7 +121,7 @@ def publish_doctree(
     register_django_docutils_directives()
     register_django_docutils_roles()
 
-    return docutils_publish_doctree(
+    return docutils_publish_doctree(  # type:ignore
         source=force_bytes(source),
         settings_overrides=settings_overrides,
     )
