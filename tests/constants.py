@@ -1,5 +1,7 @@
 """Constants for Django Docutils test suite."""
 
+from __future__ import annotations
+
 DEFAULT_RST = r"""
 hey
 ---

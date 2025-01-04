@@ -36,9 +36,10 @@ to get all the gory details.
 :license: BSD, see LICENSE for details.
 """
 
+from __future__ import annotations
+
 import re
 import typing as t
-from collections.abc import Callable
 
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
@@ -48,6 +49,8 @@ from pygments.lexers import get_lexer_by_name
 from pygments.lexers.special import TextLexer
 
 if t.TYPE_CHECKING:
+    from collections.abc import Callable
+
     from pygments.formatter import Formatter
 
 
@@ -72,7 +75,7 @@ INLINESTYLES = False
 DEFAULT = HtmlFormatter(cssclass="highlight code-block", noclasses=INLINESTYLES)
 
 #: Add name -> formatter pairs for every variant you want to use
-VARIANTS: dict[str, "Formatter[str]"] = {
+VARIANTS: dict[str, Formatter[str]] = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 

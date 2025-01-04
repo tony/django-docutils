@@ -1,13 +1,13 @@
 """Title, Subtitle, and Metadata extraction of reStructuredText."""
 
-import typing as t
+from __future__ import annotations
 
 from django.template.defaultfilters import truncatewords
 from django.utils.html import strip_tags
 from docutils import nodes
 
 
-def extract_title(document: nodes.document) -> t.Optional[str]:
+def extract_title(document: nodes.document) -> str | None:
     """Return the title of the document.
 
     Parameters
@@ -77,7 +77,7 @@ def extract_metadata(document: nodes.document) -> dict[str, str]:
     return output
 
 
-def extract_subtitle(document: nodes.document) -> t.Optional[str]:
+def extract_subtitle(document: nodes.document) -> str | None:
     """Return the subtitle of the document."""
     for node in document.traverse(nodes.PreBibliographic):  # type:ignore
         if isinstance(node, nodes.subtitle):

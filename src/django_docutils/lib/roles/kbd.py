@@ -1,9 +1,13 @@
 """<kbd> (Keyboard Input Element) role for Docutils."""
 
+from __future__ import annotations
+
 import typing as t
 
 from docutils import nodes
-from docutils.parsers.rst.states import Inliner
+
+if t.TYPE_CHECKING:
+    from docutils.parsers.rst.states import Inliner
 
 
 def kbd_role(
@@ -12,8 +16,8 @@ def kbd_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[dict[str, t.Any]] = None,
-    content: t.Optional[str] = None,
+    options: dict[str, t.Any] | None = None,
+    content: str | None = None,
 ) -> tuple[list[nodes.raw], list[t.Any]]:
     """Role for ``<kbd>``, the keyboard input element.
 

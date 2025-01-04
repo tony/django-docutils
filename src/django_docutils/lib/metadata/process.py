@@ -30,6 +30,8 @@ same dictionary::
 See *processors.py* for more examples.
 """
 
+from __future__ import annotations
+
 from django.utils.module_loading import import_string
 
 from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST

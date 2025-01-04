@@ -1,6 +1,6 @@
 """Django template tag and filter for docutils (rendering reStructuredText as HTML)."""
 
-import typing as t
+from __future__ import annotations
 
 from django import template
 from django.template.base import FilterExpression, Node, Parser, Token, kwarg_re
@@ -19,17 +19,17 @@ class ReStructuredTextNode(Node):
 
     def __init__(
         self,
-        content: t.Union[FilterExpression, str],
-        args: t.Optional[list[FilterExpression]] = None,
-        kwargs: t.Optional[dict[str, FilterExpression]] = None,
-        asvar: t.Optional[str] = None,
+        content: FilterExpression | str,
+        args: list[FilterExpression] | None = None,
+        kwargs: dict[str, FilterExpression] | None = None,
+        asvar: str | None = None,
     ) -> None:
         self.content = content
         self.args = args if args is not None else []
         self.kwargs = kwargs if kwargs is not None else {}
         self.asvar = asvar
 
-    def render(self, context: t.Optional[Context] = None) -> str:
+    def render(self, context: Context | None = None) -> str:
         """Render Node as string."""
         if context is None:
             context = Context()
@@ -105,7 +105,7 @@ def rst(parser: Parser, token: Token) -> ReStructuredTextNode:
     kwargs = {}
     asvar = None
 
-    content: t.Optional[t.Union[FilterExpression, SafeString]] = None
+    content: FilterExpression | SafeString | None = None
 
     if len(bits) >= 2 and bits[1] == "content":
         content = parser.compile_filter(bits[1])

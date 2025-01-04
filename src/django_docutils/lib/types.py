@@ -1,5 +1,7 @@
 """Typings for Django Docutils settings for django."""
 
+from __future__ import annotations
+
 from typing_extensions import NotRequired, TypedDict
 
 

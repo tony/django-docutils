@@ -1,5 +1,7 @@
 """Test docutils metadata (docinfo) processing in Django Docutils."""
 
+from __future__ import annotations
+
 import datetime
 
 from django.utils.encoding import force_bytes

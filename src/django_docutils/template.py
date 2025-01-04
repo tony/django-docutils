@@ -1,9 +1,10 @@
 """Django template engine for Docutils."""
 
+from __future__ import annotations
+
 import typing as t
 
 from django.conf import settings
-from django.http.request import HttpRequest
 from django.template.backends.base import BaseEngine
 from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
@@ -14,6 +15,7 @@ from docutils import core
 from django_docutils.lib.directives.code import register_pygments_directive
 
 if t.TYPE_CHECKING:
+    from django.http.request import HttpRequest
     from django.template.backends.base import _EngineTemplate
     from django.template.base import Context
     from django.utils.safestring import SafeString
@@ -31,11 +33,11 @@ class DocutilsTemplates(BaseEngine):
         super().__init__(params)
         self.engine = Engine(self.dirs, self.app_dirs, **self.options)
 
-    def from_string(self, template_code: str) -> "DocutilsTemplate":
+    def from_string(self, template_code: str) -> DocutilsTemplate:
         """Return DocutilsTemplate from string."""
         return DocutilsTemplate(template_code, self.options)
 
-    def get_template(self, template_name: str) -> "_EngineTemplate":
+    def get_template(self, template_name: str) -> _EngineTemplate:
         """Return template from template_name."""
         for template_file in self.iter_template_filenames(template_name):
             try:
@@ -57,9 +59,9 @@ class DocutilsTemplate:
 
     def render(
         self,
-        context: t.Union["Context", dict[str, t.Any], None] = None,
-        request: t.Optional[HttpRequest] = None,
-    ) -> "SafeString":
+        context: Context | dict[str, t.Any] | None = None,
+        request: HttpRequest | None = None,
+    ) -> SafeString:
         """Render DocutilsTemplate to string."""
         context = self.options
         if request is not None:

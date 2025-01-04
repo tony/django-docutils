@@ -1,5 +1,7 @@
 """Exceptions for Django Docutils."""
 
+from __future__ import annotations
+
 
 class DjangoDocutilsException(Exception):
     """Base exception for Django Docutils package."""

@@ -1,5 +1,7 @@
 """django-docutils test settings module for django."""
 
+from __future__ import annotations
+
 import pathlib
 import typing as t
 
@@ -37,7 +39,7 @@ TEMPLATES = [
     },
 ]
 DJANGO_DOCUTILS_ANONYMOUS_USER_NAME = "AnonymousCoward"
-DJANGO_DOCUTILS_LIB_RST: "DjangoDocutilsLibRSTSettings" = {
+DJANGO_DOCUTILS_LIB_RST: DjangoDocutilsLibRSTSettings = {
     "metadata_processors": [
         "django_docutils.lib.metadata.processors.process_datetime",
         "django_docutils.lib.metadata.processors.process_anonymous_user",

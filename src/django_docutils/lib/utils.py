@@ -5,15 +5,20 @@ Some stuff is ported from sphinx:
 - explicit_title_re, ws_re, set_role_source_info, split_explicit_title
 """
 
+from __future__ import annotations
+
 import re
-from collections.abc import Generator
+from typing import TYPE_CHECKING
 
 from docutils import nodes
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 # \x00 means the "<" was backslash-escaped (from sphinx)
 explicit_title_re = re.compile(r"^(.+?)\s*(?<!\x00)<(.*?)>$", re.DOTALL)
 
-ws_re: "re.Pattern[str]" = re.compile(r"\s+")
+ws_re: re.Pattern[str] = re.compile(r"\s+")
 
 
 def split_explicit_title(text: str) -> tuple[bool, str, str]:

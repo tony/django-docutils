@@ -1,5 +1,7 @@
 """Metadata processing for Django Docutils."""
 
+from __future__ import annotations
+
 import datetime
 import typing as t
 

@@ -1,6 +1,7 @@
 """Tests for DocutilsView template view."""
 
-import pathlib
+from __future__ import annotations
+
 import typing as t
 
 from django_docutils.views import DocutilsView
@@ -8,10 +9,12 @@ from django_docutils.views import DocutilsView
 from .constants import DEFAULT_RST
 
 if t.TYPE_CHECKING:
+    import pathlib
+
     from django.test import RequestFactory
 
 
-def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: "RequestFactory") -> None:
+def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: RequestFactory) -> None:
     """Assert DocutilsView renders HTML from reStructuredText."""
     request = rf.get("/")
     template_dir = tmp_path / "templates"

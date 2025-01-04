@@ -1,5 +1,7 @@
 """Django docutils table of contents helpers."""
 
+from __future__ import annotations
+
 import sys
 import typing as t
 
@@ -16,13 +18,13 @@ class Contents(parts.Contents):
     - Removed extra nodes.paragraph wrapping of list_item's.
     """
 
-    startnode: t.Optional[nodes.Node]
+    startnode: nodes.Node | None
 
     def build_contents(
         self,
         node: nodes.Node,
         level: int = 0,
-    ) -> t.Union[nodes.bullet_list, list[t.Any]]:
+    ) -> nodes.bullet_list | list[t.Any]:
         """Build nested bullet list from doctree content."""
         assert isinstance(node, nodes.Element)
         level += 1

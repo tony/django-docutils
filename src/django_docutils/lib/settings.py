@@ -1,5 +1,7 @@
 """Settings objects and type-mapping for Django Docutils library package."""
 
+from __future__ import annotations
+
 import typing as t
 
 from django.conf import settings
@@ -19,7 +21,7 @@ DJANGO_DOCUTILS_LIB_TEXT = t.cast(
     getattr(settings, "DJANGO_DOCUTILS_LIB_TEXT", {"uncapitalized_word_filters": []}),
 )
 
-DJANGO_DOCUTILS_ANONYMOUS_USER_NAME: t.Optional[str] = "AnonymousCoward"
+DJANGO_DOCUTILS_ANONYMOUS_USER_NAME: str | None = "AnonymousCoward"
 
 
 def reload_settings(

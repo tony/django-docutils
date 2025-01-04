@@ -1,14 +1,12 @@
 """Django view machinery for rendering docutils content as HTML."""
 
+from __future__ import annotations
+
 import pathlib
 import typing as t
 
-from django.http import HttpRequest
 from django.utils.functional import cached_property
 from django.views.generic.base import ContextMixin, TemplateView
-from docutils import nodes
-
-from django_docutils._internal.types import StrPath
 
 from .publisher import (
     publish_doctree,
@@ -16,6 +14,12 @@ from .publisher import (
     publish_toc_from_doctree,
 )
 from .text import smart_title
+
+if t.TYPE_CHECKING:
+    from django.http import HttpRequest
+    from docutils import nodes
+
+    from django_docutils._internal.types import StrPath
 
 
 class TitleMixin(ContextMixin):
@@ -51,12 +55,12 @@ class RSTMixin:
     request: HttpRequest
 
     @cached_property
-    def raw_content(self) -> t.Optional[str]:
+    def raw_content(self) -> str | None:
         """Raw reStructuredText content."""
         raise NotImplementedError
 
     @cached_property
-    def doctree(self) -> t.Optional[nodes.document]:
+    def doctree(self) -> nodes.document | None:
         """Return docutils doctree of RST content (pre-HTML)."""
         if self.raw_content is None:
             return None
@@ -64,7 +68,7 @@ class RSTMixin:
         return publish_doctree(self.raw_content)
 
     @cached_property
-    def sidebar(self, **kwargs: object) -> t.Optional[str]:
+    def sidebar(self, **kwargs: object) -> str | None:
         """Return table of contents sidebar of RST content as HTML."""
         if self.doctree is None:
             return None
@@ -72,7 +76,7 @@ class RSTMixin:
         return publish_toc_from_doctree(self.doctree)
 
     @cached_property
-    def content(self) -> t.Optional[str]:
+    def content(self) -> str | None:
         """Return reStructuredText content as HTML."""
         if self.doctree is None:
             return None
@@ -110,7 +114,7 @@ class RSTRawView(TemplateTitleView):
     """
 
     template_name = "rst/raw.html"
-    file_path: t.Optional[StrPath] = None
+    file_path: StrPath | None = None
     title = None
 
     def get_context_data(self, **kwargs: object) -> dict[str, t.Any]:
@@ -128,11 +132,11 @@ class RSTView(RSTRawView, RSTMixin):
     """RestructuredText Django View."""
 
     template_name = "rst/base.html"
-    file_path: t.Optional[StrPath] = None
+    file_path: StrPath | None = None
     title = None
 
     @cached_property
-    def raw_content(self) -> t.Optional[str]:
+    def raw_content(self) -> str | None:
         """Raw reStructuredText data."""
         if self.file_path is None:
             return None

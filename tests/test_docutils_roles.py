@@ -1,18 +1,23 @@
 # ruff: noqa: E501
 """Tests for docutils roles."""
 
+from __future__ import annotations
+
 import typing as t
-from collections.abc import Sequence
 
 import pytest
 from django.template import Context, Template
-from docutils import nodes
-from docutils.parsers.rst.states import Inliner
 
 from django_docutils.lib.roles.registry import (
     register_django_docutils_roles,
     register_role_mapping,
 )
+
+if t.TYPE_CHECKING:
+    from collections.abc import Sequence
+
+    from docutils import nodes
+    from docutils.parsers.rst.states import Inliner
 
 MAIN_TPL = """
 <main>
@@ -95,7 +100,7 @@ class SphinxLikeRole:
         text: str,
         lineno: int,
         inliner: Inliner,
-        options: t.Optional[dict[str, t.Any]] = None,
+        options: dict[str, t.Any] | None = None,
         content: Sequence[str] = (),
     ) -> tuple[list[nodes.Node], list[t.Any]]:
         """Return example class-based role."""

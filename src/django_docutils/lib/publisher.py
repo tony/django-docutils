@@ -1,5 +1,7 @@
 """Docutils Publisher fors for Django Docutils."""
 
+from __future__ import annotations
+
 import typing as t
 
 from django.utils.encoding import force_bytes, force_str
@@ -7,7 +9,6 @@ from django.utils.safestring import mark_safe
 from docutils import io, nodes
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 from docutils.readers.doctree import Reader
-from docutils.writers.html5_polyglot import Writer
 
 from .directives.registry import register_django_docutils_directives
 from .roles.registry import register_django_docutils_roles
@@ -17,19 +18,20 @@ from .writers import DjangoDocutilsWriter
 
 if t.TYPE_CHECKING:
     from docutils import SettingsSpec
+    from docutils.writers.html5_polyglot import Writer
 
 docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
 
 def publish_parts_from_doctree(
     document: nodes.document,
-    destination_path: t.Optional[str] = None,
-    writer: t.Optional[Writer] = None,
+    destination_path: str | None = None,
+    writer: Writer | None = None,
     writer_name: str = "pseudoxml",
-    settings: t.Optional[t.Any] = None,
-    settings_spec: "t.Optional[SettingsSpec]" = None,
-    settings_overrides: t.Optional[t.Any] = None,
-    config_section: t.Optional[str] = None,
+    settings: t.Any | None = None,
+    settings_spec: SettingsSpec | None = None,
+    settings_overrides: t.Any | None = None,
+    config_section: str | None = None,
     enable_exit_status: bool = False,
 ) -> dict[str, str]:
     """Render docutils doctree into docutils parts."""
@@ -56,8 +58,8 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(
     doctree: nodes.document,
-    writer: t.Optional[Writer] = None,
-) -> t.Optional[str]:
+    writer: Writer | None = None,
+) -> str | None:
     """Publish table of contents from docutils doctree."""
     if not writer:
         writer = DjangoDocutilsWriter()
@@ -98,7 +100,7 @@ def publish_toc_from_doctree(
 
 
 def publish_doctree(
-    source: t.Union[str, bytes],
+    source: str | bytes,
     settings_overrides: t.Any = docutils_settings,
 ) -> nodes.document:
     """Split off ability to get doctree (a.k.a. document).
@@ -139,8 +141,8 @@ if t.TYPE_CHECKING:
 
 def publish_html_from_source(
     source: str,
-    **kwargs: "Unpack[PublishHtmlDocTreeKwargs]",
-) -> t.Optional[str]:
+    **kwargs: Unpack[PublishHtmlDocTreeKwargs],
+) -> str | None:
     """Return HTML from reStructuredText source string."""
     doctree = publish_doctree(source)
     return publish_html_from_doctree(doctree, **kwargs)
@@ -150,7 +152,7 @@ def publish_html_from_doctree(
     doctree: nodes.document,
     show_title: bool = True,
     toc_only: bool = False,
-) -> t.Optional[str]:
+) -> str | None:
     """Return HTML from reStructuredText document (doctree).
 
     Parameters
