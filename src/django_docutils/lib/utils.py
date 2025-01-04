@@ -6,7 +6,7 @@ Some stuff is ported from sphinx:
 """
 
 import re
-import typing as t
+from collections.abc import Generator
 
 from docutils import nodes
 
@@ -90,7 +90,7 @@ def chop_after_heading_smartly(source: str) -> str:
         return chop_after_title(source)
 
 
-def find_root_sections(document: nodes.document) -> t.Generator[nodes.Node, None, None]:
+def find_root_sections(document: nodes.document) -> Generator[nodes.Node, None, None]:
     """Yield top level section nodes.
 
     Parameters

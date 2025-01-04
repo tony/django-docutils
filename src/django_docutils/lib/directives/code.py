@@ -38,6 +38,7 @@ to get all the gory details.
 
 import re
 import typing as t
+from collections.abc import Callable
 
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
@@ -75,7 +76,7 @@ VARIANTS: dict[str, "Formatter[str]"] = {
     # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
-DEFAULT_OPTION_SPEC: dict[str, t.Callable[[str], t.Any]] = dict.fromkeys(
+DEFAULT_OPTION_SPEC: dict[str, Callable[[str], t.Any]] = dict.fromkeys(
     VARIANTS,
     directives.flag,
 )

@@ -2,6 +2,7 @@
 """Tests for docutils roles."""
 
 import typing as t
+from collections.abc import Sequence
 
 import pytest
 from django.template import Context, Template
@@ -85,7 +86,7 @@ class SphinxLikeRole:
     options: dict[str, t.Any]
     #: A list of strings, the directive content for customisation
     #: (from the "role" directive).
-    content: t.Sequence[str]
+    content: Sequence[str]
 
     def __call__(
         self,
@@ -95,7 +96,7 @@ class SphinxLikeRole:
         lineno: int,
         inliner: Inliner,
         options: t.Optional[dict[str, t.Any]] = None,
-        content: t.Sequence[str] = (),
+        content: Sequence[str] = (),
     ) -> tuple[list[nodes.Node], list[t.Any]]:
         """Return example class-based role."""
         self.rawtext = rawtext
