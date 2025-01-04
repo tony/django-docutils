@@ -1,5 +1,7 @@
 """Tests for rst template filter and tags."""
 
+from __future__ import annotations
+
 import typing as t
 
 import pytest

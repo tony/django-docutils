@@ -1,5 +1,7 @@
 """Text related utilities for Django Docutils."""
 
+from __future__ import annotations
+
 import re
 
 from django.conf import settings

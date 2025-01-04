@@ -1,6 +1,8 @@
 """Test metadata and title extraction from reStructuredText."""
 
-import pathlib
+from __future__ import annotations
+
+import typing as t
 
 from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
@@ -11,6 +13,9 @@ from django_docutils.lib.metadata.extract import (
     extract_title,
 )
 from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
+
+if t.TYPE_CHECKING:
+    import pathlib
 
 
 def test_extract_title() -> None:

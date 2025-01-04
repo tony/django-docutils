@@ -1,5 +1,7 @@
 """Core parts for Django Docutils roles."""
 
+from __future__ import annotations
+
 import typing as t
 
 from docutils import nodes, utils
@@ -13,9 +15,9 @@ if t.TYPE_CHECKING:
 def generic_url_role(
     name: str,
     text: str,
-    url_handler_fn: "UrlHandlerFn",
-    innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
-) -> "RoleFnReturnValue":
+    url_handler_fn: UrlHandlerFn,
+    innernodeclass: type[nodes.Text | nodes.TextElement] = nodes.Text,
+) -> RoleFnReturnValue:
     """Docutils Role for Django Docutils.
 
     This generic role also handles explicit titles (``:role:`yata yata <target>```)
@@ -78,8 +80,8 @@ def generic_url_role(
 def generic_remote_url_role(
     name: str,
     text: str,
-    url_handler_fn: "RemoteUrlHandlerFn",
-    innernodeclass: type[t.Union[nodes.Text, nodes.TextElement]] = nodes.Text,
+    url_handler_fn: RemoteUrlHandlerFn,
+    innernodeclass: type[nodes.Text | nodes.TextElement] = nodes.Text,
 ) -> tuple[list[nodes.reference], list[t.Any]]:
     """Docutils Role that can call an external data source for title and URL.
 

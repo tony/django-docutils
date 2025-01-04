@@ -1,5 +1,7 @@
 """Code related formatter and transformers."""
 
+from __future__ import annotations
+
 import re
 import typing as t
 
@@ -21,7 +23,7 @@ if t.TYPE_CHECKING:
 class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
     """HTMLFormatter for inline codeblocks."""
 
-    def format_unencoded(self, tokensource: "TokenStream", outfile: t.Any) -> None:
+    def format_unencoded(self, tokensource: TokenStream, outfile: t.Any) -> None:
         r"""Trim inline element of space and newlines.
 
         1. Trailing newline: Final token generated returns ``(Token.Other, '\n')``
@@ -37,7 +39,7 @@ class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
            the ``InlineHtmlFormatter`` class.
         """
 
-        def filter_trailing_newline(source: "TokenStream") -> "TokenStream":
+        def filter_trailing_newline(source: TokenStream) -> TokenStream:
             tokens = list(source)
 
             # filter out the trailing newline token
@@ -52,8 +54,8 @@ class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
 
     def _wrap_div(
         self,
-        inner: "TokenStream",
-    ) -> t.Union["TokenGenerator", "TokenStream"]:
+        inner: TokenStream,
+    ) -> TokenGenerator | TokenStream:
         styles = []
         if (
             self.noclasses
@@ -77,7 +79,7 @@ class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
         yield from inner
         yield 0, "</span>\n"
 
-    def _wrap_pre(self, inner: "TokenStream") -> "TokenStream":
+    def _wrap_pre(self, inner: TokenStream) -> TokenStream:
         yield from inner
 
 

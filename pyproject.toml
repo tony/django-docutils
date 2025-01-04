@@ -195,16 +195,25 @@ select = [
   "PERF", # Perflint
   "RUF", # Ruff-specific rules
   "D", # pydocstyle
+  "FA100",  # future annotations
 ]
 ignore = [
   "COM812", # missing trailing comma, ruff format conflict
 ]
+extend-safe-fixes = [
+  "UP006",
+  "UP007",
+]
+pyupgrade.keep-runtime-typing = false
 
 [tool.ruff.lint.isort]
 known-first-party = [
   "django_docutils",
 ]
 combine-as-imports = true
+required-imports = [
+  "from __future__ import annotations",
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
@@ -243,9 +252,10 @@ exclude_also = [
   "if settings.DEBUG",
   "raise AssertionError",
   "raise NotImplementedError",
-  "if 0:",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
+  "if t.TYPE_CHECKING:",
   "class .*\\bProtocol\\):",
   "@(abc\\.)?abstractmethod",
+  "from __future__ import annotations",
 ]

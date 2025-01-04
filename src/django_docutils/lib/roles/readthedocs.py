@@ -1,11 +1,15 @@
 """ReadTheDocs role for Docutils."""
 
+from __future__ import annotations
+
 import typing as t
 
-from docutils.parsers.rst.states import Inliner
-
 from .common import generic_url_role
-from .types import RoleFnReturnValue
+
+if t.TYPE_CHECKING:
+    from docutils.parsers.rst.states import Inliner
+
+    from .types import RoleFnReturnValue
 
 
 def readthedocs_role(
@@ -14,8 +18,8 @@ def readthedocs_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[dict[str, t.Any]] = None,
-    content: t.Optional[str] = None,
+    options: dict[str, t.Any] | None = None,
+    content: str | None = None,
 ) -> RoleFnReturnValue:
     """Role for linking to readthedocs.org page.
 

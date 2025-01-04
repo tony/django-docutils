@@ -1,13 +1,17 @@
 """Django-docutils class-based view for django (and its' parts)."""
 
+from __future__ import annotations
+
 import typing as t
 
 from django.core.exceptions import ImproperlyConfigured
-from django.http.request import HttpRequest
-from django.http.response import HttpResponse
 from django.template.loader import select_template
 from django.template.response import TemplateResponse
 from django.views.generic.base import TemplateView
+
+if t.TYPE_CHECKING:
+    from django.http.request import HttpRequest
+    from django.http.response import HttpResponse
 
 
 class DocutilsResponse(TemplateResponse):
@@ -20,11 +24,11 @@ class DocutilsResponse(TemplateResponse):
         request: HttpRequest,
         template: list[str],
         rst: list[str],
-        context: t.Optional[dict[str, t.Any]] = None,
-        content_type: t.Optional[str] = None,
-        status: t.Optional[int] = None,
-        charset: t.Optional[str] = None,
-        using: t.Optional[str] = None,
+        context: dict[str, t.Any] | None = None,
+        content_type: str | None = None,
+        status: int | None = None,
+        charset: str | None = None,
+        using: str | None = None,
     ) -> None:
         self.rst_name = rst
         super().__init__(
@@ -69,15 +73,15 @@ class DocutilsView(TemplateView):
     """Django-docutils view, renders reStructuredText to HTML via rst_name."""
 
     response_class = DocutilsResponse
-    rst_name: t.Optional[str] = None
+    rst_name: str | None = None
 
     def render_to_response(
         self,
-        context: t.Optional[dict[str, t.Any]] = None,
-        content_type: t.Optional[str] = None,
-        status: t.Optional[int] = None,
-        charset: t.Optional[str] = None,
-        using: t.Optional[str] = None,
+        context: dict[str, t.Any] | None = None,
+        content_type: str | None = None,
+        status: int | None = None,
+        charset: str | None = None,
+        using: str | None = None,
         **response_kwargs: object,
     ) -> HttpResponse:
         """Override to pay in rst content."""

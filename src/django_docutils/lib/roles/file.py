@@ -1,10 +1,14 @@
 """File role for Docutils."""
 
+from __future__ import annotations
+
 import os
 import typing as t
 
 from docutils import nodes, utils
-from docutils.parsers.rst.states import Inliner
+
+if t.TYPE_CHECKING:
+    from docutils.parsers.rst.states import Inliner
 
 
 def file_role(
@@ -13,8 +17,8 @@ def file_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[dict[str, t.Any]] = None,
-    content: t.Optional[str] = None,
+    options: dict[str, t.Any] | None = None,
+    content: str | None = None,
 ) -> tuple[list[nodes.emphasis], list[t.Any]]:
     """Role for files.
 
@@ -66,8 +70,8 @@ def manifest_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[dict[str, t.Any]] = None,
-    content: t.Optional[str] = None,
+    options: dict[str, t.Any] | None = None,
+    content: str | None = None,
 ) -> tuple[list[nodes.emphasis], list[t.Any]]:
     """Role for manifests (package.json, file outputs).
 
@@ -103,8 +107,8 @@ def exe_role(
     text: str,
     lineno: int,
     inliner: Inliner,
-    options: t.Optional[dict[str, t.Any]] = None,
-    content: t.Optional[str] = None,
+    options: dict[str, t.Any] | None = None,
+    content: str | None = None,
 ) -> tuple[list[nodes.emphasis], list[t.Any]]:
     """Role for executables.
 

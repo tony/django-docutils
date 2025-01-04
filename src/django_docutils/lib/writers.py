@@ -1,23 +1,27 @@
 """Docutils writers for Django Docutils, designed for cleaner output."""
 
+from __future__ import annotations
+
 import typing as t
 
 from django.conf import settings
 from django.utils.module_loading import import_string
 from docutils import nodes
-from docutils.transforms import Transform
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
 from .settings import DJANGO_DOCUTILS_LIB_RST
+
+if t.TYPE_CHECKING:
+    from docutils.transforms import Transform
 
 
 class ParentNodeClassTuple(t.NamedTuple):
     """Typing for parent node accepting custom arguments."""
 
-    parent_node_type: type[t.Union[nodes.Node, nodes.Body]]
+    parent_node_type: type[nodes.Node | nodes.Body]
     args: list[str]
     kwargs: dict[str, str]
-    close_tag: t.Optional[str]
+    close_tag: str | None
 
 
 class DjangoDocutilsHTMLTranslator(HTMLTranslator):
@@ -94,7 +98,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
         - s/with-subtitle/subtitle for bulma css
 
         """
-        close_tag: t.Optional[str] = "</p>\n"
+        close_tag: str | None = "</p>\n"
 
         # add backlinks to refid (toc header backlinks)
         # This assures headers link to themselves, so users can copy a link
@@ -159,7 +163,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
     def _visit_section_title(
         self,
         node: nodes.Element,
-        close_tag: t.Optional[str],
+        close_tag: str | None,
     ) -> str:
         """Our special sauce for section titles.
 
