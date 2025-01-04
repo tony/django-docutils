@@ -8,11 +8,11 @@ Some stuff is ported from sphinx:
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING
+import typing as t
 
 from docutils import nodes
 
-if TYPE_CHECKING:
+if t.TYPE_CHECKING:
     from collections.abc import Generator
 
 # \x00 means the "<" was backslash-escaped (from sphinx)

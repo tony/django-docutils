@@ -9,17 +9,17 @@ Notes
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
+import typing as t
 
-if TYPE_CHECKING:
+if t.TYPE_CHECKING:
     from os import PathLike
 
     from typing_extensions import TypeAlias
 
-StrPath: TypeAlias = Union[str, "PathLike[str]"]  # stable
+StrPath: TypeAlias = t.Union[str, "PathLike[str]"]  # stable
 """:class:`os.PathLike` or :class:`str`"""
 
-StrOrBytesPath: TypeAlias = Union[
+StrOrBytesPath: TypeAlias = t.Union[
     str,
     bytes,
     "PathLike[str]",

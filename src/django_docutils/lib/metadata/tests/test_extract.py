@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+import typing as t
 
 from django.utils.encoding import force_bytes
 from docutils.core import publish_doctree
@@ -14,7 +14,7 @@ from django_docutils.lib.metadata.extract import (
 )
 from django_docutils.lib.settings import DJANGO_DOCUTILS_LIB_RST
 
-if TYPE_CHECKING:
+if t.TYPE_CHECKING:
     import pathlib
 
 
