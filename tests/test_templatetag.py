@@ -218,7 +218,7 @@ def test_templatetag_directive(settings: t.Any) -> None:
     assert template.render(Context()) == (
         """
 <main>
-<div class="highlight code-block"><pre><span></span><span class="kn">import</span> <span class="nn">this</span>
+<div class="highlight code-block"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">this</span>
 </pre></div>
 </main>
 
