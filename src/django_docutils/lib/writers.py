@@ -69,9 +69,9 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             else:
                 atts["class"] += " insite"
         else:
-            assert (
-                "refid" in node
-            ), 'References must have "refuri" or "refid" attribute.'
+            assert "refid" in node, (
+                'References must have "refuri" or "refid" attribute.'
+            )
             atts["href"] = "#" + node["refid"]
             atts["class"] += " internal"
 
