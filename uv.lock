@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.9, <4.0"
 resolution-markers = [
     "python_full_version >= '3.10'",
@@ -416,6 +417,7 @@ requires-dist = [
     { name = "pygments", specifier = "<3" },
     { name = "pytz", marker = "extra == 'pytz'" },
 ]
+provides-extras = ["pytz"]
 
 [package.metadata.requires-dev]
 coverage = [
