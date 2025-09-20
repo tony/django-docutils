@@ -51,8 +51,8 @@ pytz = [
   "pytz"
 ]
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
   # Docs
   "sphinx",
   "furo",
@@ -88,7 +88,6 @@ dev-dependencies = [
   "types-pytz",
 ]
 
-[dependency-groups]
 docs = [
   "sphinx",
   "furo",
