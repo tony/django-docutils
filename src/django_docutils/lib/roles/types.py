@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import typing as t
+from typing import Protocol
 
 from docutils import nodes
-from typing_extensions import Protocol
 
 
 class UrlHandlerFn(Protocol):
