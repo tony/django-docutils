@@ -192,7 +192,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             attrs["class"] = "toc-backref"
             attrs["href"] = "#" + node["refid"]
         if attrs:
-            self.body.append(self.starttag({}, "a", "", **attrs))
+            self.body.append(self.starttag(nodes.reference(), "a", "", **attrs))
             close_tag = f"</a></h{h_level}>\n"
         else:
             close_tag = f"</h{h_level}>\n"
