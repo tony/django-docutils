@@ -5,7 +5,7 @@ from __future__ import annotations
 __title__ = "django-docutils"
 __package_name__ = "django_docutils"
 __description__ = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."
-__version__ = "0.28.0"
+__version__ = "0.29.0"
 __author__ = "Tony Narlock"
 __github__ = "https://github.com/tony/django-docutils"
 __pypi__ = "https://pypi.org/project/django-docutils/"
