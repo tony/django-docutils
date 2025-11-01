@@ -17,7 +17,7 @@ if t.TYPE_CHECKING:
     from pygments.token import _TokenType
 
     TokenStream = Iterator[tuple[_TokenType, str]]
-    TokenGenerator = Iterator[tuple[t.Union[str, int], str]]
+    TokenGenerator = Iterator[tuple[str | int, str]]
 
 
 class InlineHtmlFormatter(HtmlFormatter):  # type:ignore
