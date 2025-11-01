@@ -1,5 +1,32 @@
 # Changelog
 
+To install the unreleased django-docutils version, see [developmental releases](https://django-docutils.git-pull.com/quickstart.html#developmental-releases).
+
+[pip](https://pip.pypa.io/en/stable/):
+
+```console
+$ pip install --upgrade --pre django-docutils
+```
+
+[pipx](https://pypa.github.io/pipx/docs/):
+
+```console
+$ pipx install --suffix=@next 'django-docutils' --pip-args '\--pre' --force
+// Usage: django-docutils@next
+```
+
+[uv](https://docs.astral.sh/uv/getting-started/features/#python-versions):
+
+```console
+$ uv add django-docutils --prerelease allow
+```
+
+[uvx](https://docs.astral.sh/uv/guides/tools/):
+
+```console
+$ uvx --from 'django-docutils' --prerelease allow django-docutils
+```
+
 ## django-docutils 0.29.0 (unreleased)
 
 - _Add your latest changes from PRs here_
