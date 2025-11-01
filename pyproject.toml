@@ -141,7 +141,7 @@ files = [
 enable_incomplete_feature = []
 
 [tool.django-stubs]
-django_settings_module = "django_docutils.lib.settings"
+django_settings_module = "tests.settings"
 
 [[tool.mypy.overrides]]
 module = [
