@@ -2,7 +2,7 @@
 name = "django-docutils"
 version = "0.28.0"
 description = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 authors = [
   {name = "Tony Narlock", email = "tony@git-pull.com"}
 ]
