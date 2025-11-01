@@ -146,7 +146,6 @@ django_settings_module = "django_docutils.lib.settings"
 [[tool.mypy.overrides]]
 module = [
   "inmemorystorage.*",
-  "django_docutils.*",
 ]
 ignore_missing_imports = true
 
@@ -171,6 +170,18 @@ disable_error_code = [
 module = ["django_docutils.lib.metadata.extract"]
 disable_error_code = [
     "misc"  # Need more than 0 values to unpack (2 expected)
+]
+
+[[tool.mypy.overrides]]
+module = ["django_docutils.template"]
+disable_error_code = [
+    "attr-defined"  # Module "django.template.base" does not explicitly export attribute "Context"
+]
+
+[[tool.mypy.overrides]]
+module = ["django_docutils.lib.writers"]
+disable_error_code = [
+    "arg-type"  # Argument has incompatible type with HTMLTranslator methods
 ]
 
 [tool.ruff]

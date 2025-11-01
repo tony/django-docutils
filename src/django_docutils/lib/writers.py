@@ -76,7 +76,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             atts["class"] += " internal"
 
         try:
-            from django_docutils.favicon.rst.nodes import icon
+            from django_docutils.favicon.rst.nodes import icon  # type: ignore[import-not-found] # noqa I001
 
             if isinstance(node[0], icon):
                 atts["class"] = ""
@@ -192,7 +192,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             attrs["class"] = "toc-backref"
             attrs["href"] = "#" + node["refid"]
         if attrs:
-            self.body.append(self.starttag({}, "a", "", **attrs))  # type:ignore
+            self.body.append(self.starttag({}, "a", "", **attrs))
             close_tag = f"</a></h{h_level}>\n"
         else:
             close_tag = f"</h{h_level}>\n"
