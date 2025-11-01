@@ -2,31 +2,31 @@
 
 from __future__ import annotations
 
-from typing_extensions import NotRequired, TypedDict
+from typing import TypedDict
 
 
-class DjangoDocutilsLibRSTRolesSettings(TypedDict):
+class DjangoDocutilsLibRSTRolesSettings(TypedDict, total=False):
     """Docutils role mappings."""
 
-    local: NotRequired[dict[str, str]]
+    local: dict[str, str]
 
 
-class DjangoDocutilsLibRSTDocutilsSettings(TypedDict):
+class DjangoDocutilsLibRSTDocutilsSettings(TypedDict, total=False):
     """Docutils document settings."""
 
-    raw_enabled: NotRequired[bool]
-    strip_comments: NotRequired[bool]
-    initial_header_level: NotRequired[int]
+    raw_enabled: bool
+    strip_comments: bool
+    initial_header_level: int
 
 
-class DjangoDocutilsLibRSTSettings(TypedDict):
+class DjangoDocutilsLibRSTSettings(TypedDict, total=False):
     """Core settings object for ``DJANGO_DOCUTILS_LIB_RST``."""
 
-    metadata_processors: NotRequired[list[str]]
-    transforms: NotRequired[list[str]]
-    docutils: NotRequired[DjangoDocutilsLibRSTDocutilsSettings]
-    directives: NotRequired[dict[str, str]]
-    roles: NotRequired[DjangoDocutilsLibRSTRolesSettings]
+    metadata_processors: list[str]
+    transforms: list[str]
+    docutils: DjangoDocutilsLibRSTDocutilsSettings
+    directives: dict[str, str]
+    roles: DjangoDocutilsLibRSTRolesSettings
 
 
 class DjangoDocutilsLibTextSettings(TypedDict):

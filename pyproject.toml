@@ -2,7 +2,7 @@
 name = "django-docutils"
 version = "0.28.0"
 description = "Docutils (a.k.a. reStructuredText, reST, RST) support for django."
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 authors = [
   {name = "Tony Narlock", email = "tony@git-pull.com"}
 ]
@@ -18,7 +18,6 @@ classifiers = [
   'License :: OSI Approved :: MIT License',
   'Natural Language :: English',
   'Programming Language :: Python :: 3',
-  'Programming Language :: Python :: 3.9',
   'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
   'Programming Language :: Python :: 3.12',
@@ -134,7 +133,7 @@ build-backend = "hatchling.build"
 [tool.mypy]
 strict = true
 plugins = ["mypy_django_plugin.main"]
-python_version = "3.9"
+python_version = "3.10"
 files = [
   "src/",
   "tests/",
@@ -186,7 +185,7 @@ disable_error_code = [
 ]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = [
