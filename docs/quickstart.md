@@ -20,14 +20,33 @@ $ pip install --upgrade django-docutils
 
 ### Developmental releases
 
-New versions of django-docutils are published to PyPI as alpha, beta, or release candidates. In
-their versions you will see notification like `a1`, `b1`, and `rc1`, respectively. `1.10.0b4` would
-mean the 4th beta release of `1.10.0` before general availability.
+New versions of django-docutils are published to PyPI as alpha, beta, or release candidates.
+In their versions you will see notification like `a1`, `b1`, and `rc1`, respectively.
+`1.10.0b4` would mean the 4th beta release of `1.10.0` before general availability.
 
 - [pip]\:
 
   ```console
   $ pip install --upgrade --pre django-docutils
+  ```
+
+- [pipx]\:
+
+  ```console
+  $ pipx install --suffix=@next 'django-docutils' --pip-args '\--pre' --force
+  // Usage: django-docutils@next
+  ```
+
+- [uv]\:
+
+  ```console
+  $ uv add django-docutils --prerelease allow
+  ```
+
+- [uvx]\:
+
+  ```console
+  $ uvx --from 'django-docutils' --prerelease allow django-docutils
   ```
 
 via trunk (can break easily):
@@ -38,7 +57,22 @@ via trunk (can break easily):
   $ pip install -e git+https://github.com/tony/django-docutils.git#egg=django-docutils
   ```
 
+- [pipx]\:
+
+  ```console
+  $ pipx install --suffix=@master 'django-docutils @ git+https://github.com/tony/django-docutils.git@master' --force
+  ```
+
+- [uv]\:
+
+  ```console
+  $ uv tool install django-docutils --from git+https://github.com/tony/django-docutils.git
+  ```
+
 [pip]: https://pip.pypa.io/en/stable/
+[pipx]: https://pypa.github.io/pipx/docs/
+[uv]: https://docs.astral.sh/uv/
+[uvx]: https://docs.astral.sh/uv/guides/tools/
 
 ## Add the django app
 
