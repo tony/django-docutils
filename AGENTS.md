@@ -187,8 +187,6 @@ Component/File(commit-type[Subcomponent]): Concise description
 why: Impact or necessity
 what:
 - Specific technical changes (single topic)
-
-refs: #issue or links (note BREAKING if applicable)
 ```
 
 Commit types: feat, fix, refactor, docs, chore, test, style, py(deps), py(deps[dev]). Keep subject ≤50 chars, body lines ≤72, imperative voice, one blank line between subject and body.
