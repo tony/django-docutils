@@ -46,3 +46,8 @@ docs/_build
 .mypy_cache/
 .pytest_cache/
 .*env*/
+
+# Claude code
+**/CLAUDE.local.md
+**/CLAUDE.*.md
+**/.claude/settings.local.json
