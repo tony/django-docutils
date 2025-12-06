@@ -6,9 +6,7 @@ import os
 import typing as t
 
 from docutils import nodes, utils
-
-if t.TYPE_CHECKING:
-    from docutils.parsers.rst.states import Inliner
+from docutils.parsers.rst.states import Inliner
 
 
 def file_role(

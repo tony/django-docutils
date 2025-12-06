@@ -8,8 +8,7 @@ from docutils import nodes, utils
 
 from django_docutils.lib.utils import split_explicit_title
 
-if t.TYPE_CHECKING:
-    from .types import RemoteUrlHandlerFn, RoleFnReturnValue, UrlHandlerFn
+from .types import RemoteUrlHandlerFn, RoleFnReturnValue, UrlHandlerFn
 
 
 def generic_url_role(

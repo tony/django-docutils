@@ -5,9 +5,7 @@ from __future__ import annotations
 import typing as t
 
 from docutils import nodes
-
-if t.TYPE_CHECKING:
-    from docutils.parsers.rst.states import Inliner
+from docutils.parsers.rst.states import Inliner
 
 
 def kbd_role(

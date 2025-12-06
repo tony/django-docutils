@@ -5,12 +5,10 @@ from __future__ import annotations
 import typing as t
 from urllib.parse import quote
 
+from docutils.parsers.rst.states import Inliner
+
 from .common import generic_url_role
-
-if t.TYPE_CHECKING:
-    from docutils.parsers.rst.states import Inliner
-
-    from .types import RoleFnReturnValue
+from .types import RoleFnReturnValue
 
 
 def hackernews_role(
