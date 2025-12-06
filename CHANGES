@@ -31,7 +31,7 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 
 _Upcoming changes will be written here._
 
-### Documentation (#445)
+### Documentation (#445, #446)
 
 - Fix broken RST substitution example in `url_role` docstring.
 - Fix docstring spacing in `is_uncapitalized_word`.
