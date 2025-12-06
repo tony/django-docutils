@@ -29,7 +29,14 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 
 ## django-docutils 0.30.0 (unreleased)
 
-- _Add your latest changes from PRs here_
+_Upcoming changes will be written here._
+
+### Documentation (#445)
+
+- Fix broken RST substitution example in `url_role` docstring.
+- Fix docstring spacing in `is_uncapitalized_word`.
+- Move types out of `TYPE_CHECKING` blocks to fix `sphinx_autodoc_typehints` forward reference errors.
+- Link exceptions section to module page in API docs.
 
 ## django-docutils 0.29.0 (2025-11-01)
 

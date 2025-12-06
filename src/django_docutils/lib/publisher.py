@@ -9,16 +9,14 @@ from django.utils.safestring import mark_safe
 from docutils import io, nodes
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 from docutils.readers.doctree import Reader
+from docutils.writers.html5_polyglot import Writer
+from typing_extensions import NotRequired, TypedDict, Unpack
 
 from .directives.registry import register_django_docutils_directives
 from .roles.registry import register_django_docutils_roles
 from .settings import DJANGO_DOCUTILS_LIB_RST
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
-
-if t.TYPE_CHECKING:
-    from docutils import SettingsSpec
-    from docutils.writers.html5_polyglot import Writer
 
 docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
 
@@ -29,7 +27,7 @@ def publish_parts_from_doctree(
     writer: Writer | None = None,
     writer_name: str = "pseudoxml",
     settings: t.Any | None = None,
-    settings_spec: SettingsSpec | None = None,
+    settings_spec: t.Any | None = None,
     settings_overrides: t.Any | None = None,
     config_section: str | None = None,
     enable_exit_status: bool = False,
@@ -129,14 +127,11 @@ def publish_doctree(
     )
 
 
-if t.TYPE_CHECKING:
-    from typing_extensions import NotRequired, TypedDict, Unpack
+class PublishHtmlDocTreeKwargs(TypedDict):
+    """Keyword arguments accepted by publish_html_from_source."""
 
-    class PublishHtmlDocTreeKwargs(TypedDict):
-        """Keyword arguments accepted by publish_html_from_source."""
-
-        show_title: NotRequired[bool]
-        toc_only: NotRequired[bool]
+    show_title: NotRequired[bool]
+    toc_only: NotRequired[bool]
 
 
 def publish_html_from_source(

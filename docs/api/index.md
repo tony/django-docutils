@@ -24,6 +24,4 @@ templatetags/index
 
 ### Exceptions
 
-```{eval-rst}
-.. autoexception:: django_docutils.exc.DjangoDocutilsException
-```
+See {doc}`/api/exc` for exception definitions.

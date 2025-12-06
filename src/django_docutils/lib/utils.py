@@ -8,12 +8,9 @@ Some stuff is ported from sphinx:
 from __future__ import annotations
 
 import re
-import typing as t
+from collections.abc import Generator
 
 from docutils import nodes
-
-if t.TYPE_CHECKING:
-    from collections.abc import Generator
 
 # \x00 means the "<" was backslash-escaped (from sphinx)
 explicit_title_re = re.compile(r"^(.+?)\s*(?<!\x00)<(.*?)>$", re.DOTALL)

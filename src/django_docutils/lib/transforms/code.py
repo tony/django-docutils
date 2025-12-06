@@ -4,20 +4,16 @@ from __future__ import annotations
 
 import re
 import typing as t
+from collections.abc import Iterator
 
 from docutils import nodes
 from docutils.transforms import Transform
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
-from pygments.token import Token
+from pygments.token import Token, _TokenType
 
-if t.TYPE_CHECKING:
-    from collections.abc import Iterator
-
-    from pygments.token import _TokenType
-
-    TokenStream = Iterator[tuple[_TokenType, str]]
-    TokenGenerator = Iterator[tuple[str | int, str]]
+TokenStream = Iterator[tuple[_TokenType, str]]
+TokenGenerator = Iterator[tuple[str | int, str]]
 
 
 class InlineHtmlFormatter(HtmlFormatter):  # type:ignore

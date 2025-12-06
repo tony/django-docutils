@@ -5,13 +5,11 @@ from __future__ import annotations
 import typing as t
 
 from django.core.exceptions import ImproperlyConfigured
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.template.loader import select_template
 from django.template.response import TemplateResponse
 from django.views.generic.base import TemplateView
-
-if t.TYPE_CHECKING:
-    from django.http.request import HttpRequest
-    from django.http.response import HttpResponse
 
 
 class DocutilsResponse(TemplateResponse):

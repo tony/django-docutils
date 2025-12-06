@@ -4,12 +4,10 @@ from __future__ import annotations
 
 import typing as t
 
+from docutils.parsers.rst.states import Inliner
+
 from .common import generic_url_role
-
-if t.TYPE_CHECKING:
-    from docutils.parsers.rst.states import Inliner
-
-    from .types import RoleFnReturnValue
+from .types import RoleFnReturnValue
 
 
 def url_role(
@@ -42,11 +40,7 @@ def url_role(
 
       :url:`Google <https://google.com>`
 
-    |google|_:
-
-    .. |google| replace:: *Google*
-
-    .. _google: https://google.com
+    Styled text:
 
     .. code-block:: rst
 
