@@ -123,6 +123,7 @@ autodoc_default_options = {
     "show-inheritance": True,
     "member-order": "bysource",
 }
+set_type_checking_flag = True
 
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
