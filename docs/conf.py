@@ -115,6 +115,13 @@ issue_url_tpl = about["__github__"] + "/issues/{issue_id}"
 
 # sphinx.ext.autodoc
 autodoc_mock_imports = ["django"]
+autoclass_content = "both"
+autodoc_member_order = "bysource"
+# Automatically extract typehints when specified and place them in
+# descriptions of the relevant function/method.
+autodoc_typehints = "description"
+# Don't show class signature with the class' name.
+autodoc_class_signature = "separated"
 toc_object_entries_show_parents = "hide"
 autodoc_default_options = {
     "undoc-members": True,
@@ -124,6 +131,15 @@ autodoc_default_options = {
     "member-order": "bysource",
 }
 set_type_checking_flag = True
+
+# sphinx-autodoc-typehints
+# Suppress warnings for forward references that can't be resolved
+# (types in TYPE_CHECKING blocks used for circular import avoidance)
+suppress_warnings = [
+    "sphinx_autodoc_typehints.forward_reference",
+    "intersphinx",
+    "intersphinx.inventory",
+]
 
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
@@ -140,8 +156,6 @@ copybutton_remove_prompts = True
 # sphinxext-rediraffe
 rediraffe_redirects = "redirects.txt"
 rediraffe_branch = "master~1"
-
-suppress_warnings = ["intersphinx", "intersphinx.inventory"]
 
 intersphinx_mapping = {
     "python": ("http://docs.python.org/", None),
