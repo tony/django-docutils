@@ -5,20 +5,16 @@ from __future__ import annotations
 import typing as t
 
 from django.conf import settings
+from django.http.request import HttpRequest
+from django.template import Context
 from django.template.backends.base import BaseEngine
 from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
 from django.template.exceptions import TemplateDoesNotExist
-from django.utils.safestring import mark_safe
+from django.utils.safestring import SafeString, mark_safe
 from docutils import core
 
 from django_docutils.lib.directives.code import register_pygments_directive
-
-if t.TYPE_CHECKING:
-    from django.http.request import HttpRequest
-    from django.template.backends.base import _EngineTemplate
-    from django.template.base import Context
-    from django.utils.safestring import SafeString
 
 
 class DocutilsTemplates(BaseEngine):
@@ -37,7 +33,7 @@ class DocutilsTemplates(BaseEngine):
         """Return DocutilsTemplate from string."""
         return DocutilsTemplate(template_code, self.options)
 
-    def get_template(self, template_name: str) -> _EngineTemplate:
+    def get_template(self, template_name: str) -> DocutilsTemplate:
         """Return template from template_name."""
         for template_file in self.iter_template_filenames(template_name):
             try:
