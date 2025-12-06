@@ -40,11 +40,7 @@ def url_role(
 
       :url:`Google <https://google.com>`
 
-    |google|_:
-
-    .. |google| replace:: *Google*
-
-    .. _google: https://google.com
+    Styled text:
 
     .. code-block:: rst
 
