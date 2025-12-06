@@ -141,6 +141,8 @@ copybutton_remove_prompts = True
 rediraffe_redirects = "redirects.txt"
 rediraffe_branch = "master~1"
 
+suppress_warnings = ["intersphinx", "intersphinx.inventory"]
+
 intersphinx_mapping = {
     "python": ("http://docs.python.org/", None),
     "django": (
