@@ -7,12 +7,10 @@ import typing as t
 from django.conf import settings
 from django.utils.module_loading import import_string
 from docutils import nodes
+from docutils.transforms import Transform
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
 from .settings import DJANGO_DOCUTILS_LIB_RST
-
-if t.TYPE_CHECKING:
-    from docutils.transforms import Transform
 
 
 class ParentNodeClassTuple(t.NamedTuple):
