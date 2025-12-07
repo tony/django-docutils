@@ -151,8 +151,9 @@ AWS keys, and the docs build switched to the `dirhtml` builder for cleaner URLs.
 
 AGENTS.md now records the changelog conventions used by this file, working
 doctest expectations, and logging standards for future library instrumentation.
-Dev dependencies, `uv`, `just`, GitHub Actions, and gp-sphinx pins were kept
-current across the release cycle.
+Releases now publish to PyPI through a Trusted Publisher workflow (#447),
+replacing token-based authentication. Dev dependencies, `uv`, `just`, GitHub
+Actions, and gp-sphinx pins were kept current across the release cycle.
 
 ## django-docutils 0.29.0 (2025-11-01)
 
