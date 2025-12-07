@@ -29,7 +29,9 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 
 ## django-docutils 0.30.0 (unreleased)
 
-_Upcoming changes will be written here._
+### CI
+
+- Migrate to PyPI Trusted Publisher (#447)
 
 ### Documentation (#445, #446)
 
