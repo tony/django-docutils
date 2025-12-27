@@ -37,6 +37,7 @@ _Upcoming changes will be written here._
 - Fix docstring spacing in `is_uncapitalized_word`.
 - Move types out of `TYPE_CHECKING` blocks to fix `sphinx_autodoc_typehints` forward reference errors.
 - Link exceptions section to module page in API docs.
+- Migrate docs deployment to AWS OIDC authentication and AWS CLI
 
 ## django-docutils 0.29.0 (2025-11-01)
 
