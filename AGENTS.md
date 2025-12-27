@@ -54,7 +54,7 @@ uv pip install --editable . -G lint
 
 ```bash
 # Run all tests (includes doctests configured in pyproject)
-make test
+just test
 # or
 uv run pytest
 
@@ -65,7 +65,7 @@ uv run pytest tests/test_template.py
 uv run pytest docs
 
 # Watch tests
-make start          # runs ptw with default args
+just start          # runs ptw with default args
 uv run ptw .        # explicit watcher
 ```
 
@@ -73,37 +73,37 @@ uv run ptw .        # explicit watcher
 
 ```bash
 # Ruff lint
-make ruff
+just ruff
 # or directly
 uv run ruff check .
 
 # Format code
-make ruff_format
+just ruff-format
 uv run ruff format .
 
 # Ruff with fixes
 uv run ruff check . --fix --show-fixes
 
 # Type checking
-make mypy
+just mypy
 uv run mypy `find . -type f -not -path '*/.*' | grep -i '.*[.]py$'`
 
 # Watchers
-make watch_ruff
-make watch_mypy
+just watch-ruff
+just watch-mypy
 ```
 
 ### Documentation
 
 ```bash
 # Build docs (Sphinx)
-make build_docs
+just build-docs
 
 # Live-reload docs
-make start_docs
+just start-docs
 
 # Edit docs assets/design
-make design_docs
+just design-docs
 ```
 
 ### Development Workflow
