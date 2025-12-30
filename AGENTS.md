@@ -177,6 +177,40 @@ def test_rst_tag_renders_toc_only(settings):
 - Type hints are required; keep mypy strictness in mind and add `TypedDict`/`Protocol` as needed
 - Use Django utilities (`force_str`, `mark_safe`, `select_template`) instead of reimplementing equivalents
 
+### Doctests
+
+**All functions and methods MUST have working doctests.** Doctests serve as both documentation and tests.
+
+**CRITICAL RULES:**
+- Doctests MUST actually execute - never comment out function calls or similar
+- Doctests MUST NOT be converted to `.. code-block::` as a workaround (code-blocks don't run)
+- If you cannot create a working doctest, **STOP and ask for help**
+
+**Available tools for doctests:**
+- `doctest_namespace` fixtures: `tmp_path`
+- Django `settings` fixture (from pytest-django)
+- Ellipsis for variable output: `# doctest: +ELLIPSIS`
+- Update `conftest.py` to add new fixtures to `doctest_namespace`
+
+**`# doctest: +SKIP` is NOT permitted** - it's just another workaround that doesn't test anything. Use fixtures properly.
+
+**Using fixtures in doctests:**
+```python
+>>> from django_docutils.lib.publisher import publish_html_from_source
+>>> rst_source = "Hello **world**"
+>>> html = publish_html_from_source(rst_source)  # doctest: +ELLIPSIS
+>>> 'world' in html
+True
+```
+
+**When output varies, use ellipsis:**
+```python
+>>> from django_docutils.lib.publisher import publish_parts_from_source
+>>> parts = publish_parts_from_source("Test")  # doctest: +ELLIPSIS
+>>> 'body' in parts
+True
+```
+
 ## Commit Messages
 
 Use conventional, component-scoped subjects:
