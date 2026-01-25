@@ -29,7 +29,9 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 
 ## django-docutils 0.30.0 (unreleased)
 
+<!-- KEEP THIS PLACEHOLDER - DO NOT REMOVE OR MODIFY THIS LINE -->
 _Upcoming changes will be written here._
+<!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
 ### Development
 
