@@ -216,7 +216,7 @@ True
 Use conventional, component-scoped subjects:
 
 ```
-Component/File(commit-type[Subcomponent]): Concise description
+Scope(type[detail]): concise description
 
 why: Impact or necessity
 what:
@@ -224,6 +224,10 @@ what:
 ```
 
 Commit types: feat, fix, refactor, docs, chore, test, style, py(deps), py(deps[dev]). Keep subject ≤50 chars, body lines ≤72, imperative voice, one blank line between subject and body.
+
+- **ai(rules[AGENTS])**: AI rule updates
+- **ai(claude[rules])**: Claude Code rules (CLAUDE.md)
+- **ai(claude[command])**: Claude Code command changes
 
 ## Debugging Tips
 
