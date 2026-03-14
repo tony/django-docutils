@@ -52,7 +52,7 @@ class DocutilsResponse(TemplateResponse):
         )
 
         template = self.resolve_template(self.template_name)
-        return template.render(context)  # type:ignore
+        return template.render(context)
 
 
 class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
