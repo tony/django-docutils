@@ -64,6 +64,7 @@ dev = [
   "sphinx-copybutton",
   "sphinxext-rediraffe",
   "sphinx-click",
+  "sphinx-design",
   "myst-parser",
   "linkify-it-py",
   # Testing
@@ -99,6 +100,7 @@ docs = [
   "sphinx-copybutton",
   "sphinxext-rediraffe",
   "sphinx-click",
+  "sphinx-design",
   "myst-parser",
   "linkify-it-py",
 ]
