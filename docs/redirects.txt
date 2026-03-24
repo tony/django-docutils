@@ -1,3 +1,7 @@
 "usage.rst" "quickstart.md"
 # "api.md" "api/index.md"  # dirhtml: same output path
 "django_view.rst" "class_based_view.md"
+"template_tag.md" "topics/template_tag.md"
+"template_filter.md" "topics/template_filter.md"
+"class_based_view.md" "topics/class_based_view.md"
+"faq.md" "topics/faq.md"
