@@ -54,19 +54,10 @@ pytz = [
 [dependency-groups]
 dev = [
   # Docs
-  "sphinx<9",
-  "furo",
+  "gp-sphinx==0.0.1a1",
   "gp-libs",
   "sphinx-autobuild",
-  "sphinx-autodoc-typehints",
-  "sphinx-inline-tabs",
-  "sphinxext-opengraph",
-  "sphinx-copybutton",
-  "sphinxext-rediraffe",
   "sphinx-click",
-  "sphinx-design",
-  "myst-parser",
-  "linkify-it-py",
   # Testing
   "gp-libs",
   "pytest",
@@ -90,19 +81,10 @@ dev = [
 ]
 
 docs = [
-  "sphinx<9",
-  "furo",
+  "gp-sphinx==0.0.1a1",
   "gp-libs",
   "sphinx-autobuild",
-  "sphinx-autodoc-typehints",
-  "sphinx-inline-tabs",
-  "sphinxext-opengraph",
-  "sphinx-copybutton",
-  "sphinxext-rediraffe",
   "sphinx-click",
-  "sphinx-design",
-  "myst-parser",
-  "linkify-it-py",
 ]
 testing = [
   "gp-libs",
@@ -185,14 +167,6 @@ module = ["django_docutils.lib.writers"]
 disable_error_code = [
     "arg-type"  # Argument has incompatible type with HTMLTranslator methods
 ]
-
-[[tool.mypy.overrides]]
-module = ["sphinx_fonts"]
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = ["tests.docs._ext.test_sphinx_fonts"]
-disable_error_code = ["arg-type"]
 
 [tool.ruff]
 target-version = "py310"
