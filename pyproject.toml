@@ -54,7 +54,7 @@ pytz = [
 [dependency-groups]
 dev = [
   # Docs
-  "gp-sphinx==0.0.1a0",
+  "gp-sphinx==0.0.1a1",
   "gp-libs",
   "sphinx-autobuild",
   "sphinx-click",
@@ -81,7 +81,7 @@ dev = [
 ]
 
 docs = [
-  "gp-sphinx==0.0.1a0",
+  "gp-sphinx==0.0.1a1",
   "gp-libs",
   "sphinx-autobuild",
   "sphinx-click",
