@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 import typing as t
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
 
 from docutils import nodes
 from docutils.transforms import Transform
@@ -12,7 +12,7 @@ from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 from pygments.token import Token, _TokenType
 
-TokenStream = Iterator[tuple[_TokenType, str]]
+TokenStream = Iterable[tuple[_TokenType, str]]
 TokenGenerator = Iterator[tuple[str | int, str]]
 
 
