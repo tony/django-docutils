@@ -171,7 +171,7 @@ def test_rst_tag_renders_toc_only(settings):
 ## Coding Standards
 
 - Always include `from __future__ import annotations` at the top of Python files
-- Prefer namespace imports (`import typing as t`; `import enum`) over `from module import ...`
+- Prefer namespace imports for stdlib (`import typing as t`; `import enum`); third-party packages may use `from X import Y`
 - Follow NumPy-style docstrings for functions and methods
 - Ruff enforces formatting; use `ruff format` before committing
 - Type hints are required; keep mypy strictness in mind and add `TypedDict`/`Protocol` as needed
