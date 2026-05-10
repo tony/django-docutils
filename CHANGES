@@ -33,739 +33,902 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+django-docutils 0.30.0 is a documentation refresh release for people trying to
+use the package without reverse-engineering its internals. The docs now lead
+with the three Django integration paths: the {func}`~django_docutils.templatetags.django_docutils.rst`
+template tag, the {func}`~django_docutils.templatetags.django_docutils.rst_filter`
+filter, and {class}`~django_docutils.views.DocutilsView`. The site also moves
+onto the shared gp-sphinx documentation stack, so API pages, navigation, fonts,
+and built assets match the rest of the gp-libs documentation family.
+
+### What's new
+
+#### Documentation rebuilt around Django workflows (#451)
+
+The documentation now follows the Library Skeleton layout: {ref}`Quickstart
+<quickstart>` first, task-oriented topics next, then the {ref}`API Reference
+<api>` and project maintenance pages. The topic pages are organized around the
+actual ways django-docutils is used in an app: {ref}`template_tag`,
+{ref}`template_filter`, and {ref}`class_based_view`.
+
+The class-based view page now shows how an `.rst` template flows through
+{class}`~django_docutils.template.DocutilsTemplates`,
+{class}`~django_docutils.template.DocutilsTemplate`,
+{class}`~django_docutils.views.DocutilsView`, and
+{class}`~django_docutils.views.DocutilsResponse`. The API index also groups
+publisher helpers, roles, directives, writers, transforms, template tags, and
+views into a browsable reference instead of leaving users to infer the package
+shape from module names.
+
+#### Faster self-hosted docs frontend (#450)
+
+The docs frontend self-hosts IBM Plex Sans and Mono, preloads the important font
+files, and uses fallback metrics so text does not jump when web fonts finish
+loading. The sidebar logo, badges, and active-link state have fixed startup
+dimensions, which removes the visible layout shift from the first page load.
+
+Internal links use a small vanilla-JavaScript navigation layer that swaps only
+the document regions that change. Browsers with the View Transitions API get a
+smooth crossfade, while older browsers keep normal navigation behavior.
+
+#### Shared gp-sphinx documentation stack (#452, #453, #454, #455)
+
+django-docutils no longer carries repo-local copies of the docs theme, font
+loader, sidebar templates, or SPA navigation script. `docs/conf.py` now composes
+the published gp-sphinx configuration, which keeps this project aligned with the
+shared docs stack used by sibling gp-libs packages.
+
+The API reference picks up card-style autodoc signatures, object-type badges,
+MyST-friendly Python cross-reference roles, improved IBM Plex typography, and
+the `gp-sphinx-*` CSS namespace. The latest bump moves the rendered site to
+`gp-furo-theme`, a Tailwind v4 refresh of Furo, with `sphinx-vite-builder`
+owning the Vite asset pipeline end to end.
+
+#### Development commands moved to Just (#448)
+
+The root `Makefile`, docs `Makefile`, and obsolete Windows docs batch file were
+replaced with `justfile` recipes. `just test`, `just ruff`, `just mypy`, and
+`just build-docs` are now the documented development loop.
+
+### Fixes
+
+- `django_docutils.__version__` is exported from the top-level package.
+- The inline code formatter now matches the upstream Pygments override
+  signature used by current type checkers.
+- The docs back button and sidebar assets update correctly during SPA-style
+  navigation.
+- Legacy docs CSS that broke code-block rendering was removed.
+
 ### Documentation
 
-- Visual improvements to API docs from [gp-sphinx](https://gp-sphinx.git-pull.com)-based Sphinx packages (#453)
-- Bump gp-sphinx docs stack to v0.0.1a8 (#454)
-- Bump gp-sphinx docs stack to v0.0.1a16 — docs site now renders
-  via `gp-furo-theme`, a Tailwind v4 respin of Furo, with
-  `sphinx-vite-builder` handling theme-asset builds (#455)
+Docstring and Sphinx cleanup made the rendered API reference less noisy:
+exceptions link back to the module page, docutils and Django typing aliases are
+visible to autodoc, forward-reference warnings are suppressed where appropriate,
+and the `url_role` and `is_uncapitalized_word` examples render cleanly.
 
+Documentation deployment now uses AWS OIDC authentication instead of long-lived
+AWS keys, and the docs build switched to the `dirhtml` builder for cleaner URLs.
 
 ### Development
 
-#### Makefile -> Justfile (#448)
-
-- Migrate from `Makefile` to `justfile` for running development tasks
-- Update documentation to reference `just` commands
-
-### Documentation (#445, #446)
-
-- Fix broken RST substitution example in `url_role` docstring.
-- Fix docstring spacing in `is_uncapitalized_word`.
-- Move types out of `TYPE_CHECKING` blocks to fix `sphinx_autodoc_typehints` forward reference errors.
-- Link exceptions section to module page in API docs.
-- Migrate docs deployment to AWS OIDC authentication and AWS CLI
+AGENTS.md now records the changelog conventions used by this file, working
+doctest expectations, and logging standards for future library instrumentation.
+Dev dependencies, `uv`, `just`, GitHub Actions, and gp-sphinx pins were kept
+current across the release cycle.
 
 ## django-docutils 0.29.0 (2025-11-01)
 
+django-docutils 0.29.0 raises the Python floor to 3.10, adds Python 3.14 to the
+test matrix, and refreshes the project for modern typing and dependency-group
+tooling. The release also updates developmental install docs so prerelease users
+can try the package with `pip`, `pipx`, `uv`, or `uvx`.
+
 ### Breaking changes
 
-- Drop support for Python 3.9; the new minimum is Python 3.10 (#443)
+#### Minimum Python is 3.10 (#443)
 
-  See also:
-  - [Python 3.9 EOL timeline](https://devguide.python.org/versions/#:~:text=Release%20manager-,3.9,-PEP%20596)
-  - [PEP 596](https://peps.python.org/pep-0596/)
+Python 3.9 support was removed after its October 31, 2025 end-of-life date. The
+package metadata, Trove classifiers, Ruff target, mypy configuration, README,
+and CI matrix now all treat Python 3.10 as the minimum.
+
+```toml
+# Before
+requires-python = ">=3.9"
+
+# After
+requires-python = ">=3.10"
+```
+
+### Dependencies
+
+The `types-docutils` constraint was relaxed after the temporary lock used during
+the Python 3.9 transition. Development dependencies were refreshed for the
+Python 3.10+ support window.
+
+### Documentation
+
+{ref}`Quickstart <quickstart>` now includes prerelease installation commands for
+`pip`, `pipx`, `uv`, and `uvx`, matching the install preamble at the top of this
+changelog.
 
 ### Development
 
-- Add Python 3.14 to test matrix (#442)
+Python 3.14 is covered in CI (#442). The codebase also adopted
+`from __future__ import annotations` and Ruff's Python 3.10 annotation rules, so
+imports used only for type checking no longer need to be resolved at runtime
+(#440).
 
-#### chore: Implement PEP 563 deferred annotation resolution (#440)
-
-- Add `from __future__ import annotations` to defer annotation resolution and reduce unnecessary runtime computations during type checking.
-- Enable Ruff checks for PEP-compliant annotations:
-  - [non-pep585-annotation (UP006)](https://docs.astral.sh/ruff/rules/non-pep585-annotation/)
-  - [non-pep604-annotation (UP007)](https://docs.astral.sh/ruff/rules/non-pep604-annotation/)
-
-For more details on PEP 563, see: https://peps.python.org/pep-0563/
-
-### Development
-
-- Relax `types-docutils` version constraint (#418)
+Django 5.2 was added to the supported classifier and test coverage, while Django
+5.0 was removed from the active matrix.
 
 ## django-docutils 0.28.0 (2024-12-20)
 
-_Maintenance release only, no bug fixes or new features_
+django-docutils 0.28.0 is a maintenance release that moves the project to the
+Python 3.9+ era. There are no user-facing rendering changes, but package
+metadata, CI, and automated lint output now line up with the new floor.
 
-### Breaking changes (#439)
+### Breaking changes
 
-- Drop Python 3.8
+#### Minimum Python is 3.9 (#439)
 
-  The minimum version of Python in this and future releases is Python 3.9.
+Python 3.8 support was removed after its October 7, 2024 end-of-life date. The
+new minimum for this release line is Python 3.9.
 
-  Python 3.8 reached end-of-life status on October 7th, 2024 (see PEP 569).
+```toml
+# Before
+requires-python = ">=3.8"
+
+# After
+requires-python = ">=3.9"
+```
+
+### Dependencies
+
+`types-docutils` was temporarily locked to `0.21.0.20241005` while the docs and
+typing stack settled (#438).
 
 ### Development
 
-- Aggressive automated lint fixes via `ruff` (#437)
-
-  via ruff v0.8.4, all automated lint fixes, including unsafe and previews were applied for Python 3.9:
-
-  ```sh
-  ruff check --select ALL . --fix --unsafe-fixes --preview --show-fixes; ruff format .
-  ```
+The repository was run through an aggressive Ruff modernization pass for Python
+3.9, including preview and unsafe fixes where Ruff could apply them
+mechanically (#437).
 
 ## django-docutils 0.27.0 (2024-11-26)
 
-_Maintenance release only, no bug fixes or new features_
+django-docutils 0.27.0 moves project management from Poetry to uv and the build
+backend from Poetry to hatchling. It also drops Django 3.2, adds Django 5.1 to
+the supported test grid, and keeps the package focused on current Django LTS and
+feature releases.
 
 ### Breaking changes
 
-#### Project and package management: poetry to uv (#435)
+#### Django 4.2 is the minimum supported Django (#430)
 
-[uv] is the new package and project manager for the project, replacing Poetry.
+Django 3.2 support was removed after upstream extended support ended on April 1,
+2024. django-docutils 0.26.x is the final release line for Django 3.2 users.
 
-[uv]: https://github.com/astral-sh/uv
+```toml
+# Before
+django = ">=3.2"
 
-#### Build system: poetry to hatchling (#435)
+# After
+django = ">=4.2"
+```
 
-[Build system] moved from [poetry] to [hatchling].
+#### Project management moved from Poetry to uv (#435)
 
-[Build system]: https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend
-[poetry]: https://github.com/python-poetry/poetry
-[hatchling]: https://hatch.pypa.io/latest/
+Development installs, lockfile updates, and CI dependency setup now use
+[uv](https://docs.astral.sh/uv/) instead of Poetry.
 
-#### Drop Django 3.2 (#430)
+```console
+$ uv sync --all-extras --dev
+```
 
-Django 4.2+ is the new minimum version. Support for django 3.2 is dropped.
+#### Build backend moved to hatchling (#435)
 
-v0.26.x is the final Django 3.2 versions.
-
-Django 3.2's extended support has ended April 1st, 2024 [^DJ3_2_deprecation].
-
-[^DJ3_2_deprecation]: Django Project. Unsupported previous releases. https://www.djangoproject.com/download/#unsupported-versions.
+The package build backend changed from Poetry's backend to
+[hatchling](https://hatch.pypa.io/latest/). This affects contributors and
+release automation, not the Django rendering APIs.
 
 ### Development
 
-- Support for Django 5.1 in CI, trove classifiers (#429)
+Django 5.1 was added to CI and package classifiers (#429). Python 3.13 was also
+added to the local tool versions and CI coverage during this release cycle.
 
 ## django-docutils 0.26.0 (2024-07-20)
 
+django-docutils 0.26.0 is the final release line that supports Django 3.2. It is
+otherwise a maintenance release with documentation link cleanup and code-quality
+updates.
+
 ### Breaking changes
 
-- 0.26.x is the final branch supporting Django 3.2.
-
-  0.27+ drops support for Django 3.2.
+0.26.x is the final branch supporting Django 3.2. django-docutils 0.27.0 and
+newer require Django 4.2+.
 
 ### Documentation
 
-- Automatically linkify links that were previously only text.
+Links in the documentation are automatically linkified when they were previously
+rendered as plain text.
 
 ### Development
 
-- poetry: 1.8.1 -> 1.8.3
-
-  See also: https://github.com/python-poetry/poetry/blob/1.8.3/CHANGELOG.md
-
-- Code quality: Use f-strings in more places (#422)
-
-  via [ruff 0.4.2](https://github.com/astral-sh/ruff/blob/v0.4.2/CHANGELOG.md).
-
-- Code quality(`InlineHtmlFormatter._wrap_div`): Tweak handling of style and css class names (#422)
+Poetry was updated from 1.8.1 to 1.8.3. Ruff 0.4.2 drove a small code-quality
+pass, including f-string cleanups and adjustments to
+{class}`~django_docutils.lib.transforms.code.InlineHtmlFormatter` style and
+class handling (#422).
 
 ## django-docutils 0.25.0 (2024-03-24)
 
-_Maintenance release only, no bug fixes or new features_
+django-docutils 0.25.0 is a maintenance release. It carries no rendering fixes
+or new public features, but refreshes the codebase with the then-current Ruff
+rule set.
 
 ### Development
 
-- Aggressive automated lint fixes via `ruff` (#419)
-
-  via ruff v0.3.4, all automated lint fixes, including unsafe and previews were applied:
-
-  ```sh
-  ruff check --select ALL . --fix --unsafe-fixes --preview --show-fixes; ruff format .
-  ```
-
-  Branches were treated with:
-
-  ```sh
-  git rebase \
-      --strategy-option=theirs \
-      --exec 'poetry run ruff check --select ALL . --fix --unsafe-fixes --preview --show-fixes; poetry run ruff format .; git add src tests; git commit --amend --no-edit' \
-      origin/master
-  ```
+The project was run through Ruff 0.3.4 with all selected automated fixes,
+including preview and unsafe fixes where accepted by the project (#419).
 
 ## django-docutils 0.24.0 (2024-03-09)
 
-### Bug fixes
+django-docutils 0.24.0 restores Python 3.8 compatibility for the supported
+release line. This is a targeted compatibility fix with no new Django rendering
+surface.
 
-- Re-implement support Python 3.8 (#417)
+### Fixes
+
+Python 3.8 support was re-implemented and added back to the test matrix (#417).
 
 ## django-docutils 0.23.0 (2024-02-06)
 
-_Maintenance release only, no bug fixes or new features_
+django-docutils 0.23.0 is a maintenance release for linting and development
+tooling. It keeps the package behavior stable while tightening the checks used
+for future code changes.
+
+### Dependencies
+
+Ruff moved from 0.2.2 to 0.3.0, and CI now calls `ruff check .` with Ruff's
+current command shape (#416).
 
 ### Development
 
-- poetry: 1.7.1 -> 1.8.1
-
-  See also: https://github.com/python-poetry/poetry/blob/1.8.1/CHANGELOG.md
-
-- ruff 0.2.2 -> 0.3.0 (#416)
-
-  Related formattings. Update CI to use `ruff check .` instead of `ruff .`.
-
-  See also: https://github.com/astral-sh/ruff/blob/v0.3.0/CHANGELOG.md
-
-- Strengthen linting (#415)
-
-  - Add flake8-commas (COM)
-
-    - https://docs.astral.sh/ruff/rules/#flake8-commas-com
-    - https://pypi.org/project/flake8-commas/
-
-  - Add flake8-builtins (A)
-
-    - https://docs.astral.sh/ruff/rules/#flake8-builtins-a
-    - https://pypi.org/project/flake8-builtins/
-
-  - Add flake8-errmsg (EM)
-
-    - https://docs.astral.sh/ruff/rules/#flake8-errmsg-em
-    - https://pypi.org/project/flake8-errmsg/
+Lint coverage was strengthened with Ruff rule families for commas, builtins, and
+error-message construction (#415). These checks make future refactors more
+consistent without changing the public APIs.
 
 ## django-docutils 0.22.1 (2023-12-24)
 
+django-docutils 0.22.1 fixes the settings reload signal added in 0.22.0. Apps
+that update Django settings at runtime can now trigger role and directive
+registration without a signal argument error.
+
 ### Fixes
 
-- Fix `reload_settings` setting signal: Missing keyword arguments in params (#413,
-  fixes #412)
+`reload_settings` now accepts Django's signal keyword arguments correctly (#413,
+fixes #412).
 
 ## django-docutils 0.22.0 (2023-12-24)
 
+django-docutils 0.22.0 makes custom docutils roles and directives respond to
+Django settings updates. It also moves registration helpers into dedicated
+registry modules so the public import path matches their responsibility.
+
 ### Breaking changes
 
-- Moved functions: Move docutils role and directive registration from package root to dedicated module (#409):
-  - `register_django_docutils_roles()` from `django_docutils.lib.roles` to `django_docutils.lib.roles.registry`
-  - `register_django_docutils_directives()` from `django_docutils.lib.directives` to `django_docutils.lib.directives.registry`
+#### Role and directive registration moved to registry modules (#409)
 
-### Improvements
+The registration functions moved out of the package roots and into explicit
+registry modules.
 
-- Settings: Register docutils roles and directives when django settings updates (#408)
+```python
+# Before
+from django_docutils.lib.roles import register_django_docutils_roles
+from django_docutils.lib.directives import register_django_docutils_directives
 
-### Tests
+# After
+from django_docutils.lib.roles.registry import register_django_docutils_roles
+from django_docutils.lib.directives.registry import register_django_docutils_directives
+```
 
-- Add tests for custom roles and directives (#408)
+### What's new
+
+#### Settings updates re-register roles and directives (#408)
+
+When `DJANGO_DOCUTILS_LIB_RST` changes during a Django settings update,
+django-docutils re-registers configured docutils roles and directives. This
+keeps custom role and directive mappings in sync with test overrides and
+runtime settings changes.
+
+### Development
+
+Tests now cover custom role and directive registration through settings updates
+(#408).
 
 ## django-docutils 0.21.0 (2023-12-09)
 
-_Maintenance release only, no bug fixes or new features_
+django-docutils 0.21.0 updates the supported Django matrix around Django 5.0.
+It removes older unsupported Django minors and keeps CI aligned with the package
+metadata.
 
-### Packaging
+### Dependencies
 
-- pyproject.toml: Add django 5.0 (#407)
-- pyproject.toml: Remove django 4.0 and 4.1 from pyproject (#407)
+Django 5.0 was added to package metadata and the test grid. Django 4.0 and 4.1
+were removed from the project configuration and CI matrix (#407).
 
-### CI
+### Development
 
-- Move CodeQL from advanced configuration file to GitHub's default
-- ci(tests): Remove django 4.0 and 4.1 from testgrid (#407)
-- ci(tests): Add django 5.0 to testgrid (#407)
+CodeQL moved from an advanced configuration file to GitHub's default setup.
 
 ## django-docutils 0.20.1 (2023-11-18)
 
+django-docutils 0.20.1 fixes development dependency configuration and refreshes
+GitHub Actions used by CI. There are no user-facing rendering changes.
+
 ### Development
 
-- Packaging (poetry): Fix development dependencies
+Poetry development dependencies now use dependency groups instead of extras,
+matching Poetry's documented layout and `poetry check` expectations.
 
-  Per [Poetry's docs on managing dependencies] and `poetry check`, we had it wrong: Instead of using extras, we should create these:
-
-  ```toml
-  [tool.poetry.group.group-name.dependencies]
-  dev-dependency = "1.0.0"
-  ```
-
-  Which we now do.
-
-  [Poetry's docs on managing dependencies]: https://python-poetry.org/docs/master/managing-dependencies/
-
-- CI: Update action packages to fix warnings
-
-  - [dorny/paths-filter]: 2.7.0 -> 2.11.1
-  - [codecov/codecov-action]: 2 -> 3
-
-  [dorny/paths-filter]: https://github.com/dorny/paths-filter
-  [codecov/codecov-action]: https://github.com/codecov/codecov-action
+CI actions were updated to remove warnings, including `dorny/paths-filter` and
+`codecov/codecov-action`.
 
 ## django-docutils 0.20.0 (2023-11-18)
 
-_Maintenance release only, no bug fixes or new features_
-
-### Development
-
-- Poetry: 1.6.1 -> 1.7.0
-
-  See also: https://github.com/python-poetry/poetry/blob/1.7.0/CHANGELOG.md
-
-- Move formatting from `black` to [`ruff format`] (#406)
-
-  This retains the same formatting style of `black` while eliminating a
-  dev dependency by using our existing rust-based `ruff` linter.
-
-  [`ruff format`]: https://docs.astral.sh/ruff/formatter/
-
-- Tests: Additional test coverage, including for some roles (#404)
-- mypy,sphinx: Point settings to `django_docutils.lib.settings` (#404)
-- docstring: Fix `gh` role (#404)
-
-## django-docutils 0.19.0 (2023-10-08)
-
-### Breaking changes
-
-- Rename `django_docutils.engines` to `django_docutils.template` (#402)
-- Template engine: Rename `Docutils` to `DjangoTemplates` (#402)
-
-## django-docutils 0.18.0 (2023-10-08)
-
-### Bug fix
-
-- Remove duplicate `CodeBlock` directive from `directives.py` (#401)
-
-### Development
-
-- ci: Add pydocstyle rule to ruff (#396)
-
-### Documentation
-
-- Add docstrings to functions, methods, classes, and packages (#396)
-
-## django-docutils 0.17.0 (2023-10-08)
-
-### Breaking changes
-
-- Remove references to font awesome (#397, #399)
-
-  These are unused and leftovers from an earlier codebase.
-
-- Removed unused visitor from `HTMLTranslator` (#400)
-- Removed models.py file (#400)
-- TemplateTags: Fixes `MalformedArgumentsToUrlTag` ->
-  `MalformedArgumentsToRSTTag` (#400)
-
-### Development
-
-- Add typings for settings (#395)
-
-### Documentation
-
-- Add intersphinx API documentation for Django (#395)
-
-## django-docutils 0.16.0 (2023-10-07)
-
-### Breaking changes
-
-- Rename `GenericUrlRoleFn` -> `RoleFnReturnValue` (#394)
-
-### Documentation
-
-- Add role typings to docs (#394)
-- Roles: Split `common` and `types` to separate ToC section (#394)
-- Improve documentation for roles (#394)
-
-## django-docutils 0.15.0 (2023-10-01)
-
-### Breaking changes
-
-- Rename `restructuredtext` -> `rst` (#390)
-
-  - `{% filter restructuredtext %}` -> `{% endfilter %}`
-  - `{% restructuredtext %}` -> `{% rst %}`
-
-- Move template tag from `lib/templatetags/rst` ->
-  `templatetags/django_docutils` (#391)
+django-docutils 0.20.0 is a maintenance release that consolidates formatting on
+Ruff and expands test coverage around roles and settings. It does not change the
+main template tag, filter, or view APIs.
 
 ### What's new
 
-- `rst` template tags can now accept blocks (#392):
+#### Formatting moved from Black to Ruff (#406)
 
-  ```django
-  {% load django_docutils %}
-  {% rst %}
-  Hello world
-  ===========
-
-  Thank you for visiting the site!
-
-  - List item 1
-  - List item 2
-  {% endrst %}
-  ```
-
-- `ReStructuredTextNode` learned to accept plain strings (#388)
-- `restructuredtext` filter revitalized (#388)
-
-  - Now powered the same `docutils` code as the template tag
-  - django-docutils settings will now apply to the filter
-
-### Tweaks
-
-- `restructuredtext` filter:
-  - Fix `stacklevel` in warning (#389)
-  - register filter via decorator (#389)
-- `DocutilsView`: Improve `rst_name` typing (#389)
+`ruff format` replaced Black for code formatting. The project keeps a familiar
+Black-style format while using the same fast tool for linting and formatting.
 
 ### Fixes
 
-- `restructuredtext` template tag: Fix language in error message (#389)
+The GitHub role docstring was corrected, and the docs and mypy configuration now
+point at `django_docutils.lib.settings` (#404).
 
 ### Development
 
-- Test suite (#386):
-  - Template tag
-  - Template filter
-  - Django template engine
-- Project settings (test settings module): Add type annotations for `django-stubs` + `mypy` (#368)
+Additional tests cover role behavior and related helpers (#404). Poetry was
+updated to 1.7.0 during the release cycle.
 
-  Note: This only applies to internal typings
+## django-docutils 0.19.0 (2023-10-08)
 
-### Packaging
-
-- Move pytest configuration to `pyproject.toml` (#387)
-
-## django-docutils 0.14.1 (2023-10-01)
-
-_Maintenance only, no bug fixes or features_
-
-### Packaging
-
-- Add `Typing :: Typed` to trove classifiers
-
-### Documentation
-
-- API docs: Remove pygments
-- `restructuredtext` filter: Add credit
-
-  Note: The filter has already been deprecated since 0.4.0 and will soon be replaced
-  by #386.
-
-## django-docutils 0.14.0 (2023-09-30)
-
-### What's new
-
-- Now [`mypy --strict`] compliant (#378)
-
-  [`mypy --strict`]: https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-strict
+django-docutils 0.19.0 renames the Django template engine module and backend
+class so the public names match the package's Django-facing template system.
+The docs were updated around the class-based view workflow at the same time.
 
 ### Breaking changes
 
-- Remove `django_docutils.pygments` (#385)
+#### Template engine imports moved to `django_docutils.template` (#402)
 
-  Pygments lexers are unrelated to the package.
+The old `django_docutils.engines` import path was replaced by
+`django_docutils.template`.
 
-## django-docutils 0.13.5 (2023-09-30)
+```python
+# Before
+from django_docutils.engines import Docutils
 
-### Bug fixes
+# After
+from django_docutils.template import DocutilsTemplates
+```
 
-- Remove `develtech` role (#382)
-- lib/publisher: Remove unused positional args (#382)
+In Django settings, the backend path should now point at
+{class}`~django_docutils.template.DocutilsTemplates`.
 
-## django-docutils 0.13.4 (2023-09-24)
-
-### Compatibility
-
-- Remove `FILE_CHARSET` setting usage (#381)
-
-  Setting was deprecated in Django 3.1.
+```python
+{
+    "BACKEND": "django_docutils.template.DocutilsTemplates",
+    "APP_DIRS": True,
+    "NAME": "docutils",
+}
+```
 
 ### Documentation
 
-- Fix Sphinx docs, settings warning (#380)
+The class-based view documentation was renamed and expanded, with examples that
+connect {class}`~django_docutils.views.DocutilsView` to the docutils template
+engine and rendered HTML output.
+
+## django-docutils 0.18.0 (2023-10-08)
+
+django-docutils 0.18.0 removes duplicate directive wiring and starts enforcing
+NumPy-style docstrings through Ruff. The release is mostly internal, but it
+improves the generated API reference for users browsing the package.
+
+### Fixes
+
+The duplicate `CodeBlock` directive definition was removed from `directives.py`
+(#401).
+
+### Documentation
+
+Docstrings were added across functions, methods, classes, and packages so the
+API reference has usable narrative text (#396).
+
+### Development
+
+Ruff's pydocstyle rules were enabled with the NumPy convention (#396).
+
+## django-docutils 0.17.0 (2023-10-08)
+
+django-docutils 0.17.0 continues narrowing the package to Django docutils
+rendering. It removes leftover Font Awesome machinery, unused model code, and an
+incorrect template-tag exception name.
+
+### Breaking changes
+
+Font Awesome transformer references were removed because they were unused
+leftovers from an earlier codebase (#397, #399). The unused HTML translator
+visitor and `models.py` file were also removed (#400).
+
+`MalformedArgumentsToUrlTag` was renamed to
+{class}`~django_docutils.templatetags.django_docutils.MalformedArgumentsToRSTTag`
+so errors from the `{% rst %}` tag use the correct domain language (#400).
+
+### Documentation
+
+The API docs gained Django intersphinx links, and settings typings were added to
+make the generated reference clearer (#395).
+
+## django-docutils 0.16.0 (2023-10-07)
+
+django-docutils 0.16.0 cleans up the public typing names for docutils roles and
+expands the role documentation. This release is most relevant to users writing
+custom role functions.
+
+### Breaking changes
+
+`GenericUrlRoleFn` was renamed to `RoleFnReturnValue` (#394). The new name
+describes the value returned by docutils role callbacks instead of implying a
+specific URL helper implementation.
+
+### Documentation
+
+Role typings now appear in the docs, `common` and `types` are split into
+separate role API pages, and the role documentation was expanded (#394).
+
+## django-docutils 0.15.0 (2023-10-01)
+
+django-docutils 0.15.0 is the release where the Django template integration
+settled around `{% rst %}` and the `rst` filter. The filter now uses the same
+publisher path as the tag, block tags are supported, and tests cover the tag,
+filter, and template engine together.
+
+### Breaking changes
+
+#### `restructuredtext` was renamed to `rst` (#390)
+
+The Django template tag and filter were renamed to the shorter `rst` spelling.
+
+```django
+{# Before #}
+{% filter restructuredtext %}
+Hello **world**
+{% endfilter %}
+
+{# After #}
+{% filter rst %}
+Hello **world**
+{% endfilter %}
+```
+
+```django
+{# Before #}
+{% restructuredtext content %}
+
+{# After #}
+{% rst content %}
+```
+
+#### Template tags moved into `templatetags.django_docutils` (#391)
+
+The template tag module moved from `lib/templatetags/rst` to
+`templatetags/django_docutils`. Django users should load the tag library with
+`{% load django_docutils %}`.
+
+### What's new
+
+#### `{% rst %}` can render block content (#392)
+
+The {func}`~django_docutils.templatetags.django_docutils.rst` tag now accepts
+content between `{% rst %}` and `{% endrst %}` without requiring a separate
+template variable.
+
+```django
+{% load django_docutils %}
+{% rst %}
+Hello world
+===========
+
+Thank you for visiting the site!
+
+- List item 1
+- List item 2
+{% endrst %}
+```
+
+#### The `rst` filter uses the same publisher as the tag (#388)
+
+The {func}`~django_docutils.templatetags.django_docutils.rst_filter` filter now
+renders through {class}`~django_docutils.templatetags.django_docutils.ReStructuredTextNode`,
+so django-docutils settings apply to filter output as well as tag output.
+
+### Fixes
+
+The `restructuredtext` filter warning stack level was corrected, the filter is
+registered through Django's decorator API, {class}`~django_docutils.views.DocutilsView`
+has tighter `rst_name` typing, and the template-tag error message was corrected
+(#389).
+
+### Development
+
+Tests now cover the template tag, template filter, and Django template engine
+(#386). Pytest configuration moved into `pyproject.toml` (#387), and the test
+settings module gained type annotations for django-stubs and mypy.
+
+## django-docutils 0.14.1 (2023-10-01)
+
+django-docutils 0.14.1 is a small packaging and documentation maintenance
+release. It does not change runtime rendering behavior.
+
+### Documentation
+
+The API docs no longer depend on Pygments-specific pages, and the deprecated
+`restructuredtext` filter gained credit notes before its replacement work landed.
+
+### Development
+
+The package classifiers now advertise `Typing :: Typed`.
+
+## django-docutils 0.14.0 (2023-09-30)
+
+django-docutils 0.14.0 makes the package mypy strict compliant and removes a
+Pygments lexer module that did not belong to the Django docutils integration.
+
+### Breaking changes
+
+`django_docutils.pygments` was removed because Pygments lexers are unrelated to
+this package's core purpose (#385).
+
+### Development
+
+The codebase now passes `mypy --strict` (#378).
+
+## django-docutils 0.13.5 (2023-09-30)
+
+django-docutils 0.13.5 removes more leftover project-specific behavior from the
+role and publisher layer.
+
+### Fixes
+
+The unused `develtech` role was removed, and unused positional arguments were
+removed from publisher internals (#382).
+
+## django-docutils 0.13.4 (2023-09-24)
+
+django-docutils 0.13.4 updates compatibility with modern Django settings and
+fixes the docs build setup.
+
+### Fixes
+
+The package no longer reads Django's deprecated `FILE_CHARSET` setting, which
+was deprecated in Django 3.1 (#381).
+
+### Documentation
+
+The Sphinx configuration and settings warning were fixed so documentation builds
+cleanly (#380).
 
 ## django-docutils 0.13.3 (2023-09-24)
 
-### Bug fixes
+django-docutils 0.13.3 removes stale pagination arguments left behind by the
+earlier cleanup of page-related features.
 
-- Remove unused page number params (#379):
+### Fixes
 
-  - `publish_toc_from_doctree()`
-  - `publish_html_from_doctree()`
-
-  The related code was removed as part of #376
+Unused page-number parameters were removed from `publish_toc_from_doctree()` and
+`publish_html_from_doctree()` (#379).
 
 ## django-docutils 0.13.2 (2023-09-10)
 
-### Bug fixes
+django-docutils 0.13.2 is a targeted class-based-view fix.
 
-- `RSTMixin`: Fix `.content` missing params
+### Fixes
+
+{class}`~django_docutils.lib.views.RSTMixin` now handles `.content` without
+missing parameters.
 
 ## django-docutils 0.13.1 (2023-09-10)
 
-### Internal improvements
+django-docutils 0.13.1 follows the debloating releases with CI and warning
+cleanup.
 
-- ci: Check `black` formatting (#377)
-- Update Poetry 1.5.1 -> 1.6.1 (#377)
+### Development
 
-### Tests
-
-- Fix deprecation warnings in Django 4.1+ (#377)
+CI now checks Black formatting, Poetry was updated from 1.5.1 to 1.6.1, and the
+test suite no longer emits Django 4.1+ deprecation warnings (#377).
 
 ## django-docutils 0.13.0 (2023-09-10)
 
-### Breaking changes: Debloating, Part 2
+django-docutils 0.13.0 is the second debloating release. It removes dependency
+weight and a remote Amazon role that did not fit the core package goal: solid
+docutils rendering for Django.
 
-#### Remove unused requirements (#376)
+### Breaking changes
 
-- Remove dependencies on (now unused via #373):
+#### Unused runtime and test dependencies were removed (#376)
 
-  - `django_slug_processor`
-  - `django-randomslugfield`
-  - `django-dirtyfields`
-  - `django-extensions`
-  - `django-dirtyfields`
-  - `bitly-api-py3`
-  - `lxml`
+Dependencies tied to removed ORM and URL-shortening features were dropped,
+including `django_slug_processor`, `django-randomslugfield`,
+`django-dirtyfields`, `django-extensions`, `bitly-api-py3`, and `lxml`.
 
-- Remove dev dependencies (now unused via #373):
+Unused development dependencies were also removed, including `types-tqdm`,
+`types-six`, `types-requests`, `factory-boy`, `pytest-factory-boy`, and
+`pytest-mock`. `pytz` became optional.
 
-  - `types-tqdm`
-  - `types-six`
-  - `types-requests`
-  - `factory-boy`
-  - `pytest-factory-boy`
-  - `pytest-mock`
+#### The `:amzn:` role was removed (#376)
 
-- Make `pytz` optional dependency
-
-#### Remove `:amzn:` (amazon) role (#376)
-
-This required `bitly-api-py3`, a dependency not related to core functionality.
-It also distracted away from the project's goals: Just having solid docutils
-rendering for django.
+The Amazon role depended on `bitly-api-py3`, which was unrelated to Django
+docutils rendering and pulled the package away from its focused scope.
 
 ## django-docutils 0.12.0 (2023-09-10)
 
-### Breaking changes: Debloating, Part 1
+django-docutils 0.12.0 is the first debloating release after the package was
+split out from a more specialized codebase. It removes ORM-backed content
+features, ad-related hooks, old `based` naming, and dependencies that were not
+needed for reStructuredText rendering in Django.
 
-django-docutils is a hastily-extracted hunk of specialized django code - and only now is getting
-dedicated attention.
+### Breaking changes
 
-To begin, django-docutils just got leaner downstream, beginning with removal of
-non-essential dependencies and experimental code.
+#### ORM-specific features were removed (#374)
 
-#### Remove `favicon`, `references` and `rst_post` (#374)
+`favicon`, `references`, and `rst_post` were removed because they were
+application-specific ORM features rather than docutils integration primitives.
+Related ad hooks such as `inject_ads`, `add_keywords`, and `BASED_ADS` were also
+removed (fixes #371 and #372).
 
-_Resolves #371_
+#### Settings moved from `BASED_*` to `DJANGO_DOCUTILS_*` (#374)
 
-These are ORM based parts and too specialized for a docutils package for django.
+Old `based` setting prefixes were renamed to the package name.
 
-This also includes references to ads, e.g. `inject_ads`, `add_keywords`, and
-`BASED_ADS` (fixes #372).
+```python
+# Before
+BASED_LIB = {...}
 
-If you want to use these, please file an issue on the tracker.
+# After
+DJANGO_DOCUTILS_LIB = {...}
+```
 
-#### Remove old references to `based` prefixes to `django_docutils` (#374)
+#### `tqdm` and `tldextract` were removed from the core dependency set (#374)
 
-_Fixes #373_
-
-- Settings: `BASED` -> `DJANGO_DOCUTILS`, e.g. `BASED_LIB` ->
-  `DJANGO_DOCUTILS_LIB`.
-
-#### Remove dependency on `tqdm` and `tldextract` (#374)
-
-_Fixes #363_
-
-These packages aren't required by the core reStructuredText functionality.
+These packages were not required for rendering reStructuredText content in
+Django (fixes #363).
 
 ## django-docutils 0.11.0 (2023-09-10)
 
-### Internal improvements
+django-docutils 0.11.0 improves linting consistency with Ruff and includes a
+post-release formatting pass.
 
-- [ruff]: Improved linting via additional ruff rules, including import sorting
-  (#368)
+### Development
+
+Ruff gained additional rules, including import sorting (#368).
 
 ### Post releases
 
 #### django-docutils 0.11.0post0 (2023-09-10)
 
-- Run black formatter on codebase.
+The codebase was run through Black formatting.
 
 ## django-docutils 0.10.0 (2023-09-02)
 
-_Maintenance only, no bug fixes or features_
+django-docutils 0.10.0 is a maintenance release that starts consolidating
+formatting, linting, and package metadata around modern Python tooling. It also
+adds Django 4.2 and Python 3.11 metadata.
 
-### Internal improvements
+### Development
 
-- Move formatting, import sorting, and linting to [ruff].
+Formatting, import sorting, and linting moved to Ruff, replacing isort, flake8,
+and related flake8 plugins with a faster Rust-based tool.
 
-  This rust-based checker has dramatically improved performance. Linting and
-  formatting can be done almost instantly.
+Tests no longer rely on pytest's deprecated `py.local.path` objects and use
+{class}`pathlib.Path` instead (#369). Partial, incorrect, or unused typings were
+removed to make room for stricter typing work later.
 
-  This change replaces isort, flake8 and flake8 plugins.
+### Dependencies
 
-- Tests: Remove reliance on [`py.local.path`](https://py.readthedocs.io/en/latest/path.html#py-path-local-local-file-system-path) (#369)
-
-  It has has been deprecated by pytest in favor of {class}`pathlib.Path` parts.
-
-- Remove some partial typings, in lieu of full typings in the future (#369)
-
-  This typings were unused and in some cases incorrect.
-
-[ruff]: https://ruff.rs
+`pytz` was added as a required dependency because newer Django versions no
+longer include it implicitly.
 
 ### Packaging
 
-- Add `pytz` required dependency
-
-  Required, implicitly removed in newer django versions.
-
-- Remove `MANIFEST.in`
-
-  poetry handles this via `include` in pyproject.toml
-
-- Remove `.readthedocs.yml`, unused as we self-host
-- poetry: 1.4.0 -> 1.5.1
-
-  See also:
-
-  - https://github.com/python-poetry/poetry/releases/tag/1.5.0
-  - https://github.com/python-poetry/poetry/releases/tag/1.5.1
-
-- Add Django 4.2 to CI coverage and classifiers
-- Add Python 3.11 to classifiers
+`MANIFEST.in` and `.readthedocs.yml` were removed because Poetry and the
+self-hosted docs workflow own those concerns. Poetry moved from 1.4.0 to 1.5.1,
+Django 4.2 was added to CI and classifiers, and Python 3.11 was added to
+classifiers.
 
 ## django-docutils 0.9.0 (2022-09-24)
 
+django-docutils 0.9.0 trims default installation weight and speeds up CI. It is
+mostly a packaging and infrastructure release.
+
 ### Breaking changes
 
-- `tqdm` and `tldextract` are not installed by default (#362)
+`tqdm` and `tldextract` are no longer installed by default, simplifying installs
+for users that only need the core rendering path (#362).
 
-  This is for simplicity for the user (to note have to wrestle with sub-packages)
+### Development
 
-### Infrastructure
-
-- CI speedups (#361)
-
-  - Split out release to separate job so the PyPI Upload docker image isn't pulled on normal runs
-  - Clean up CodeQL
-
-- Poetry: Bump 1.1.x to 1.2.x
+CI was split so the PyPI upload image is not pulled on normal test runs, and
+CodeQL configuration was cleaned up (#361). Poetry moved from 1.1.x to 1.2.x.
 
 ### Packaging
 
-- Remove `.tmuxp-before-script.sh` (was used by `.tmuxp.yaml`'s `before_script`)
+The obsolete `.tmuxp-before-script.sh` helper was removed.
 
 ## django-docutils 0.8.0 (2022-09-11)
 
+django-docutils 0.8.0 moves the package into a `src/` layout and improves docs
+rendering through gp-libs Sphinx helpers.
+
 ### Development
 
-- Moved project structure to `src/` (#356)
-- Add [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) (#352)
-- Add [flake8-comprehensions](https://github.com/adamchainz/flake8-comprehensions) (#353)
+The project moved to `src/` layout (#356). `flake8-bugbear` and
+`flake8-comprehensions` were added to development checks (#352, #353).
 
 ### Documentation
 
-- Render changelog in [`linkify_issues`] (#350, #355)
-- Fix Table of contents rendering with sphinx autodoc with [`sphinx_toctree_autodoc_fix`] (#355)
-
-[`linkify_issues`]: https://gp-libs.git-pull.com/linkify_issues/
-[`sphinx_toctree_autodoc_fix`]: https://gp-libs.git-pull.com/sphinx_toctree_autodoc_fix/
+The changelog is rendered with issue links, and the docs gained a fix for
+Sphinx autodoc table-of-contents rendering (#350, #355).
 
 ## django-docutils 0.7.0 (2022-08-16)
 
+django-docutils 0.7.0 adds the first static typing and doctest validation
+infrastructure. It is a development-quality release rather than a feature
+release for Django users.
+
 ### Development
 
-Infrastructure updates for static type checking and doctest examples.
+Doctest support and initial mypy validation were added (#342). CI gained better
+Python dependency caching through `actions/setup-python`, CodeQL analysis was
+added, and pre-commit configuration was removed from the repository.
 
-- Update development packages (black, isort)
-- Add .tool-versions, .python-version
-- Run code through black w/o `--skip-string-normalization`
-
-- Initial [doctests] support added, via #342
-
-  [doctests]: https://docs.python.org/3/library/doctest.html
-
-- Initial [mypy] validation, via #342
-
-  [mypy]: https://github.com/python/mypy
-
-- CI (tests, docs): Improve caching of python dependencies via `action/setup-python`'s v3/4's new
-  poetry caching, via #342
-
-- CI (docs): Skip if no `PUBLISH` condition triggered, via #342
-
-- CI: Remove `.pre-commit-config.yaml`, users should know enough to handle these things themselves,
-  via #342
-
-- CI: Add codeql analysis step
+The codebase was reformatted with Black without `--skip-string-normalization`,
+and development package pins were refreshed.
 
 ## django-docutils 0.6.0 (2022-03-27)
 
-### Compatibility
+django-docutils 0.6.0 updates the supported Python and Django baseline and
+refreshes the docs stack.
 
-- Drop python 3.5 to 3.7 (minimum version python 3.8)
-- Minimum django version 3.0
+### Breaking changes
+
+Python 3.5, 3.6, and 3.7 support was dropped. Python 3.8 became the minimum
+supported Python version, and Django 3.0 became the minimum supported Django
+version.
 
 ### Development
 
-- CI:
-  - Fix CI variables
-  - Rename Publish Docs -> docs
-  - Fix poetry installation and caching
+CI variables, Poetry installation, dependency caching, and the docs publishing
+workflow were cleaned up.
 
 ### Documentation
 
-- Move theme to furo
-- Move to markdown
+The documentation moved to Markdown and the Furo theme.
 
 ## django-docutils 0.5.1 (2020-08-09)
 
-- [#270](https://github.com/tony/django-docutils/pull/270) Fix packaging / optional dependencies
-- Remove twine extra dependency
-- Remove setup.py (in favor of poetry, which we used to build and publish as of django-docutils
-  0.5.0)
+django-docutils 0.5.1 fixes packaging around optional dependencies after the
+0.5.0 project-management migration.
+
+### Fixes
+
+Packaging and optional dependencies were corrected (#270). The `twine` extra and
+legacy `setup.py` were removed because Poetry now builds and publishes the
+package.
 
 ## django-docutils 0.5.0 (2020-08-08)
 
-- Use our new bitly api fork at <https://pypi.org/project/bitly-api-py3/> /
-  <https://github.com/develtech/bitly-api-python>
-- pipenv -> poetry
-- readthedocs -> self-hosted docs
-- travis -> github actions
-- Add black + isort and format code with it
-- Remove vulture
-- Remove python 2.x support, python 3.3 and 3.4 (reached end of life)
-- Update to new django versions (2.2 and 2.3)
-- Remove unsupported django versions (1.8, 1.9, 1.10, 2.0, 2.1)
-- Cleanup CI, add caching
-- Add `InjectFontAwesome` transformer to inject icon `<em>` tags for font awesome based on regex
-  patterns
-- Additional support for detecting font-awesome patterns and injecting the icon in other
-  transformers (e.g. `XRefTransform`)
+django-docutils 0.5.0 modernizes the project after the early Django/Python 2
+era. It moves packaging, docs hosting, CI, formatting, and supported framework
+versions onto the stack used by later releases.
+
+### Breaking changes
+
+Python 2, Python 3.3, and Python 3.4 support was removed. Unsupported Django
+versions 1.8, 1.9, 1.10, 2.0, and 2.1 were removed, while newer Django 2.2 and
+3.0-era support was added.
+
+### What's new
+
+Font Awesome pattern detection and injection landed through the
+`InjectFontAwesome` transformer and related transformers such as `XRefTransform`.
+These APIs were later removed when the package was narrowed to core docutils
+rendering.
+
+### Development
+
+The project moved from pipenv to Poetry, Travis CI to GitHub Actions, and
+Read the Docs to self-hosted documentation. Black and isort were added and the
+codebase was formatted with them. Vulture was removed.
+
+### Dependencies
+
+The package switched to the `bitly-api-py3` fork used by the older URL-shortener
+integration.
 
 ## django-docutils 0.4.0 (2017-02-21)
 
-- Django template tag
-- Some README documentation
+django-docutils 0.4.0 adds the original Django template tag surface and basic
+README documentation.
+
+### What's new
+
+The first Django template tag for rendering reStructuredText through docutils was
+added.
+
+### Documentation
+
+The README gained initial usage documentation.
 
 ## django-docutils 0.3.4 (2017-02-12)
 
-- Add requirements/test.txt to manifest
+django-docutils 0.3.4 is a packaging repair release.
+
+### Fixes
+
+`requirements/test.txt` was added to the package manifest.
 
 ## django-docutils 0.3.3 (2017-02-12)
 
-- Add requirements/base.txt to manifest
+django-docutils 0.3.3 is a packaging repair release.
+
+### Fixes
+
+`requirements/base.txt` was added to the package manifest.
 
 ## django-docutils 0.3.2 (2017-02-12)
 
-- Another tweak to get pypi readme up
+django-docutils 0.3.2 is a PyPI README repair release.
+
+### Fixes
+
+Another PyPI README rendering adjustment was shipped.
 
 ## django-docutils 0.3.1 (2017-02-12)
 
-- Some changes to attempt to fix pypi README
+django-docutils 0.3.1 is a PyPI README repair release.
+
+### Fixes
+
+The package metadata was adjusted to improve PyPI README rendering.
 
 ## django-docutils 0.3.0 (2017-02-12)
 
-- Package updates and fixes
+django-docutils 0.3.0 updates package metadata and release packaging.
+
+### Fixes
+
+Package updates and packaging fixes were shipped.
 
 ## django-docutils 0.2.0 (2017-01-01)
 
-- Support for Django 1.10.0
+django-docutils 0.2.0 adds support for the then-current Django 1.10 release.
+
+### What's new
+
+Django 1.10.0 support was added.
 
 ## django-docutils 0.1.0 (2015-06-20)
 
-- First release on PyPI.
+django-docutils 0.1.0 is the first PyPI release.
+
+### What's new
+
+The package was published to PyPI for the first time.
 
 <!---
 # vim: set filetype=markdown:
