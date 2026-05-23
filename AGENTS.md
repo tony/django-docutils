@@ -292,6 +292,17 @@ Assert on `caplog.records` attributes, not string matching on `caplog.text`:
 - Non-scalar ad-hoc objects in `extra`
 - Requiring custom `extra` fields in format strings without safe defaults (missing keys raise `KeyError`)
 
+### Git Commit Standards
+
+#### Release commits
+
+Never create tags. Never push tags. The user handles tagging and tag
+pushes (tags trigger the CI publish workflow).
+
+Release commit subjects are plain and short: `Tag v<version>`. Put
+the detailed why/what in the commit body. Don't use the
+`Scope(type[detail]):` format for releases — don't bury the lede.
+
 ## Commit Messages
 
 Use conventional, component-scoped subjects:
