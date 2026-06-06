@@ -141,7 +141,7 @@ def sanitize_doctree(
 def publish_parts_from_doctree(
     document: nodes.document,
     destination_path: str | None = None,
-    writer: writers.Writer | None = None,
+    writer: writers.Writer[t.Any] | None = None,
     writer_name: str = "pseudoxml",
     settings: t.Any | None = None,
     settings_spec: t.Any | None = None,
@@ -187,7 +187,7 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(
     doctree: nodes.document,
-    writer: writers.Writer | None = None,
+    writer: writers.Writer[t.Any] | None = None,
 ) -> str | None:
     """Publish table of contents from docutils doctree."""
     if not writer:
