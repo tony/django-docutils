@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing import TypedDict
+import typing as t
+
+from typing_extensions import NotRequired, TypedDict
 
 
 class DjangoDocutilsLibRSTRolesSettings(TypedDict, total=False):
@@ -14,7 +16,10 @@ class DjangoDocutilsLibRSTRolesSettings(TypedDict, total=False):
 class DjangoDocutilsLibRSTDocutilsSettings(TypedDict, total=False):
     """Docutils document settings."""
 
+    file_insertion_enabled: bool
     raw_enabled: bool
+    _disable_config: bool
+    line_length_limit: int
     strip_comments: bool
     initial_header_level: int
 
@@ -22,6 +27,8 @@ class DjangoDocutilsLibRSTDocutilsSettings(TypedDict, total=False):
 class DjangoDocutilsLibRSTSettings(TypedDict, total=False):
     """Core settings object for ``DJANGO_DOCUTILS_LIB_RST``."""
 
+    allow_unsafe_docutils_settings: bool
+    allowed_uri_schemes: NotRequired[t.Sequence[str]]
     metadata_processors: list[str]
     transforms: list[str]
     docutils: DjangoDocutilsLibRSTDocutilsSettings

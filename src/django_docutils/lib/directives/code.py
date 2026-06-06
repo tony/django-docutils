@@ -107,7 +107,9 @@ class CodeBlock(Directive):
         # take an arbitrary option if more than one is given
         formatter = (self.options and VARIANTS[next(iter(self.options))]) or DEFAULT
         parsed = highlight("\n".join(self.content), lexer, formatter)
-        return [nodes.raw("", parsed, format="html")]
+        raw_node = nodes.raw("", parsed, format="html")
+        raw_node["django_docutils_trusted_raw"] = True
+        return [raw_node]
 
 
 def register_pygments_directive(directive: str = "code-block") -> None:

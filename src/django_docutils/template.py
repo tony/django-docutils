@@ -12,9 +12,10 @@ from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
 from django.template.exceptions import TemplateDoesNotExist
 from django.utils.safestring import SafeString, mark_safe
-from docutils import core
+from docutils import writers
 
 from django_docutils.lib.directives.code import register_pygments_directive
+from django_docutils.lib.publisher import publish_doctree, publish_parts_from_doctree
 
 
 class DocutilsTemplates(BaseEngine):
@@ -59,14 +60,14 @@ class DocutilsTemplate:
         request: HttpRequest | None = None,
     ) -> SafeString:
         """Render DocutilsTemplate to string."""
-        context = self.options
         if request is not None:
-            context["request"] = request
-            context["csrf_input"] = csrf_input_lazy(request)
-            context["csrf_token"] = csrf_token_lazy(request)
-        context = {"source": self.source, "writer_name": "html"}
+            self.options["request"] = request
+            self.options["csrf_input"] = csrf_input_lazy(request)
+            self.options["csrf_token"] = csrf_token_lazy(request)
 
-        parts = core.publish_parts(**context)["html_body"]
+        writer = writers.get_writer_class("html")()
+        doctree = publish_doctree(self.source)
+        parts = publish_parts_from_doctree(doctree, writer=writer)["html_body"]
         assert isinstance(parts, str)
 
         return mark_safe(parts)

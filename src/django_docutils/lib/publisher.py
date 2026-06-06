@@ -3,36 +3,132 @@
 from __future__ import annotations
 
 import typing as t
+import urllib.parse
 
 from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
-from docutils import io, nodes
+from docutils import io, nodes, writers
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 from docutils.readers.doctree import Reader
-from docutils.writers.html5_polyglot import Writer
 from typing_extensions import NotRequired, TypedDict, Unpack
 
 from .directives.registry import register_django_docutils_directives
 from .roles.registry import register_django_docutils_roles
-from .settings import DJANGO_DOCUTILS_LIB_RST
+from .settings import get_allowed_uri_schemes, get_docutils_settings
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
 
-docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
+
+def _uri_is_allowed(uri: str, allowed_uri_schemes: frozenset[str]) -> bool:
+    """Return whether a URI can be emitted into HTML attributes.
+
+    Examples
+    --------
+    >>> _uri_is_allowed("https://example.com", frozenset({"https"}))
+    True
+    >>> _uri_is_allowed("#section", frozenset())
+    True
+    >>> _uri_is_allowed("javascript:alert(1)", frozenset({"https"}))
+    False
+    """
+    parts = urllib.parse.urlsplit(uri)
+    if not parts.scheme:
+        return True
+    return parts.scheme.lower() in allowed_uri_schemes
+
+
+def _replace_node_with_text(node: nodes.Element) -> None:
+    """Replace a node with its rendered text content.
+
+    Examples
+    --------
+    >>> paragraph = nodes.paragraph()
+    >>> reference = nodes.reference("", "", nodes.Text("link"))
+    >>> paragraph += reference
+    >>> _replace_node_with_text(reference)
+    >>> paragraph.astext()
+    'link'
+    """
+    if node.parent is None:
+        return
+    node.parent.replace(node, nodes.Text(node.astext()))
+
+
+def _remove_node(node: nodes.Element) -> None:
+    """Remove a node from its parent if it is attached.
+
+    Examples
+    --------
+    >>> paragraph = nodes.paragraph()
+    >>> raw = nodes.raw("", "<script></script>", format="html")
+    >>> paragraph += raw
+    >>> _remove_node(raw)
+    >>> len(paragraph.children)
+    0
+    """
+    if node.parent is not None:
+        node.parent.remove(node)
+
+
+def sanitize_doctree(
+    document: nodes.document,
+    settings_overrides: t.Mapping[str, object] | None = None,
+) -> None:
+    """Remove unsafe HTML-producing nodes and attributes from a doctree.
+
+    Examples
+    --------
+    >>> document = nodes.document("", "")
+    >>> document += nodes.raw("", "<script></script>", format="html")
+    >>> sanitize_doctree(document)
+    >>> len(document.children)
+    0
+    """
+    settings = get_docutils_settings(settings_overrides)
+    allowed_uri_schemes = get_allowed_uri_schemes()
+
+    if settings.get("raw_enabled") is not True:
+        for raw_node in list(document.findall(nodes.raw)):
+            if raw_node.get("django_docutils_trusted_raw") is not True:
+                _remove_node(raw_node)
+
+    for reference in list(document.findall(nodes.reference)):
+        refuri = reference.get("refuri")
+        if isinstance(refuri, str) and not _uri_is_allowed(
+            refuri,
+            allowed_uri_schemes,
+        ):
+            _replace_node_with_text(reference)
+
+    for target in list(document.findall(nodes.target)):
+        refuri = target.get("refuri")
+        if isinstance(refuri, str) and not _uri_is_allowed(refuri, allowed_uri_schemes):
+            del target["refuri"]
+
+    for image in list(document.findall(nodes.image)):
+        uri = image.get("uri")
+        if isinstance(uri, str) and not _uri_is_allowed(uri, allowed_uri_schemes):
+            _remove_node(image)
 
 
 def publish_parts_from_doctree(
     document: nodes.document,
     destination_path: str | None = None,
-    writer: Writer | None = None,
+    writer: writers.Writer[t.Any] | None = None,
     writer_name: str = "pseudoxml",
     settings: t.Any | None = None,
     settings_spec: t.Any | None = None,
-    settings_overrides: t.Any | None = None,
+    settings_overrides: t.Mapping[str, object] | None = None,
     config_section: str | None = None,
     enable_exit_status: bool = False,
 ) -> dict[str, str]:
     """Render docutils doctree into docutils parts."""
+    docutils_settings = get_docutils_settings(settings_overrides)
+    sanitize_doctree(document, docutils_settings)
+    if settings is not None:
+        for setting, value in docutils_settings.items():
+            setattr(settings, setting, value)
+
     reader = Reader(parser_name="null")  # type:ignore
     pub = Publisher(
         reader,
@@ -46,7 +142,7 @@ def publish_parts_from_doctree(
         pub.set_writer(writer_name)
     pub.process_programmatic_settings(
         settings_spec,
-        settings_overrides,
+        docutils_settings,
         config_section,
     )
     pub.set_destination(None, destination_path)
@@ -56,7 +152,7 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(
     doctree: nodes.document,
-    writer: Writer | None = None,
+    writer: writers.Writer[t.Any] | None = None,
 ) -> str | None:
     """Publish table of contents from docutils doctree."""
     if not writer:
@@ -99,7 +195,7 @@ def publish_toc_from_doctree(
 
 def publish_doctree(
     source: str | bytes,
-    settings_overrides: t.Any = docutils_settings,
+    settings_overrides: t.Mapping[str, object] | None = None,
 ) -> nodes.document:
     """Split off ability to get doctree (a.k.a. document).
 
@@ -120,10 +216,11 @@ def publish_doctree(
     """
     register_django_docutils_directives()
     register_django_docutils_roles()
+    docutils_settings = get_docutils_settings(settings_overrides)
 
     return docutils_publish_doctree(  # type:ignore
         source=force_bytes(source),
-        settings_overrides=settings_overrides,
+        settings_overrides=docutils_settings,
     )
 
 
@@ -174,7 +271,6 @@ def publish_html_from_doctree(
     parts = publish_parts_from_doctree(
         doctree,
         writer=writer,
-        settings_overrides=docutils_settings,
     )
 
     if show_title:

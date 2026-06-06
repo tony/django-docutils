@@ -10,6 +10,31 @@ from django.core.signals import setting_changed
 if t.TYPE_CHECKING:
     from .types import DjangoDocutilsLibRSTSettings, DjangoDocutilsLibTextSettings
 
+SAFE_DOCUTILS_DEFAULTS: t.Final[dict[str, object]] = {
+    "file_insertion_enabled": False,
+    "raw_enabled": False,
+    "_disable_config": True,
+    "line_length_limit": 10_000,
+}
+"""Docutils defaults used for web-facing django-docutils rendering."""
+
+PROTECTED_DOCUTILS_DEFAULTS: t.Final[dict[str, object]] = {
+    "file_insertion_enabled": False,
+    "raw_enabled": False,
+    "_disable_config": True,
+}
+"""Settings that require explicit unsafe opt-in before applications may override."""
+
+DEFAULT_ALLOWED_URI_SCHEMES: t.Final[frozenset[str]] = frozenset(
+    {"http", "https", "mailto"},
+)
+"""URI schemes emitted by django-docutils HTML rendering by default."""
+
+UNSAFE_URI_SCHEMES: t.Final[frozenset[str]] = frozenset(
+    {"data", "file", "javascript", "vbscript"},
+)
+"""URI schemes that require explicit unsafe opt-in when configured."""
+
 DJANGO_DOCUTILS_LIB_RST = t.cast(
     "DjangoDocutilsLibRSTSettings",
     getattr(settings, "DJANGO_DOCUTILS_LIB_RST", {}),
@@ -24,6 +49,69 @@ DJANGO_DOCUTILS_LIB_TEXT = t.cast(
 DJANGO_DOCUTILS_ANONYMOUS_USER_NAME: str | None = "AnonymousCoward"
 
 
+def unsafe_docutils_settings_allowed() -> bool:
+    """Return whether project settings may re-enable unsafe Docutils features.
+
+    Examples
+    --------
+    >>> isinstance(unsafe_docutils_settings_allowed(), bool)
+    True
+    """
+    return bool(DJANGO_DOCUTILS_LIB_RST.get("allow_unsafe_docutils_settings", False))
+
+
+def get_docutils_settings(
+    settings_overrides: t.Mapping[str, object] | None = None,
+) -> dict[str, object]:
+    """Return Docutils settings with django-docutils security defaults applied.
+
+    Examples
+    --------
+    >>> settings = get_docutils_settings()
+    >>> settings["file_insertion_enabled"]
+    False
+    >>> settings["raw_enabled"]
+    False
+    >>> settings["_disable_config"]
+    True
+    """
+    configured = dict(DJANGO_DOCUTILS_LIB_RST.get("docutils", {}))
+    overrides = dict(settings_overrides or {})
+    resolved: dict[str, object] = {
+        **SAFE_DOCUTILS_DEFAULTS,
+        **configured,
+        **overrides,
+    }
+
+    if not unsafe_docutils_settings_allowed():
+        resolved.update(PROTECTED_DOCUTILS_DEFAULTS)
+        line_length_limit = resolved.get("line_length_limit")
+        if isinstance(line_length_limit, int) and line_length_limit > 10_000:
+            resolved["line_length_limit"] = 10_000
+
+    return resolved
+
+
+def get_allowed_uri_schemes() -> frozenset[str]:
+    """Return normalized URI schemes allowed in rendered HTML attributes.
+
+    Examples
+    --------
+    >>> "https" in get_allowed_uri_schemes()
+    True
+    >>> "javascript" in get_allowed_uri_schemes()
+    False
+    """
+    configured = DJANGO_DOCUTILS_LIB_RST.get(
+        "allowed_uri_schemes",
+        DEFAULT_ALLOWED_URI_SCHEMES,
+    )
+    schemes = {str(scheme).lower().removesuffix(":") for scheme in configured}
+    if not unsafe_docutils_settings_allowed():
+        schemes -= UNSAFE_URI_SCHEMES
+    return frozenset(schemes)
+
+
 def reload_settings(
     signal: t.Any,
     sender: t.Any,
@@ -35,7 +123,9 @@ def reload_settings(
     """Ran when settings updated."""
     if setting == "DJANGO_DOCUTILS_LIB_RST" and isinstance(value, dict):
         # mypy: See mypy#6262, mypy#9168. There's no equivalent to keyof in TypeScript
-        DJANGO_DOCUTILS_LIB_RST.update(**value)  # type:ignore
+        rst_settings = t.cast("t.MutableMapping[str, object]", DJANGO_DOCUTILS_LIB_RST)
+        rst_settings.clear()
+        rst_settings.update(value)
 
         # Register any added docutils roles or directives
         from django_docutils.lib.directives.registry import (
