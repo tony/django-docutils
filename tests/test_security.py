@@ -556,6 +556,11 @@ URI_ALLOW_CASES: list[UriAllowCase] = [
         uri="java\x01script:alert(1)",
         allowed=False,
     ),
+    UriAllowCase(
+        test_id="invalid-ipv6",
+        uri="http://[::1",
+        allowed=False,
+    ),
 ]
 
 
@@ -624,6 +629,14 @@ def test_inline_code_survives_doctree_re_render() -> None:
     for html in (first, second):
         assert "inline-code" in html
         assert "ls" in html
+
+
+def test_malformed_link_does_not_fail_render() -> None:
+    """RST with an unparsable link URI renders instead of raising."""
+    html = publish_html_from_source("`x <http://[::1>`_")
+
+    assert html is not None
+    assert "http://[::1" not in html
 
 
 def test_append_html_to_node_survives_sanitization() -> None:

@@ -29,7 +29,8 @@ def _uri_is_allowed(uri: str, allowed_uri_schemes: frozenset[str]) -> bool:
 
     Control characters are rejected before parsing: scheme-invalid bytes
     such as a vertical tab make ``urlsplit`` report an empty scheme, which
-    would otherwise pass as a relative link.
+    would otherwise pass as a relative link. URIs ``urlsplit`` refuses to
+    parse (e.g. malformed IPv6 brackets) are treated as disallowed.
 
     Examples
     --------
@@ -41,10 +42,15 @@ def _uri_is_allowed(uri: str, allowed_uri_schemes: frozenset[str]) -> bool:
     False
     >>> _uri_is_allowed("java\x0bscript:alert(1)", frozenset({"https"}))
     False
+    >>> _uri_is_allowed("http://[::1", frozenset({"http"}))
+    False
     """
     if any(char in _C0_CONTROL_CHARS for char in uri):
         return False
-    parts = urllib.parse.urlsplit(uri)
+    try:
+        parts = urllib.parse.urlsplit(uri)
+    except ValueError:
+        return False
     if not parts.scheme:
         return True
     return parts.scheme.lower() in allowed_uri_schemes
