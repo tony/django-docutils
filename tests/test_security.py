@@ -631,6 +631,49 @@ def test_inline_code_survives_doctree_re_render() -> None:
         assert "ls" in html
 
 
+class SanitizeMisuseCase(t.NamedTuple):
+    """A direct sanitize_doctree call with caller-supplied raw settings."""
+
+    test_id: str
+    rst_settings: dict[str, object]
+    expect_raw_kept: bool
+
+
+SANITIZE_MISUSE_CASES: list[SanitizeMisuseCase] = [
+    SanitizeMisuseCase(
+        test_id="raw-enabled-without-opt-in",
+        rst_settings={"docutils": {}},
+        expect_raw_kept=False,
+    ),
+    SanitizeMisuseCase(
+        test_id="raw-enabled-with-opt-in",
+        rst_settings={"allow_unsafe_docutils_settings": True},
+        expect_raw_kept=True,
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    SanitizeMisuseCase._fields,
+    SANITIZE_MISUSE_CASES,
+    ids=[case.test_id for case in SANITIZE_MISUSE_CASES],
+)
+def test_sanitize_doctree_raw_skip_requires_project_opt_in(
+    settings: t.Any,
+    test_id: str,
+    rst_settings: dict[str, object],
+    expect_raw_kept: bool,
+) -> None:
+    """Caller-supplied raw_enabled cannot bypass stripping without the opt-in."""
+    settings.DJANGO_DOCUTILS_LIB_RST = rst_settings
+    document = nodes.document("", "")  # type: ignore[arg-type]
+    document += nodes.raw("", "<script></script>", format="html")
+
+    sanitize_doctree(document, {"raw_enabled": True})
+
+    assert bool(list(document.findall(nodes.raw))) is expect_raw_kept
+
+
 def test_malformed_link_does_not_fail_render() -> None:
     """RST with an unparsable link URI renders instead of raising."""
     html = publish_html_from_source("`x <http://[::1>`_")

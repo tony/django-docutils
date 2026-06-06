@@ -14,7 +14,11 @@ from typing_extensions import NotRequired, TypedDict, Unpack
 
 from .directives.registry import register_django_docutils_directives
 from .roles.registry import register_django_docutils_roles
-from .settings import get_allowed_uri_schemes, get_docutils_settings
+from .settings import (
+    get_allowed_uri_schemes,
+    get_docutils_settings,
+    unsafe_docutils_settings_allowed,
+)
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
 
@@ -102,8 +106,9 @@ def sanitize_doctree(
     docutils_settings : mapping, optional
         Already-resolved Docutils settings, consumed as-is. ``None``
         resolves project defaults via :func:`get_docutils_settings`.
-        URI scheme policy is project-level via
-        :func:`get_allowed_uri_schemes`, not per-call.
+        ``raw_enabled`` only skips raw-node removal when the project also
+        sets ``allow_unsafe_docutils_settings``. URI scheme policy is
+        project-level via :func:`get_allowed_uri_schemes`, not per-call.
 
     Examples
     --------
@@ -120,7 +125,10 @@ def sanitize_doctree(
     )
     allowed_uri_schemes = get_allowed_uri_schemes()
 
-    if settings.get("raw_enabled") is not True:
+    raw_skip_allowed = (
+        settings.get("raw_enabled") is True and unsafe_docutils_settings_allowed()
+    )
+    if not raw_skip_allowed:
         for raw_node in list(document.findall(nodes.raw)):
             if raw_node.get("django_docutils_trusted_raw") is not True:
                 _remove_node(raw_node)
