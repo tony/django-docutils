@@ -10,6 +10,7 @@ from docutils.core import publish_doctree as docutils_publish_doctree
 
 from django_docutils.lib.publisher import (
     _uri_is_allowed,
+    publish_doctree,
     publish_html_from_doctree,
     publish_html_from_source,
     publish_parts_from_doctree,
@@ -601,3 +602,22 @@ def test_library_markup_survives_locked_down_rendering(
 
     assert html is not None
     assert expected_html in html
+
+
+def test_inline_code_survives_doctree_re_render() -> None:
+    """Re-rendering a doctree keeps CodeTransform's highlighted inline code.
+
+    CodeTransform replaces literals with raw nodes in place during the first
+    publish; sanitization on a second publish of the same doctree must not
+    delete them.
+    """
+    doctree = publish_doctree("Run ``$ ls -la`` now.")
+
+    first = publish_html_from_doctree(doctree)
+    second = publish_html_from_doctree(doctree)
+
+    assert first is not None
+    assert second is not None
+    for html in (first, second):
+        assert "inline-code" in html
+        assert "ls" in html

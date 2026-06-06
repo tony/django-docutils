@@ -150,6 +150,7 @@ class CodeTransform(Transform):
 
             if newtext:
                 newnode = nodes.raw("", newtext, format="html")
+                newnode["django_docutils_trusted_raw"] = True
 
             if newnode and node.parent:
                 node.replace_self(newnode)
