@@ -9,6 +9,7 @@ from django.template import Context, Template
 from docutils.core import publish_doctree as docutils_publish_doctree
 
 from django_docutils.lib.publisher import (
+    _uri_is_allowed,
     publish_html_from_doctree,
     publish_html_from_source,
     publish_parts_from_doctree,
@@ -485,3 +486,84 @@ def test_unsafe_docutils_settings_can_be_enabled_for_trusted_rst(
 
     assert html is not None
     assert expected_html in html
+
+
+class UriAllowCase(t.NamedTuple):
+    """A URI and whether the scheme allow-list may emit it."""
+
+    test_id: str
+    uri: str
+    allowed: bool
+
+
+URI_ALLOW_CASES: list[UriAllowCase] = [
+    UriAllowCase(
+        test_id="plain-https",
+        uri="https://example.com",
+        allowed=True,
+    ),
+    UriAllowCase(
+        test_id="relative",
+        uri="/path/page",
+        allowed=True,
+    ),
+    UriAllowCase(
+        test_id="fragment",
+        uri="#section",
+        allowed=True,
+    ),
+    UriAllowCase(
+        test_id="javascript",
+        uri="javascript:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="uppercase-scheme",
+        uri="JAVASCRIPT:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="leading-space",
+        uri="  javascript:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="embedded-tab",
+        uri="java\tscript:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="embedded-newline",
+        uri="java\nscript:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="embedded-cr",
+        uri="java\rscript:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="vertical-tab",
+        uri="java\x0bscript:alert(1)",
+        allowed=False,
+    ),
+    UriAllowCase(
+        test_id="c0-control",
+        uri="java\x01script:alert(1)",
+        allowed=False,
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    UriAllowCase._fields,
+    URI_ALLOW_CASES,
+    ids=[case.test_id for case in URI_ALLOW_CASES],
+)
+def test_uri_is_allowed_rejects_obfuscated_schemes(
+    test_id: str,
+    uri: str,
+    allowed: bool,
+) -> None:
+    """Scheme obfuscation must not slip past the URI allow-list."""
+    assert _uri_is_allowed(uri, frozenset({"https"})) is allowed

@@ -18,9 +18,18 @@ from .settings import get_allowed_uri_schemes, get_docutils_settings
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
 
+_C0_CONTROL_CHARS: t.Final[frozenset[str]] = frozenset(
+    chr(code_point) for code_point in range(0x20)
+) | {"\x7f"}
+"""C0 / DEL control characters that disqualify a URI outright."""
+
 
 def _uri_is_allowed(uri: str, allowed_uri_schemes: frozenset[str]) -> bool:
-    """Return whether a URI can be emitted into HTML attributes.
+    r"""Return whether a URI can be emitted into HTML attributes.
+
+    Control characters are rejected before parsing: scheme-invalid bytes
+    such as a vertical tab make ``urlsplit`` report an empty scheme, which
+    would otherwise pass as a relative link.
 
     Examples
     --------
@@ -30,7 +39,11 @@ def _uri_is_allowed(uri: str, allowed_uri_schemes: frozenset[str]) -> bool:
     True
     >>> _uri_is_allowed("javascript:alert(1)", frozenset({"https"}))
     False
+    >>> _uri_is_allowed("java\x0bscript:alert(1)", frozenset({"https"}))
+    False
     """
+    if any(char in _C0_CONTROL_CHARS for char in uri):
+        return False
     parts = urllib.parse.urlsplit(uri)
     if not parts.scheme:
         return True
