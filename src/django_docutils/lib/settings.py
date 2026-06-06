@@ -35,9 +35,11 @@ UNSAFE_URI_SCHEMES: t.Final[frozenset[str]] = frozenset(
 )
 """URI schemes that require explicit unsafe opt-in when configured."""
 
+# Copy so the module state never aliases Django's stored settings object;
+# reload_settings() mutates this dict in place on setting_changed.
 DJANGO_DOCUTILS_LIB_RST = t.cast(
     "DjangoDocutilsLibRSTSettings",
-    getattr(settings, "DJANGO_DOCUTILS_LIB_RST", {}),
+    dict(getattr(settings, "DJANGO_DOCUTILS_LIB_RST", {})),
 )
 """Settings for reStructuredText"""
 
@@ -122,10 +124,13 @@ def reload_settings(
 ) -> None:
     """Ran when settings updated."""
     if setting == "DJANGO_DOCUTILS_LIB_RST" and isinstance(value, dict):
+        # Snapshot before clear(): on override_settings teardown, value can be
+        # the same object as DJANGO_DOCUTILS_LIB_RST.
+        new_value = dict(value)
         # mypy: See mypy#6262, mypy#9168. There's no equivalent to keyof in TypeScript
         rst_settings = t.cast("t.MutableMapping[str, object]", DJANGO_DOCUTILS_LIB_RST)
         rst_settings.clear()
-        rst_settings.update(value)
+        rst_settings.update(new_value)
 
         # Register any added docutils roles or directives
         from django_docutils.lib.directives.registry import (
