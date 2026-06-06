@@ -149,7 +149,15 @@ def publish_parts_from_doctree(
     config_section: str | None = None,
     enable_exit_status: bool = False,
 ) -> dict[str, str]:
-    """Render docutils doctree into docutils parts."""
+    """Render docutils doctree into docutils parts.
+
+    Examples
+    --------
+    >>> doctree = publish_doctree("Hello **world**")
+    >>> parts = publish_parts_from_doctree(doctree, writer=DjangoDocutilsWriter())
+    >>> "world" in parts["html_body"]
+    True
+    """
     docutils_settings = get_docutils_settings(settings_overrides)
     sanitize_doctree(document, docutils_settings)
     if settings is not None:
@@ -240,6 +248,12 @@ def publish_doctree(
     -------
     docutils.nodes.document
         document/doctree for reStructuredText content
+
+    Examples
+    --------
+    >>> doctree = publish_doctree("Hello **world**")
+    >>> doctree.astext().startswith("Hello")
+    True
     """
     register_django_docutils_directives()
     register_django_docutils_roles()
@@ -262,7 +276,14 @@ def publish_html_from_source(
     source: str,
     **kwargs: Unpack[PublishHtmlDocTreeKwargs],
 ) -> str | None:
-    """Return HTML from reStructuredText source string."""
+    """Return HTML from reStructuredText source string.
+
+    Examples
+    --------
+    >>> html = publish_html_from_source("Hello **world**")
+    >>> html is not None and "world" in html
+    True
+    """
     doctree = publish_doctree(source)
     return publish_html_from_doctree(doctree, **kwargs)
 
@@ -287,6 +308,13 @@ def publish_html_from_doctree(
     -------
     str or None
         HTML from reStructuredText document (doctree)
+
+    Examples
+    --------
+    >>> doctree = publish_doctree("Hello **world**")
+    >>> html = publish_html_from_doctree(doctree)
+    >>> html is not None and "<strong>world</strong>" in html
+    True
     """
     writer = DjangoDocutilsWriter()
 

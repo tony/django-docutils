@@ -58,7 +58,14 @@ class DocutilsTemplate:
         context: Context | dict[str, t.Any] | None = None,
         request: HttpRequest | None = None,
     ) -> SafeString:
-        """Render DocutilsTemplate to string."""
+        """Render DocutilsTemplate to string.
+
+        Examples
+        --------
+        >>> template = DocutilsTemplate("Hello **world**", {})
+        >>> "world" in template.render()
+        True
+        """
         writer = writers.get_writer_class("html")()
         doctree = publish_doctree(self.source)
         parts = publish_parts_from_doctree(doctree, writer=writer)["html_body"]

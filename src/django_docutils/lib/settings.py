@@ -122,7 +122,18 @@ def reload_settings(
     enter: bool,
     **kwargs: t.Any,
 ) -> None:
-    """Ran when settings updated."""
+    """Ran when settings updated.
+
+    Examples
+    --------
+    >>> before = dict(DJANGO_DOCUTILS_LIB_RST)
+    >>> reload_settings(None, None, "DJANGO_DOCUTILS_LIB_RST", {"transforms": []}, True)
+    >>> DJANGO_DOCUTILS_LIB_RST["transforms"]
+    []
+    >>> reload_settings(None, None, "DJANGO_DOCUTILS_LIB_RST", dict(before), False)
+    >>> dict(DJANGO_DOCUTILS_LIB_RST) == before
+    True
+    """
     if setting == "DJANGO_DOCUTILS_LIB_RST" and isinstance(value, dict):
         # Snapshot before clear(): on override_settings teardown, value can be
         # the same object as DJANGO_DOCUTILS_LIB_RST.
