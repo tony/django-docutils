@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import typing as t
 
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 
 class DjangoDocutilsLibRSTRolesSettings(TypedDict, total=False):
@@ -28,7 +28,7 @@ class DjangoDocutilsLibRSTSettings(TypedDict, total=False):
     """Core settings object for ``DJANGO_DOCUTILS_LIB_RST``."""
 
     allow_unsafe_docutils_settings: bool
-    allowed_uri_schemes: NotRequired[t.Sequence[str]]
+    allowed_uri_schemes: t.Sequence[str]
     metadata_processors: list[str]
     transforms: list[str]
     docutils: DjangoDocutilsLibRSTDocutilsSettings
