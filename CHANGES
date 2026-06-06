@@ -33,13 +33,36 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
-django-docutils 0.30.0 is a documentation refresh release for people trying to
-use the package without reverse-engineering its internals. The docs now lead
-with the three Django integration paths: the {func}`~django_docutils.templatetags.django_docutils.rst`
-template tag, the {func}`~django_docutils.templatetags.django_docutils.rst_filter`
-filter, and {class}`~django_docutils.views.DocutilsView`. The site also moves
-onto the shared gp-sphinx documentation stack, so API pages, navigation, fonts,
-and built assets match the rest of the gp-libs documentation family.
+### Breaking changes
+
+#### Docutils rendering is locked down by default (#457)
+
+django-docutils now disables Docutils file insertion, raw directives, and
+`docutils.conf` processing across the public rendering helpers. It also removes
+raw nodes and unsafe URI schemes before emitting HTML. Apps that render trusted
+static RST and intentionally depend on `.. include::`, `.. raw::`, local
+`docutils.conf`, or unsafe URI schemes must opt in explicitly.
+
+```python
+# Before
+DJANGO_DOCUTILS_LIB_RST = {
+    "docutils": {
+        "raw_enabled": True,
+        "file_insertion_enabled": True,
+    },
+}
+
+# After
+DJANGO_DOCUTILS_LIB_RST = {
+    "allow_unsafe_docutils_settings": True,
+    "docutils": {
+        "raw_enabled": True,
+        "file_insertion_enabled": True,
+    },
+}
+```
+
+See {ref}`security` for trusted-content examples and deployment advice.
 
 ### What's new
 
@@ -98,6 +121,11 @@ replaced with `justfile` recipes. `just test`, `just ruff`, `just mypy`, and
 - The docs back button and sidebar assets update correctly during SPA-style
   navigation.
 - Legacy docs CSS that broke code-block rendering was removed.
+- `django.test.override_settings` changes to `DJANGO_DOCUTILS_LIB_RST` now
+  fully apply while active and fully revert on exit, instead of merging
+  override keys into project settings permanently.
+- Rendering `.rst` templates with a request no longer stores request and CSRF
+  state on the shared template engine options.
 
 ### Documentation
 
@@ -105,6 +133,10 @@ Docstring and Sphinx cleanup made the rendered API reference less noisy:
 exceptions link back to the module page, docutils and Django typing aliases are
 visible to autodoc, forward-reference warnings are suppressed where appropriate,
 and the `url_role` and `is_uncapitalized_word` examples render cleanly.
+
+The new {ref}`security` topic explains the locked-down defaults, manual unsafe
+opt-ins for trusted static RST, URI scheme filtering, and deployment guidance
+for user-authored content.
 
 Documentation deployment now uses AWS OIDC authentication instead of long-lived
 AWS keys, and the docs build switched to the `dirhtml` builder for cleaner URLs.
