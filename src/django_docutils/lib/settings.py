@@ -54,6 +54,12 @@ DJANGO_DOCUTILS_ANONYMOUS_USER_NAME: str | None = "AnonymousCoward"
 def unsafe_docutils_settings_allowed() -> bool:
     """Return whether project settings may re-enable unsafe Docutils features.
 
+    Returns
+    -------
+    bool
+        ``True`` when ``DJANGO_DOCUTILS_LIB_RST`` sets
+        ``allow_unsafe_docutils_settings``.
+
     Examples
     --------
     >>> isinstance(unsafe_docutils_settings_allowed(), bool)
@@ -66,6 +72,18 @@ def get_docutils_settings(
     settings_overrides: t.Mapping[str, object] | None = None,
 ) -> dict[str, object]:
     """Return Docutils settings with django-docutils security defaults applied.
+
+    Parameters
+    ----------
+    settings_overrides : mapping, optional
+        Per-call Docutils settings layered over project configuration.
+        Protected settings still win unless the project sets
+        ``allow_unsafe_docutils_settings``.
+
+    Returns
+    -------
+    dict
+        Resolved Docutils settings safe to hand to the publisher.
 
     Examples
     --------
@@ -96,6 +114,12 @@ def get_docutils_settings(
 
 def get_allowed_uri_schemes() -> frozenset[str]:
     """Return normalized URI schemes allowed in rendered HTML attributes.
+
+    Returns
+    -------
+    frozenset of str
+        Lowercased scheme names; unsafe schemes are excluded unless the
+        project sets ``allow_unsafe_docutils_settings``.
 
     Examples
     --------

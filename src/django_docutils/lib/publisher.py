@@ -165,6 +165,35 @@ def publish_parts_from_doctree(
 ) -> dict[str, str]:
     """Render docutils doctree into docutils parts.
 
+    Parameters
+    ----------
+    document : docutils.nodes.document
+        Doctree to sanitize and render.
+    destination_path : str, optional
+        Destination path handed to the docutils publisher.
+    writer : docutils.writers.Writer, optional
+        Writer instance; ``writer_name`` selects one when omitted.
+    writer_name : str
+        Writer name used when ``writer`` is not given.
+    settings : optional
+        Pre-built docutils settings object. The resolved security settings
+        are written onto it, but configuration files it already read cannot
+        be retroactively undone — prefer ``None``.
+    settings_spec : optional
+        docutils settings spec passed through to the publisher.
+    settings_overrides : mapping, optional
+        Per-call Docutils settings resolved via
+        :func:`~django_docutils.lib.settings.get_docutils_settings`.
+    config_section : str, optional
+        docutils configuration section passed through to the publisher.
+    enable_exit_status : bool
+        Forwarded to ``Publisher.publish``.
+
+    Returns
+    -------
+    dict
+        docutils parts (e.g. ``html_body``) keyed by part name.
+
     Examples
     --------
     >>> doctree = publish_doctree("Hello **world**")
@@ -291,6 +320,18 @@ def publish_html_from_source(
     **kwargs: Unpack[PublishHtmlDocTreeKwargs],
 ) -> str | None:
     """Return HTML from reStructuredText source string.
+
+    Parameters
+    ----------
+    source : str
+        reStructuredText content.
+    **kwargs : PublishHtmlDocTreeKwargs
+        Rendering flags forwarded to :func:`publish_html_from_doctree`.
+
+    Returns
+    -------
+    str or None
+        Rendered HTML, or ``None`` when only an empty TOC was requested.
 
     Examples
     --------
