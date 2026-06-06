@@ -36,4 +36,6 @@ def kbd_role(
     for key in keys:
         html += f"<kbd>{key}</kbd>"
 
-    return [nodes.raw("", html, format="html")], []
+    raw_node = nodes.raw("", html, format="html")
+    raw_node["django_docutils_trusted_raw"] = True
+    return [raw_node], []

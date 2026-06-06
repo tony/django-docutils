@@ -567,3 +567,37 @@ def test_uri_is_allowed_rejects_obfuscated_schemes(
 ) -> None:
     """Scheme obfuscation must not slip past the URI allow-list."""
     assert _uri_is_allowed(uri, frozenset({"https"})) is allowed
+
+
+class TrustedMarkupCase(t.NamedTuple):
+    """Library-generated markup that must survive locked-down rendering."""
+
+    test_id: str
+    source: str
+    expected_html: str
+
+
+TRUSTED_MARKUP_CASES: list[TrustedMarkupCase] = [
+    TrustedMarkupCase(
+        test_id="kbd-role",
+        source=":kbd:`ctrl-t`",
+        expected_html="<kbd>ctrl-t</kbd>",
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    TrustedMarkupCase._fields,
+    TRUSTED_MARKUP_CASES,
+    ids=[case.test_id for case in TRUSTED_MARKUP_CASES],
+)
+def test_library_markup_survives_locked_down_rendering(
+    test_id: str,
+    source: str,
+    expected_html: str,
+) -> None:
+    """django-docutils' own raw-emitting markup renders under safe defaults."""
+    html = publish_html_from_source(source)
+
+    assert html is not None
+    assert expected_html in html
