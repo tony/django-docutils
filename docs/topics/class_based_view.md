@@ -11,6 +11,14 @@
 
 You can also use a class-based view to render reStructuredText (reST).
 
+:::{important}
+
+`DocutilsView` and the `DocutilsTemplates` backend use locked-down Docutils
+defaults. See {ref}`security` before serving user-authored RST or enabling
+trusted-content overrides.
+
+:::
+
 If you want to use reStructuredText as a django template engine, `INSTALLED_APPS` _isn't_ required,
 instead you add this to your `TEMPLATES` variable in your settings:
 

@@ -1,0 +1,81 @@
+(security)=
+
+# Security
+
+django-docutils renders reStructuredText to HTML and returns that HTML as safe
+template output. The default renderer is locked down for content that may come
+from users, editors, uploads, API requests, or other lower-trust sources.
+
+## Default posture
+
+Without extra configuration, django-docutils applies these Docutils settings on
+public rendering paths:
+
+```python
+{
+    "file_insertion_enabled": False,
+    "raw_enabled": False,
+    "_disable_config": True,
+    "line_length_limit": 10_000,
+}
+```
+
+This disables `.. include::`, `.. raw::`, `.. csv-table:: :file:`, URL-backed
+file insertion, and local `docutils.conf` overrides. The HTML publisher also
+removes raw nodes and blocks unsafe URI schemes such as `javascript:`, `data:`,
+`file:`, and `vbscript:` before output.
+
+The default allowed URI schemes are:
+
+```python
+DJANGO_DOCUTILS_LIB_RST = {
+    "allowed_uri_schemes": ["http", "https", "mailto"],
+}
+```
+
+Relative links and fragment links are still allowed.
+
+## Trusted RST opt-in
+
+Only enable unsafe Docutils features for trusted static RST that ships with your
+application or documentation. Do not enable these settings for comments, CMS
+fields, profile text, uploaded files, or request data.
+
+```python
+DJANGO_DOCUTILS_LIB_RST = {
+    "allow_unsafe_docutils_settings": True,
+    "docutils": {
+        "raw_enabled": True,
+        "file_insertion_enabled": True,
+        "_disable_config": False,
+    },
+}
+```
+
+The opt-in flag is deliberate. Setting `raw_enabled=True` or
+`file_insertion_enabled=True` alone is ignored by the protected public helpers.
+
+## URI schemes
+
+Add ordinary safe schemes directly:
+
+```python
+DJANGO_DOCUTILS_LIB_RST = {
+    "allowed_uri_schemes": ["http", "https", "mailto", "tel"],
+}
+```
+
+Dangerous schemes such as `javascript:`, `data:`, `file:`, and `vbscript:` are
+ignored unless `allow_unsafe_docutils_settings=True` is also set. Treat that as
+trusted-content-only configuration.
+
+## Operational advice
+
+Keep the normal Django security rules in place:
+
+- Validate and limit user-submitted RST before rendering it.
+- Limit request and upload size at the web server or application boundary.
+- Use a Content Security Policy as defense in depth for rendered pages.
+- Avoid adding extra `mark_safe()` calls around user content.
+- Prefer separate trusted and untrusted rendering settings when your app has
+  both static documentation and user-authored content.
