@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import typing as t
 
+from django_docutils.template import DocutilsTemplates
 from django_docutils.views import DocutilsView
 
 from .constants import DEFAULT_RST
@@ -63,3 +64,22 @@ def test_view(settings: t.Any, tmp_path: pathlib.Path, rf: RequestFactory) -> No
 
 """
     )
+
+
+def test_render_does_not_mutate_shared_options(rf: RequestFactory) -> None:
+    """Rendering with a request must not leak state into shared options."""
+    engine = DocutilsTemplates(
+        {
+            "NAME": "docutils",
+            "DIRS": [],
+            "APP_DIRS": False,
+            "OPTIONS": {},
+        },
+    )
+    template = engine.from_string("Hello **world**")
+    options_before = dict(engine.options)
+
+    html = template.render(request=rf.get("/"))
+
+    assert "world" in html
+    assert engine.options == options_before

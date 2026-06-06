@@ -8,7 +8,6 @@ from django.conf import settings
 from django.http.request import HttpRequest
 from django.template import Context
 from django.template.backends.base import BaseEngine
-from django.template.backends.utils import csrf_input_lazy, csrf_token_lazy
 from django.template.engine import Engine
 from django.template.exceptions import TemplateDoesNotExist
 from django.utils.safestring import SafeString, mark_safe
@@ -60,11 +59,6 @@ class DocutilsTemplate:
         request: HttpRequest | None = None,
     ) -> SafeString:
         """Render DocutilsTemplate to string."""
-        if request is not None:
-            self.options["request"] = request
-            self.options["csrf_input"] = csrf_input_lazy(request)
-            self.options["csrf_token"] = csrf_token_lazy(request)
-
         writer = writers.get_writer_class("html")()
         doctree = publish_doctree(self.source)
         parts = publish_parts_from_doctree(doctree, writer=writer)["html_body"]
