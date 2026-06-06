@@ -72,9 +72,19 @@ def _remove_node(node: nodes.Element) -> None:
 
 def sanitize_doctree(
     document: nodes.document,
-    settings_overrides: t.Mapping[str, object] | None = None,
+    docutils_settings: t.Mapping[str, object] | None = None,
 ) -> None:
     """Remove unsafe HTML-producing nodes and attributes from a doctree.
+
+    Parameters
+    ----------
+    document : docutils.nodes.document
+        Doctree to sanitize in place.
+    docutils_settings : mapping, optional
+        Already-resolved Docutils settings, consumed as-is. ``None``
+        resolves project defaults via :func:`get_docutils_settings`.
+        URI scheme policy is project-level via
+        :func:`get_allowed_uri_schemes`, not per-call.
 
     Examples
     --------
@@ -84,7 +94,11 @@ def sanitize_doctree(
     >>> len(document.children)
     0
     """
-    settings = get_docutils_settings(settings_overrides)
+    settings = (
+        dict(docutils_settings)
+        if docutils_settings is not None
+        else get_docutils_settings()
+    )
     allowed_uri_schemes = get_allowed_uri_schemes()
 
     if settings.get("raw_enabled") is not True:
@@ -249,8 +263,8 @@ def publish_html_from_doctree(
 
     Parameters
     ----------
-    value : str
-        Contents from template being placed into node
+    doctree : docutils.nodes.document
+        reStructuredText document (doctree) to render
     show_title : bool
         Show top level title
     toc_only : bool
