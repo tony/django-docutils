@@ -6,6 +6,7 @@ import typing as t
 
 import pytest
 from django.template import Context, Template
+from docutils import nodes
 from docutils.core import publish_doctree as docutils_publish_doctree
 
 from django_docutils.lib.publisher import (
@@ -14,7 +15,9 @@ from django_docutils.lib.publisher import (
     publish_html_from_doctree,
     publish_html_from_source,
     publish_parts_from_doctree,
+    sanitize_doctree,
 )
+from django_docutils.lib.utils import append_html_to_node
 from django_docutils.lib.writers import DjangoDocutilsWriter
 from django_docutils.template import DocutilsTemplates
 from django_docutils.views import DocutilsView
@@ -621,3 +624,15 @@ def test_inline_code_survives_doctree_re_render() -> None:
     for html in (first, second):
         assert "inline-code" in html
         assert "ls" in html
+
+
+def test_append_html_to_node_survives_sanitization() -> None:
+    """HTML injected via append_html_to_node persists under safe defaults."""
+    doctree = publish_doctree("content\n")
+    paragraph = next(iter(doctree.findall(nodes.paragraph)))
+    append_html_to_node(paragraph, "<span>injected</span>")
+
+    sanitize_doctree(doctree)
+
+    raw_nodes = list(doctree.findall(nodes.raw))
+    assert any("injected" in raw_node.astext() for raw_node in raw_nodes)
