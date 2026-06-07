@@ -87,10 +87,11 @@ INSTALLED_APPS = [
 
 ## Next steps
 
-Integate docutils to your django site:
+Integrate docutils to your django site:
 
 1. {ref}`template_tag`
 2. {ref}`template_filter`
 3. {ref}`class_based_view`
+4. {ref}`security`
 
 :::

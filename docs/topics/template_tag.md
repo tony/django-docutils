@@ -21,6 +21,13 @@ INSTALLED_APPS = [
 
 ## Using the django tag
 
+:::{important}
+
+The `{% rst %}` tag uses locked-down Docutils defaults. See {ref}`security`
+before rendering user-authored RST or enabling trusted-content overrides.
+
+:::
+
 In your HTML template:
 
 ```django

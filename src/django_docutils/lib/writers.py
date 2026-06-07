@@ -10,6 +10,7 @@ from docutils import nodes
 from docutils.transforms import Transform
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
+from .sanitize import sanitize_doctree
 from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
@@ -224,12 +225,31 @@ class DjangoDocutilsWriter(Writer):
     ... }
     """
 
+    #: Settings resolved for the current render, set by
+    #: :func:`~django_docutils.lib.publisher.publish_parts_from_doctree` so the
+    #: final sanitize pass applies the same policy as the pre-publish pass.
+    django_docutils_settings: t.Mapping[str, object] | None = None
+
     def __init__(self) -> None:
         Writer.__init__(self)
         # I'd like to put this into the class attribute, but I think
         # somewhere up the Writer/Translator hierarchy are 'old' python
         # classes. (e.g. Python =< 2.1 classes)
         self.translator_class = DjangoDocutilsHTMLTranslator
+
+    def translate(self) -> None:
+        """Sanitize the document, then render it.
+
+        Docutils applies all transforms before calling the writer, so
+        sanitizing here guarantees the pass runs after writer transforms
+        (including those configured via ``DJANGO_DOCUTILS_LIB_RST``). A
+        transform cannot inject raw nodes or unsafe URIs that survive to the
+        output. The settings resolved for this render — including per-call
+        ``settings_overrides`` — are reused so this pass applies the same
+        policy as the pre-publish sanitize.
+        """
+        sanitize_doctree(self.document, self.django_docutils_settings)
+        Writer.translate(self)
 
     def get_transforms(self) -> list[type[Transform]]:
         """Return transformed required by DjangoDocutilsWriter.

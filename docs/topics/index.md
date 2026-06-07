@@ -25,6 +25,12 @@ Use the `rst` filter to convert RST strings to HTML inline.
 Serve RST-backed pages with `DocutilsView`.
 :::
 
+:::{grid-item-card} Security
+:link: security
+:link-type: doc
+Understand locked-down defaults and trusted-content opt-ins.
+:::
+
 :::{grid-item-card} FAQ
 :link: faq
 :link-type: doc
@@ -39,5 +45,6 @@ Common questions about reStructuredText and django-docutils.
 template_tag
 template_filter
 class_based_view
+security
 faq
 ```

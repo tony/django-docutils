@@ -16,24 +16,27 @@ def kbd_role(
     inliner: Inliner,
     options: dict[str, t.Any] | None = None,
     content: str | None = None,
-) -> tuple[list[nodes.raw], list[t.Any]]:
+) -> tuple[list[nodes.inline], list[t.Any]]:
     """Role for ``<kbd>``, the keyboard input element.
 
     Examples
     --------
-    :kbd:`ctrl-t`
+    >>> node_list, messages = kbd_role(
+    ...     "kbd",
+    ...     ":kbd:`ctrl-t`",
+    ...     "ctrl-t",
+    ...     1,
+    ...     None,  # type: ignore[arg-type]
+    ... )
+    >>> messages
+    []
+    >>> node_list[0].astext()
+    'ctrl-t'
+    >>> node_list[0]["classes"]
+    ['kbd']
 
     .. code-block:: rst
 
        :kbd:`ctrl-t`
     """
-    html = ""
-    keys = text.split(",")
-
-    if isinstance(keys, str):
-        keys = [keys]
-
-    for key in keys:
-        html += f"<kbd>{key}</kbd>"
-
-    return [nodes.raw("", html, format="html")], []
+    return [nodes.inline(rawtext, key, classes=["kbd"]) for key in text.split(",")], []

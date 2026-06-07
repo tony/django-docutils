@@ -124,6 +124,7 @@ def append_html_to_node(node: nodes.Element, ad_code: str) -> None:
     html += "</div>"
 
     html_node = nodes.raw("", html, format="html")
+    html_node["django_docutils_trusted_raw"] = True
 
     node.append(html_node)
     node.replace_self(node)
