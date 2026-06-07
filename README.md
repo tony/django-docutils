@@ -2,6 +2,14 @@
 
 docutils (a.k.a. reStructuredText / rst / reST) support for Django.
 
+django-docutils turns off docutils features that are risky on the web — raw
+HTML pass-through, file inclusion, and local `docutils.conf` lookup — and
+filters unsafe link schemes from rendered output. That reduces risk; it does
+not make untrusted markup safe. If people can submit their own
+reStructuredText or Markdown to your site (comments, profiles, CMS fields),
+read the [Security topic](https://django-docutils.git-pull.com/topics/security.html)
+first.
+
 ## Quickstart
 
 Install django-docutils:
@@ -94,7 +102,6 @@ class HomeView(DocutilsView):
 # Optional, automatically maps roles, directives and transformers
 DJANGO_DOCUTILS_LIB_RST = {
     "docutils": {
-        "raw_enabled": True,
         "strip_comments": True,
         "initial_header_level": 2,
     },
@@ -113,6 +120,22 @@ DJANGO_DOCUTILS_LIB_RST = {
 # Optional
 DJANGO_DOCUTILS_LIB_TEXT = {
     "uncapitalized_word_filters": ["project.my_module.my_capitalization_fn"]
+}
+```
+
+For trusted static RST only — never for user-submitted content — docutils
+features that the default rendering disables can be re-enabled with an
+explicit opt-in
+([Security topic](https://django-docutils.git-pull.com/topics/security.html),
+[docutils security guide](https://docutils.sourceforge.io/docs/howto/security.html)):
+
+```python
+DJANGO_DOCUTILS_LIB_RST = {
+    "allow_unsafe_docutils_settings": True,
+    "docutils": {
+        "raw_enabled": True,
+        "file_insertion_enabled": True,
+    },
 }
 ```
 
