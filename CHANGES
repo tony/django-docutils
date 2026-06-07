@@ -27,11 +27,22 @@ $ uv add django-docutils --prerelease allow
 $ uvx --from 'django-docutils' --prerelease allow django-docutils
 ```
 
-## django-docutils 0.30.0 (unreleased)
+## django-docutils 0.31.0 (unreleased)
 
 <!-- KEEP THIS PLACEHOLDER - DO NOT REMOVE OR MODIFY THIS LINE -->
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
+
+## django-docutils 0.30.0 (2026-06-07)
+
+django-docutils 0.30.0 hardens the rendering defaults so reStructuredText from
+untrusted sources can no longer read local files, reach external URLs, or
+inject raw HTML out of the box. This is a breaking change for apps that
+intentionally render trusted static RST with those features — they now opt in
+with a single `allow_unsafe_docutils_settings` flag; see {ref}`security` for the
+migration and deployment guidance. New reader-orientation docs, led by a
+{ref}`what-is-docutils` topic, help newcomers tell docutils, reStructuredText,
+Sphinx, and Markdown apart.
 
 ### Breaking changes
 
