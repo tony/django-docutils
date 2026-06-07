@@ -123,9 +123,8 @@ replaced with `justfile` recipes. `just test`, `just ruff`, `just mypy`, and
 - The docs back button and sidebar assets update correctly during SPA-style
   navigation.
 - Legacy docs CSS that broke code-block rendering was removed.
-- `django.test.override_settings` changes to `DJANGO_DOCUTILS_LIB_RST` now
-  fully apply while active and fully revert on exit, instead of merging
-  override keys into project settings permanently.
+- `django.test.override_settings` of `DJANGO_DOCUTILS_LIB_RST` now applies and
+  reverts cleanly, instead of permanently merging override keys into settings.
 - Rendering `.rst` templates with a request no longer stores request and CSRF
   state on the shared template engine options.
 
