@@ -74,6 +74,19 @@ via trunk (can break easily):
 [uv]: https://docs.astral.sh/uv/
 [uvx]: https://docs.astral.sh/uv/guides/tools/
 
+## New to reStructuredText?
+
+[reStructuredText] is the markup language; [docutils] is the library that
+parses and renders it. The official [primer][rst-primer] and
+[quick reference][rst-quickref] cover the syntax; {ref}`what-is-docutils`
+maps the wider ecosystem (docutils, Sphinx, Markdown), and the {ref}`faq`
+answers common questions.
+
+[reStructuredText]: https://docutils.sourceforge.io/rst.html
+[docutils]: https://docutils.sourceforge.io/
+[rst-primer]: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
+[rst-quickref]: https://docutils.sourceforge.io/docs/user/rst/quickref.html
+
 ## Add the django app
 
 Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
@@ -94,4 +107,5 @@ Integrate docutils to your django site:
 3. {ref}`class_based_view`
 4. {ref}`security`
 
-:::
+The rendering defaults disable docutils features that are risky on the web;
+if your site accepts user-authored markup, start with {ref}`security`.

@@ -144,6 +144,13 @@ Django's security overview. {func}`~django_docutils.lib.sanitize.sanitize_doctre
 and {class}`~django_docutils.lib.sanitize.SanitizeTransform` are documented for
 reuse in custom docutils pipelines.
 
+A new {ref}`what-is-docutils` topic orients readers who are new to the
+ecosystem: docutils versus reStructuredText versus Sphinx, Markdown parsing
+options, and the formats docutils can emit. The README and {ref}`quickstart`
+link the upstream reStructuredText primers, and the README's unsafe-settings
+example shows the `allow_unsafe_docutils_settings` opt-in instead of a
+standalone `raw_enabled` that the hardened defaults would ignore.
+
 Documentation deployment now uses AWS OIDC authentication instead of long-lived
 AWS keys, and the docs build switched to the `dirhtml` builder for cleaner URLs.
 

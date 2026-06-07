@@ -31,6 +31,12 @@ Serve RST-backed pages with `DocutilsView`.
 Understand locked-down defaults and trusted-content opt-ins.
 :::
 
+:::{grid-item-card} What is docutils?
+:link: what_is_docutils
+:link-type: doc
+Untangle docutils, reStructuredText, Sphinx, and Markdown.
+:::
+
 :::{grid-item-card} FAQ
 :link: faq
 :link-type: doc
@@ -46,5 +52,6 @@ template_tag
 template_filter
 class_based_view
 security
+what_is_docutils
 faq
 ```

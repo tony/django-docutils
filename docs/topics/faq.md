@@ -4,17 +4,26 @@
 
 ## General
 
+New to the ecosystem? {ref}`what-is-docutils` maps docutils,
+reStructuredText, Sphinx, and Markdown in one page.
+
 ### What is reST, RST, reStructuredText?
 
-[reStructuredText] is a markup syntax, similar to markdown.
+[reStructuredText] is a markup syntax, similar to markdown. Learn it from the
+official [primer][rst-primer] and [quick reference][rst-quickref].
+
+[rst-primer]: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
+[rst-quickref]: https://docutils.sourceforge.io/docs/user/rst/quickref.html
 
 ### What is docutils?
 
 [docutils] is a python package for parsing and publishing markup. The default docutils package
-supports reStructuredText. It can also be extended to parse markdown
-(e.g. [myst-parser]).
+supports reStructuredText. It can also parse markdown when a third-party
+parser such as [myst-docutils] or [myst-parser] is installed — see
+{ref}`what-is-docutils` for the details.
 
-[myst-parser]: https://github.com/executablebooks/MyST-Parser
+[myst-docutils]: https://pypi.org/project/myst-docutils/
+[myst-parser]: https://myst-parser.readthedocs.io/
 
 ## Django Docutils
 
