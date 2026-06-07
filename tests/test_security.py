@@ -831,7 +831,7 @@ def test_meta_refresh_kept_with_unsafe_opt_in(settings: t.Any) -> None:
 
     parts = publish_parts_from_doctree(doctree, writer=DjangoDocutilsWriter())
 
-    assert "https://example.com/" in parts.get("head", "")
+    assert 'http-equiv="refresh"' in parts.get("head", "")
 
 
 def test_malformed_link_does_not_fail_render() -> None:
