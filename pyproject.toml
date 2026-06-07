@@ -56,6 +56,10 @@ dev = [
   # Docs
   "gp-sphinx==0.0.1a30",
   "sphinx-autodoc-api-style==0.0.1a30",
+  "sphinx-autodoc-docutils==0.0.1a30",
+  "sphinx-autodoc-sphinx==0.0.1a30",
+  "sphinx-ux-autodoc-layout==0.0.1a30",
+  "sphinx-ux-badges==0.0.1a30",
   "gp-libs",
   "sphinx-autobuild",
   "sphinx-click",
@@ -83,6 +87,10 @@ dev = [
 docs = [
   "gp-sphinx==0.0.1a30",
   "sphinx-autodoc-api-style==0.0.1a30",
+  "sphinx-autodoc-docutils==0.0.1a30",
+  "sphinx-autodoc-sphinx==0.0.1a30",
+  "sphinx-ux-autodoc-layout==0.0.1a30",
+  "sphinx-ux-badges==0.0.1a30",
   "gp-libs",
   "sphinx-autobuild",
   "sphinx-click",
