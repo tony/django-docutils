@@ -27,16 +27,17 @@ class RemoteUrlHandlerFn(Protocol):
 RoleFnReturnValue = tuple[list[nodes.reference], list[t.Any]]
 """Role function return value.
 
-See also
---------
+.. seealso::
 
-From `Docutils: How to: RST Roles
-<https://docutils.sourceforge.io/docs/howto/rst-roles.html>`_:
+   From `Docutils: How to: RST Roles
+   <https://docutils.sourceforge.io/docs/howto/rst-roles.html>`_:
 
-    Role functions return a tuple of two values:
+      Role functions return a tuple of two values:
 
-    - A list of nodes which will be inserted into the document tree at the point where
-      the interpreted role was encountered (can be an empty list).
-    - A list of system messages, which will be inserted into the document tree
-      immediately after the end of the current block (can also be empty).
+      - A list of nodes which will be inserted into the document tree at the
+        point where the interpreted role was encountered (can be an empty
+        list).
+      - A list of system messages, which will be inserted into the document
+        tree immediately after the end of the current block (can also be
+        empty).
 """
