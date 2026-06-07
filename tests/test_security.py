@@ -790,6 +790,50 @@ def test_library_transform_trusted_raw_survives_sanitize_last(
     assert "<script>alert(2)</script>" not in html
 
 
+def test_meta_refresh_is_stripped_from_head_parts(settings: t.Any) -> None:
+    """A meta http-equiv=refresh URI must not reach the head/meta parts.
+
+    The meta directive emits a ``<meta http-equiv="refresh">`` into the head
+    parts, outside the reference/target/image URI policy. A refresh forces
+    navigation regardless of scheme, so the node is removed under safe
+    defaults rather than scheme-validated.
+    """
+    settings.DJANGO_DOCUTILS_LIB_RST = {}
+    doctree = publish_doctree(
+        ".. meta::\n   :http-equiv=refresh: 0;url=javascript:alert(1)\n\ntext\n",
+    )
+
+    parts = publish_parts_from_doctree(doctree, writer=DjangoDocutilsWriter())
+
+    for key in ("head", "meta", "whole", "html_head"):
+        assert "javascript:alert(1)" not in parts.get(key, "")
+        assert "refresh" not in parts.get(key, "").lower()
+
+
+def test_benign_meta_survives_sanitization(settings: t.Any) -> None:
+    """Non-refresh meta (description, keywords) is preserved."""
+    settings.DJANGO_DOCUTILS_LIB_RST = {}
+    doctree = publish_doctree(
+        ".. meta::\n   :name=description: hello world\n\ntext\n",
+    )
+
+    parts = publish_parts_from_doctree(doctree, writer=DjangoDocutilsWriter())
+
+    assert "hello world" in parts.get("head", "")
+
+
+def test_meta_refresh_kept_with_unsafe_opt_in(settings: t.Any) -> None:
+    """Trusted content opting into unsafe settings keeps refresh meta."""
+    settings.DJANGO_DOCUTILS_LIB_RST = {"allow_unsafe_docutils_settings": True}
+    doctree = publish_doctree(
+        ".. meta::\n   :http-equiv=refresh: 5;url=https://example.com/\n\ntext\n",
+    )
+
+    parts = publish_parts_from_doctree(doctree, writer=DjangoDocutilsWriter())
+
+    assert "https://example.com/" in parts.get("head", "")
+
+
 def test_malformed_link_does_not_fail_render() -> None:
     """RST with an unparsable link URI renders instead of raising."""
     html = publish_html_from_source("`x <http://[::1>`_")

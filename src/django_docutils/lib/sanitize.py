@@ -149,6 +149,16 @@ def sanitize_doctree(
         if isinstance(uri, str) and not _uri_is_allowed(uri, allowed_uri_schemes):
             _remove_node(image)
 
+    # ``.. meta:: :http-equiv=refresh:`` emits a ``<meta>`` into the head
+    # parts, outside the reference/target/image URI policy. A refresh forces
+    # navigation regardless of scheme — a refresh to an allow-listed host is
+    # still hostile — so the node is removed, not scheme-validated.
+    if not unsafe_docutils_settings_allowed():
+        for meta_node in list(document.findall(nodes.meta)):
+            http_equiv = meta_node.get("http-equiv")
+            if isinstance(http_equiv, str) and http_equiv.lower() == "refresh":
+                _remove_node(meta_node)
+
 
 class SanitizeTransform(Transform):
     """Run :func:`sanitize_doctree` as a docutils transform.

@@ -39,11 +39,11 @@ _Upcoming changes will be written here._
 
 django-docutils now disables Docutils file insertion, raw directives, and
 `docutils.conf` processing across the public rendering helpers. It also removes
-raw nodes and unsafe URI schemes before emitting HTML, and sanitizes after all
-writer transforms run, so a transform cannot reintroduce unsafe markup. Apps
-that render trusted static RST and intentionally depend on `.. include::`,
-`.. raw::`, local `docutils.conf`, or unsafe URI schemes must opt in
-explicitly.
+raw nodes, unsafe URI schemes, and `http-equiv=refresh` meta directives before
+emitting HTML, and sanitizes after all writer transforms run, so a transform
+cannot reintroduce unsafe markup. Apps that render trusted static RST and
+intentionally depend on `.. include::`, `.. raw::`, local `docutils.conf`, or
+unsafe URI schemes must opt in explicitly.
 
 ```python
 # Before
