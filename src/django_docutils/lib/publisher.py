@@ -7,7 +7,7 @@ import urllib.parse
 
 from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
-from docutils import io, nodes, writers
+from docutils import io, nodes
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 from docutils.readers.doctree import Reader
 from typing_extensions import NotRequired, TypedDict, Unpack
@@ -155,7 +155,7 @@ def sanitize_doctree(
 def publish_parts_from_doctree(
     document: nodes.document,
     destination_path: str | None = None,
-    writer: writers.Writer | None = None,
+    writer: t.Any | None = None,
     writer_name: str = "pseudoxml",
     settings: t.Any | None = None,
     settings_spec: t.Any | None = None,
@@ -230,7 +230,7 @@ def publish_parts_from_doctree(
 
 def publish_toc_from_doctree(
     doctree: nodes.document,
-    writer: writers.Writer | None = None,
+    writer: t.Any | None = None,
 ) -> str | None:
     """Publish table of contents from docutils doctree."""
     if not writer:
