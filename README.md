@@ -1,6 +1,10 @@
 # django-docutils &middot; [![Python Package](https://img.shields.io/pypi/v/django-docutils.svg)](https://pypi.org/project/django-docutils/) [![License](https://img.shields.io/github/license/tony/django-docutils.svg)](https://github.com/tony/django-docutils/blob/master/LICENSE)
 
-docutils (a.k.a. reStructuredText / rst / reST) support for Django.
+[docutils](https://docutils.sourceforge.io/) (a.k.a.
+[reStructuredText](https://docutils.sourceforge.io/rst.html) / rst / reST)
+support for Django.
+
+Documentation: <https://django-docutils.git-pull.com/>
 
 django-docutils turns off docutils features that are risky on the web — raw
 HTML pass-through, file inclusion, and local `docutils.conf` lookup — and
@@ -34,16 +38,15 @@ In your template:
 ```django
 {% load django_docutils %}
 {% rst %}
-# hey
-# how's it going
-A. hows
-B. it
+Welcome
+=======
 
-C. going
-D. today
+Write `reStructuredText <https://docutils.sourceforge.io/rst.html>`_ with
+links, **bold** text, and highlighted code:
 
-**hi**
-*hi*
+.. code-block:: python
+
+   print("hello")
 {% endrst %}
 ```
 
@@ -54,16 +57,15 @@ In your template:
 ```django
 {% load django_docutils %}
 {% filter rst %}
-# hey
-# how's it going
-A. hows
-B. it
+Welcome
+=======
 
-C. going
-D. today
+Write `reStructuredText <https://docutils.sourceforge.io/rst.html>`_ with
+links, **bold** text, and highlighted code:
 
-**hi**
-*hi*
+.. code-block:: python
+
+   print("hello")
 {% endfilter %}
 ```
 
@@ -143,6 +145,15 @@ DJANGO_DOCUTILS_LIB_RST = {
 
 - Python 3.10+
 - Django 4.2+
+- [Documentation](https://django-docutils.git-pull.com/) ·
+  [Quickstart](https://django-docutils.git-pull.com/quickstart.html) ·
+  [Security](https://django-docutils.git-pull.com/topics/security.html) ·
+  [FAQ](https://django-docutils.git-pull.com/topics/faq.html)
+- New to the ecosystem? [What is docutils?](https://django-docutils.git-pull.com/topics/what_is_docutils.html)
+  untangles docutils, reStructuredText, Sphinx, and Markdown.
+- [reStructuredText primer](https://docutils.sourceforge.io/docs/user/rst/quickstart.html)
+  and [quick reference](https://docutils.sourceforge.io/docs/user/rst/quickref.html)
+  from the docutils project.
 
 [![Docs](https://github.com/tony/django-docutils/workflows/docs/badge.svg)](https://github.com/tony/django-docutils/actions?query=workflow%3A%22Docs%22)
 [![Build Status](https://github.com/tony/django-docutils/workflows/tests/badge.svg)](https://github.com/tony/django-docutils/actions?query=workflow%3A%22tests%22)
