@@ -2,6 +2,12 @@
 
 # `lib.roles.url`
 
+:::{seealso}
+
+Registry-aware entry: {rst:role}`url` in {ref}`api_lib_components`.
+
+:::
+
 ```{eval-rst}
 .. automodule:: django_docutils.lib.roles.url
    :members:

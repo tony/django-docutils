@@ -2,6 +2,12 @@
 
 # `lib.roles.github`
 
+:::{seealso}
+
+Registry-aware entry: {rst:role}`github` in {ref}`api_lib_components`.
+
+:::
+
 ```{eval-rst}
 .. automodule:: django_docutils.lib.roles.github
    :members:

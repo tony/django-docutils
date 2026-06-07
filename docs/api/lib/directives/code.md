@@ -2,6 +2,13 @@
 
 # `lib.directives.code`
 
+:::{seealso}
+
+Registry-aware entry: {rst:dir}`codeblock` in
+{ref}`api_lib_components`.
+
+:::
+
 ```{eval-rst}
 .. automodule:: django_docutils.lib.directives.code
    :members:

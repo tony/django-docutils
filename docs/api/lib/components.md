@@ -18,6 +18,8 @@ so the docutils component family below is the complete inventory.
 
 ## Writer
 
+Full API: {ref}`api_lib_writers`.
+
 ```{eval-rst}
 .. autowriter:: django_docutils.lib.writers.DjangoDocutilsWriter
 ```
@@ -28,11 +30,16 @@ The translator's `Overrides` fact lists only the visit/depart handlers
 the class defines itself — the customizations layered on docutils'
 HTML5 translator.
 
+Full API: {ref}`api_lib_writers`.
+
 ```{eval-rst}
 .. autotranslator:: django_docutils.lib.writers.DjangoDocutilsHTMLTranslator
 ```
 
 ## Transforms
+
+Full API: {ref}`api_lib_transforms_code`, {ref}`api_lib_transforms_toc`,
+and {ref}`api_lib_sanitize`.
 
 ```{eval-rst}
 .. autotransform:: django_docutils.lib.transforms.code.CodeTransform
@@ -46,7 +53,7 @@ HTML5 translator.
 
 Registered under the name configured in `DJANGO_DOCUTILS_LIB_RST`
 (`code-block` by default, with `sourcecode` as a common alias) via
-{func}`django_docutils.lib.directives.code.register_pygments_directive`.
+{func}`django_docutils.lib.directives.code.register_pygments_directive`. Full API: {ref}`api_lib_directives_code`.
 
 ```{eval-rst}
 .. autodirective:: django_docutils.lib.directives.code.CodeBlock
@@ -57,6 +64,7 @@ Registered under the name configured in `DJANGO_DOCUTILS_LIB_RST`
 Role names shown here derive from the callable names; the names
 actually registered with docutils come from the `roles` mapping in
 `DJANGO_DOCUTILS_LIB_RST` (for example `gh` for {rst:role}`github`).
+Full API: {ref}`api_lib_roles`.
 
 ```{eval-rst}
 .. autorole:: django_docutils.lib.roles.email.email_role
