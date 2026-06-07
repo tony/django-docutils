@@ -38,6 +38,8 @@ conf = merge_sphinx_config(
     dark_logo="img/icons/logo-dark.svg",
     extra_extensions=[
         "sphinx_autodoc_api_style",
+        "sphinx_autodoc_docutils",
+        "sphinx_autodoc_sphinx",
         "sphinx_click.ext",
     ],
     intersphinx_mapping={

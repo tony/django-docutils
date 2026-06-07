@@ -5,6 +5,7 @@
 ```{toctree}
 :maxdepth: 1
 
+components
 directives/index
 metadata/index
 publisher
