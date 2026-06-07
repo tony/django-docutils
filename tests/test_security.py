@@ -10,13 +10,12 @@ from docutils import nodes
 from docutils.core import publish_doctree as docutils_publish_doctree
 
 from django_docutils.lib.publisher import (
-    _uri_is_allowed,
     publish_doctree,
     publish_html_from_doctree,
     publish_html_from_source,
     publish_parts_from_doctree,
-    sanitize_doctree,
 )
+from django_docutils.lib.sanitize import _uri_is_allowed, sanitize_doctree
 from django_docutils.lib.utils import append_html_to_node
 from django_docutils.lib.writers import DjangoDocutilsWriter
 from django_docutils.template import DocutilsTemplates
