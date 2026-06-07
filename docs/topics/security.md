@@ -6,6 +6,14 @@ django-docutils renders reStructuredText to HTML and returns that HTML as safe
 template output. The default renderer is locked down for content that may come
 from users, editors, uploads, API requests, or other lower-trust sources.
 
+These defaults implement the hardening the docutils project recommends for web
+applications in [Deploying Docutils Securely]. They reduce risk; they do not
+make untrusted markup safe to render. The riskiest input is dynamic content —
+reStructuredText (or any markup) that people type into your site themselves,
+such as comments, profile text, or CMS fields.
+
+[Deploying Docutils Securely]: https://docutils.sourceforge.io/docs/howto/security.html
+
 ## Default posture
 
 Without extra configuration, django-docutils applies these Docutils settings on
@@ -77,11 +85,15 @@ trusted-content-only configuration.
 
 ## Operational advice
 
-Keep the normal Django security rules in place:
+Keep the normal Django security rules in place — see [Security in Django] for
+the framework-level picture:
 
 - Validate and limit user-submitted RST before rendering it.
 - Limit request and upload size at the web server or application boundary.
-- Use a Content Security Policy as defense in depth for rendered pages.
+- Use a [Content Security Policy] as defense in depth for rendered pages.
 - Avoid adding extra `mark_safe()` calls around user content.
 - Prefer separate trusted and untrusted rendering settings when your app has
   both static documentation and user-authored content.
+
+[Security in Django]: https://docs.djangoproject.com/en/stable/topics/security/
+[Content Security Policy]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
