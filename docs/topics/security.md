@@ -39,6 +39,24 @@ blocks and highlighted inline code are marked trusted after package-controlled
 HTML generation; the `kbd` role renders escaped inline text instead of raw HTML.
 User-authored `.. raw::` does not render under safe defaults.
 
+## How sanitization runs
+
+Sanitization is the final step before HTML is written. Docutils applies every
+transform first — including any configured through
+`DJANGO_DOCUTILS_LIB_RST['transforms']` — and django-docutils sanitizes after
+them. A transform that builds nodes from user content (for example, an
+autolinker) cannot emit a `javascript:` link or raw HTML that the locked-down
+default would otherwise strip from source.
+
+Library-generated markup is exempt because it is marked trusted at the point of
+generation, so Pygments code blocks, highlighted inline code, and the `kbd`
+role survive while user-authored raw markup does not.
+
+The sanitizer is available for custom pipelines: call
+{func}`~django_docutils.lib.sanitize.sanitize_doctree` on a doctree directly,
+or add {class}`~django_docutils.lib.sanitize.SanitizeTransform` to your own
+docutils writer's transform list so it runs last.
+
 The default allowed URI schemes are:
 
 ```python

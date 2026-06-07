@@ -39,9 +39,11 @@ _Upcoming changes will be written here._
 
 django-docutils now disables Docutils file insertion, raw directives, and
 `docutils.conf` processing across the public rendering helpers. It also removes
-raw nodes and unsafe URI schemes before emitting HTML. Apps that render trusted
-static RST and intentionally depend on `.. include::`, `.. raw::`, local
-`docutils.conf`, or unsafe URI schemes must opt in explicitly.
+raw nodes and unsafe URI schemes before emitting HTML, and sanitizes after all
+writer transforms run, so a transform cannot reintroduce unsafe markup. Apps
+that render trusted static RST and intentionally depend on `.. include::`,
+`.. raw::`, local `docutils.conf`, or unsafe URI schemes must opt in
+explicitly.
 
 ```python
 # Before
@@ -135,8 +137,13 @@ visible to autodoc, forward-reference warnings are suppressed where appropriate,
 and the `url_role` and `is_uncapitalized_word` examples render cleanly.
 
 The new {ref}`security` topic explains the locked-down defaults, manual unsafe
-opt-ins for trusted static RST, URI scheme filtering, and deployment guidance
-for user-authored content.
+opt-ins for trusted static RST, URI scheme filtering, when sanitization runs,
+and deployment guidance for user-authored content. It cites the upstream
+guidance the defaults implement — docutils' [Deploying Docutils
+Securely](https://docutils.sourceforge.io/docs/howto/security.html) — and
+Django's security overview. {func}`~django_docutils.lib.sanitize.sanitize_doctree`
+and {class}`~django_docutils.lib.sanitize.SanitizeTransform` are documented for
+reuse in custom docutils pipelines.
 
 Documentation deployment now uses AWS OIDC authentication instead of long-lived
 AWS keys, and the docs build switched to the `dirhtml` builder for cleaner URLs.

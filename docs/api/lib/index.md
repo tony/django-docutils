@@ -9,6 +9,7 @@ directives/index
 metadata/index
 publisher
 roles/index
+sanitize
 settings
 text
 transforms/index
