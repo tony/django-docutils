@@ -10,6 +10,7 @@ from docutils import nodes
 from docutils.transforms import Transform
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
+from .sanitize import sanitize_doctree
 from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
@@ -230,6 +231,18 @@ class DjangoDocutilsWriter(Writer):
         # somewhere up the Writer/Translator hierarchy are 'old' python
         # classes. (e.g. Python =< 2.1 classes)
         self.translator_class = DjangoDocutilsHTMLTranslator
+
+    def translate(self) -> None:
+        """Sanitize the document, then render it.
+
+        Docutils applies all transforms before calling the writer, so
+        sanitizing here guarantees the pass runs after writer transforms
+        (including those configured via ``DJANGO_DOCUTILS_LIB_RST``). A
+        transform cannot inject raw nodes or unsafe URIs that survive to the
+        output.
+        """
+        sanitize_doctree(self.document)
+        Writer.translate(self)
 
     def get_transforms(self) -> list[type[Transform]]:
         """Return transformed required by DjangoDocutilsWriter.

@@ -748,6 +748,48 @@ def test_sanitize_doctree_raw_skip_requires_project_opt_in(
     assert bool(list(document.findall(nodes.raw))) is expect_raw_kept
 
 
+def test_writer_transform_output_is_sanitized(settings: t.Any) -> None:
+    """A writer transform cannot smuggle unsafe nodes past the sanitizer.
+
+    Transforms run during ``pub.publish()`` — after the pre-publish sanitize
+    pass — so the writer must sanitize again after transforms. Otherwise a
+    transform that builds nodes from untrusted content emits ``javascript:``
+    links or raw HTML even under locked-down defaults.
+    """
+    settings.DJANGO_DOCUTILS_LIB_RST = {
+        "transforms": ["sanitize_fixtures.InjectingTransform"],
+    }
+
+    html = publish_html_from_source("Benign source")
+
+    assert html is not None
+    assert "javascript:alert(1)" not in html
+    assert "<script>alert(2)</script>" not in html
+
+
+def test_library_transform_trusted_raw_survives_sanitize_last(
+    settings: t.Any,
+) -> None:
+    """Library transforms that mark raw trusted still render after sanitize.
+
+    Sanitization runs as the last writer step; CodeTransform's highlighted
+    inline code is marked trusted, so it survives while untrusted transform
+    output does not.
+    """
+    settings.DJANGO_DOCUTILS_LIB_RST = {
+        "transforms": [
+            "django_docutils.lib.transforms.code.CodeTransform",
+            "sanitize_fixtures.InjectingTransform",
+        ],
+    }
+
+    html = publish_html_from_source("Run ``$ ls -la`` now.")
+
+    assert html is not None
+    assert "inline-code" in html
+    assert "<script>alert(2)</script>" not in html
+
+
 def test_malformed_link_does_not_fail_render() -> None:
     """RST with an unparsable link URI renders instead of raising."""
     html = publish_html_from_source("`x <http://[::1>`_")
