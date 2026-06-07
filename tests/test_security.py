@@ -584,6 +584,7 @@ class TrustedMarkupCase(t.NamedTuple):
     test_id: str
     source: str
     expected_html: str
+    forbidden_html: str | None
 
 
 TRUSTED_MARKUP_CASES: list[TrustedMarkupCase] = [
@@ -591,6 +592,33 @@ TRUSTED_MARKUP_CASES: list[TrustedMarkupCase] = [
         test_id="kbd-role",
         source=":kbd:`ctrl-t`",
         expected_html="<kbd>ctrl-t</kbd>",
+        forbidden_html=None,
+    ),
+    TrustedMarkupCase(
+        test_id="kbd-role-comma",
+        source=":kbd:`ctrl-t,shift`",
+        expected_html="<kbd>ctrl-t</kbd><kbd>shift</kbd>",
+        forbidden_html=None,
+    ),
+    TrustedMarkupCase(
+        test_id="kbd-role-ampersand",
+        source=":kbd:`A&B`",
+        expected_html="<kbd>A&amp;B</kbd>",
+        forbidden_html="<kbd>A&B</kbd>",
+    ),
+    TrustedMarkupCase(
+        test_id="kbd-role-angle-brackets",
+        source=":kbd:`<Enter>`",
+        expected_html="<kbd>&lt;Enter&gt;</kbd>",
+        forbidden_html="<kbd><Enter></kbd>",
+    ),
+    TrustedMarkupCase(
+        test_id="kbd-role-script-breakout",
+        source=":kbd:`</kbd><script>alert(1)</script><kbd>`",
+        expected_html=(
+            "<kbd>&lt;/kbd&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;kbd&gt;</kbd>"
+        ),
+        forbidden_html="<script>alert(1)</script>",
     ),
 ]
 
@@ -604,12 +632,59 @@ def test_library_markup_survives_locked_down_rendering(
     test_id: str,
     source: str,
     expected_html: str,
+    forbidden_html: str | None,
 ) -> None:
-    """django-docutils' own raw-emitting markup renders under safe defaults."""
+    """django-docutils' own markup renders safely under safe defaults."""
     html = publish_html_from_source(source)
 
     assert html is not None
     assert expected_html in html
+    if forbidden_html is not None:
+        assert forbidden_html not in html
+
+
+class KbdDoctreeCase(t.NamedTuple):
+    """A kbd role source and the key labels it should preserve as text nodes."""
+
+    test_id: str
+    source: str
+    expected_texts: tuple[str, ...]
+
+
+KBD_DOCTREE_CASES: list[KbdDoctreeCase] = [
+    KbdDoctreeCase(
+        test_id="kbd-role-inline-node",
+        source=":kbd:`ctrl-t`",
+        expected_texts=("ctrl-t",),
+    ),
+    KbdDoctreeCase(
+        test_id="kbd-role-comma-inline-nodes",
+        source=":kbd:`ctrl-t,shift`",
+        expected_texts=("ctrl-t", "shift"),
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    KbdDoctreeCase._fields,
+    KBD_DOCTREE_CASES,
+    ids=[case.test_id for case in KBD_DOCTREE_CASES],
+)
+def test_kbd_role_uses_escaped_doctree_nodes(
+    test_id: str,
+    source: str,
+    expected_texts: tuple[str, ...],
+) -> None:
+    """The kbd role must not trust user-controlled labels as raw HTML."""
+    doctree = publish_doctree(source)
+
+    assert not list(doctree.findall(nodes.raw))
+    kbd_nodes = [
+        node
+        for node in doctree.findall(nodes.inline)
+        if "kbd" in node.get("classes", [])
+    ]
+    assert tuple(node.astext() for node in kbd_nodes) == expected_texts
 
 
 def test_inline_code_survives_doctree_re_render() -> None:
