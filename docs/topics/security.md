@@ -91,7 +91,8 @@ the framework-level picture:
 - Validate and limit user-submitted RST before rendering it.
 - Limit request and upload size at the web server or application boundary.
 - Use a [Content Security Policy] as defense in depth for rendered pages.
-- Avoid adding extra `mark_safe()` calls around user content.
+- Avoid adding extra {func}`mark_safe() <django.utils.safestring.mark_safe>`
+  calls around user content.
 - Prefer separate trusted and untrusted rendering settings when your app has
   both static documentation and user-authored content.
 
