@@ -225,6 +225,11 @@ class DjangoDocutilsWriter(Writer):
     ... }
     """
 
+    #: Settings resolved for the current render, set by
+    #: :func:`~django_docutils.lib.publisher.publish_parts_from_doctree` so the
+    #: final sanitize pass applies the same policy as the pre-publish pass.
+    django_docutils_settings: t.Mapping[str, object] | None = None
+
     def __init__(self) -> None:
         Writer.__init__(self)
         # I'd like to put this into the class attribute, but I think
@@ -239,9 +244,11 @@ class DjangoDocutilsWriter(Writer):
         sanitizing here guarantees the pass runs after writer transforms
         (including those configured via ``DJANGO_DOCUTILS_LIB_RST``). A
         transform cannot inject raw nodes or unsafe URIs that survive to the
-        output.
+        output. The settings resolved for this render — including per-call
+        ``settings_overrides`` — are reused so this pass applies the same
+        policy as the pre-publish sanitize.
         """
-        sanitize_doctree(self.document)
+        sanitize_doctree(self.document, self.django_docutils_settings)
         Writer.translate(self)
 
     def get_transforms(self) -> list[type[Transform]]:

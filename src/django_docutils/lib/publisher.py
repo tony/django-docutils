@@ -74,6 +74,12 @@ def publish_parts_from_doctree(
         for setting, value in docutils_settings.items():
             setattr(settings, setting, value)
 
+    # Reuse the resolved settings for the writer's final sanitize pass so it
+    # applies the same policy as the pre-publish pass above (e.g. a per-call
+    # raw_enabled override under the project opt-in).
+    if writer is not None:
+        writer.django_docutils_settings = docutils_settings
+
     reader = Reader(parser_name="null")  # type:ignore
     pub = Publisher(
         reader,

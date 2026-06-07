@@ -834,6 +834,41 @@ def test_meta_refresh_kept_with_unsafe_opt_in(settings: t.Any) -> None:
     assert 'http-equiv="refresh"' in parts.get("head", "")
 
 
+def test_per_call_raw_opt_in_kept_through_writer_pass(settings: t.Any) -> None:
+    """A per-call raw_enabled override is honored by both sanitize passes.
+
+    With the project opt-in set, ``raw_enabled`` supplied via
+    ``settings_overrides`` must survive the final writer-level sanitize, not
+    only the pre-publish pass.
+    """
+    settings.DJANGO_DOCUTILS_LIB_RST = {"allow_unsafe_docutils_settings": True}
+    doctree = publish_doctree("text")
+    doctree += nodes.raw("", "<b>KEEP</b>", format="html")
+
+    parts = publish_parts_from_doctree(
+        doctree,
+        writer=DjangoDocutilsWriter(),
+        settings_overrides={"raw_enabled": True},
+    )
+
+    assert "<b>KEEP</b>" in parts["html_body"]
+
+
+def test_per_call_raw_without_opt_in_is_stripped(settings: t.Any) -> None:
+    """Per-call raw_enabled alone, without the project opt-in, still strips."""
+    settings.DJANGO_DOCUTILS_LIB_RST = {}
+    doctree = publish_doctree("text")
+    doctree += nodes.raw("", "<b>NOPE</b>", format="html")
+
+    parts = publish_parts_from_doctree(
+        doctree,
+        writer=DjangoDocutilsWriter(),
+        settings_overrides={"raw_enabled": True},
+    )
+
+    assert "<b>NOPE</b>" not in parts["html_body"]
+
+
 def test_malformed_link_does_not_fail_render() -> None:
     """RST with an unparsable link URI renders instead of raising."""
     html = publish_html_from_source("`x <http://[::1>`_")
