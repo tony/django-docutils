@@ -311,6 +311,7 @@ Use conventional, component-scoped subjects:
 Scope(type[detail]): concise description
 
 why: Impact or necessity
+
 what:
 - Specific technical changes (single topic)
 ```
