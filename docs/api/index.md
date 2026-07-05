@@ -20,7 +20,8 @@ Exception definitions for django-docutils.
 :::{grid-item-card} Views
 :link: views
 :link-type: doc
-`DocutilsView` and response classes.
+{class}`~django_docutils.views.DocutilsView` and
+{class}`~django_docutils.views.DocutilsResponse`.
 :::
 
 :::{grid-item-card} Lib
@@ -32,13 +33,14 @@ Publisher, roles, directives, writers, and transforms.
 :::{grid-item-card} Template Engine
 :link: template
 :link-type: doc
-`DocutilsTemplates` backend for Django.
+{class}`~django_docutils.template.DocutilsTemplates` backend for Django.
 :::
 
 :::{grid-item-card} Template Tags
 :link: templatetags/index
 :link-type: doc
-`{% rst %}` tag and `rst` filter internals.
+{func}`~django_docutils.templatetags.django_docutils.rst` tag and
+{func}`~django_docutils.templatetags.django_docutils.rst_filter` internals.
 :::
 
 ::::

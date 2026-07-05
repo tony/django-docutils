@@ -10,19 +10,21 @@ High-level guides covering django-docutils features, configuration, and common p
 :::{grid-item-card} Template Tag
 :link: template_tag
 :link-type: doc
-Render reStructuredText inside Django templates with `{% rst %}`.
+Render reStructuredText inside Django templates with the
+{func}`~django_docutils.templatetags.django_docutils.rst` tag.
 :::
 
 :::{grid-item-card} Template Filter
 :link: template_filter
 :link-type: doc
-Use the `rst` filter to convert RST strings to HTML inline.
+Use the {func}`~django_docutils.templatetags.django_docutils.rst_filter` filter
+to convert RST strings to HTML inline.
 :::
 
 :::{grid-item-card} Class-based View
 :link: class_based_view
 :link-type: doc
-Serve RST-backed pages with `DocutilsView`.
+Serve RST-backed pages with {class}`~django_docutils.views.DocutilsView`.
 :::
 
 :::{grid-item-card} Security

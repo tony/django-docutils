@@ -2,7 +2,9 @@
 
 # Template filter
 
-## Setup
+Use {func}`~django_docutils.templatetags.django_docutils.rst_filter` when RST
+source flows through Django's filter syntax, either as a variable or a
+`{% filter rst %}` block.
 
 :::{seealso}
 
@@ -10,7 +12,9 @@
 
 :::
 
-Make sure `django_docutils` is added your `INSTALLED_APPS` in your settings file:
+## Setup
+
+Add `django_docutils` to `INSTALLED_APPS` in your settings file:
 
 ```python
 INSTALLED_APPS = [
@@ -19,7 +23,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-## Using the django filter
+## Render filtered content
 
 :::{important}
 

@@ -2,7 +2,10 @@
 
 # Template tag
 
-## Setup
+Use {func}`~django_docutils.templatetags.django_docutils.rst` when the RST
+source lives directly in a Django template block. The tag sends that block to
+the django-docutils publisher and returns HTML for Django to insert into the
+page.
 
 :::{seealso}
 
@@ -10,7 +13,9 @@
 
 :::
 
-Make sure `django_docutils` is added your `INSTALLED_APPS` in your settings file:
+## Setup
+
+Add `django_docutils` to `INSTALLED_APPS` in your settings file:
 
 ```python
 INSTALLED_APPS = [
@@ -19,7 +24,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-## Using the django tag
+## Render a template block
 
 :::{important}
 

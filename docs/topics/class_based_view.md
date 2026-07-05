@@ -2,25 +2,30 @@
 
 # Class-based view
 
-## Setup
+Use {class}`~django_docutils.views.DocutilsView` when an RST file should behave
+like a Django view page. Django chooses the outer template, django-docutils
+renders the `.rst` source, and the view passes the rendered HTML as `content`.
+
+For applications that want Django to load `.rst` files through a template
+backend, {class}`~django_docutils.template.DocutilsTemplates` provides the
+docutils engine.
 
 :::{seealso}
 
 {ref}`Quickstart <quickstart>`
 :::
 
-You can also use a class-based view to render reStructuredText (reST).
-
 :::{important}
 
-`DocutilsView` and the `DocutilsTemplates` backend use locked-down Docutils
-defaults. See {ref}`security` before serving user-authored RST or enabling
-trusted-content overrides.
+Both entry points use locked-down Docutils defaults. See {ref}`security` before
+serving user-authored RST or enabling trusted-content overrides.
 
 :::
 
-If you want to use reStructuredText as a django template engine, `INSTALLED_APPS` _isn't_ required,
-instead you add this to your `TEMPLATES` variable in your settings:
+## Setup
+
+You do not need `INSTALLED_APPS` for the backend-only path. Add the docutils
+backend to `TEMPLATES` instead:
 
 ```python
 TEMPLATES = [
@@ -34,9 +39,9 @@ TEMPLATES = [
 ]
 ```
 
-## Introduction to views
+## Render a view
 
-Now django will be able to scan for .rst files and process them. In your view:
+With the backend configured, your view points at an RST template:
 
 ```python
 from django_docutils.views import DocutilsView

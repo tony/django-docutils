@@ -4,7 +4,7 @@
 
 ## Installation
 
-For latest official version:
+Install the latest official version:
 
 ```console
 $ pip install django-docutils
@@ -20,9 +20,10 @@ $ pip install --upgrade django-docutils
 
 ### Developmental releases
 
-New versions of django-docutils are published to PyPI as alpha, beta, or release candidates.
-In their versions you will see notification like `a1`, `b1`, and `rc1`, respectively.
-`1.10.0b4` would mean the 4th beta release of `1.10.0` before general availability.
+New versions of django-docutils are published to PyPI as alpha, beta, or release
+candidates. Their versions use markers like `a1`, `b1`, and `rc1`,
+respectively. `1.10.0b4` would mean the 4th beta release of `1.10.0` before
+general availability.
 
 - [pip]\:
 
@@ -87,7 +88,7 @@ answers common questions.
 [rst-primer]: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
 [rst-quickref]: https://docutils.sourceforge.io/docs/user/rst/quickref.html
 
-## Add the django app
+## Add the Django app
 
 Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
 
@@ -100,7 +101,7 @@ INSTALLED_APPS = [
 
 ## Next steps
 
-Integrate docutils to your django site:
+Choose the entry point for your Django site:
 
 1. {ref}`template_tag`
 2. {ref}`template_filter`
