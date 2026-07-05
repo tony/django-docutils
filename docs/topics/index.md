@@ -10,7 +10,7 @@ High-level guides covering django-docutils features, configuration, and common p
 :::{grid-item-card} Template Tag
 :link: template_tag
 :link-type: doc
-Render reStructuredText inside Django templates with the
+Render [reStructuredText] inside [Django] templates with the
 {func}`~django_docutils.templatetags.django_docutils.rst` tag.
 :::
 
@@ -36,7 +36,7 @@ Understand locked-down defaults and trusted-content opt-ins.
 :::{grid-item-card} What is docutils?
 :link: what_is_docutils
 :link-type: doc
-Untangle docutils, reStructuredText, Sphinx, and Markdown.
+Untangle [docutils], reStructuredText, [Sphinx], and [Markdown].
 :::
 
 :::{grid-item-card} FAQ
@@ -46,6 +46,12 @@ Common questions about reStructuredText and django-docutils.
 :::
 
 ::::
+
+[reStructuredText]: https://docutils.sourceforge.io/rst.html
+[Django]: https://docs.djangoproject.com/
+[docutils]: https://docutils.sourceforge.io/
+[Sphinx]: https://www.sphinx-doc.org/
+[Markdown]: https://www.markdownguide.org/
 
 ```{toctree}
 :hidden:

@@ -2,9 +2,9 @@
 
 # Template filter
 
-Use {func}`~django_docutils.templatetags.django_docutils.rst_filter` when RST
-source flows through Django's filter syntax, either as a variable or a
-`{% filter rst %}` block.
+Use {func}`~django_docutils.templatetags.django_docutils.rst_filter` when
+[reStructuredText] source flows through [Django]'s filter syntax, either as a
+variable or a `{% filter rst %}` block.
 
 :::{seealso}
 
@@ -27,10 +27,14 @@ INSTALLED_APPS = [
 
 :::{important}
 
-The `rst` filter uses locked-down Docutils defaults. See {ref}`security` before
-rendering user-authored RST or enabling trusted-content overrides.
+The `rst` filter uses locked-down [docutils] defaults. See {ref}`security`
+before rendering user-authored RST or enabling trusted-content overrides.
 
 :::
+
+[Django]: https://docs.djangoproject.com/
+[reStructuredText]: https://docutils.sourceforge.io/rst.html
+[docutils]: https://docutils.sourceforge.io/
 
 In your HTML template:
 

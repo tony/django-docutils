@@ -33,7 +33,7 @@ Publisher, roles, directives, writers, and transforms.
 :::{grid-item-card} Template Engine
 :link: template
 :link-type: doc
-{class}`~django_docutils.template.DocutilsTemplates` backend for Django.
+{class}`~django_docutils.template.DocutilsTemplates` backend for [Django].
 :::
 
 :::{grid-item-card} Template Tags
@@ -55,3 +55,5 @@ lib/index
 template
 templatetags/index
 ```
+
+[Django]: https://docs.djangoproject.com/

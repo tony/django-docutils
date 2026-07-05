@@ -8,11 +8,12 @@ New to the ecosystem? {ref}`what-is-docutils` maps the core terms in one page.
 
 ### What is reST, RST, reStructuredText?
 
-[reStructuredText] is a markup syntax, similar to Markdown. Learn it from the
+[reStructuredText] is a markup syntax, similar to [Markdown]. Learn it from the
 official [primer][rst-primer] and [quick reference][rst-quickref].
 
 [rst-primer]: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
 [rst-quickref]: https://docutils.sourceforge.io/docs/user/rst/quickref.html
+[Markdown]: https://www.markdownguide.org/
 
 ### What is docutils?
 

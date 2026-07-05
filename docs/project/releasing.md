@@ -7,7 +7,8 @@ Users should pin to `>=0.x,<0.y`.
 
 ## Release Process
 
-Releases are triggered by git tags and published to PyPI via trusted publishing.
+Releases are triggered by [git] tags and published to [PyPI] via trusted
+publishing.
 
 1. Update `CHANGES` with the release notes
 
@@ -30,3 +31,6 @@ Releases are triggered by git tags and published to PyPI via trusted publishing.
    ```console
    $ git push && git push --tags
    ```
+
+[git]: https://git-scm.com/
+[PyPI]: https://pypi.org/
