@@ -54,12 +54,12 @@ pytz = [
 [dependency-groups]
 dev = [
   # Docs
-  "gp-sphinx==0.0.1a32",
-  "sphinx-autodoc-api-style==0.0.1a32",
-  "sphinx-autodoc-docutils==0.0.1a32",
-  "sphinx-autodoc-sphinx==0.0.1a32",
-  "sphinx-ux-autodoc-layout==0.0.1a32",
-  "sphinx-ux-badges==0.0.1a32",
+  "gp-sphinx==0.0.1a33",
+  "sphinx-autodoc-api-style==0.0.1a33",
+  "sphinx-autodoc-docutils==0.0.1a33",
+  "sphinx-autodoc-sphinx==0.0.1a33",
+  "sphinx-ux-autodoc-layout==0.0.1a33",
+  "sphinx-ux-badges==0.0.1a33",
   "gp-libs",
   "sphinx-autobuild",
   "sphinx-click",
@@ -85,12 +85,12 @@ dev = [
 ]
 
 docs = [
-  "gp-sphinx==0.0.1a32",
-  "sphinx-autodoc-api-style==0.0.1a32",
-  "sphinx-autodoc-docutils==0.0.1a32",
-  "sphinx-autodoc-sphinx==0.0.1a32",
-  "sphinx-ux-autodoc-layout==0.0.1a32",
-  "sphinx-ux-badges==0.0.1a32",
+  "gp-sphinx==0.0.1a33",
+  "sphinx-autodoc-api-style==0.0.1a33",
+  "sphinx-autodoc-docutils==0.0.1a33",
+  "sphinx-autodoc-sphinx==0.0.1a33",
+  "sphinx-ux-autodoc-layout==0.0.1a33",
+  "sphinx-ux-badges==0.0.1a33",
   "gp-libs",
   "sphinx-autobuild",
   "sphinx-click",
