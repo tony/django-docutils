@@ -17,8 +17,8 @@ Render [reStructuredText] inside [Django] templates with the
 :::{grid-item-card} Template Filter
 :link: template_filter
 :link-type: doc
-Use the {func}`~django_docutils.templatetags.django_docutils.rst_filter` filter
-to convert RST strings to HTML inline.
+Legacy coverage for the deprecated
+{func}`~django_docutils.templatetags.django_docutils.rst_filter` filter.
 :::
 
 :::{grid-item-card} Class-based View

@@ -31,23 +31,10 @@ general availability.
   $ pip install --upgrade --pre django-docutils
   ```
 
-- [pipx]\:
-
-  ```console
-  $ pipx install --suffix=@next 'django-docutils' --pip-args '\--pre' --force
-  // Usage: django-docutils@next
-  ```
-
 - [uv]\:
 
   ```console
   $ uv add django-docutils --prerelease allow
-  ```
-
-- [uvx]\:
-
-  ```console
-  $ uvx --from 'django-docutils' --prerelease allow django-docutils
   ```
 
 via trunk (can break easily):
@@ -58,23 +45,15 @@ via trunk (can break easily):
   $ pip install -e git+https://github.com/tony/django-docutils.git#egg=django-docutils
   ```
 
-- [pipx]\:
-
-  ```console
-  $ pipx install --suffix=@master 'django-docutils @ git+https://github.com/tony/django-docutils.git@master' --force
-  ```
-
 - [uv]\:
 
   ```console
-  $ uv tool install django-docutils --from git+https://github.com/tony/django-docutils.git
+  $ uv add django-docutils --from git+https://github.com/tony/django-docutils.git
   ```
 
 [pip]: https://pip.pypa.io/en/stable/
-[pipx]: https://pypa.github.io/pipx/docs/
 [PyPI]: https://pypi.org/
 [uv]: https://docs.astral.sh/uv/
-[uvx]: https://docs.astral.sh/uv/guides/tools/
 
 ## New to reStructuredText?
 
@@ -103,14 +82,39 @@ INSTALLED_APPS = [
 ]
 ```
 
+## Render your first block
+
+Load the template tags and put a small reStructuredText document inside
+`{% rst %}`:
+
+```django
+{% load django_docutils %}
+{% rst %}
+Hello
+=====
+
+Welcome to **reStructuredText** in Django.
+{% endrst %}
+```
+
+Output:
+
+```html
+<main id="hello">
+<h1 class="title is-1">Hello</h1>
+<p>Welcome to <strong>reStructuredText</strong> in Django.</p>
+</main>
+```
+
 ## Next steps
 
 Choose the entry point for your Django site:
 
 1. {ref}`template_tag`
-2. {ref}`template_filter`
-3. {ref}`class_based_view`
-4. {ref}`security`
+2. {ref}`class_based_view`
+3. {ref}`security`
+4. {ref}`template_filter` for legacy templates that already use the deprecated
+   filter
 
 The rendering defaults disable docutils features that are risky on the web;
 if your site accepts user-authored markup, start with {ref}`security`.

@@ -4,7 +4,8 @@
 
 :::{seealso}
 
-Registry-aware entry: {rst:role}`hackernews` in {ref}`api_lib_components`.
+Registry-aware entries: {rst:role}`hackernews` and common alias
+{rst:role}`hn` in {ref}`api_lib_components`.
 
 :::
 

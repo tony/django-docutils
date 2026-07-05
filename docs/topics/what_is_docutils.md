@@ -17,8 +17,9 @@ fastest ways in are the official [primer][rst-primer] and the
 
 [docutils] is the Python library that parses reStructuredText and publishes it
 to other formats. reStructuredText is the language; docutils is the processing
-system — the parser is one docutils component, the output writers are others.
-The [docutils documentation][docutils-docs] covers both halves.
+system — the [parser][docutils-parser] is one docutils component, the
+[output writers][docutils-writers] are others. The
+[docutils documentation][docutils-docs] covers both halves.
 
 ## What is Sphinx — and is django-docutils Sphinx?
 
@@ -53,7 +54,7 @@ pipeline, reach for [MyST-Parser].
 ## What can docutils output?
 
 reStructuredText input can leave docutils in many formats — django-docutils
-uses the HTML writer family, the rest come with the
+uses the [HTML writer family][docutils-html-writer], the rest come with the
 [docutils CLI tools][docutils-tools] such as `rst2html5`, `rst2latex`, and
 `rst2man`:
 
@@ -82,6 +83,9 @@ not remove — see {ref}`security` and docutils' own
 [docutils]: https://docutils.sourceforge.io/
 [Django]: https://docs.djangoproject.com/
 [docutils-docs]: https://docutils.sourceforge.io/docs/
+[docutils-parser]: https://docutils.sourceforge.io/docs/ref/doctree.html
+[docutils-writers]: https://docutils.sourceforge.io/docs/api/publisher.html#publishers
+[docutils-html-writer]: https://docutils.sourceforge.io/docs/user/html.html
 [docutils-config]: https://docutils.sourceforge.io/docs/user/config.html
 [docutils-tools]: https://docutils.sourceforge.io/docs/user/tools.html
 [docutils-security]: https://docutils.sourceforge.io/docs/howto/security.html

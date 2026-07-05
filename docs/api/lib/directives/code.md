@@ -4,7 +4,7 @@
 
 :::{seealso}
 
-Registry-aware entry: {rst:dir}`codeblock` in
+Registry-aware entry: {rst:dir}`code-block` in
 {ref}`api_lib_components`.
 
 :::

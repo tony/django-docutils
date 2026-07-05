@@ -4,8 +4,8 @@
 
 :::{seealso}
 
-Registry-aware entries: {rst:role}`file` and {rst:role}`manifest` in
-{ref}`api_lib_components`.
+Registry-aware entries: {rst:role}`file`, {rst:role}`exe`, and
+{rst:role}`manifest` in {ref}`api_lib_components`.
 
 :::
 

@@ -161,7 +161,7 @@ def sanitize_doctree(
 
 
 class SanitizeTransform(Transform):
-    """Run :func:`sanitize_doctree` as a docutils transform.
+    """Run :func:`~django_docutils.lib.sanitize.sanitize_doctree` as a transform.
 
     :class:`~django_docutils.lib.writers.DjangoDocutilsWriter` sanitizes in
     ``translate()`` so the pass always runs after every transform. This

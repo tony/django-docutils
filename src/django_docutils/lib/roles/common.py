@@ -27,16 +27,19 @@ def generic_url_role(
 
     Parameters
     ----------
-    name : name of the role, e.g. 'github'
-    text : text inside of the role, e.g:
+    name : str
+        Name of the role, e.g. ``github``.
+    text : str
+        Text inside of the role, e.g:
+
       - 'airline-mode/airline-mode'
       - 'this repo <airline-mode/airline-mode>'
-    url_handler_fn : :data:`django_docutils.lib.roles.types.UrlHandlerFn`
-      a function that accepts the target param
+    url_handler_fn : django_docutils.lib.roles.types.UrlHandlerFn
+        A function that accepts the target param.
 
     Returns
     -------
-    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
+    django_docutils.lib.roles.types.RoleFnReturnValue
 
     Examples
     --------
@@ -94,16 +97,19 @@ def generic_remote_url_role(
 
     Parameters
     ----------
-    name : name of the role, e.g. 'github'
-    text : text inside of the role, e.g:
+    name : str
+        Name of the role, e.g. ``github``.
+    text : str
+        Text inside of the role, e.g:
+
       - 'airline-mode/airline-mode'
       - 'this repo <airline-mode/airline-mode>'
-    url_handler_fn : :data:`django_docutils.lib.roles.types.RemoteUrlHandlerFn`
-       a function that accepts the target param, example:
+    url_handler_fn : django_docutils.lib.roles.types.RemoteUrlHandlerFn
+        A function that accepts the target param.
 
     Returns
     -------
-    :data:`django_docutils.lib.roles.types.RoleFnReturnValue`
+    django_docutils.lib.roles.types.RoleFnReturnValue
 
     Examples
     --------

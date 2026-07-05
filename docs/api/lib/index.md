@@ -13,6 +13,7 @@ roles/index
 sanitize
 settings
 text
+types
 transforms/index
 utils
 views

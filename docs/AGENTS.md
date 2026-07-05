@@ -61,14 +61,12 @@ make the common case pay a comprehension tax for the advanced one.
 
 ## Examples that run
 
-`testpaths` includes `docs/`, so pytest collects any `>>>` block in a
-docs page as a doctest (gp-libs' docutils doctest tooling) and runs
-it. No `conftest.py` adds `doctest_namespace` fixtures, so spell out
-imports in the example itself (`from django_docutils.lib.publisher
-import publish_html_from_source`); pytest-django supplies
-`DJANGO_SETTINGS_MODULE=tests.settings`, so rendering helpers work.
-`ELLIPSIS` and `NORMALIZE_WHITESPACE` are already on via
-`doctest_optionflags`.
+Sphinx doctest examples run through `just -f docs/justfile doctest`, and
+autodoc examples receive the imports configured in `docs/conf.py`. Pytest does
+not collect Markdown pages by itself; fenced examples that cannot be doctested
+belong in focused tests under `tests/`, such as the docs-snippet contract tests.
+When a docs page uses a `>>>` example, spell out any imports that are not in the
+Sphinx doctest global setup.
 
 Most examples in these docs never execute: fenced `django` template
 blocks, settings dicts, and rendered-HTML output are prose to pytest.
@@ -135,6 +133,6 @@ scheme lists left exact. Read it before reshaping another page.
 - Are the advanced and pipeline-level parts clearly marked opt-in?
 - Did you leave every settings block, output block, table, and
   cross-reference exact — and do any `>>>` examples pass
-  `uv run pytest docs`?
+  `just -f docs/justfile doctest`?
 - Did `just build-docs` stay clean — no new warning, no broken
   cross-reference?
