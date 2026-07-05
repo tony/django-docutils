@@ -48,7 +48,7 @@ via trunk (can break easily):
 - [uv]\:
 
   ```console
-  $ uv add django-docutils --from git+https://github.com/tony/django-docutils.git
+  $ uv add "django-docutils @ git+https://github.com/tony/django-docutils.git"
   ```
 
 [pip]: https://pip.pypa.io/en/stable/
