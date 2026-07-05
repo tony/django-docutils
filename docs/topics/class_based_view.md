@@ -2,13 +2,14 @@
 
 # Class-based view
 
-Use {class}`~django_docutils.views.DocutilsView` when an RST file should behave
-like a Django view page. Django chooses the outer template, django-docutils
-renders the `.rst` source, and the view passes the rendered HTML as `content`.
+Use {class}`~django_docutils.views.DocutilsView` when a [reStructuredText] file
+should behave like a [Django] view page. Django chooses the outer template,
+django-docutils renders the `.rst` source, and the view passes the rendered
+HTML as `content`.
 
 For applications that want Django to load `.rst` files through a template
 backend, {class}`~django_docutils.template.DocutilsTemplates` provides the
-docutils engine.
+[docutils] engine.
 
 :::{seealso}
 
@@ -17,10 +18,14 @@ docutils engine.
 
 :::{important}
 
-Both entry points use locked-down Docutils defaults. See {ref}`security` before
+Both entry points use locked-down docutils defaults. See {ref}`security` before
 serving user-authored RST or enabling trusted-content overrides.
 
 :::
+
+[reStructuredText]: https://docutils.sourceforge.io/rst.html
+[Django]: https://docs.djangoproject.com/
+[docutils]: https://docutils.sourceforge.io/
 
 ## Setup
 

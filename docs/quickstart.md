@@ -20,8 +20,8 @@ $ pip install --upgrade django-docutils
 
 ### Developmental releases
 
-New versions of django-docutils are published to PyPI as alpha, beta, or release
-candidates. Their versions use markers like `a1`, `b1`, and `rc1`,
+New versions of django-docutils are published to [PyPI] as alpha, beta, or
+release candidates. Their versions use markers like `a1`, `b1`, and `rc1`,
 respectively. `1.10.0b4` would mean the 4th beta release of `1.10.0` before
 general availability.
 
@@ -72,6 +72,7 @@ via trunk (can break easily):
 
 [pip]: https://pip.pypa.io/en/stable/
 [pipx]: https://pypa.github.io/pipx/docs/
+[PyPI]: https://pypi.org/
 [uv]: https://docs.astral.sh/uv/
 [uvx]: https://docs.astral.sh/uv/guides/tools/
 
@@ -80,17 +81,20 @@ via trunk (can break easily):
 [reStructuredText] is the markup language; [docutils] is the library that
 parses and renders it. The official [primer][rst-primer] and
 [quick reference][rst-quickref] cover the syntax; {ref}`what-is-docutils`
-maps the wider ecosystem (docutils, Sphinx, Markdown), and the {ref}`faq`
-answers common questions.
+maps the wider ecosystem (docutils, [Sphinx], [Markdown]), and the
+{ref}`faq` answers common questions.
 
 [reStructuredText]: https://docutils.sourceforge.io/rst.html
 [docutils]: https://docutils.sourceforge.io/
+[Sphinx]: https://www.sphinx-doc.org/
+[Markdown]: https://www.markdownguide.org/
 [rst-primer]: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
 [rst-quickref]: https://docutils.sourceforge.io/docs/user/rst/quickref.html
 
 ## Add the Django app
 
-Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
+Next, add `django_docutils` to your `INSTALLED_APPS` in your [Django] settings
+file:
 
 ```python
 INSTALLED_APPS = [
@@ -110,3 +114,5 @@ Choose the entry point for your Django site:
 
 The rendering defaults disable docutils features that are risky on the web;
 if your site accepts user-authored markup, start with {ref}`security`.
+
+[Django]: https://docs.djangoproject.com/

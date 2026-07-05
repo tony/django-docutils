@@ -1,6 +1,6 @@
 (api_lib_transforms_code)=
 
-# `lib.roles.transforms.code`
+# `lib.transforms.code`
 
 :::{seealso}
 

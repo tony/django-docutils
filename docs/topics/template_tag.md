@@ -2,10 +2,10 @@
 
 # Template tag
 
-Use {func}`~django_docutils.templatetags.django_docutils.rst` when the RST
-source lives directly in a Django template block. The tag sends that block to
-the django-docutils publisher and returns HTML for Django to insert into the
-page.
+Use {func}`~django_docutils.templatetags.django_docutils.rst` when
+[reStructuredText] source lives directly in a [Django] template block. The tag
+sends that block to the {ref}`publisher helpers <api_lib_publisher>` and
+returns HTML for Django to insert into the page.
 
 :::{seealso}
 
@@ -28,10 +28,14 @@ INSTALLED_APPS = [
 
 :::{important}
 
-The `{% rst %}` tag uses locked-down Docutils defaults. See {ref}`security`
+The `{% rst %}` tag uses locked-down [docutils] defaults. See {ref}`security`
 before rendering user-authored RST or enabling trusted-content overrides.
 
 :::
+
+[reStructuredText]: https://docutils.sourceforge.io/rst.html
+[Django]: https://docs.djangoproject.com/
+[docutils]: https://docutils.sourceforge.io/
 
 In your HTML template:
 

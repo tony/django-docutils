@@ -1,6 +1,6 @@
 (api_lib_transforms_toc)=
 
-# `lib.roles.transforms.toc`
+# `lib.transforms.toc`
 
 :::{seealso}
 

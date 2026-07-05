@@ -2,14 +2,14 @@
 
 # What is docutils?
 
-A field guide to the names you will meet when rendering markup in Django:
+A field guide to the names you will meet when rendering markup in [Django]:
 [docutils], [reStructuredText], [Sphinx], and friends — and where
 django-docutils fits among them.
 
 ## What is reStructuredText?
 
 [reStructuredText] (also written *reST*, *RST*, or *rst*) is a plaintext
-markup language, comparable to Markdown but older and more extensible. The
+markup language, comparable to [Markdown] but older and more extensible. The
 fastest ways in are the official [primer][rst-primer] and the
 [quick reference][rst-quickref].
 
@@ -80,6 +80,7 @@ not remove — see {ref}`security` and docutils' own
 [security guide][docutils-security].
 
 [docutils]: https://docutils.sourceforge.io/
+[Django]: https://docs.djangoproject.com/
 [docutils-docs]: https://docutils.sourceforge.io/docs/
 [docutils-config]: https://docutils.sourceforge.io/docs/user/config.html
 [docutils-tools]: https://docutils.sourceforge.io/docs/user/tools.html
@@ -89,6 +90,7 @@ not remove — see {ref}`security` and docutils' own
 [rst-quickref]: https://docutils.sourceforge.io/docs/user/rst/quickref.html
 [Sphinx]: https://www.sphinx-doc.org/
 [sphinx-primer]: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+[Markdown]: https://www.markdownguide.org/
 [MyST-Parser]: https://myst-parser.readthedocs.io/
 [myst-docutils]: https://pypi.org/project/myst-docutils/
 [pycmark]: https://pypi.org/project/pycmark/
