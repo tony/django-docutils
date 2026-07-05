@@ -18,7 +18,15 @@ Install packages:
 $ uv sync --all-extras --dev
 ```
 
-## Running Tests
+## Codebase map
+
+The Django-facing entry points are the template tag and filter in
+`django_docutils.templatetags.django_docutils`, the template backend in
+`django_docutils.template`, and `DocutilsView` in `django_docutils.views`.
+They all hand source to the publisher helpers in `django_docutils.lib`, where
+roles, directives, transforms, writers, settings, and sanitization are applied.
+
+## Running tests
 
 ```console
 $ uv run pytest
@@ -36,14 +44,31 @@ Watch tests:
 $ uv run ptw .
 ```
 
-## Building Docs
+## Building docs
 
 ```console
-$ uv run sphinx-build docs docs/_build
+$ just build-docs
 ```
 
-Live-reload:
+Run Sphinx doctests:
 
 ```console
-$ uv run sphinx-autobuild docs docs/_build
+$ just -f docs/justfile doctest
+```
+
+Live reload:
+
+```console
+$ just start-docs
+```
+
+Before committing, run the full local gate from the repository root:
+
+```console
+$ rm -rf docs/_build
+$ uv run ruff check . --fix --show-fixes
+$ uv run ruff format .
+$ uv run mypy .
+$ uv run py.test --reruns 0 -vvv
+$ just build-docs
 ```

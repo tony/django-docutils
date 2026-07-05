@@ -60,6 +60,11 @@ Registered under the name configured in `DJANGO_DOCUTILS_LIB_RST`
 {func}`django_docutils.lib.directives.code.register_pygments_directive`. Full API: {ref}`api_lib_directives_code`.
 
 ```{eval-rst}
+.. rst:directive:: code-block
+
+   Default registered name for
+   :class:`django_docutils.lib.directives.code.CodeBlock`.
+
 .. autodirective:: django_docutils.lib.directives.code.CodeBlock
 ```
 
@@ -71,9 +76,23 @@ actually registered with docutils come from the `roles` mapping in
 Full API: {ref}`api_lib_roles`.
 
 ```{eval-rst}
+.. rst:role:: gh
+
+   Common local alias for :rst:role:`github`.
+
+.. rst:role:: hn
+
+   Common local alias for :rst:role:`hackernews`.
+
+.. rst:role:: rtd
+
+   Common local alias for :rst:role:`readthedocs`.
+
 .. autorole:: django_docutils.lib.roles.email.email_role
 
 .. autorole:: django_docutils.lib.roles.file.file_role
+
+.. autorole:: django_docutils.lib.roles.file.exe_role
 
 .. autorole:: django_docutils.lib.roles.file.manifest_role
 

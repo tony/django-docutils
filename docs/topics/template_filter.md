@@ -2,9 +2,9 @@
 
 # Template filter
 
-Use {func}`~django_docutils.templatetags.django_docutils.rst_filter` when
-[reStructuredText] source flows through [Django]'s filter syntax, either as a
-variable or a `{% filter rst %}` block.
+The {func}`~django_docutils.templatetags.django_docutils.rst_filter` filter is
+deprecated. Keep it for existing templates that already use [Django]'s filter
+syntax, but use {ref}`template_tag` for new template blocks.
 
 :::{seealso}
 
@@ -41,8 +41,12 @@ In your HTML template:
 ```django
 {% load django_docutils %}
 {% filter rst %}
-# hey
-# how's it going
+hey
+---
+
+hi
+##
+
 A. hows
 B. it
 

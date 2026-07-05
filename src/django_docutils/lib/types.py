@@ -37,6 +37,6 @@ class DjangoDocutilsLibRSTSettings(TypedDict, total=False):
 
 
 class DjangoDocutilsLibTextSettings(TypedDict):
-    """Core settings object for ``DJANGO_DOCUTILS_TEXT_RST``."""
+    """Core settings object for ``DJANGO_DOCUTILS_LIB_TEXT``."""
 
     uncapitalized_word_filters: list[str]

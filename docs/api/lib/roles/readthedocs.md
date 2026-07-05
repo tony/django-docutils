@@ -4,7 +4,8 @@
 
 :::{seealso}
 
-Registry-aware entry: {rst:role}`readthedocs` in {ref}`api_lib_components`.
+Registry-aware entries: {rst:role}`readthedocs` and common alias
+{rst:role}`rtd` in {ref}`api_lib_components`.
 
 :::
 

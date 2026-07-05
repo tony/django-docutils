@@ -42,8 +42,12 @@ In your HTML template:
 ```django
 {% load django_docutils %}
 {% rst %}
-# hey
-# how's it going
+hey
+---
+
+hi
+##
+
 A. hows
 B. it
 

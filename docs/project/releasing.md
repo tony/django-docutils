@@ -17,7 +17,7 @@ publishing.
 3. Commit:
 
    ```console
-   $ git commit -m "django-docutils <version>"
+   $ git commit -m "Tag v<version>"
    ```
 
 4. Tag:

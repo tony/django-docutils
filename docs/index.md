@@ -17,7 +17,9 @@ Install and render your first RST snippet in 5 minutes.
 :::{grid-item-card} Topics
 :link: topics/index
 :link-type: doc
-Template tags, template filters, class-based views, security, and FAQ.
+{ref}`Template tag <template_tag>`, {ref}`class-based view <class_based_view>`,
+{ref}`security`, legacy {ref}`template filter <template_filter>`, and
+{ref}`FAQ <faq>`.
 :::
 
 :::{grid-item-card} API Reference

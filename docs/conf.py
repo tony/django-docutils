@@ -37,6 +37,7 @@ conf = merge_sphinx_config(
     light_logo="img/icons/logo.svg",
     dark_logo="img/icons/logo-dark.svg",
     extra_extensions=[
+        "sphinx.ext.doctest",
         "sphinx_autodoc_api_style",
         "sphinx_autodoc_docutils",
         "sphinx_autodoc_sphinx",
@@ -60,3 +61,51 @@ conf = merge_sphinx_config(
     exclude_patterns=["_build", "AGENTS.md", "CLAUDE.md"],
 )
 globals().update(conf)
+
+doctest_global_setup = """
+from docutils import nodes
+from django_docutils.lib.publisher import (
+    publish_doctree,
+    publish_html_from_doctree,
+    publish_html_from_source,
+    publish_parts_from_doctree,
+)
+from django_docutils.lib.roles.kbd import kbd_role
+from django_docutils.lib.sanitize import (
+    SanitizeTransform,
+    _remove_node,
+    _replace_node_with_text,
+    _uri_is_allowed,
+    sanitize_doctree,
+)
+from django_docutils.lib.settings import (
+    DJANGO_DOCUTILS_LIB_RST,
+    get_allowed_uri_schemes,
+    get_docutils_settings,
+    reload_settings,
+    unsafe_docutils_settings_allowed,
+)
+from django_docutils.lib.writers import DjangoDocutilsWriter
+from django_docutils.template import DocutilsTemplate
+"""
+
+nitpick_ignore_regex = [
+    ("py:.*", r"docutils\..*"),
+    ("py:.*", r"django\..*"),
+    ("py:.*", r"pygments\..*"),
+    ("py:.*", r"typing_extensions\..*"),
+    ("py:.*", r"django_docutils\.lib\.transforms\.code\.Token(Stream|Generator)"),
+    ("py:class", r"django_docutils\.lib\.roles\.types\.RoleFnReturnValue"),
+    ("py:.*", r"nodes\..*"),
+    ("py:class", r"Formatter"),
+    ("py:class", r"HttpRequest"),
+    ("py:class", r"RoleFnReturnValue"),
+    ("py:class", r"StrPath"),
+    ("py:class", r"frozenset of str"),
+    ("py:class", r"mapping"),
+    ("py:class", r"optional"),
+    ("py:class", r"str or bytes"),
+    ("py:class", r"str or None"),
+    ("py:obj", r"From:"),
+    ("py:obj", r"License:"),
+]

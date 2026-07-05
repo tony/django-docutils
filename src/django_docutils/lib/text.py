@@ -25,9 +25,10 @@ def is_uncapitalized_word(value: str) -> bool:
         True if term or word is uncapitalized.
 
 
-    Functions can be declared via DJANGO_DOCUTILS_TEXT in django settings via string
-    imports. The filters accept one argument (the word). If you don't want the
-    word/pattern capitalized, return True. Anything else capitalizes as normal.
+    Functions can be declared via ``DJANGO_DOCUTILS_LIB_TEXT`` in Django
+    settings via string imports. The filters accept one argument (the word). If
+    you don't want the word or pattern capitalized, return ``True``. Anything
+    else capitalizes as normal.
 
     How to create filters:
 

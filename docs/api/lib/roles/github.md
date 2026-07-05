@@ -4,7 +4,8 @@
 
 :::{seealso}
 
-Registry-aware entry: {rst:role}`github` in {ref}`api_lib_components`.
+Registry-aware entries: {rst:role}`github` and common alias {rst:role}`gh` in
+{ref}`api_lib_components`.
 
 :::
 

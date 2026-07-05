@@ -27,7 +27,9 @@ Exception definitions for django-docutils.
 :::{grid-item-card} Lib
 :link: lib/index
 :link-type: doc
-Publisher, roles, directives, writers, and transforms.
+{ref}`Publisher helpers <api_lib_publisher>`, {ref}`roles <api_lib_roles>`,
+{ref}`directives <api_lib_directives>`, {ref}`writers <api_lib_writers>`, and
+{ref}`transforms <api_lib_transforms>`.
 :::
 
 :::{grid-item-card} Template Engine
