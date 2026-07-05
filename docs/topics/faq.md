@@ -4,8 +4,7 @@
 
 ## General
 
-New to the ecosystem? {ref}`what-is-docutils` maps docutils,
-reStructuredText, Sphinx, and Markdown in one page.
+New to the ecosystem? {ref}`what-is-docutils` maps the core terms in one page.
 
 ### What is reST, RST, reStructuredText?
 

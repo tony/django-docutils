@@ -2,7 +2,8 @@
 
 # django-docutils
 
-Docutils (reStructuredText) support for Django templates, views, and template engines.
+[docutils] support for [reStructuredText] in [Django] templates, views, and
+template engines.
 
 ::::{grid} 1 1 2 2
 :gutter: 2 2 3 3
@@ -44,6 +45,10 @@ $ uv add django-docutils
 ```
 
 See [Quickstart](quickstart.md) for configuration and first steps.
+
+[docutils]: https://docutils.sourceforge.io/
+[reStructuredText]: https://docutils.sourceforge.io/rst.html
+[Django]: https://docs.djangoproject.com/
 
 ## At a glance
 

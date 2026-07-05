@@ -20,8 +20,8 @@ $ pip install --upgrade django-docutils
 
 ### Developmental releases
 
-New versions of django-docutils are published to PyPI as alpha, beta, or release
-candidates. Their versions use markers like `a1`, `b1`, and `rc1`,
+New versions of django-docutils are published to [PyPI] as alpha, beta, or
+release candidates. Their versions use markers like `a1`, `b1`, and `rc1`,
 respectively. `1.10.0b4` would mean the 4th beta release of `1.10.0` before
 general availability.
 
@@ -72,6 +72,7 @@ via trunk (can break easily):
 
 [pip]: https://pip.pypa.io/en/stable/
 [pipx]: https://pypa.github.io/pipx/docs/
+[PyPI]: https://pypi.org/
 [uv]: https://docs.astral.sh/uv/
 [uvx]: https://docs.astral.sh/uv/guides/tools/
 
