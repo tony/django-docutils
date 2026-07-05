@@ -9,7 +9,7 @@ reStructuredText, Sphinx, and Markdown in one page.
 
 ### What is reST, RST, reStructuredText?
 
-[reStructuredText] is a markup syntax, similar to markdown. Learn it from the
+[reStructuredText] is a markup syntax, similar to Markdown. Learn it from the
 official [primer][rst-primer] and [quick reference][rst-quickref].
 
 [rst-primer]: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
@@ -17,9 +17,9 @@ official [primer][rst-primer] and [quick reference][rst-quickref].
 
 ### What is docutils?
 
-[docutils] is a python package for parsing and publishing markup. The default docutils package
-supports reStructuredText. It can also parse markdown when a third-party
-parser such as [myst-docutils] or [myst-parser] is installed — see
+[docutils] is a Python package for parsing and publishing markup. The default
+docutils package supports reStructuredText. It can also parse Markdown when a
+third-party parser such as [myst-docutils] or [myst-parser] is installed — see
 {ref}`what-is-docutils` for the details.
 
 [myst-docutils]: https://pypi.org/project/myst-docutils/
@@ -31,11 +31,12 @@ parser such as [myst-docutils] or [myst-parser] is installed — see
 
 No! [docutils] can always be used directly.
 
-This package simply offers template extensions to use docutils in django views.
+This package adds Django template and view helpers around docutils.
 
 ### What does this package provide?
 
-3 ways to render reStructuredText via docutils in [Django]:
+You get three entry points for rendering reStructuredText via docutils in
+[Django]:
 
 1. {ref}`template_tag`
 2. {ref}`template_filter`
@@ -43,8 +44,8 @@ This package simply offers template extensions to use docutils in django views.
 
 ### Can I copy code from this project to my own?
 
-Yes! Go ahead, the project's source is released under the [MIT license] - you are welcome to view the codebase and copy just
-what you need.
+Yes. The project is released under the [MIT license], so you can view the
+codebase and copy what you need.
 
 [MIT license]: https://github.com/tony/django-docutils/blob/master/LICENSE
 [docutils]: https://docutils.sourceforge.io/

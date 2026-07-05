@@ -33,6 +33,21 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Documentation
+
+#### Documentation links now follow reader workflows
+
+The topic and API overview pages now link their first mentions of the template
+tag, template filter, class-based view, template backend, and docutils
+components directly to their rendered references. Readers can move from a
+workflow guide to the exact API or component page without hunting through later
+reference sections.
+
+The template tag, template filter, and class-based view guides now introduce the
+feature before setup details, so readers see when to use each entry point before
+they copy configuration. The quickstart and FAQ wording was also tightened
+around Django, Python, Markdown, and developmental-release terminology.
+
 ## django-docutils 0.30.0 (2026-06-07)
 
 django-docutils 0.30.0 hardens the rendering defaults so reStructuredText from
