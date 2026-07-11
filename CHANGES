@@ -33,6 +33,16 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Fixes
+
+#### `typing-extensions` no longer required at runtime (#465)
+
+`typing_extensions` was imported at module scope but never declared as a runtime
+dependency, so installs without it raised `ModuleNotFoundError` on
+{class}`~django_docutils.template.DocutilsTemplates`,
+{func}`~django_docutils.templatetags.django_docutils.rst`, and
+{class}`~django_docutils.views.DocutilsView`.
+
 ### Documentation
 
 #### Documentation links now follow reader workflows
@@ -47,6 +57,14 @@ The template tag, template filter, and class-based view guides now introduce the
 feature before setup details, so readers see when to use each entry point before
 they copy configuration. The quickstart and FAQ wording was also tightened
 around Django, Python, Markdown, and developmental-release terminology.
+
+### Development
+
+#### Runtime dependency smoke test (#465)
+
+CI installs django-docutils with only its declared runtime dependencies, imports
+every module, and renders reStructuredText, so a runtime import declared only in
+a dependency group fails the build instead of reaching PyPI.
 
 ## django-docutils 0.30.0 (2026-06-07)
 

@@ -4,16 +4,14 @@ from __future__ import annotations
 
 import typing as t
 
-from typing_extensions import TypedDict
 
-
-class DjangoDocutilsLibRSTRolesSettings(TypedDict, total=False):
+class DjangoDocutilsLibRSTRolesSettings(t.TypedDict, total=False):
     """Docutils role mappings."""
 
     local: dict[str, str]
 
 
-class DjangoDocutilsLibRSTDocutilsSettings(TypedDict, total=False):
+class DjangoDocutilsLibRSTDocutilsSettings(t.TypedDict, total=False):
     """Docutils document settings."""
 
     file_insertion_enabled: bool
@@ -24,7 +22,7 @@ class DjangoDocutilsLibRSTDocutilsSettings(TypedDict, total=False):
     initial_header_level: int
 
 
-class DjangoDocutilsLibRSTSettings(TypedDict, total=False):
+class DjangoDocutilsLibRSTSettings(t.TypedDict, total=False):
     """Core settings object for ``DJANGO_DOCUTILS_LIB_RST``."""
 
     allow_unsafe_docutils_settings: bool
@@ -36,7 +34,7 @@ class DjangoDocutilsLibRSTSettings(TypedDict, total=False):
     roles: DjangoDocutilsLibRSTRolesSettings
 
 
-class DjangoDocutilsLibTextSettings(TypedDict):
+class DjangoDocutilsLibTextSettings(t.TypedDict):
     """Core settings object for ``DJANGO_DOCUTILS_LIB_TEXT``."""
 
     uncapitalized_word_filters: list[str]

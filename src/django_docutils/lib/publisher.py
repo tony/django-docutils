@@ -9,7 +9,6 @@ from django.utils.safestring import mark_safe
 from docutils import io, nodes
 from docutils.core import Publisher, publish_doctree as docutils_publish_doctree
 from docutils.readers.doctree import Reader
-from typing_extensions import NotRequired, TypedDict, Unpack
 
 from .directives.registry import register_django_docutils_directives
 from .roles.registry import register_django_docutils_roles
@@ -17,6 +16,9 @@ from .sanitize import sanitize_doctree
 from .settings import get_docutils_settings
 from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
+
+if t.TYPE_CHECKING:
+    from typing_extensions import NotRequired, Unpack
 
 
 def publish_parts_from_doctree(
@@ -181,7 +183,7 @@ def publish_doctree(
     )
 
 
-class PublishHtmlDocTreeKwargs(TypedDict):
+class PublishHtmlDocTreeKwargs(t.TypedDict):
     """Keyword arguments accepted by publish_html_from_source."""
 
     show_title: NotRequired[bool]

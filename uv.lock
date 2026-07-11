@@ -472,6 +472,7 @@ dev = [
     { name = "types-docutils" },
     { name = "types-pygments" },
     { name = "types-pytz" },
+    { name = "typing-extensions" },
 ]
 docs = [
     { name = "gp-libs" },
@@ -492,6 +493,7 @@ lint = [
     { name = "types-docutils" },
     { name = "types-pygments" },
     { name = "types-pytz" },
+    { name = "typing-extensions" },
 ]
 testing = [
     { name = "dj-inmemorystorage" },
@@ -543,6 +545,7 @@ dev = [
     { name = "types-docutils" },
     { name = "types-pygments" },
     { name = "types-pytz" },
+    { name = "typing-extensions" },
 ]
 docs = [
     { name = "gp-libs", specifier = ">=0.0.18" },
@@ -562,6 +565,7 @@ lint = [
     { name = "types-docutils" },
     { name = "types-pygments" },
     { name = "types-pytz" },
+    { name = "typing-extensions" },
 ]
 testing = [
     { name = "dj-inmemorystorage" },
