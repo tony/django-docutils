@@ -43,6 +43,14 @@ jobs:
       - name: Test with pytest
         run: uv run py.test --cov=./ --cov-report=xml
 
+      # Installs only [project].dependencies, so anything imported at runtime
+      # but declared in a dependency group fails here rather than on PyPI.
+      - name: Runtime dependency smoke test
+        run: >
+          uvx --isolated --no-cache
+          --python ${{ matrix.python-version }}
+          --from . python scripts/runtime_dep_smoketest.py
+
       - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
