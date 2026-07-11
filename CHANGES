@@ -33,6 +33,17 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+## django-docutils 0.30.1 (2026-07-11)
+
+django-docutils 0.30.1 fixes a failed import on installations that do not
+already provide `typing-extensions`. The library imported it at runtime without
+declaring it as a dependency, so a clean install raised `ModuleNotFoundError` on
+{class}`~django_docutils.template.DocutilsTemplates`,
+{func}`~django_docutils.templatetags.django_docutils.rst`, and
+{class}`~django_docutils.views.DocutilsView`. Django, docutils, and Pygments are
+now the only runtime dependencies, and CI checks that on every push. Upgrading
+requires no code changes.
+
 ### Fixes
 
 #### `typing-extensions` no longer required at runtime (#465)
