@@ -82,6 +82,9 @@ dev = [
   "types-docutils",
   "types-Pygments",
   "types-pytz",
+  # Type-checking only: `NotRequired` / `Unpack` are 3.11+ in the stdlib and
+  # are imported under `t.TYPE_CHECKING`. Must never become a runtime dep.
+  "typing-extensions",
 ]
 
 docs = [
@@ -116,6 +119,9 @@ lint = [
   "types-docutils",
   "types-Pygments",
   "types-pytz",
+  # Type-checking only: `NotRequired` / `Unpack` are 3.11+ in the stdlib and
+  # are imported under `t.TYPE_CHECKING`. Must never become a runtime dep.
+  "typing-extensions",
 ]
 
 [build-system]
