@@ -270,6 +270,10 @@ testpaths = [
   "src/django_docutils",
   "tests",
   "docs",
+  "scripts",
+]
+markers = [
+  "scripts__runtime_dep_smoketest: run runtime dependency smoke tests",
 ]
 pythonpath = ". tests"
 filterwarnings = [
