@@ -60,11 +60,11 @@ dev = [
   "sphinx-autodoc-sphinx==0.0.1a34",
   "sphinx-ux-autodoc-layout==0.0.1a34",
   "sphinx-ux-badges==0.0.1a34",
-  "gp-libs>=0.0.18",
+  "gp-libs>=0.0.19",
   "sphinx-autobuild",
   "sphinx-click",
   # Testing
-  "gp-libs>=0.0.18",
+  "gp-libs>=0.0.19",
   "pytest",
   "pytest-rerunfailures",
   "pytest-mock",
@@ -94,12 +94,12 @@ docs = [
   "sphinx-autodoc-sphinx==0.0.1a34",
   "sphinx-ux-autodoc-layout==0.0.1a34",
   "sphinx-ux-badges==0.0.1a34",
-  "gp-libs>=0.0.18",
+  "gp-libs>=0.0.19",
   "sphinx-autobuild",
   "sphinx-click",
 ]
 testing = [
-  "gp-libs>=0.0.18",
+  "gp-libs>=0.0.19",
   "pytest",
   "pytest-rerunfailures",
   "pytest-mock",
