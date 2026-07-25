@@ -177,6 +177,31 @@ def test_rst_tag_renders_toc_only(settings):
 - Type hints are required; keep mypy strictness in mind and add `TypedDict`/`Protocol` as needed
 - Use Django utilities (`force_str`, `mark_safe`, `select_template`) instead of reimplementing equivalents
 
+**Classes with fields** — `NamedTuple`, dataclasses — document every field in
+an `Attributes` section:
+
+```python
+class ParentNodeClassTuple(t.NamedTuple):
+    """Typing for parent node accepting custom arguments.
+
+    Attributes
+    ----------
+    parent_node_type : type[docutils.nodes.Node | docutils.nodes.Body]
+        Parent node class the title must be wrapped in for this entry to apply.
+    args : list[str]
+        Positional arguments passed to ``starttag``.
+    kwargs : dict[str, str]
+        HTML attributes passed to ``starttag``.
+    close_tag : str | None
+        Closing tag emitted after the title, or ``None`` to keep the default.
+    """
+```
+
+Autodoc renders every field whether or not you describe it, so an
+undocumented `NamedTuple` field ships to the API docs as "Alias for field
+number 0" and a dataclass field ships bare. Document all of them — a class
+with three fields and two documented still ships a stub for the third.
+
 ### Doctests
 
 **All functions and methods MUST have working doctests.** Doctests serve as both documentation and tests.
