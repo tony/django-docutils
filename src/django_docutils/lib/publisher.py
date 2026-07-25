@@ -184,7 +184,16 @@ def publish_doctree(
 
 
 class PublishHtmlDocTreeKwargs(t.TypedDict):
-    """Keyword arguments accepted by publish_html_from_source."""
+    """Keyword arguments accepted by publish_html_from_source.
+
+    Attributes
+    ----------
+    show_title : NotRequired[bool]
+        Render the document title above the body. Omitted means ``True``.
+    toc_only : NotRequired[bool]
+        Return only the table of contents, for sidebars, rather than the
+        document body. Omitted means ``False``.
+    """
 
     show_title: NotRequired[bool]
     toc_only: NotRequired[bool]
