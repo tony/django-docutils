@@ -51,7 +51,7 @@ jobs:
           --python ${{ matrix.python-version }}
           --from . python scripts/runtime_dep_smoketest.py
 
-      - uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
