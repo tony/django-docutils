@@ -15,7 +15,19 @@ from .settings import DJANGO_DOCUTILS_LIB_RST
 
 
 class ParentNodeClassTuple(t.NamedTuple):
-    """Typing for parent node accepting custom arguments."""
+    """Typing for parent node accepting custom arguments.
+
+    Attributes
+    ----------
+    parent_node_type : type[docutils.nodes.Node | docutils.nodes.Body]
+        Parent node class the title must be wrapped in for this entry to apply.
+    args : list[str]
+        Positional arguments passed to ``starttag``.
+    kwargs : dict[str, str]
+        HTML attributes passed to ``starttag``.
+    close_tag : str | None
+        Closing tag emitted after the title, or ``None`` to keep the default.
+    """
 
     parent_node_type: type[nodes.Node | nodes.Body]
     args: list[str]
