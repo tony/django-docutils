@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import inspect
 import typing as t
 
 from django.utils.module_loading import import_string
@@ -138,7 +137,7 @@ def register_role_mapping(role_mapping: dict[str, t.Any]) -> None:
         #
         # If they include kwargs, they are entered as a tuple with a second
         # element that's a dict of the kwargs passed into the role.
-        if inspect.isclass(role_):
+        if isinstance(role_, type):
             if role_cb_kwargs:
                 roles.register_local_role(role_name, role_(**role_cb_kwargs))
             else:
