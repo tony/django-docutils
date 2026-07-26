@@ -16,4 +16,4 @@ class DocutilsNotInstalled(DjangoDocutilsException):
         *args: object,
         **kwargs: object,
     ) -> None:
-        return super().__init__(message, *args, **kwargs)
+        super().__init__(message, *args, **kwargs)

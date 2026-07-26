@@ -59,7 +59,7 @@ class DocutilsViewRstNameImproperlyConfigured(ImproperlyConfigured):
     """DocutilsView could not find rst_name."""
 
     def __init__(self, *args: object, **kwargs: object) -> None:
-        return super().__init__(
+        super().__init__(
             "DocutilsView requires either a definition of 'rst_name' or an "
             "implementation of 'get_rst_names()'",
             *args,
