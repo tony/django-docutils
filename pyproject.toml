@@ -274,6 +274,10 @@ convention = "numpy"
 # so narrowing the catch would let an unanticipated failure abort the run and
 # hide the checks after it.
 "scripts/runtime_dep_smoketest.py" = ["BLE001"]
+# RST document metadata carries no UTC offset, so the parse formats cannot
+# take `%z`. The naive value is intentional: `process_datetime` localizes it
+# to `settings.TIME_ZONE` when the optional `pytz` extra is installed.
+"src/django_docutils/lib/metadata/processors.py" = ["DTZ007"]
 
 [tool.pytest.ini_options]
 addopts = "--tb=short --no-header --showlocals --doctest-modules"
