@@ -269,6 +269,11 @@ convention = "numpy"
 # module of dunder assignments — to collect every metadata key into one dict.
 # The input is a first-party file in this repo, never untrusted.
 "docs/conf.py" = ["S102"]
+# The smoke test imports every module and renders RST to prove the runtime
+# dependency set is complete. Any failure is a finding to collect and report,
+# so narrowing the catch would let an unanticipated failure abort the run and
+# hide the checks after it.
+"scripts/runtime_dep_smoketest.py" = ["BLE001"]
 
 [tool.pytest.ini_options]
 addopts = "--tb=short --no-header --showlocals --doctest-modules"
