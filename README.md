@@ -27,7 +27,7 @@ Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
 ```python
 INSTALLED_APPS = [
     # ... your default apps,
-    'django_docutils'
+    "django_docutils"
 ]
 ```
 
@@ -93,9 +93,10 @@ Now django will be able to scan for .rst files and process them. In your view:
 ```python
 from django_docutils.views import DocutilsView
 
+
 class HomeView(DocutilsView):
-    template_name = 'base.html'
-    rst_name = 'home.rst'
+    template_name = "base.html"
+    rst_name = "home.rst"
 ```
 
 # Settings
@@ -116,7 +117,7 @@ DJANGO_DOCUTILS_LIB_RST = {
     },
     "directives": {
         "code-block": "django_docutils.lib.directives.code.CodeBlock",
-    }
+    },
 }
 
 # Optional
