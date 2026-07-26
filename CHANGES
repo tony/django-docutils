@@ -33,6 +33,14 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Documentation
+
+#### Settings fields describe themselves in the API reference (#467)
+
+The `TypedDict` settings schemas and the writer's `NamedTuple` now say what
+each field holds. They previously reached the rendered API reference as
+"Alias for field number 0" or as a bare name carrying only its type.
+
 ### Development
 
 #### CI actions updated to current majors
