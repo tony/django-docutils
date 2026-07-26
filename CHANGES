@@ -33,6 +33,15 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Development
+
+#### CI actions updated to current majors
+
+Workflow actions moved to their current major releases: `actions/checkout` v7,
+`actions/cache` v6, `astral-sh/setup-uv` v9.0.0, `codecov/codecov-action` v7,
+and `dorny/paths-filter` v4. Workflow behavior is unchanged, though setup-uv no
+longer prunes the uv cache, so the first run after this repopulates it.
+
 ## django-docutils 0.30.1 (2026-07-11)
 
 django-docutils 0.30.1 fixes a failed import on installations that do not
