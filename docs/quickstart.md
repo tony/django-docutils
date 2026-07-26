@@ -78,7 +78,7 @@ file:
 ```python
 INSTALLED_APPS = [
     # ... your default apps,
-    'django_docutils'
+    "django_docutils"
 ]
 ```
 

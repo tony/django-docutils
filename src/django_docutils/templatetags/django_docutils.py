@@ -52,7 +52,7 @@ class MalformedArgumentsToRSTTag(TemplateSyntaxError):
     """Invalid arguments to rst django template tag."""
 
     def __init__(self, *args: object, **kwargs: object) -> None:
-        return super().__init__("Malformed arguments to url tag", *args, **kwargs)
+        super().__init__("Malformed arguments to url tag", *args, **kwargs)
 
 
 @register.tag

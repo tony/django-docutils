@@ -25,10 +25,12 @@ def test_filter(settings: t.Any) -> None:
 """.replace("{{DEFAULT_RST}}", DEFAULT_RST),
     )
     with pytest.warns(DeprecationWarning) as record:
-        assert template.render(Context()) == DEFAULT_EXPECTED
-        message = record[0].message
-        assert isinstance(message, Warning)
-        assert message.args[0] == "The rst filter has been deprecated"
+        rendered = template.render(Context())
+
+    assert rendered == DEFAULT_EXPECTED
+    message = record[0].message
+    assert isinstance(message, Warning)
+    assert message.args[0] == "The rst filter has been deprecated"
 
 
 def test_templatetag(settings: t.Any) -> None:

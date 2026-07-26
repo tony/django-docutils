@@ -20,7 +20,7 @@ Add `django_docutils` to `INSTALLED_APPS` in your settings file:
 ```python
 INSTALLED_APPS = [
     # ... your default apps,
-    'django_docutils'
+    "django_docutils"
 ]
 ```
 

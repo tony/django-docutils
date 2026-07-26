@@ -76,7 +76,7 @@ dev = [
   "coverage",
   "pytest-cov",
   # Lint
-  "ruff",
+  "ruff>=0.16.0",
   "mypy",
   "django-stubs",
   "types-docutils",
@@ -113,7 +113,7 @@ coverage =[
   "pytest-cov",
 ]
 lint = [
-  "ruff",
+  "ruff>=0.16.0",
   "mypy",
   "django-stubs",
   "types-docutils",
@@ -211,7 +211,10 @@ disable_error_code = [
 target-version = "py310"
 
 [tool.ruff.lint]
-select = [
+# `select` is deliberately unset: ruff 0.16 enables a curated default rule
+# set, and an explicit `select` would replace it rather than extend it.
+# `extend-select` layers this project's additional linters on top.
+extend-select = [
   "E", # pycodestyle
   "F", # pyflakes
   "I", # isort
@@ -228,7 +231,7 @@ select = [
   "PERF", # Perflint
   "RUF", # Ruff-specific rules
   "D", # pydocstyle
-  "FA100",  # future annotations
+  "FA100", # future annotations
 ]
 ignore = [
   "COM812", # missing trailing comma, ruff format conflict
@@ -262,6 +265,19 @@ convention = "numpy"
 [tool.ruff.lint.per-file-ignores]
 "*/__init__.py" = ["F401"]
 "src/**/*.py" = ["PTH"]
+# The Sphinx config exec's this package's own `__about__.py` — a data-only
+# module of dunder assignments — to collect every metadata key into one dict.
+# The input is a first-party file in this repo, never untrusted.
+"docs/conf.py" = ["S102"]
+# The smoke test imports every module and renders RST to prove the runtime
+# dependency set is complete. Any failure is a finding to collect and report,
+# so narrowing the catch would let an unanticipated failure abort the run and
+# hide the checks after it.
+"scripts/runtime_dep_smoketest.py" = ["BLE001"]
+# RST document metadata carries no UTC offset, so the parse formats cannot
+# take `%z`. The naive value is intentional: `process_datetime` localizes it
+# to `settings.TIME_ZONE` when the optional `pytz` extra is installed.
+"src/django_docutils/lib/metadata/processors.py" = ["DTZ007"]
 
 [tool.pytest.ini_options]
 addopts = "--tb=short --no-header --showlocals --doctest-modules"

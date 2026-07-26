@@ -33,6 +33,12 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Dependencies
+
+Minimum `ruff>=0.16.0` (was unpinned) for linting and formatting (#468). Ruff
+now formats Python code blocks inside Markdown, so `ruff format` reaches the
+README and the docs alongside the source tree.
+
 ### Documentation
 
 #### Settings fields describe themselves in the API reference (#467)
@@ -42,6 +48,14 @@ each field holds. They previously reached the rendered API reference as
 "Alias for field number 0" or as a bare name carrying only its type.
 
 ### Development
+
+#### Ruff's default rule set is enabled (#468)
+
+Linting runs ruff's own recommended rule set with this project's linters layered
+on top, rather than replacing it. An explicit `select` opts out of the default
+set, so the config uses `extend-select` instead. Contributors will see findings
+from linters the project never listed — flake8-bandit, flake8-datetimez,
+flake8-blind-except, and flake8-pytest-style among them.
 
 #### CI actions updated to current majors
 

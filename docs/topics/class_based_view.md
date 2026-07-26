@@ -51,9 +51,10 @@ With the backend configured, your view points at an RST template:
 ```python
 from django_docutils.views import DocutilsView
 
+
 class HomeView(DocutilsView):
-    template_name = 'base.html'
-    rst_name = 'home.rst'
+    template_name = "base.html"
+    rst_name = "home.rst"
 ```
 
 *yourapp/templates/home.rst*:
