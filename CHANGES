@@ -33,6 +33,12 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Dependencies
+
+Minimum `ruff>=0.16.0` (was unpinned) for linting and formatting (#468). Ruff
+now formats Python code blocks inside Markdown, so `ruff format` reaches the
+README and the docs alongside the source tree.
+
 ### Documentation
 
 #### Settings fields describe themselves in the API reference (#467)
