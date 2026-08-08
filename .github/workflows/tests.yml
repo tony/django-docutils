@@ -24,7 +24,7 @@ jobs:
         run: uv sync --all-extras --dev
 
       - name: Install django @ ${{ matrix.django-version }}
-        run: uv pip install DJANGO~=${{ matrix.django-version }}
+        run: uv pip install DJANGO~=${{ matrix.django-version }}.0
 
       - name: Print python versions
         run: |
