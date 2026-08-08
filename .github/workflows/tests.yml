@@ -5,6 +5,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    # `uv run` syncs the environment from uv.lock first, which would
+    # reinstall the locked django over the one the matrix leg installed.
+    env:
+      UV_NO_SYNC: '1'
     strategy:
       matrix:
         python-version: ['3.10', '3.14']
