@@ -27,11 +27,20 @@ $ uv add django-docutils --prerelease allow
 $ uvx --from 'django-docutils' --prerelease allow django-docutils
 ```
 
-## django-docutils 0.31.0 (unreleased)
+## django-docutils 0.32.0 (unreleased)
 
 <!-- KEEP THIS PLACEHOLDER - DO NOT REMOVE OR MODIFY THIS LINE -->
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
+
+## django-docutils 0.31.0 (2026-08-08)
+
+django-docutils 0.31.0 adds support for Django 6.1 and 6.0, and raises the
+minimum to Django 5.2. Django 4.2 LTS and 5.1 both reached the end of security
+support earlier this year, so neither is declared or tested any longer;
+projects still on those series should move to 5.2 LTS before upgrading. Python
+support is unchanged at 3.10 and newer, and rendering behavior is untouched —
+upgrading requires no code changes beyond the Django floor.
 
 ### Breaking changes
 
