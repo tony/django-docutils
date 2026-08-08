@@ -33,6 +33,15 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Development
+
+#### The source distribution carries only the project
+
+The sdist shipped editor and agent configuration, CI workflows, toolchain pins,
+and the lockfile, because the build declared its contents with keys the backend
+does not read. It now carries the package, its tests, the docs, the scripts, and
+the changelog — enough to build the package and run its suite, and nothing else.
+
 ## django-docutils 0.31.0 (2026-08-08)
 
 django-docutils 0.31.0 adds support for Django 6.1 and 6.0, and raises the
