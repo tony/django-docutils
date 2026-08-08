@@ -26,14 +26,14 @@ classifiers = [
   "Typing :: Typed",
 ]
 keywords = ["django", "docutils", "reStructuredText", "rst", "reST"]
-homepage = "https://django-docutils.git-pull.com"
 dependencies = [
   "django>=5.2",
   "docutils",
   "pygments<3"
 ]
 
-[tool.project]
+[project.urls]
+Homepage = "https://django-docutils.git-pull.com"
 "Bug Tracker" = "https://github.com/tony/django-docutils/issues"
 Documentation = "https://django-docutils.git-pull.com"
 Repository = "https://github.com/tony/django-docutils"
