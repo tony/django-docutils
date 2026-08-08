@@ -39,6 +39,15 @@ Minimum `ruff>=0.16.0` (was unpinned) for linting and formatting (#468). Ruff
 now formats Python code blocks inside Markdown, so `ruff format` reaches the
 README and the docs alongside the source tree.
 
+### What's new
+
+#### Django 6.1 support (#469)
+
+django-docutils runs on Django 6.1 and 6.0, both now declared in the package
+metadata and covered by CI. Django 6.x requires Python 3.12 or newer;
+installations on Python 3.10 and 3.11 continue to resolve Django 5.2. Upgrading
+requires no code changes.
+
 ### Documentation
 
 #### Settings fields describe themselves in the API reference (#467)
@@ -59,17 +68,10 @@ flake8-blind-except, and flake8-pytest-style among them.
 
 #### The test matrix runs the versions it names (#469)
 
-Legs pinned Django with `~=X.Y`, which floats across an entire major series, and
-`uv run` re-synced the environment from `uv.lock` before running the suite.
-Together those meant every leg tested whatever the lockfile resolved for its
-Python, regardless of the version the leg named. Legs now install `~=X.Y.0` and
-run with `UV_NO_SYNC`.
-
-The Python axis was inert for a separate reason: `uv python install` only makes
-an interpreter available, and `.python-version` still selected the one the
-project used, so every leg ran Python 3.14 -- including those named 3.10.
-`UV_PYTHON` now binds each leg to its own interpreter, and a leg fails outright
-when the Python or the Django it is running is not the one it asked for.
+Every CI job silently ran one Python and one Django — whichever the lockfile
+resolved — regardless of the pair it was named for. Both axes now install what
+the job names, and a job fails outright when they do not match, so the support
+claims above are tested rather than assumed.
 
 #### CI actions updated to current majors
 
