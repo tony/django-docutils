@@ -129,6 +129,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv.exclude-newer-package]
+# The lock is what CI resolves against, so the cooldown would keep it on a
+# known-vulnerable django for three days after each security release.
+django = false
+
 # git-pull packages release in lockstep with their workspaces, so a
 # fresh release blocking on the 3-day cooldown blocks every
 # contributor's `uv sync` until it clears. `false` exempts each
