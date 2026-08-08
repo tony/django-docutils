@@ -26,7 +26,7 @@ Key features:
 
 This project uses:
 - Python 3.10+
-- Django 4.2 through 6.1 (6.x requires Python 3.12+)
+- Django 5.2 through 6.1 (6.x requires Python 3.12+)
 - [uv](https://github.com/astral-sh/uv) for dependency management
 - [ruff](https://github.com/astral-sh/ruff) for linting/formatting
 - [mypy](https://github.com/python/mypy) with `django-stubs` for typing
