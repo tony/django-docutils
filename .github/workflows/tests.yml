@@ -12,7 +12,13 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.10', '3.14']
-        django-version: ['4.2', '5.1', '5.2']
+        django-version: ['4.2', '5.1', '5.2', '6.0', '6.1']
+        exclude:
+          # django 6.x requires python 3.12+
+          - python-version: '3.10'
+            django-version: '6.0'
+          - python-version: '3.10'
+            django-version: '6.1'
     steps:
       - uses: actions/checkout@v7
 
