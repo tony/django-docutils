@@ -11,8 +11,6 @@ readme = "README.md"
 classifiers = [
   'Development Status :: 2 - Pre-Alpha',
   'Framework :: Django',
-  'Framework :: Django :: 4.2',
-  'Framework :: Django :: 5.1',
   'Framework :: Django :: 5.2',
   'Framework :: Django :: 6.0',
   'Framework :: Django :: 6.1',
@@ -36,7 +34,7 @@ include = [
   { path = "tests", format = "sdist" },
 ]
 dependencies = [
-  "django>=4.2",
+  "django>=5.2",
   "docutils",
   "pygments<3"
 ]
