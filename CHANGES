@@ -33,11 +33,38 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Breaking changes
+
+#### Django 5.2 is the minimum supported Django (#469)
+
+Minimum `django>=5.2` (was `>=4.2`). Django 4.2 LTS reached end of extended
+support in April 2026 and Django 5.1 in December 2025, so neither receives
+security fixes. Both leave the trove classifiers and the test matrix.
+
+Projects on 4.2 or 5.1 should move to 5.2 LTS, which is supported through April
+2028:
+
+```console
+$ pip install --upgrade 'django>=5.2'
+```
+
+The Python floor is unchanged: Django 5.2 supports Python 3.10 through 3.14, so
+installations on 3.10 and 3.11 keep resolving 5.2 while 3.12+ can take 6.x.
+
 ### Dependencies
 
 Minimum `ruff>=0.16.0` (was unpinned) for linting and formatting (#468). Ruff
 now formats Python code blocks inside Markdown, so `ruff format` reaches the
 README and the docs alongside the source tree.
+
+### What's new
+
+#### Django 6.1 support (#469)
+
+django-docutils runs on Django 6.1 and 6.0, both now declared in the package
+metadata and covered by CI. Django 6.x requires Python 3.12 or newer;
+installations on Python 3.10 and 3.11 continue to resolve Django 5.2. Upgrading
+requires no code changes.
 
 ### Documentation
 
@@ -56,6 +83,13 @@ on top, rather than replacing it. An explicit `select` opts out of the default
 set, so the config uses `extend-select` instead. Contributors will see findings
 from linters the project never listed — flake8-bandit, flake8-datetimez,
 flake8-blind-except, and flake8-pytest-style among them.
+
+#### The test matrix runs the versions it names (#469)
+
+Every CI job silently ran one Python and one Django — whichever the lockfile
+resolved — regardless of the pair it was named for. Both axes now install what
+the job names, and a job fails outright when they do not match, so the support
+claims above are tested rather than assumed.
 
 #### CI actions updated to current majors
 

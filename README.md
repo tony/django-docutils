@@ -145,7 +145,7 @@ DJANGO_DOCUTILS_LIB_RST = {
 ## More information
 
 - Python 3.10+
-- Django 4.2+
+- Django 5.2+
 - [Documentation](https://django-docutils.git-pull.com/) ·
   [Quickstart](https://django-docutils.git-pull.com/quickstart.html) ·
   [Security](https://django-docutils.git-pull.com/topics/security.html) ·
