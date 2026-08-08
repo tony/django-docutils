@@ -57,6 +57,20 @@ set, so the config uses `extend-select` instead. Contributors will see findings
 from linters the project never listed — flake8-bandit, flake8-datetimez,
 flake8-blind-except, and flake8-pytest-style among them.
 
+#### The test matrix runs the versions it names (#469)
+
+Legs pinned Django with `~=X.Y`, which floats across an entire major series, and
+`uv run` re-synced the environment from `uv.lock` before running the suite.
+Together those meant every leg tested whatever the lockfile resolved for its
+Python, regardless of the version the leg named. Legs now install `~=X.Y.0` and
+run with `UV_NO_SYNC`.
+
+The Python axis was inert for a separate reason: `uv python install` only makes
+an interpreter available, and `.python-version` still selected the one the
+project used, so every leg ran Python 3.14 -- including those named 3.10.
+`UV_PYTHON` now binds each leg to its own interpreter, and a leg fails outright
+when the Python or the Django it is running is not the one it asked for.
+
 #### CI actions updated to current majors
 
 Workflow actions moved to their current major releases: `actions/checkout` v7,
