@@ -33,6 +33,14 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+## django-docutils 0.31.1 (2026-08-08)
+
+django-docutils 0.31.1 is a packaging fix. The project links — documentation,
+repository, issue tracker, changelog, and discussions — now appear on the PyPI
+page, and the source distribution carries only the package and what is needed
+to build and test it. Nothing in the library changed; upgrading from 0.31.0
+requires no code changes.
+
 ### Fixes
 
 #### Project links on PyPI (#470)
