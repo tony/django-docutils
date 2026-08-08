@@ -33,6 +33,13 @@ $ uvx --from 'django-docutils' --prerelease allow django-docutils
 _Upcoming changes will be written here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Fixes
+
+#### Project links on PyPI (#470)
+
+The PyPI page now shows the documentation, repository, issue tracker, changelog,
+and discussions links, which no previous release shipped.
+
 ### Development
 
 #### The source distribution carries only the project
