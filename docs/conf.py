@@ -56,9 +56,7 @@ conf = merge_sphinx_config(
     rediraffe_redirects="redirects.txt",
     autodoc_mock_imports=["django"],
     set_type_checking_flag=True,
-    # AGENTS.md is agent guidance, not a site page; keep Sphinx from
-    # treating it as an orphan document.
-    exclude_patterns=["_build", "AGENTS.md", "CLAUDE.md"],
+    exclude_patterns=["_build"],
 )
 globals().update(conf)
 
