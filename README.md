@@ -22,6 +22,10 @@ Install django-docutils:
 $ pip install django-docutils
 ```
 
+```console
+$ uv add django-docutils
+```
+
 Next, add `django_docutils` to your `INSTALLED_APPS` in your settings file:
 
 ```python
@@ -99,7 +103,7 @@ class HomeView(DocutilsView):
     rst_name = "home.rst"
 ```
 
-# Settings
+## Settings
 
 ```python
 # Optional, automatically maps roles, directives and transformers
@@ -144,8 +148,7 @@ DJANGO_DOCUTILS_LIB_RST = {
 
 ## More information
 
-- Python 3.10+
-- Django 5.2+
+- Python 3.10-3.14, Django 5.2-6.1 (Django 6.x requires Python 3.12+).
 - [Documentation](https://django-docutils.git-pull.com/) ·
   [Quickstart](https://django-docutils.git-pull.com/quickstart.html) ·
   [Security](https://django-docutils.git-pull.com/topics/security.html) ·
