@@ -13,7 +13,7 @@ from django_docutils.lib.writers import DjangoDocutilsWriter
 
 def test_HTMLWriter_hides_docinfo() -> None:
     """Assert HTMLWriter hides docinfo."""
-    docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
+    docutils_settings = dict(DJANGO_DOCUTILS_LIB_RST.get("docutils", {}))
 
     content = """
 ===========

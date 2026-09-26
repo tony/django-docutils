@@ -68,7 +68,7 @@ some content
 
 def test_extract_metadata(tmp_path: pathlib.Path) -> None:
     """Assert metadata extraction from reStructuredText."""
-    docutils_settings = DJANGO_DOCUTILS_LIB_RST.get("docutils", {})
+    docutils_settings = dict(DJANGO_DOCUTILS_LIB_RST.get("docutils", {}))
     content = """
 ===========
 Content ok!
