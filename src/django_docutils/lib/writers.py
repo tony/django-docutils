@@ -87,7 +87,7 @@ class DjangoDocutilsHTMLTranslator(HTMLTranslator):
             atts["class"] += " internal"
 
         try:
-            from django_docutils.favicon.rst.nodes import icon  # type: ignore[import-not-found] # noqa I001
+            from django_docutils.favicon.rst.nodes import icon  # type: ignore[import-not-found]
 
             if isinstance(node[0], icon):
                 atts["class"] = ""
