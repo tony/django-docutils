@@ -114,9 +114,9 @@ or the isolated form CI runs:
 $ uvx --isolated --no-cache --from . python scripts/runtime_dep_smoketest.py
 ```
 
-Python 3.10 through 3.14 and Django 5.2 through 6.1 are all exercised in CI
-(`.github/workflows/tests.yml`); Django 6.x requires Python 3.12+, so the
-matrix excludes Python 3.10 against Django 6.0 and 6.1.
+CI (`.github/workflows/tests.yml`) tests Python 3.10 and 3.15 against
+Django 5.2, 6.0, and 6.1; Django 6.x requires Python 3.12+, so the matrix
+excludes Python 3.10 against Django 6.0 and 6.1.
 
 ## Documentation
 
