@@ -225,9 +225,9 @@ backtick — since it renders its own API page.
 The supported matrix is `pyproject.toml` (`requires-python`, the
 `Framework :: Django` classifiers) and
 `.github/workflows/tests.yml` (the CI job matrix and its excludes) — read
-those, do not guess. django-docutils currently supports Python 3.10 through
+those, do not guess. django-docutils currently supports Python 3.11 through
 3.14 and Django 5.2 through 6.1; Django 6.x requires Python 3.12+, which is
-why the CI matrix excludes Python 3.10 against Django 6.0 and 6.1.
+why the CI matrix excludes Python 3.11 against Django 6.0 and 6.1.
 `requires-python` is the authority for the Python floor; state the matrix in
 prose wherever a reader decides compatibility — the README, the quickstart —
 and keep it in agreement.
