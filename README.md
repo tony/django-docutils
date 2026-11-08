@@ -148,7 +148,7 @@ DJANGO_DOCUTILS_LIB_RST = {
 
 ## More information
 
-- Python 3.10-3.14, Django 5.2-6.1 (Django 6.x requires Python 3.12+).
+- Python 3.11-3.14, Django 5.2-6.1 (Django 6.x requires Python 3.12+).
 - [Documentation](https://django-docutils.git-pull.com/) ·
   [Quickstart](https://django-docutils.git-pull.com/quickstart.html) ·
   [Security](https://django-docutils.git-pull.com/topics/security.html) ·
