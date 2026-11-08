@@ -18,7 +18,7 @@ from .transforms.toc import Contents
 from .writers import DjangoDocutilsWriter
 
 if t.TYPE_CHECKING:
-    from typing_extensions import NotRequired, Unpack
+    from typing import NotRequired, Unpack
 
 
 def publish_parts_from_doctree(
